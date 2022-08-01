@@ -1,0 +1,103 @@
+/* Variables */
+$synvelt-vertical-navigation-compact-width: 112px;
+
+synvelt-vertical-navigation {
+    /* Compact appearance overrides */
+    &.synvelt-vertical-navigation-appearance-compact {
+        width: $synvelt-vertical-navigation-compact-width;
+        min-width: $synvelt-vertical-navigation-compact-width;
+        max-width: $synvelt-vertical-navigation-compact-width;
+
+        /* Left positioned */
+        &.synvelt-vertical-navigation-position-left {
+            /* Side mode */
+            &.synvelt-vertical-navigation-mode-side {
+                margin-left: -$synvelt-vertical-navigation-compact-width;
+            }
+
+            /* Opened */
+            &.synvelt-vertical-navigation-opened {
+                margin-left: 0;
+            }
+        }
+
+        /* Right positioned */
+        &.synvelt-vertical-navigation-position-right {
+            /* Side mode */
+            &.synvelt-vertical-navigation-mode-side {
+                margin-right: -$synvelt-vertical-navigation-compact-width;
+            }
+
+            /* Opened */
+            &.synvelt-vertical-navigation-opened {
+                margin-right: 0;
+            }
+
+            /* Aside wrapper */
+            .synvelt-vertical-navigation-aside-wrapper {
+                left: auto;
+                right: $synvelt-vertical-navigation-compact-width;
+            }
+        }
+
+        /* Wrapper */
+        .synvelt-vertical-navigation-wrapper {
+            /* Content */
+            .synvelt-vertical-navigation-content {
+                > synvelt-vertical-navigation-aside-item,
+                > synvelt-vertical-navigation-basic-item {
+                    .synvelt-vertical-navigation-item-wrapper {
+                        margin: 4px 8px 0 8px;
+
+                        .synvelt-vertical-navigation-item {
+                            flex-direction: column;
+                            justify-content: center;
+                            padding: 12px;
+                            border-radius: 6px;
+
+                            .synvelt-vertical-navigation-item-icon {
+                                margin-right: 0;
+                            }
+
+                            .synvelt-vertical-navigation-item-title-wrapper {
+                                margin-top: 8px;
+
+                                .synvelt-vertical-navigation-item-title {
+                                    font-size: 12px;
+                                    font-weight: 500;
+                                    text-align: center;
+                                    line-height: 16px;
+                                }
+
+                                .synvelt-vertical-navigation-item-subtitle {
+                                    display: none !important;
+                                }
+                            }
+
+                            .synvelt-vertical-navigation-item-badge {
+                                position: absolute;
+                                top: 12px;
+                                left: 64px;
+                            }
+                        }
+                    }
+
+                    > synvelt-vertical-navigation-collapsable-item {
+                        display: none;
+                    }
+
+                    > synvelt-vertical-navigation-group-item {
+                        > .synvelt-vertical-navigation-item-wrapper {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        /* Aside wrapper */
+        .synvelt-vertical-navigation-aside-wrapper {
+            left: $synvelt-vertical-navigation-compact-width;
+        }
+    }
+}

@@ -1,0 +1,91 @@
+/* Variables */
+$synvelt-vertical-navigation-thin-width: 80px;
+
+synvelt-vertical-navigation {
+    /* Thin appearance overrides */
+    &.synvelt-vertical-navigation-appearance-thin {
+        width: $synvelt-vertical-navigation-thin-width;
+        min-width: $synvelt-vertical-navigation-thin-width;
+        max-width: $synvelt-vertical-navigation-thin-width;
+
+        /* Left positioned */
+        &.synvelt-vertical-navigation-position-left {
+            &.synvelt-vertical-navigation-mode-side {
+                margin-left: -$synvelt-vertical-navigation-thin-width;
+            }
+
+            &.synvelt-vertical-navigation-opened {
+                margin-left: 0;
+            }
+        }
+
+        /* Right positioned */
+        &.synvelt-vertical-navigation-position-right {
+            &.synvelt-vertical-navigation-mode-side {
+                margin-right: -$synvelt-vertical-navigation-thin-width;
+            }
+
+            &.synvelt-vertical-navigation-opened {
+                margin-right: 0;
+            }
+
+            .synvelt-vertical-navigation-aside-wrapper {
+                left: auto;
+                right: $synvelt-vertical-navigation-thin-width;
+            }
+        }
+
+        /* Wrapper */
+        .synvelt-vertical-navigation-wrapper {
+            /* Content */
+            .synvelt-vertical-navigation-content {
+                > synvelt-vertical-navigation-aside-item,
+                > synvelt-vertical-navigation-basic-item {
+                    flex-direction: column;
+                    justify-content: center;
+                    height: 64px;
+                    min-height: 64px;
+                    max-height: 64px;
+                    padding: 0 16px;
+
+                    .synvelt-vertical-navigation-item-wrapper {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        .synvelt-vertical-navigation-item {
+                            justify-content: center;
+                            padding: 12px;
+                            border-radius: 4px;
+
+                            .synvelt-vertical-navigation-item-icon {
+                                margin: 0;
+                            }
+
+                            .synvelt-vertical-navigation-item-arrow,
+                            .synvelt-vertical-navigation-item-badge-content,
+                            .synvelt-vertical-navigation-item-title-wrapper {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+
+                > synvelt-vertical-navigation-collapsable-item {
+                    display: none;
+                }
+
+                > synvelt-vertical-navigation-group-item {
+                    > .synvelt-vertical-navigation-item-wrapper {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        /* Aside wrapper */
+        .synvelt-vertical-navigation-aside-wrapper {
+            left: $synvelt-vertical-navigation-thin-width;
+        }
+    }
+}
