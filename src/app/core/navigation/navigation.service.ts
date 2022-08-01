@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, ReplaySubject, tap } from 'rxjs';
 import { Navigation } from 'app/core/navigation/navigation.types';
 import { SynveltNavigationItem } from '@synvelt/components/navigation';
-import { horizontalNavigation } from 'app/mock-api/common/navigation/data';
 import { cloneDeep } from 'lodash-es';
+import { horizontalNavigation } from './navigation-menu';
 
 @Injectable({
   providedIn: 'root',

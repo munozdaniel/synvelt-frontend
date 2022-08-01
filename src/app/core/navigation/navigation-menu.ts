@@ -2,7 +2,7 @@
 import { SynveltNavigationItem } from '@synvelt/components/navigation';
 
 // #MENU #SIDENAV
-export const defaultNavigation: SynveltNavigationItem[] = [
+export const horizontalNavigation: SynveltNavigationItem[] = [
   {
     id: 'home',
     title: 'Home',
