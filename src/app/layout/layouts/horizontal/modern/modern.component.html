@@ -35,12 +35,14 @@
       <div class="flex items-center mx-2 lg:mr-8">
         <div class="hidden lg:flex">
           <img
-            class="dark:hidden w-24"
+            class="dark:hidden"
             src="assets/images/logo/logo-text.svg"
+            style="width: 146px"
           />
           <img
-            class="hidden dark:flex w-24"
+            class="hidden dark:flex"
             src="assets/images/logo/logo-text-on-dark.svg"
+            style="width: 146px"
           />
         </div>
         <img class="flex lg:hidden w-8" src="assets/images/logo/logo.svg" />
@@ -49,7 +51,7 @@
       <synvelt-horizontal-navigation
         class="mr-2"
         [name]="'mainNavigation'"
-        [navigation]="navigation.horizontal"
+        [navigation]="navigation?.horizontal"
       ></synvelt-horizontal-navigation>
     </ng-container>
     <!-- Navigation toggle button -->
@@ -60,14 +62,6 @@
     </ng-container>
     <!-- Components -->
     <div class="flex items-center pl-2 ml-auto space-x-0.5 sm:space-x-2">
-      <synvelt-fullscreen class="hidden md:block"></synvelt-fullscreen>
-      <search [appearance]="'bar'"></search>
-      <shortcuts></shortcuts>
-      <messages></messages>
-      <notifications></notifications>
-      <button class="lg:hidden" mat-icon-button (click)="quickChat.toggle()">
-        <mat-icon [svgIcon]="'heroicons_outline:chat-alt-2'"></mat-icon>
-      </button>
       <user></user>
     </div>
   </div>
@@ -88,6 +82,3 @@
     >
   </div>
 </div>
-
-<!-- Quick chat -->
-<quick-chat #quickChat="quickChat"></quick-chat>
