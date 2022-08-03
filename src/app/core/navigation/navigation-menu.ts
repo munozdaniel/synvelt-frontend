@@ -7,7 +7,7 @@ export const horizontalNavigation: SynveltNavigationItem[] = [
     id: 'home',
     title: 'Home',
     type: 'basic',
-    link: '/home',
+    link: '/inicio',
   },
   {
     id: 'usuario',
