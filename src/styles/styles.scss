@@ -1,4 +1,154 @@
-/* ----------------------------------------------------------------------------------------------------- */
-/*  @ Import/write your custom styles here.
-/*  @ Styles from this file will override 'vendors.scss' and Synvelt's base styles.
-/* ----------------------------------------------------------------------------------------------------- */
+// Tablas Expansible
+.mat-error {
+  color: red !important;
+  //   font-size: 10.5px !important;
+}
+.titulo_celda {
+  color: orange;
+}
+table {
+  width: 100%;
+}
+.mat-column-expandedDetail {
+  padding: 0 !important;
+}
+tr.fila_detalle {
+  height: 0 !important;
+}
+
+tr.fila_seleccionada:not(.example-expanded-row):hover > .cdk-cell {
+  color: white !important;
+}
+// No funciona
+tr.fila_seleccionada:hover
+  > .mat-column-opciones
+  > .mat-button-wrapper
+  > .mat-icon-button
+  > .mat-icon {
+  color: white !important;
+}
+tr.fila_seleccionada:not(.example-expanded-row):hover {
+  background-color: #0f172aeb;
+  //   background-color: rgb(0, 132, 255);
+  color: white !important;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+tr.fila_activa:not(.example-expanded-row) {
+  background-color: rgb(90, 172, 248);
+  //   background-color: rgb(0, 132, 255);
+  color: white !important;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+tr.vence-menos-15:not(.example-expanded-row) {
+  border-left: 4px solid rgb(128, 1, 1);
+  background-color: rgba(255, 0, 0, 0.233);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: white !important;
+}
+
+tr.vence-menos-30:not(.example-expanded-row) {
+  border-left: 4px solid rgb(255, 123, 0);
+  background-color: #ff7b0061;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+tr.fila_vencida:not(.example-expanded-row) {
+  border: 1px solid rgb(46, 46, 46);
+  background-color: rgba(80, 80, 80, 0.233);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+tr.fila_seleccionada:not(.example-expanded-row):hover > .button_marker {
+  color: white !important;
+  cursor: pointer;
+}
+tr.fila_seleccionada:not(.example-expanded-row):hover > .fila_hover > div {
+  color: white !important;
+  cursor: pointer;
+}
+
+tr.fila_seleccionada:not(.example-expanded-row):active {
+  background: rgb(90, 172, 248);
+  color: rgb(34, 33, 33);
+}
+.hoverTab {
+  background-color: #2196f342 !important;
+}
+.fila_seleccionada td {
+  border-bottom-width: 0;
+}
+
+.detalle_expansible {
+  overflow: hidden;
+  display: flex;
+}
+// Fin: Tablas Expansible
+
+.mat-form-field-appearance-outline .mat-form-field-flex {
+  // Force all inputs to have the same height.
+  // Otherwise mat-select are doing their own thing and gain extra-height
+  // https://github.com/angular/material2/issues/13198
+  height: 3em;
+
+  // mat-select
+  // {
+  // 	margin-top: -3.5em;
+  // }
+}
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 0.3em 0 1em 0;
+}
+.mat-form-field-appearance-outline .mat-form-field-label {
+  top: 1.2em;
+  margin-top: -4px;
+  padding-top: 1px;
+}
+.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float
+  .mat-form-field-label,
+.mat-form-field-appearance-outline.mat-form-field-can-float
+  .mat-input-server:focus
+  + .mat-form-field-label-wrapper
+  .mat-form-field-label {
+  margin: 0px;
+  transform: translateY(-1.39375em) scale(0.75);
+  width: 133.3333333333%;
+}
+// Fin: Inputs
+// Modales
+.footer_modal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+// Fin: Modales
+.subtitulo_seccion {
+  font-weight: bolder;
+  padding-left: 1em;
+  margin-bottom: 1em;
+  text-decoration: underline;
+}
+
+//
+.toolbar-blue {
+  background-color: #446e9b !important;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#6d94bf),
+    color-stop(50%, #446e9b),
+    to(#3e648d)
+  );
+  background-image: linear-gradient(#6d94bf, #446e9b 50%, #3e648d);
+  background-repeat: no-repeat;
+  -webkit-filter: none;
+  filter: none;
+  border: 1px solid #345578;
+  color: white;
+}

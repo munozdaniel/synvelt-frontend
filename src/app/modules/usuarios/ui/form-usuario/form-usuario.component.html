@@ -1,0 +1,88 @@
+<div class="w-full p-2 md:p-4">
+  <div>
+    <form [formGroup]="form" class="flex flex-col" (ngSubmit)="guardar()">
+      <div
+        class="bg-card rounded-2xl shadow p-8 pb-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2"
+      >
+        <!-- Apellido field -->
+        <div *ngIf="esEditar" class="w-full">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Nombre de Usuario</mat-label>
+            <input id="apellido" matInput formControlName="username" required />
+            <mat-error *ngIf="form.controls.username.hasError('required')">
+              Este campo es requerido.
+            </mat-error>
+            <mat-hint
+              *ngIf="
+                !usernameValido &&
+                !form.controls.username.pristine &&
+                form.controls.username.value !== usernameOriginal
+              "
+              class="text-red-700"
+              >El nombre de usuario ya existe</mat-hint
+            >
+          </mat-form-field>
+        </div>
+        <!-- Apellido field -->
+        <div *ngIf="esEditar" class="w-full">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Password</mat-label>
+            <input id="apellido" matInput formControlName="password" />
+          </mat-form-field>
+        </div>
+        <!-- Nombre field -->
+        <div class="w-full">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Nombre</mat-label>
+            <input id="nombre" matInput formControlName="nombre" required />
+            <mat-error *ngIf="form.controls.nombre.hasError('required')">
+              Este campo es requerido.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <!-- Apellido field -->
+        <div class="w-full">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Apellido</mat-label>
+            <input id="apellido" matInput formControlName="apellido" required />
+            <mat-error *ngIf="form.controls.apellido.hasError('required')">
+              Este campo es requerido.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- email field -->
+        <div class="w-full">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Email</mat-label>
+            <input id="email" type="email" matInput formControlName="email" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="flex flex-row justify-center items-center min-w-full mt-4">
+        <button
+          *ngIf="!cargando"
+          mat-raised-button
+          color="primary"
+          [disabled]="
+            form.invalid ||
+            (usuario?._id &&
+              !usernameValido &&
+              form.controls.username.value !== usernameOriginal)
+          "
+        >
+          {{ usuario && usuario._id ? "Actualizar" : "Guardar" }}
+        </button>
+        <button
+          *ngIf="cargando"
+          mat-raised-button
+          color="warn"
+          [disabled]="true"
+        >
+          Cargando...
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

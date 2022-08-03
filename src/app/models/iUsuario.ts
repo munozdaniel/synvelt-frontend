@@ -1,5 +1,6 @@
 export interface IUsuario {
   Id: string;
+  Nombre: string;
   Apellido: string;
   ClaveLogin?: string;
   Cuil?: string;
@@ -7,7 +8,6 @@ export interface IUsuario {
   FechaUtcActualizacion?: string;
   IdInspector?: string;
   IdRolPrincipal?: string;
-  Nombre: string;
   NombreLogin?: string;
   //     <Apellido>Van Gogh</Apellido>
   // <ClaveLogin>testnocifrado</ClaveLogin>

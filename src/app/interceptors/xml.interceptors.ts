@@ -5,11 +5,12 @@ import {
   HttpResponse,
   HttpEvent,
 } from '@angular/common/http';
-import { Inject } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { filter, map, Observable } from 'rxjs';
 import { XmlParser } from '@angular/compiler';
 import { XMLParser } from 'fast-xml-parser';
 
+@Injectable()
 export class XmlInterceptor implements HttpInterceptor {
   constructor(@Inject(XmlParser) private xml: XMLParser) {}
   intercept(
@@ -22,6 +23,7 @@ export class XmlInterceptor implements HttpInterceptor {
       filter(event => event instanceof HttpResponse),
       map(
         (event: HttpResponse<any>) => {
+          console.log('eventinter', event);
           if (this.xml.parse(event.body) !== true) {
             // only parse xml response, pass all other responses to other interceptors
             return event;

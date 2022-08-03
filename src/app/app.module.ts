@@ -14,6 +14,7 @@ import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/auth/auth.interceptor';
+import { XML2JsonInterceptorService } from './interceptors/xml2json.interceptors';
 
 const routerConfig: ExtraOptions = {
   preloadingStrategy: PreloadAllModules,
@@ -43,7 +44,12 @@ const routerConfig: ExtraOptions = {
   ],
   bootstrap: [AppComponent],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: XML2JsonInterceptorService,
+    //   multi: true,
+    // },
+    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
 })
 export class AppModule {}
