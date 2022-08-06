@@ -99,10 +99,10 @@ export class TablaUsuariosComponent implements OnInit, OnChanges {
       const filterArray = filters.split(',');
       //   TODO: Verificar si hace falta agregar mas coluymnas
       const columns = [
-        data.Nombre,
-        data.Apellido,
-        data.Cuil,
-        data.DireccionMail,
+        data.nombre,
+        data.apellido,
+        data.cuil,
+        data.direccionMail,
       ];
 
       filterArray.forEach(filter => {
@@ -135,9 +135,9 @@ export class TablaUsuariosComponent implements OnInit, OnChanges {
     }
   }
   editar(row: IUsuario) {
-    this.retEditar.emit(row.Id);
+    this.retEditar.emit(row.id);
   }
   eliminar(row: IUsuario) {
-    this.retEliminar.emit(row.Id);
+    this.retEliminar.emit(row.id);
   }
 }

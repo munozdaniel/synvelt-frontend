@@ -88,28 +88,15 @@ export class UsuarioService {
     const contentType = 'application/json';
     headers = headers.append('Accept', accept);
     headers = headers.append('Content-Type', contentType);
-    // return this._http.get('http://asdrovia.com//usuarios/Lista');
+    return this._http.get('http://asdrovia.com/AdmInsp/usuarios/Lista');
     return of([
-      {
-        Apellido: 'Van Gogh',
-        ClaveLogin: 'testnocifrado',
-        Cuil: null,
-        DireccionMail: 'vincentvg@impresionismo.net',
-        FechaUtcActualizacion: '2022-07-20T23:31:11.403',
-        FechaUtcBaja: null,
-        Id: '1770d68a-ad5a-4650-aaec-1f3b8bdc266b',
-        IdInspector: '3bf31f93-72a4-4708-af0d-3b7d0132a9f8',
-        IdRolPrincipal: '5a7d5dba-9768-43a5-a08b-6570ad56ce56',
-        Nombre: 'Vincent',
-        NombreLogin: 'vincent',
-      },
       {
         Apellido: 'Windsor',
         ClaveLogin: 'testnocifrado',
         Cuil: null,
         DireccionMail: 'elizabeth@windsor.org',
-        FechaUtcActualizacion: '2022-07-20T23:31:17.41',
-        FechaUtcBaja: null,
+        FechaActualizacion: '2022-07-20T23:31:17.41',
+        FechaBaja: null,
         Id: '2d8f1bb7-c993-4913-8c9f-6c526999b4e0',
         IdInspector: null,
         IdRolPrincipal: '5a7d5dba-9768-43a5-a08b-6570ad56ce56',

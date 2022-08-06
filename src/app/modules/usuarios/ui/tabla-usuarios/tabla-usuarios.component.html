@@ -1,4 +1,4 @@
-<div class="p-2 md:p-4 w-full">
+<div class="w-full">
   <div class="w-full">
     <mat-progress-bar
       *ngIf="cargando"
@@ -10,7 +10,7 @@
       mat-table
       matSort
       [dataSource]="dataSource"
-      class="mat-elevation-z1 m-0"
+      class="mat-elevation-z1 m-0 w-full"
       multiTemplateDataRows
     >
       <!--     'cuit', 'nombreCompleto', 'area', 'perfil', 'estado'

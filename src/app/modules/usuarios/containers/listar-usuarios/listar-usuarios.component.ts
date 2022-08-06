@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { UsuarioService } from 'app/core/services/usuario.service';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { IUsuario } from 'app/models/iUsuario';
+import { IRol } from 'app/models/iRol';
+import { Observable } from 'rxjs';
+import { RolService } from 'app/core/services/rol.service';
 @UntilDestroy()
 @Component({
   selector: 'app-listar-usuarios',
@@ -12,19 +15,26 @@ import { IUsuario } from 'app/models/iUsuario';
 export class ListarUsuariosComponent implements OnInit {
   usuarios: IUsuario[];
   cargando = false;
+  roles$: Observable<IRol[]>;
+  parametros: any;
   constructor(
     private _usuarioService: UsuarioService,
+    private _rolService: RolService,
     private _router: Router,
     private _synveltConfirmationService: SynveltConfirmationService
   ) {}
 
   ngOnInit(): void {
     this.obtenerTodos();
+    this.obtenerRoles();
+  }
+  obtenerRoles() {
+    this.roles$ = this._rolService.obtenertodos();
   }
   obtenerTodos() {
     this.cargando = true;
     this._usuarioService
-      .buscar()
+      .buscar(this.parametros)
       .pipe(untilDestroyed(this))
       .subscribe(
         datos => {
@@ -91,5 +101,9 @@ export class ListarUsuariosComponent implements OnInit {
           console.log('[ERROR]', error);
         }
       );
+  }
+  setFiltros(parametros) {
+    this.parametros = parametros;
+    this.obtenerTodos();
   }
 }

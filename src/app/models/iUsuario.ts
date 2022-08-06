@@ -1,14 +1,18 @@
 export interface IUsuario {
-  Id: string;
-  Nombre: string;
-  Apellido: string;
-  ClaveLogin?: string;
-  Cuil?: string;
-  DireccionMail?: string;
-  FechaUtcActualizacion?: string;
-  IdInspector?: string;
-  IdRolPrincipal?: string;
-  NombreLogin?: string;
+  id: string;
+  nombre: string;
+  apellido: string;
+  cuil?: string;
+  cuit?: string;
+  estado?: string;
+  areaMunicipal?: string;
+
+  claveLogin?: string;
+  direccionMail?: string;
+  fechaUtcActualizacion?: string;
+  idInspector?: string;
+  idRolPrincipal?: string;
+  nombreLogin?: string;
   //     <Apellido>Van Gogh</Apellido>
   // <ClaveLogin>testnocifrado</ClaveLogin>
   // <Cuil i:nil="true"/>

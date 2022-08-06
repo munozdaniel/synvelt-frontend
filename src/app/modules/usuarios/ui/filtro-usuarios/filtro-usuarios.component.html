@@ -1,0 +1,70 @@
+<form
+  [formGroup]="form"
+  class="bg-card mat-elevation-z1 flex flex-col w-full"
+  (ngSubmit)="filtrar()"
+>
+  <div class="p-8 grid grid-cols-1 gap-2">
+    <!--  cuit field -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Cuit </mat-label>
+      <input id="cuit" matInput formControlName="cuit" />
+    </mat-form-field>
+    <!--  nombre field -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Nombre </mat-label>
+      <input id="nombreCompleto" matInput formControlName="nombreCompleto" />
+    </mat-form-field>
+    <!--  nombre field -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Área Municipal </mat-label>
+      <input id="areaMunicipal" matInput formControlName="areaMunicipal" />
+    </mat-form-field>
+
+    <!-- Rol -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label class="lbl">Roles</mat-label>
+      <input
+        type="text"
+        matInput
+        class="input is-medium"
+        autocomplete="off"
+        formControlName="rol"
+        [matAutocomplete]="autoRol"
+      />
+      <mat-icon matSuffix>search</mat-icon>
+      <mat-autocomplete #autoRol="matAutocomplete" [displayWith]="displayFnRol">
+        <mat-option
+          *ngFor="let option of filteredRoles | async"
+          [value]="option"
+        >
+          {{ option.nombre }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <!-- Estado -->
+    <mat-form-field appearance="outline" class="input-sm">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="estado">
+        <mat-option value="ACTIVO">ACTIVO</mat-option>
+        <mat-option value="SUSPENDIDO">SUSPENDIDO</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="flex flex-row justify-between items-center -mt-3 mb-4 px-6">
+    <button mat-stroked-button color="primary" [disabled]="cargando">
+      Limpiar
+    </button>
+    <button
+      *ngIf="!cargando"
+      mat-raised-button
+      color="primary"
+      [disabled]="form.invalid"
+    >
+      Filtrar
+    </button>
+    <button *ngIf="cargando" mat-raised-button color="warn" [disabled]="true">
+      Cargando...
+    </button>
+  </div>
+</form>
