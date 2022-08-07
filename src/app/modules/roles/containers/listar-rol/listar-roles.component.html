@@ -1,0 +1,40 @@
+<div class="flex flex-col flex-auto min-w-0 container mx-auto px-8" style="">
+  <app-breadcrumb
+    [breadcrumbs]="[{ nombre: 'Consulta de roles', url: ['roles'] }]"
+  ></app-breadcrumb>
+
+  <!-- Header -->
+  <div
+    class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between bg-transparent"
+  >
+    <h3 class="titulo">Consulta de roles</h3>
+    <!-- Opciones del Header -->
+    <button
+      color="primary"
+      class="-ml-3 sm:ml-0 mt-2 sm:mt-0 mb-0 order-last sm:order-last"
+      mat-flat-button
+      (click)="redireccionarAgregar()"
+    >
+      <mat-icon [svgIcon]="'heroicons_outline:plus-circle'"></mat-icon>
+      <span>NUEVO</span>
+    </button>
+  </div>
+  <div
+    class="flex flex-col md:flex-row md:justify-between md:items-start mt-4 gap-2"
+  >
+    <app-filtro-roles
+      class="w-full md:w-4/12"
+      [cargando]="cargando"
+      (retFiltros)="setFiltros($event)"
+    >
+    </app-filtro-roles>
+
+    <app-tabla-roles
+      class="w-full md:w-8/12"
+      [roles]="roles"
+      [cargando]="cargando"
+      (retEditar)="setEditar($event)"
+      (retEliminar)="setEliminar($event)"
+    ></app-tabla-roles>
+  </div>
+</div>

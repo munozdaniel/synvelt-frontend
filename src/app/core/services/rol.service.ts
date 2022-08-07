@@ -46,4 +46,17 @@ export class RolService {
       params: queryParams,
     });
   }
+  guardar(rol: IRol): Observable<IRol> {
+    return this._http.post<IRol>(this.url + 'usuarios/Rol', rol);
+  }
+  buscar(parametros?: any): any {
+    console.log('buscar', parametros);
+    const queryParams = this.setQueryParams(parametros);
+    return this._http.get(this.url + 'roles/Lista', {
+      params: queryParams,
+    });
+  }
+  eliminar(id): Observable<void> {
+    return this._http.put<void>(this.url + `roles/Baja?id=${id}`, null);
+  }
 }

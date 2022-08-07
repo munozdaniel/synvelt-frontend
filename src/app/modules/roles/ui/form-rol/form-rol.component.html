@@ -1,0 +1,56 @@
+<div class="w-full bg-card mat-elevation-z1">
+  <form [formGroup]="form" class="flex flex-col" (ngSubmit)="guardar()">
+    <div
+      class="p-8 pb-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2"
+    >
+      <!--  field -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Nombre</mat-label>
+        <input id="nombre" matInput formControlName="nombre" required />
+        <mat-error *ngIf="form.controls.nombre.hasError('required')">
+          Este campo es requerido.
+        </mat-error>
+      </mat-form-field>
+      <!--  field -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Descripción</mat-label>
+        <input
+          id="descripcion"
+          matInput
+          formControlName="descripcion"
+          required
+        />
+      </mat-form-field>
+      <div>
+        <mat-slide-toggle
+          [color]="'primary'"
+          formControlName="esAdministradorDatos"
+        >
+          Administrador de datos
+        </mat-slide-toggle>
+      </div>
+      <div>
+        <mat-slide-toggle
+          [color]="'primary'"
+          formControlName="esAdministradorAplicacion"
+        >
+          Administrador de aplicación
+        </mat-slide-toggle>
+      </div>
+    </div>
+
+    <div class="flex flex-row justify-center items-center min-w-full mt-4 mb-6">
+      <button
+        *ngIf="!cargando"
+        mat-raised-button
+        color="primary"
+        [disabled]="form.invalid"
+      >
+        {{ usuario && usuario._id ? "Actualizar" : "Guardar" }}
+      </button>
+      <button *ngIf="cargando" mat-raised-button color="warn" [disabled]="true">
+        Cargando...
+      </button>
+    </div>
+  </form>
+</div>

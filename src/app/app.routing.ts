@@ -155,4 +155,27 @@ export const appRoutes: Route[] = [
       },
     ],
   },
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    component: LayoutComponent,
+    resolve: {
+      initialData: InitialDataResolver, // para enviar datos al iniciar la ruta (en este caso el menu)
+    },
+    children: [
+      {
+        // canActivate: [NgxPermissionsGuard],
+        // data: {
+        //   permissions: {
+        //     only: ['ADMIN'],
+        //     redirectTo: '/',
+        //   },
+        // },
+        path: 'roles',
+        loadChildren: () =>
+          import('app/modules/roles/rol.module').then(m => m.RolModule),
+      },
+    ],
+  },
 ];
