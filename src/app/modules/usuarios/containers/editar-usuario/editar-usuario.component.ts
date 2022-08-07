@@ -2,16 +2,18 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
+import { RolService } from 'app/core/services/rol.service';
 import { UsuarioService } from 'app/core/services/usuario.service';
+import { IRol } from 'app/models/iRol';
 import { IUsuario } from 'app/models/iUsuario';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 @UntilDestroy()
 @Component({
   selector: 'app-editar-usuario',
   templateUrl: './editar-usuario.component.html',
 })
 export class EditarUsuarioComponent implements OnInit, OnDestroy {
-  //
+  roles$: Observable<IRol[]>; //
   cargando = false;
   usuario: IUsuario;
   usuarioId: string;
@@ -20,6 +22,7 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
   suscripcionUsername: Subscription;
   constructor(
     private _activeRoute: ActivatedRoute,
+    private _rolService: RolService,
     private _usuarioService: UsuarioService,
     private _synveltConfirmationService: SynveltConfirmationService,
     private _router: Router
@@ -31,7 +34,7 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // Recuperamos el id de la url y buscamos el usuario
+    this.obtenerRoles(); // Recuperamos el id de la url y buscamos el usuario
     this._activeRoute.params.subscribe(params => {
       this.usuarioId = params['id'];
       if (this.usuarioId) {
@@ -42,7 +45,9 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+  obtenerRoles() {
+    this.roles$ = this._rolService.obtenertodos();
+  }
   obtenerUsuarioPorId() {
     this.cargando = true;
     this._usuarioService

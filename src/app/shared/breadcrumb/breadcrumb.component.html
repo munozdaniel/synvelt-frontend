@@ -2,8 +2,9 @@
   <ol class="breadcrumb">
     <li
       *ngFor="let item of breadcrumbs; let i = index"
-      class="breadcrumb-item"
+      class="breadcrumb-item hover:font-bold"
       [class.active]="i === breadcrumbs.length - 1"
+      [class.cursor-pointer]="i !== breadcrumbs.length - 1"
     >
       <a (click)="redirect(item)">{{ item.nombre }}</a>
       <!-- href="/demos/puerta/portal/Hub/Masters" -->
