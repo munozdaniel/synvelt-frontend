@@ -19,6 +19,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FiltroUsuariosComponent } from './ui/filtro-usuarios/filtro-usuarios.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { MatInputModule } from '@angular/material/input';
     MatAutocompleteModule,
     MatSelectModule,
     MatInputModule,
+    MatMenuModule
     // NgxPermissionsModule.forChild(),
   ],
 })

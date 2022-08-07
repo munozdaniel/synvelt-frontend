@@ -27,7 +27,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { synveltAnimations } from '@synvelt/animations';
 import { IUsuario } from 'app/models/iUsuario';
-const columnasMD = ['cuit', 'nombreCompleto', 'area', 'estado'];
+const columnasMD = ['cuit', 'nombreCompleto', 'area', 'estado', 'opciones'];
 const columnasXS = ['nombreCompleto'];
 @Component({
   selector: 'app-tabla-usuarios',

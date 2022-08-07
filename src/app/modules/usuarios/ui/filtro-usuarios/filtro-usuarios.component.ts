@@ -37,9 +37,10 @@ export class FiltroUsuariosComponent implements OnInit, OnChanges {
    */
   ngOnInit(): void {
     this.form = this._fb.group({
-      nombreCompleto: [null],
+      nombre: [null],
+    //   apellido: [null],
       estado: [null],
-      cuit: [null],
+      cuil: [null],
       rol: [null],
       areaMunicipal: [null],
       //   apellido: [null],
@@ -71,6 +72,10 @@ export class FiltroUsuariosComponent implements OnInit, OnChanges {
   displayFnRol(objeto: IRol): string {
     return objeto && objeto.nombre ? objeto.nombre : '';
   }
+  limpiar() {
+    this.form.reset();
+    this.retFiltros.emit(null);
+  }
   filtrar() {
     if (this.form.invalid) {
       this._synveltConfirmationService.open({
@@ -98,15 +103,18 @@ export class FiltroUsuariosComponent implements OnInit, OnChanges {
       const parametros = this.form.value;
       const filtros: any = {};
 
-      if (parametros.nombreCompleto) {
-        filtros.nombreCompleto = parametros.nombreCompleto;
+      if (parametros.nombre) {
+        filtros.nombreCompleto = parametros.nombre;
       }
+    //   if (parametros.apellido) {
+    //     filtros.apellido = parametros.apellido;
+    //   }
       if (parametros.estado) {
         filtros.activo = parametros.estado === 'ACTIVO' ? true : false;
       }
 
-      if (parametros.cuit) {
-        filtros.cuit = parametros.cuit;
+      if (parametros.cuil) {
+        filtros.cuil = parametros.cuil;
       }
       if (parametros.rol) {
         filtros.idRolPrincipal = parametros.rol ? parametros.rol.id : null;

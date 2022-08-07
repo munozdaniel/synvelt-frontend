@@ -191,3 +191,26 @@ dl {
   color: #777;
   content: "/";
 }
+tr.fila_inactiva {
+  background-color: rgb(248, 95, 90);
+  //   background-color: rgb(0, 132, 255);
+  color: white !important;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.suspendido {
+  border: 1px solid rgb(139, 1, 1);
+  background-color: rgba(168, 4, 4, 0.568);
+  color: white;
+  font-size: 12px;
+  border-radius: 20px;
+  padding: 4px;
+}
+.activo {
+  border: 1px solid rgb(24, 97, 2);
+  background-color: rgba(4, 116, 0, 0.568);
+  color: white;
+  font-size: 12px;
+  border-radius: 20px;
+  padding: 4px;
+}

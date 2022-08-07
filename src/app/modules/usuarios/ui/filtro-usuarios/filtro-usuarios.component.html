@@ -7,13 +7,17 @@
     <!--  cuit field -->
     <mat-form-field appearance="outline" class="w-full">
       <mat-label>Cuit </mat-label>
-      <input id="cuit" matInput formControlName="cuit" />
+      <input id="cuil" matInput formControlName="cuil" />
     </mat-form-field>
     <!--  nombre field -->
     <mat-form-field appearance="outline" class="w-full">
       <mat-label>Nombre </mat-label>
-      <input id="nombreCompleto" matInput formControlName="nombreCompleto" />
+      <input id="nombre" matInput formControlName="nombre" />
     </mat-form-field>
+    <!-- <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Apellido </mat-label>
+      <input id="apellido" matInput formControlName="apellido" />
+    </mat-form-field> -->
     <!--  nombre field -->
     <mat-form-field appearance="outline" class="w-full">
       <mat-label>Área Municipal </mat-label>
@@ -52,7 +56,13 @@
   </div>
 
   <div class="flex flex-row justify-between items-center -mt-3 mb-4 px-6">
-    <button mat-stroked-button color="primary" [disabled]="cargando">
+    <button
+      mat-stroked-button
+      color="primary"
+      [disabled]="cargando"
+      type="button"
+      (click)="limpiar()"
+    >
       Limpiar
     </button>
     <button
@@ -60,6 +70,7 @@
       mat-raised-button
       color="primary"
       [disabled]="form.invalid"
+      type="submit"
     >
       Filtrar
     </button>
