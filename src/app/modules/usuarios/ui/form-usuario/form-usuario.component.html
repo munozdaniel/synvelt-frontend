@@ -1,88 +1,152 @@
-<div class="w-full p-2 md:p-4">
-  <div>
-    <form [formGroup]="form" class="flex flex-col" (ngSubmit)="guardar()">
-      <div
-        class="bg-card rounded-2xl shadow p-8 pb-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2"
+<div class="w-full bg-card mat-elevation-z1">
+  <form [formGroup]="form" class="flex flex-col" (ngSubmit)="guardar()">
+    <div
+      class="p-8 pb-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2"
+    >
+      <!--  field -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Nombre</mat-label>
+        <input id="nombre" matInput formControlName="nombre" required />
+        <mat-error *ngIf="form.controls.nombre.hasError('required')">
+          Este campo es requerido.
+        </mat-error>
+        <mat-error *ngIf="form.controls.nombre.hasError('maxLength')">
+          Máximo 30 carácteres.
+        </mat-error>
+      </mat-form-field>
+      <!--  field -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Apellido</mat-label>
+        <input id="apellido" matInput formControlName="apellido" required />
+        <mat-error *ngIf="form.controls.apellido.hasError('required')">
+          Este campo es requerido.
+        </mat-error>
+        <mat-error *ngIf="form.controls.apellido.hasError('maxLength')">
+          Máximo 20 carácteres.
+        </mat-error>
+      </mat-form-field>
+      <!--  field -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Cuit</mat-label>
+        <input
+          id="cuil"
+          matInput
+          formControlName="cuil"
+          required
+          [mask]="'00-00000000-0'"
+        />
+        <mat-error *ngIf="form.controls.cuil.hasError('required')">
+          Este campo es requerido.
+        </mat-error>
+        <mat-error *ngIf="form.controls.cuil.hasError('maxLength')">
+          Máximo 11 carácteres.
+        </mat-error>
+      </mat-form-field>
+      <!--  field -->
+      <!-- <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Nro Legajo</mat-label>
+          <input
+            id="nroLegajo"
+            matInput
+            formControlName="nroLegajo"
+            type="number"
+            required
+          />
+          <mat-error *ngIf="form.controls.nroLegajo.hasError('required')">
+            Este campo es requerido.
+          </mat-error>
+        </mat-form-field> -->
+
+      <!--  field -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Email</mat-label>
+        <input
+          id="direccionMail"
+          matInput
+          formControlName="direccionMail"
+          required
+          type="email"
+        />
+        <mat-error *ngIf="form.controls.direccionMail.hasError('email')">
+          No es un formato de email correcto
+        </mat-error>
+        <mat-error *ngIf="form.controls.direccionMail.hasError('maxLength')">
+          Máximo 256 carácteres.
+        </mat-error>
+      </mat-form-field>
+      <!--  field -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Télefono</mat-label>
+        <input
+          id="telefono"
+          matInput
+          formControlName="telefono"
+          type="number"
+          required
+        />
+        <mat-error *ngIf="form.controls.telefono.hasError('maxLength')">
+          Máximo 12 caracteres
+        </mat-error>
+      </mat-form-field>
+      <!-- Rol -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label class="lbl">Roles</mat-label>
+        <input
+          type="text"
+          matInput
+          class="input is-medium"
+          autocomplete="off"
+          formControlName="rol"
+          [matAutocomplete]="autoRol"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+        <mat-autocomplete
+          #autoRol="matAutocomplete"
+          [displayWith]="displayFnRol"
+        >
+          <mat-option
+            *ngFor="let option of filteredRoles | async"
+            [value]="option"
+          >
+            {{ option.nombre }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <!--  field -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Contraseña</mat-label>
+        <input
+          id="claveLogin"
+          matInput
+          formControlName="claveLogin"
+          type="number"
+          required
+        />
+      </mat-form-field>
+      <!--  field -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Observación</mat-label>
+        <textarea #observacion matInput placeholder="Observación"></textarea>
+        <mat-hint align="end">{{ observacion.value.length }} / 4000</mat-hint>
+
+        <mat-error *ngIf="form.controls.direccionMail.hasError('maxLength')">
+          Máximo 4000 carácteres.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="flex flex-row justify-center items-center min-w-full mt-4 mb-6">
+      <button
+        *ngIf="!cargando"
+        mat-raised-button
+        color="primary"
+        [disabled]="form.invalid"
       >
-        <!-- Apellido field -->
-        <div *ngIf="esEditar" class="w-full">
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Nombre de Usuario</mat-label>
-            <input id="apellido" matInput formControlName="username" required />
-            <mat-error *ngIf="form.controls.username.hasError('required')">
-              Este campo es requerido.
-            </mat-error>
-            <mat-hint
-              *ngIf="
-                !usernameValido &&
-                !form.controls.username.pristine &&
-                form.controls.username.value !== usernameOriginal
-              "
-              class="text-red-700"
-              >El nombre de usuario ya existe</mat-hint
-            >
-          </mat-form-field>
-        </div>
-        <!-- Apellido field -->
-        <div *ngIf="esEditar" class="w-full">
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Password</mat-label>
-            <input id="apellido" matInput formControlName="password" />
-          </mat-form-field>
-        </div>
-        <!-- Nombre field -->
-        <div class="w-full">
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Nombre</mat-label>
-            <input id="nombre" matInput formControlName="nombre" required />
-            <mat-error *ngIf="form.controls.nombre.hasError('required')">
-              Este campo es requerido.
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <!-- Apellido field -->
-        <div class="w-full">
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Apellido</mat-label>
-            <input id="apellido" matInput formControlName="apellido" required />
-            <mat-error *ngIf="form.controls.apellido.hasError('required')">
-              Este campo es requerido.
-            </mat-error>
-          </mat-form-field>
-        </div>
-
-        <!-- email field -->
-        <div class="w-full">
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Email</mat-label>
-            <input id="email" type="email" matInput formControlName="email" />
-          </mat-form-field>
-        </div>
-      </div>
-
-      <div class="flex flex-row justify-center items-center min-w-full mt-4">
-        <button
-          *ngIf="!cargando"
-          mat-raised-button
-          color="primary"
-          [disabled]="
-            form.invalid ||
-            (usuario?._id &&
-              !usernameValido &&
-              form.controls.username.value !== usernameOriginal)
-          "
-        >
-          {{ usuario && usuario._id ? "Actualizar" : "Guardar" }}
-        </button>
-        <button
-          *ngIf="cargando"
-          mat-raised-button
-          color="warn"
-          [disabled]="true"
-        >
-          Cargando...
-        </button>
-      </div>
-    </form>
-  </div>
+        {{ usuario && usuario._id ? "Actualizar" : "Guardar" }}
+      </button>
+      <button *ngIf="cargando" mat-raised-button color="warn" [disabled]="true">
+        Cargando...
+      </button>
+    </div>
+  </form>
 </div>

@@ -26,8 +26,16 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { synveltAnimations } from '@synvelt/animations';
+import { IRol } from 'app/models/iRol';
 import { IUsuario } from 'app/models/iUsuario';
-const columnasMD = ['cuit', 'nombreCompleto', 'area', 'estado', 'opciones'];
+const columnasMD = [
+  'cuit',
+  'nombreCompleto',
+  'area',
+  'rol',
+  'estado',
+  'opciones',
+];
 const columnasXS = ['nombreCompleto'];
 @Component({
   selector: 'app-tabla-usuarios',
@@ -46,6 +54,7 @@ const columnasXS = ['nombreCompleto'];
 })
 export class TablaUsuariosComponent implements OnInit, OnChanges {
   @Input() usuarios: IUsuario[];
+  @Input() roles: IRol[];
   @Input() cargando: boolean;
   @Output() retEliminar = new EventEmitter<string>();
   @Output() retEditar = new EventEmitter<string>();
@@ -85,11 +94,29 @@ export class TablaUsuariosComponent implements OnInit, OnChanges {
       });
   }
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes.roles && changes.roles.currentValue) {
+      this.setUsuariosConRol();
+    }
     if (changes.usuarios && changes.usuarios.currentValue) {
       this.dataSource.data = this.usuarios;
     }
   }
-
+  setUsuariosConRol() {
+    if (!this.usuarios) {
+      setTimeout(() => {
+        this.setUsuariosConRol();
+      }, 1000);
+    } else {
+      this.usuarios.forEach(usuario => {
+        const index = this.roles.findIndex(
+          rol => rol.id === usuario.idRolPrincipal
+        );
+        if (index !== -1) {
+          usuario.rol = this.roles[index];
+        }
+      });
+    }
+  }
   ngOnInit(): void {
     this.customSearchSortTable();
   }

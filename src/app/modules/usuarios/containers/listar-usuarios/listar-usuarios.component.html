@@ -1,12 +1,8 @@
 <div class="flex flex-col flex-auto min-w-0 container mx-auto px-8" style="">
-  <div class="w-full mt-2">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <a href="/demos/puerta/portal/Hub/Masters">Registros</a>
-      </li>
-      <li class="breadcrumb-item active">Consulta de usuarios</li>
-    </ol>
-  </div>
+  <app-breadcrumb
+    [breadcrumbs]="[{ nombre: 'Consulta de usuarios', url: ['usuarios'] }]"
+  ></app-breadcrumb>
+
   <!-- Header -->
   <div
     class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between bg-transparent"
@@ -29,7 +25,7 @@
     <app-filtro-usuarios
       class="w-full md:w-4/12"
       [cargando]="cargando"
-      [roles]="roles$ | async"
+      [roles]="roles"
       (retFiltros)="setFiltros($event)"
     >
     </app-filtro-usuarios>
@@ -37,6 +33,7 @@
     <app-tabla-usuarios
       class="w-full md:w-8/12"
       [usuarios]="usuarios"
+      [roles]="roles"
       [cargando]="cargando"
       (retEditar)="setEditar($event)"
       (retEliminar)="setEliminar($event)"

@@ -1,3 +1,5 @@
+import { IRol } from './iRol';
+
 export interface IUsuario {
   id: string;
   apellido: string;
@@ -22,6 +24,8 @@ export interface IUsuario {
 
   //   fechaUtcActualizacion?: string;
   estado?: string;
+  //   En t de ejecucion
+  rol?: IRol;
 }
 
 export interface IUsuarioFilter {

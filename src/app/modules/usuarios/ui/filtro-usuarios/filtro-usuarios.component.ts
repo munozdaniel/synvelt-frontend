@@ -38,7 +38,7 @@ export class FiltroUsuariosComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.form = this._fb.group({
       nombre: [null],
-    //   apellido: [null],
+      //   apellido: [null],
       estado: [null],
       cuil: [null],
       rol: [null],
@@ -72,6 +72,7 @@ export class FiltroUsuariosComponent implements OnInit, OnChanges {
   displayFnRol(objeto: IRol): string {
     return objeto && objeto.nombre ? objeto.nombre : '';
   }
+  //   Fin: Autocomplete
   limpiar() {
     this.form.reset();
     this.retFiltros.emit(null);
@@ -106,9 +107,9 @@ export class FiltroUsuariosComponent implements OnInit, OnChanges {
       if (parametros.nombre) {
         filtros.nombreCompleto = parametros.nombre;
       }
-    //   if (parametros.apellido) {
-    //     filtros.apellido = parametros.apellido;
-    //   }
+      //   if (parametros.apellido) {
+      //     filtros.apellido = parametros.apellido;
+      //   }
       if (parametros.estado) {
         filtros.activo = parametros.estado === 'ACTIVO' ? true : false;
       }

@@ -20,7 +20,10 @@ import { FiltroUsuariosComponent } from './ui/filtro-usuarios/filtro-usuarios.co
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
-
+import { IConfig, NgxMaskModule } from 'ngx-mask';
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 @NgModule({
   declarations: [
     ListarUsuariosComponent,
@@ -48,8 +51,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatAutocompleteModule,
     MatSelectModule,
     MatInputModule,
-    MatMenuModule
+    MatMenuModule,
     // NgxPermissionsModule.forChild(),
+    NgxMaskModule.forRoot(maskConfig),
   ],
 })
 export class UsuarioModule {}

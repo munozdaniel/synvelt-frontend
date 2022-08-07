@@ -29,6 +29,7 @@
     "crypto-js": "3.3.0",
     "fast-xml-parser": "^4.0.9",
     "highlight.js": "11.3.1",
+    "ngx-mask": "^13.1.15",
     "lodash-es": "4.17.21",
     "moment": "2.29.1",
     "ng-apexcharts": "1.6.0",

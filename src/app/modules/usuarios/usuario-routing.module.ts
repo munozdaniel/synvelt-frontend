@@ -11,7 +11,7 @@ const routes: Routes = [
     //  DEBE estar autenticados
   },
   {
-    path: 'agregar',
+    path: 'nuevo',
     component: AgregarUsuarioComponent,
     //  DEBE estar autenticados
   },

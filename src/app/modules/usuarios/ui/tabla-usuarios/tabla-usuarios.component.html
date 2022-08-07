@@ -69,6 +69,18 @@
           </span>
         </td>
       </ng-container>
+      <!-- '',
+                        -->
+      <ng-container matColumnDef="rol">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Perfil</th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          [class.fila_inactiva]="row.fechaBaja"
+        >
+          {{ row.rol?.nombre }}
+        </td>
+      </ng-container>
 
       <ng-container matColumnDef="opciones">
         <th mat-header-cell *matHeaderCellDef>

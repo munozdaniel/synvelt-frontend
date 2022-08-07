@@ -5,7 +5,6 @@ import { UsuarioService } from 'app/core/services/usuario.service';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { IUsuario } from 'app/models/iUsuario';
 import { IRol } from 'app/models/iRol';
-import { Observable } from 'rxjs';
 import { RolService } from 'app/core/services/rol.service';
 @UntilDestroy()
 @Component({
@@ -15,7 +14,7 @@ import { RolService } from 'app/core/services/rol.service';
 export class ListarUsuariosComponent implements OnInit {
   usuarios: IUsuario[];
   cargando = false;
-  roles$: Observable<IRol[]>;
+  roles: IRol[];
   parametros: any;
   constructor(
     private _usuarioService: UsuarioService,
@@ -29,7 +28,17 @@ export class ListarUsuariosComponent implements OnInit {
     this.obtenerRoles();
   }
   obtenerRoles() {
-    this.roles$ = this._rolService.obtenertodos();
+    this._rolService
+      .obtenertodos()
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        datos => {
+          this.roles = datos;
+        },
+        error => {
+          console.log('[ERROR]', error);
+        }
+      );
   }
   obtenerTodos() {
     this.cargando = true;
@@ -50,7 +59,7 @@ export class ListarUsuariosComponent implements OnInit {
   }
   redireccionarAgregar() {
     console.log('redireccionarAgregar');
-    this._router.navigate(['usuarios/agregar']);
+    this._router.navigate(['usuarios/nuevo']);
   }
   setEditar(evento: string) {
     this._router.navigate(['usuarios/editar', evento]);
