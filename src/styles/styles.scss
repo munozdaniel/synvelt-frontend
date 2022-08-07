@@ -90,7 +90,8 @@ tr.fila_seleccionada:not(.example-expanded-row):active {
 }
 // Fin: Tablas Expansible
 
-.mat-form-field-appearance-outline .mat-form-field-flex {
+.mat-form-field-appearance-outline:not(.text-area) .mat-form-field-flex {
+  //
   // Force all inputs to have the same height.
   // Otherwise mat-select are doing their own thing and gain extra-height
   // https://github.com/angular/material2/issues/13198
