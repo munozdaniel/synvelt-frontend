@@ -96,6 +96,11 @@
           </button>
           <mat-menu #menu="matMenu">
             <!-- *ngxPermissionsOnly="['ADMIN', 'EMPLEADO']" -->
+            <button mat-menu-item (click)="asignarRol(row)">
+              <mat-icon svgIcon="feather:edit"></mat-icon>
+              <span> Asignar Rol</span>
+            </button>
+            <mat-divider></mat-divider>
             <button mat-menu-item (click)="editar(row)">
               <mat-icon svgIcon="feather:edit"></mat-icon>
               <span> Editar</span>
@@ -133,7 +138,7 @@
     </table>
     <mat-card
       *ngIf="!usuarios || usuarios.length < 1"
-      class="bg-card mat-elevation-z0 flex flex-row justify-center items-center rounded-none"
+      class="bg-card mat-elevation-z0 p-4 flex flex-row justify-center items-center rounded-none"
     >
       <p>No se encontraron resultados</p>
     </mat-card>

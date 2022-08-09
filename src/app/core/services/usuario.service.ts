@@ -1,7 +1,7 @@
 import { environment } from 'environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { IUsuario } from 'app/models/iUsuario';
+import { IUsuario, LISTAR_USUARIOS } from 'app/models/iUsuario';
 import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root',
@@ -68,8 +68,17 @@ export class UsuarioService {
     return queryParams;
   }
   /**
-   * PUT usuarios/Actualizacion?apellido={apellido}&claveLogin={claveLogin}&cuil={cuil}&direccionMail={direccionMail}
-   * &esInspector={esInspector}&id={id}&idRolPrincipal={idRolPrincipal}&nombre={nombre}&nombreLogin={nombreLogin}
+   * PUT usuarios/Actualizacion?apellido={apellido}
+   * &claveLogin={claveLogin}
+   * &cuil={cuil}
+   * &direccionMail={direccionMail}
+   * &esInspector={esInspector}
+   * &id={id}
+   * &idAreaInterna={idAreaInterna}
+   * &idRolPrincipal={idRolPrincipal}&nombre={nombre}
+   * &nombreLogin={nombreLogin}
+   * &telefono={telefono}
+   * &comentario={comentario}
    *   */
   guardar(parametros: any): Observable<IUsuario> {
     const queryParams = this.setQueryParams(parametros);
@@ -105,20 +114,13 @@ export class UsuarioService {
     return this._http.get(this.url + 'usuarios/Lista', {
       params: queryParams,
     });
-    // return of([
-    //   {
-    //     Apellido: 'Windsor',
-    //     ClaveLogin: 'testnocifrado',
-    //     Cuil: null,
-    //     DireccionMail: 'elizabeth@windsor.org',
-    //     FechaActualizacion: '2022-07-20T23:31:17.41',
-    //     FechaBaja: null,
-    //     Id: '2d8f1bb7-c993-4913-8c9f-6c526999b4e0',
-    //     IdInspector: null,
-    //     IdRolPrincipal: '5a7d5dba-9768-43a5-a08b-6570ad56ce56',
-    //     Nombre: 'Elizabeth',
-    //     NombreLogin: 'erii',
-    //   },
-    // ]);
+    return of(LISTAR_USUARIOS);
+  }
+  //   POST usuarios/AsignacionUsuariosRol?idRol={idRol}
+  asignarRol(idRol: string): Observable<any> {
+    return this._http.post(
+      this.url + `usuarios/AsignacionUsuariosRol?idRol=${idRol}`,
+      {}
+    );
   }
 }

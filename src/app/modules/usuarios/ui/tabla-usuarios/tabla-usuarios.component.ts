@@ -56,6 +56,7 @@ export class TablaUsuariosComponent implements OnInit, OnChanges {
   @Input() usuarios: IUsuario[];
   @Input() roles: IRol[];
   @Input() cargando: boolean;
+  @Output() retAsignarRol= new EventEmitter<string>();
   @Output() retEliminar = new EventEmitter<string>();
   @Output() retEditar = new EventEmitter<string>();
   columnas = columnasMD;
@@ -165,6 +166,9 @@ export class TablaUsuariosComponent implements OnInit, OnChanges {
     this.retEditar.emit(row.id);
   }
   eliminar(row: IUsuario) {
+    this.retEliminar.emit(row.id);
+  }
+  asignarRol(row: IUsuario) {
     this.retEliminar.emit(row.id);
   }
 }

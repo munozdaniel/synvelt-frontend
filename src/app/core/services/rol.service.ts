@@ -31,6 +31,12 @@ export class RolService {
       if (parametros.id) {
         queryParams = queryParams.append('id', parametros.id);
       }
+      if (parametros.nombre) {
+        queryParams = queryParams.append('nombre', parametros.nombre);
+      }
+      if (parametros.descripcion) {
+        queryParams = queryParams.append('descripcion', parametros.descripcion);
+      }
     }
     return queryParams;
   }
@@ -46,8 +52,12 @@ export class RolService {
       params: queryParams,
     });
   }
-  guardar(rol: IRol): Observable<IRol> {
-    return this._http.post<IRol>(this.url + 'usuarios/Rol', rol);
+  //   usuarios/ActualizacionRol?esAdministradorAplicacion={esAdministradorAplicacion}&esAdministradorDatos={esAdministradorDatos}&id={id}&nombre={nombre}&descripcion={descripcion}
+  guardar(parametros: any): Observable<IRol> {
+    const queryParams = this.setQueryParams(parametros);
+    return this._http.post<IRol>(this.url + 'usuarios/ActualizacionRol', {
+      params: queryParams,
+    });
   }
   buscar(parametros?: any): any {
     console.log('buscar', parametros);

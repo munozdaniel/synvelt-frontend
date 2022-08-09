@@ -116,4 +116,7 @@ export class ListarUsuariosComponent implements OnInit {
     this.parametros = parametros;
     this.obtenerTodos();
   }
+  setAsignarRol(evento: string) {
+    this._router.navigate(['usuarios/asignar-rol', evento]);
+  }
 }

@@ -21,6 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
+import { AsignarRolComponent } from './containers/asignar-rol/asignar-rol.component';
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
@@ -32,6 +33,7 @@ const maskConfig: Partial<IConfig> = {
     AgregarUsuarioComponent,
     EditarUsuarioComponent,
     FiltroUsuariosComponent,
+    AsignarRolComponent,
   ],
   imports: [
     CommonModule,

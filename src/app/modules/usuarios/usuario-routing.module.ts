@@ -20,6 +20,11 @@ const routes: Routes = [
     component: EditarUsuarioComponent,
     //  DEBE estar autenticados
   },
+  {
+    path: 'asignar-rol/:id',
+    component: EditarUsuarioComponent,
+    //  DEBE estar autenticados
+  },
 ];
 
 @NgModule({

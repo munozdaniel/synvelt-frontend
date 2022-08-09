@@ -34,6 +34,7 @@ export class FiltroUsuariosComponent implements OnInit, OnChanges {
    *
    * CUIT - Nombre del Usuario - Área Municipal -
    * Perfil Asignado - Estado
+   *
    */
   ngOnInit(): void {
     this.form = this._fb.group({
