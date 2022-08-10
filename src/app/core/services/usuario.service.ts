@@ -95,7 +95,8 @@ export class UsuarioService {
    * PUT usuarios/Eliminacion?id={id}
    */
   eliminar(id): Observable<void> {
-    return this._http.put<void>(this.url + `usuarios/Baja?id=${id}`, null);
+    // return this._http.put<void>(this.url + `usuarios/Baja?id=${id}`, null);
+    return this._http.get<void>(this.url + `usuarios/Baja?id=${id}`);
   }
   //   listar(): Observable<IUsuario[]> {}
   /**
