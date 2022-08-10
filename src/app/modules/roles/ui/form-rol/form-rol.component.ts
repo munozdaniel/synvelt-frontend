@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -6,6 +7,7 @@ import {
   OnInit,
   Output,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -13,6 +15,13 @@ import { synveltAnimations } from '@synvelt/animations';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { Observable, startWith, map } from 'rxjs';
 import { IRol } from 'app/models/iRol';
+import { IUsuario } from 'app/models/iUsuario';
+import {
+  MediaMatcher,
+  BreakpointObserver,
+  Breakpoints,
+  BreakpointState,
+} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-form-rol',
@@ -24,15 +33,36 @@ export class FormRolComponent implements OnInit, OnChanges {
   @Input() rol?: IRol;
   @Output() retForm = new EventEmitter<IRol>();
   @Output() retUsernameExiste = new EventEmitter<any>();
-
+  //
   form: FormGroup;
   esEditar = false;
   filteredRoles: Observable<IRol[]>;
-
+  // Mobile
+  isMobile: boolean;
+  private _mobileQueryListener: () => void;
+  mobileQuery: MediaQueryList;
   constructor(
     private _fb: FormBuilder,
-    private _synveltConfirmationService: SynveltConfirmationService
-  ) {}
+    private _synveltConfirmationService: SynveltConfirmationService,
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _media: MediaMatcher,
+    public breakpointObserver: BreakpointObserver
+  ) {
+    // "Escuchador" del tamaño de pantalla
+    this.mobileQuery = this._media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => this._changeDetectorRef.detectChanges();
+    this.breakpointObserver
+      .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          // Si la pantalla es small
+          this.isMobile = true;
+        } else {
+          // Si la pantalla no es small
+          this.isMobile = false;
+        }
+      });
+  }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.rol && changes.rol.currentValue) {
       this.esEditar = true;

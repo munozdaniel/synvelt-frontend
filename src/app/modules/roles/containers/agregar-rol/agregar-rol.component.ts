@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { RolService } from 'app/core/services/rol.service';
+import { UsuarioService } from 'app/core/services/usuario.service';
 import { IRol } from 'app/models/iRol';
+import { IUsuario } from 'app/models/iUsuario';
 
 @UntilDestroy()
 @Component({
@@ -13,43 +15,81 @@ import { IRol } from 'app/models/iRol';
 export class AgregarRolComponent implements OnInit, OnDestroy {
   //
   cargando = false;
-
+  cargandoUsuario = false;
+  usuarios: IUsuario[];
+  usuariosSeleccionados: IUsuario[];
   constructor(
     private _rolService: RolService,
+    private _usuarioService: UsuarioService,
     private _synveltConfirmationService: SynveltConfirmationService,
     private _router: Router
   ) {}
   ngOnDestroy(): void {}
 
-  ngOnInit(): void {}
-
+  ngOnInit(): void {
+    this.obtenerUsuarios();
+  }
+  obtenerUsuarios() {
+    this.cargandoUsuario = true;
+    this._usuarioService
+      .buscar()
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        datos => {
+          this.cargandoUsuario = false;
+          this.usuarios = datos;
+        },
+        error => {
+          this.cargandoUsuario = false;
+          console.log('[ERROR]', error);
+        }
+      );
+  }
   setForm(evento: IRol) {
-    // Open the confirmation and save the reference
-    const dialogRef = this._synveltConfirmationService.open({
-      title: 'Confirmar Operación',
-      message: 'Está por guardar un nuevo rol, desea continuar?',
-      icon: {
-        name: 'heroicons_solid:question-mark-circle',
-        color: 'info',
-      },
-      actions: {
-        confirm: {
-          label: 'Guardar',
-          color: 'primary',
-        },
-        cancel: {
-          label: 'Cancelar',
-        },
-      },
-    });
+    if (this.usuariosSeleccionados?.length < 1) {
+      this._synveltConfirmationService.open({
+        title: 'Formulario Incompleto',
+        message: 'Tiene que seleccionar al menos un usuario',
 
-    // Subscribe to afterClosed from the dialog reference
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      if (result === 'confirmed') {
-        this.guardar(evento);
-      }
-    });
+        actions: {
+          confirm: {
+            show: false,
+            // label: 'Aceptar',
+          },
+          cancel: {
+            show: true,
+            label: 'Aceptar',
+          },
+        },
+      });
+    } else {
+      // Open the confirmation and save the reference
+      const dialogRef = this._synveltConfirmationService.open({
+        title: 'Confirmar Operación',
+        message: 'Está por guardar un nuevo rol, desea continuar?',
+        icon: {
+          name: 'heroicons_solid:question-mark-circle',
+          color: 'info',
+        },
+        actions: {
+          confirm: {
+            label: 'Guardar',
+            color: 'primary',
+          },
+          cancel: {
+            label: 'Cancelar',
+          },
+        },
+      });
+
+      // Subscribe to afterClosed from the dialog reference
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(result);
+        if (result === 'confirmed') {
+          this.guardar(evento);
+        }
+      });
+    }
   }
   guardar(rol: IRol) {
     this.cargando = true;
@@ -77,5 +117,8 @@ export class AgregarRolComponent implements OnInit, OnDestroy {
           console.log('[ERROR]', error);
         }
       );
+  }
+  setSelectUsuarios(evento: IUsuario[]) {
+    this.usuariosSeleccionados = [...evento];
   }
 }

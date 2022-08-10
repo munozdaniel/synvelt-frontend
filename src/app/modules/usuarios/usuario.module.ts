@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListarUsuariosComponent } from './containers/listar-usuarios/listar-usuarios.component';
-import { TablaUsuariosComponent } from './ui/tabla-usuarios/tabla-usuarios.component';
 import { FormUsuarioComponent } from './ui/form-usuario/form-usuario.component';
 import { AgregarUsuarioComponent } from './containers/agregar-usuario/agregar-usuario.component';
 import { EditarUsuarioComponent } from './containers/editar-usuario/editar-usuario.component';
@@ -21,13 +20,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
+import { TablaUsuariosModule } from 'app/shared/tabla-usuarios/tabla-usuarios.module';
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
 @NgModule({
   declarations: [
     ListarUsuariosComponent,
-    TablaUsuariosComponent,
     FormUsuarioComponent,
     AgregarUsuarioComponent,
     EditarUsuarioComponent,
@@ -54,6 +53,7 @@ const maskConfig: Partial<IConfig> = {
     MatMenuModule,
     // NgxPermissionsModule.forChild(),
     NgxMaskModule.forRoot(maskConfig),
+    TablaUsuariosModule,
   ],
 })
 export class UsuarioModule {}

@@ -104,7 +104,6 @@ export class UsuarioService {
    * Para consulta de usuarios
    */
   buscar(parametros?: any): any {
-    console.log('buscar', parametros);
     const queryParams = this.setQueryParams(parametros);
     // let headers = new HttpHeaders();
     // const headers = new HttpHeaders().set('content-type',    );
