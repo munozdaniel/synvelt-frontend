@@ -25,6 +25,7 @@
     <app-filtro-usuarios
       class="w-full md:w-4/12"
       [cargando]="cargando"
+      [areasInternas]="areasInternas"
       [roles]="roles"
       (retFiltros)="setFiltros($event)"
     >
@@ -32,6 +33,7 @@
 
     <app-tabla-usuarios
       class="w-full md:w-8/12"
+      [areasInternas]="areasInternas"
       [usuarios]="usuarios"
       [roles]="roles"
       [cargando]="cargando"

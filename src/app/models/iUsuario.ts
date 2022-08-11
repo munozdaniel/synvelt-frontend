@@ -1,3 +1,4 @@
+import { IAreaInterna } from './iAreaInterna';
 import { IRol } from './iRol';
 
 export interface IUsuario {
@@ -24,6 +25,7 @@ export interface IUsuario {
   estado?: string;
   //   En t de ejecucion
   rol?: IRol;
+  areaInterna?: IAreaInterna;
 }
 
 export interface IUsuarioFilter {

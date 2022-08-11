@@ -20,9 +20,30 @@
     </mat-form-field> -->
     <!--  nombre field -->
     <!-- TODO: Autocomplete AreaMunicipal -->
+    <!-- AreaInterna -->
     <mat-form-field appearance="outline" class="w-full">
-      <mat-label>Área Municipal </mat-label>
-      <input id="idAreaInterna" matInput formControlName="idAreaInterna" />
+      <mat-label class="lbl">Area Interna</mat-label>
+      <input
+        type="text"
+        matInput
+        class="input is-medium"
+        autocomplete="off"
+        formControlName="areaInterna"
+        [matAutocomplete]="autoAreas"
+      />
+      <mat-icon matSuffix>search</mat-icon>
+      <mat-autocomplete
+        #autoAreas="matAutocomplete"
+        [displayWith]="displayFnArea"
+      >
+        <mat-option [value]="areaIndistinta">Indistinto</mat-option>
+        <mat-option
+          *ngFor="let option of filteredAreas | async"
+          [value]="option"
+        >
+          {{ option.nombre }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
     <!-- Rol -->
@@ -38,6 +59,7 @@
       />
       <mat-icon matSuffix>search</mat-icon>
       <mat-autocomplete #autoRol="matAutocomplete" [displayWith]="displayFnRol">
+        <mat-option [value]="rolIndistinto">Indistinto</mat-option>
         <mat-option
           *ngFor="let option of filteredRoles | async"
           [value]="option"

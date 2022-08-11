@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // url: 'http://asdrovia.com/AdmInsp/',
-  url: 'https://elosegui.org/AdmInsp/',
+  url: 'http://asdrovia.com/AdmInsp/',
+  // url: 'https://elosegui.org/AdmInsp/',
 };
 
 /*

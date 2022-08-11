@@ -6,6 +6,8 @@ import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { IUsuario } from 'app/models/iUsuario';
 import { IRol } from 'app/models/iRol';
 import { RolService } from 'app/core/services/rol.service';
+import { AreaInternaService } from 'app/core/services/area-interna.service';
+import { IAreaInterna } from 'app/models/iAreaInterna';
 @UntilDestroy()
 @Component({
   selector: 'app-listar-usuarios',
@@ -16,16 +18,24 @@ export class ListarUsuariosComponent implements OnInit {
   cargando = false;
   roles: IRol[];
   parametros: any;
+  areasInternas: IAreaInterna[];
   constructor(
     private _usuarioService: UsuarioService,
     private _rolService: RolService,
     private _router: Router,
-    private _synveltConfirmationService: SynveltConfirmationService
+    private _synveltConfirmationService: SynveltConfirmationService,
+    private _areaInternaService: AreaInternaService
   ) {}
 
   ngOnInit(): void {
     this.obtenerTodos();
     this.obtenerRoles();
+    this.obtenerAreasInternas();
+  }
+  obtenerAreasInternas() {
+    this._areaInternaService.obtenertodos().subscribe(areasInternas => {
+      this.areasInternas = areasInternas;
+    });
   }
   obtenerRoles() {
     this._rolService
@@ -47,7 +57,6 @@ export class ListarUsuariosComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe(
         datos => {
-          console.log('datos', datos);
           this.cargando = false;
           this.usuarios = datos as any;
         },
@@ -58,7 +67,6 @@ export class ListarUsuariosComponent implements OnInit {
       );
   }
   redireccionarAgregar() {
-    console.log('redireccionarAgregar');
     this._router.navigate(['usuarios/nuevo']);
   }
   setEditar(evento: string) {

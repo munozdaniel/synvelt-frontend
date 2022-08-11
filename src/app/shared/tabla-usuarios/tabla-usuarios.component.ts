@@ -26,6 +26,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { synveltAnimations } from '@synvelt/animations';
+import { IAreaInterna } from 'app/models/iAreaInterna';
 import { IRol } from 'app/models/iRol';
 import { IUsuario } from 'app/models/iUsuario';
 const columnasMD = [
@@ -54,9 +55,10 @@ const columnasXS = ['nombreCompleto'];
 })
 export class TablaUsuariosComponent implements OnInit, OnChanges {
   @Input() usuarios: IUsuario[];
+  @Input() areasInternas: IAreaInterna[];
   @Input() roles: IRol[];
   @Input() cargando: boolean;
-  @Output() retAsignarRol= new EventEmitter<string>();
+  @Output() retAsignarRol = new EventEmitter<string>();
   @Output() retEliminar = new EventEmitter<string>();
   @Output() retEditar = new EventEmitter<string>();
   columnas = columnasMD;
@@ -98,6 +100,9 @@ export class TablaUsuariosComponent implements OnInit, OnChanges {
     if (changes.roles && changes.roles.currentValue) {
       this.setUsuariosConRol();
     }
+    if (changes.areasInternas && changes.areasInternas.currentValue) {
+      this.setUsuariosConAreaInterna();
+    }
     if (changes.usuarios && changes.usuarios.currentValue) {
       this.dataSource.data = this.usuarios;
     }
@@ -114,6 +119,22 @@ export class TablaUsuariosComponent implements OnInit, OnChanges {
         );
         if (index !== -1) {
           usuario.rol = this.roles[index];
+        }
+      });
+    }
+  }
+  setUsuariosConAreaInterna() {
+    if (!this.usuarios) {
+      setTimeout(() => {
+        this.setUsuariosConAreaInterna();
+      }, 1000);
+    } else {
+      this.usuarios.forEach(usuario => {
+        const index = this.areasInternas.findIndex(
+          x => x.id === usuario.idAreaInterna
+        );
+        if (index !== -1) {
+          usuario.areaInterna = this.areasInternas[index];
         }
       });
     }

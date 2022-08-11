@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
+import { IAreaInterna } from 'app/models/iAreaInterna';
 import { IRol } from 'app/models/iRol';
 import { Observable, startWith, map } from 'rxjs';
 @Component({
@@ -18,9 +19,13 @@ import { Observable, startWith, map } from 'rxjs';
 export class FiltroUsuariosComponent implements OnInit, OnChanges {
   @Input() cargando = false;
   @Input() roles: IRol[];
+  @Input() areasInternas: IAreaInterna[];
   @Output() retFiltros = new EventEmitter<any>();
   form: FormGroup;
   filteredRoles: Observable<IRol[]>;
+  filteredAreas: Observable<IAreaInterna[]>;
+  areaIndistinta = { id: null, nombre: 'Indistinto', codigo: 'N/A' };
+  rolIndistinto = { id: null, nombre: 'Indistinto', codigo: 'N/A' };
   constructor(
     private _fb: FormBuilder,
     private _synveltConfirmationService: SynveltConfirmationService
@@ -28,6 +33,9 @@ export class FiltroUsuariosComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.roles && changes.roles.currentValue) {
       this.setAutocompleteRoles();
+    }
+    if (changes.areasInternas && changes.areasInternas.currentValue) {
+      this.setAutocompleteAreasInternas();
     }
   }
   /** CAMPOS FILTRO Y ORDEN
@@ -43,10 +51,39 @@ export class FiltroUsuariosComponent implements OnInit, OnChanges {
       estado: [null],
       cuil: [null],
       rol: [null],
-      idAreaInterna: [null],
+      areaInterna: [null],
       //   apellido: [null],
     });
   }
+  //  Autocomplete
+  setAutocompleteAreasInternas() {
+    if (!this.form) {
+      setTimeout(() => {
+        this.setAutocompleteAreasInternas();
+      }, 1000);
+    } else {
+      this.filteredAreas = this.form.controls.areaInterna.valueChanges.pipe(
+        startWith(''),
+        map(value => (typeof value === 'string' ? value : value.nombre)),
+        map(name =>
+          name ? this._filterAreas(name) : this.areasInternas.slice()
+        )
+      );
+    }
+  }
+  private _filterAreas(name: string): IAreaInterna[] {
+    const filterValue = name.toLowerCase();
+
+    return this.areasInternas.filter(option => {
+      const nombreCompleto = option.nombre;
+      // return nombreCompleto.toLowerCase().indexOf(filterValue) === 0;
+      return nombreCompleto.toLowerCase().includes(filterValue);
+    });
+  }
+  displayFnArea(objeto: IAreaInterna): string {
+    return objeto && objeto.nombre ? objeto.nombre : '';
+  }
+  //   Fin: Autocomplete
   //  Autocomplete
   setAutocompleteRoles() {
     if (!this.form) {
@@ -121,8 +158,8 @@ export class FiltroUsuariosComponent implements OnInit, OnChanges {
       if (parametros.rol) {
         filtros.idRolPrincipal = parametros.rol ? parametros.rol.id : null;
       }
-      if (parametros.idAreaInterna) {
-        filtros.idAreaInterna = parametros.idAreaInterna;
+      if (parametros.areaInterna) {
+        filtros.idAreaInterna = parametros.areaInterna.id;
       }
 
       this.retFiltros.emit(filtros);
