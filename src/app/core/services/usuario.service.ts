@@ -21,6 +21,9 @@ export class UsuarioService {
       if (parametros.apellido) {
         queryParams = queryParams.append('apellido', parametros.apellido);
       }
+      if (parametros.comentario) {
+        queryParams = queryParams.append('comentario', parametros.nombre);
+      }
       if (parametros.nombre) {
         queryParams = queryParams.append('nombre', parametros.nombre);
       }
@@ -30,10 +33,10 @@ export class UsuarioService {
       if (parametros.cuil) {
         queryParams = queryParams.append('cuil', parametros.cuil);
       }
-      if (parametros.areaMunicipal) {
+      if (parametros.idAreaInterna) {
         queryParams = queryParams.append(
-          'areaMunicipal',
-          parametros.areaMunicipal
+          'idAreaInterna',
+          parametros.idAreaInterna
         );
       }
       if (parametros.idRolPrincipal) {
@@ -64,6 +67,9 @@ export class UsuarioService {
       if (parametros.nombreLogin) {
         queryParams = queryParams.append('nombreLogin', parametros.nombreLogin);
       }
+      if (parametros.telefono) {
+        queryParams = queryParams.append('telefono', parametros.telefono);
+      }
     }
     return queryParams;
   }
@@ -82,13 +88,10 @@ export class UsuarioService {
    *   */
   guardar(parametros: any): Observable<IUsuario> {
     const queryParams = this.setQueryParams(parametros);
-    return this._http.put<IUsuario>(
-      this.url + 'usuarios/Actualizacion',
-      {},
-      {
-        params: queryParams,
-      }
-    );
+    //   this.url + 'usuarios/Actualizacion',
+    return this._http.get<IUsuario>(this.url + 'usuarios/ActualizacionG', {
+      params: queryParams,
+    });
   }
   //   actualizar(): Observable<IUsuario> {}
   /**
@@ -115,12 +118,5 @@ export class UsuarioService {
       params: queryParams,
     });
     return of(LISTAR_USUARIOS);
-  }
-  //   POST usuarios/AsignacionUsuariosRol?idRol={idRol}
-  asignarRol(idRol: string): Observable<any> {
-    return this._http.post(
-      this.url + `usuarios/AsignacionUsuariosRol?idRol=${idRol}`,
-      {}
-    );
   }
 }

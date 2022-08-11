@@ -63,7 +63,7 @@ export class FiltroRolesComponent implements OnInit, OnChanges {
       //   estado: [null],
       //   cuit: [null],
       //   rol: [null],
-      //   areaMunicipal: [null],
+      //   idAreaInterna: [null],
       const parametros = this.form.value;
       const filtros: any = {};
 

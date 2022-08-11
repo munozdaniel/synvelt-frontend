@@ -20,8 +20,6 @@ export interface IUsuario {
   nombreLogin?: string;
   telefono?: number;
 
-  areaMunicipal?: string;
-
   //   fechaUtcActualizacion?: string;
   estado?: string;
   //   En t de ejecucion
@@ -33,7 +31,7 @@ export interface IUsuarioFilter {
   estado?: string;
   cuit?: string;
   rol?: string;
-  areaMunicipal?: string;
+  idAreaInterna?: string;
 }
 
 export const LISTAR_USUARIOS: IUsuario[] = [

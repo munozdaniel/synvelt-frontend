@@ -14,6 +14,7 @@ import { synveltAnimations } from '@synvelt/animations';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { Observable, startWith, map } from 'rxjs';
 import { IRol } from 'app/models/iRol';
+import { IAreaInterna } from 'app/models/iAreaInterna';
 
 @Component({
   selector: 'app-form-usuario',
@@ -24,12 +25,14 @@ export class FormUsuarioComponent implements OnInit, OnChanges {
   @Input() cargando: boolean;
   @Input() usuario?: IUsuario;
   @Input() roles: IRol[];
+  @Input() areasInternas: IAreaInterna[];
   @Output() retForm = new EventEmitter<IUsuario>();
   @Output() retUsernameExiste = new EventEmitter<any>();
 
   form: FormGroup;
   esEditar = false;
   filteredRoles: Observable<IRol[]>;
+  filteredAreasInternas: Observable<IAreaInterna[]>;
 
   constructor(
     private _fb: FormBuilder,
@@ -43,6 +46,10 @@ export class FormUsuarioComponent implements OnInit, OnChanges {
     if (changes.roles && changes.roles.currentValue) {
       this.setAutocompleteRoles();
     }
+    if (changes.filteredAreasInternas && changes.filteredAreasInternas.currentValue) {
+      this.setAutocompleteRoles();
+    }
+
   }
 
   ngOnInit(): void {
@@ -58,6 +65,7 @@ export class FormUsuarioComponent implements OnInit, OnChanges {
       direccionMail: ['', [Validators.email, Validators.maxLength(256)]],
       telefono: ['', [Validators.maxLength(12)]],
       rol: ['', []],
+      areaInterna: ['', []],
       comentario: ['', [Validators.maxLength(4000)]],
 
       nombreLogin: ['', []], // se saca del cuit
@@ -65,9 +73,36 @@ export class FormUsuarioComponent implements OnInit, OnChanges {
 
       //   nroLegajo: ['', []],
       //   idInspector: ['', []],
-      //   areaMunicipal: ['', []],
+      //   idAreaInterna: ['', []],
     });
   }
+    //  Autocomplete
+    setAutocompleteAreaInterna() {
+        if (!this.form) {
+          setTimeout(() => {
+            this.setAutocompleteAreaInterna();
+          }, 1000);
+        } else {
+          this.filteredAreasInternas = this.form.controls.areaInterna.valueChanges.pipe(
+            startWith(''),
+            map(value => (typeof value === 'string' ? value : value.nombre)),
+            map(name => (name ? this._filterAreaInterna(name) : this.areasInternas.slice()))
+          );
+        }
+      }
+      private _filterAreaInterna(name: string): IAreaInterna[] {
+        const filterValue = name.toLowerCase();
+
+        return this.areasInternas.filter(option => {
+          const nombreCompleto = option.nombre;
+          // return nombreCompleto.toLowerCase().indexOf(filterValue) === 0;
+          return nombreCompleto.toLowerCase().includes(filterValue);
+        });
+      }
+      displayFnAreaInterna(objeto: IAreaInterna): string {
+        return objeto && objeto.nombre ? objeto.nombre : '';
+      }
+      //   Fin: Autocomplete
   //  Autocomplete
   setAutocompleteRoles() {
     if (!this.form) {

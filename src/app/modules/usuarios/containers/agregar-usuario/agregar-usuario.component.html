@@ -17,6 +17,7 @@
   >
     <app-form-usuario
       [cargando]="cargando"
+      [areasInternas]="areasInternas$ | async"
       [roles]="roles$ | async"
       (retForm)="setForm($event)"
       class="w-full"

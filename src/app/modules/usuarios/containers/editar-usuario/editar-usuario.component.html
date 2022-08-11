@@ -18,6 +18,7 @@
     <app-form-usuario
       [cargando]="cargando"
       [usuario]="usuario"
+      [areasInternas]="areasInternas$ | async"
       [roles]="roles$ | async"
       (retForm)="setForm($event)"
       class="w-full"

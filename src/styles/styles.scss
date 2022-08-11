@@ -215,3 +215,13 @@ tr.fila_inactiva {
   border-radius: 20px;
   padding: 4px;
 }
+.contenedor-slide-toggle {
+  margin-top: 5px;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  padding: 6px 10px;
+  /* margin-top: -10px; */
+  display: flex;
+  justify-content: flex-start;
+  height: fit-content;
+}

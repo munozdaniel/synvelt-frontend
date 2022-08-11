@@ -112,6 +112,36 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
+      <!-- areaInterna -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label class="lbl">Area Interna</mat-label>
+        <input
+          type="text"
+          matInput
+          class="input is-medium"
+          autocomplete="off"
+          formControlName="areaInterna"
+          [matAutocomplete]="autoAreaInterna"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+        <mat-autocomplete
+          #autoAreaInterna="matAutocomplete"
+          [displayWith]="displayFnAreaInterna"
+        >
+          <mat-option
+            *ngFor="let option of filteredAreasInternas | async"
+            [value]="option"
+          >
+            {{ option.nombre }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <!-- field -->
+      <div class="contenedor-slide-toggle">
+        <mat-slide-toggle [color]="'primary'" formControlName="esInspector">
+          Inspector
+        </mat-slide-toggle>
+      </div>
       <!--  field -->
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>Contraseña</mat-label>

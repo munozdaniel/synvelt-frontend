@@ -43,7 +43,7 @@ export class FiltroUsuariosComponent implements OnInit, OnChanges {
       estado: [null],
       cuil: [null],
       rol: [null],
-      areaMunicipal: [null],
+      idAreaInterna: [null],
       //   apellido: [null],
     });
   }
@@ -101,7 +101,7 @@ export class FiltroUsuariosComponent implements OnInit, OnChanges {
       //   estado: [null],
       //   cuit: [null],
       //   rol: [null],
-      //   areaMunicipal: [null],
+      //   idAreaInterna: [null],
       const parametros = this.form.value;
       const filtros: any = {};
 
@@ -121,8 +121,8 @@ export class FiltroUsuariosComponent implements OnInit, OnChanges {
       if (parametros.rol) {
         filtros.idRolPrincipal = parametros.rol ? parametros.rol.id : null;
       }
-      if (parametros.areaMunicipal) {
-        filtros.areaMunicipal = parametros.areaMunicipal;
+      if (parametros.idAreaInterna) {
+        filtros.idAreaInterna = parametros.idAreaInterna;
       }
 
       this.retFiltros.emit(filtros);

@@ -2,8 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
+import { AreaInternaService } from 'app/core/services/area-interna.service';
 import { RolService } from 'app/core/services/rol.service';
 import { UsuarioService } from 'app/core/services/usuario.service';
+import { IAreaInterna } from 'app/models/iAreaInterna';
 import { IRol } from 'app/models/iRol';
 import { IUsuario } from 'app/models/iUsuario';
 import { Observable, Subscription } from 'rxjs';
@@ -20,7 +22,9 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
   usernameValido = false;
   //
   suscripcionUsername: Subscription;
+  areasInternas$: Observable<IAreaInterna[]>;
   constructor(
+    private _areaInternaService: AreaInternaService,
     private _activeRoute: ActivatedRoute,
     private _rolService: RolService,
     private _usuarioService: UsuarioService,
@@ -35,6 +39,7 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.obtenerRoles(); // Recuperamos el id de la url y buscamos el usuario
+    this.obtenerAreasInternas();
     this._activeRoute.params.subscribe(params => {
       this.usuarioId = params['id'];
       if (this.usuarioId) {
@@ -44,6 +49,9 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
         this._router.navigate(['usuarios']);
       }
     });
+  }
+  obtenerAreasInternas() {
+    this.areasInternas$ = this._areaInternaService.obtenertodos();
   }
   obtenerRoles() {
     this.roles$ = this._rolService.obtenertodos();
