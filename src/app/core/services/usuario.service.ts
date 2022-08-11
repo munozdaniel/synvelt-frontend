@@ -73,6 +73,11 @@ export class UsuarioService {
     }
     return queryParams;
   }
+  GetHttpHeaders(): HttpHeaders {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return headers;
+  }
+
   /**
    * PUT usuarios/Actualizacion?apellido={apellido}
    * &claveLogin={claveLogin}
@@ -89,9 +94,14 @@ export class UsuarioService {
   guardar(parametros: any): Observable<IUsuario> {
     const queryParams = this.setQueryParams(parametros);
     //   this.url + 'usuarios/Actualizacion',
-    return this._http.get<IUsuario>(this.url + 'usuarios/ActualizacionG', {
-      params: queryParams,
-    });
+    // return this._http.post<IUsuario>(this.url + 'usuarios/Actualizacion', {
+    //   params: queryParams,
+    // });
+    return this._http.post<IUsuario>(
+      this.url + 'usuarios/Actualizacion',
+      parametros,
+      { headers: this.GetHttpHeaders() }
+    );
   }
   //   actualizar(): Observable<IUsuario> {}
   /**

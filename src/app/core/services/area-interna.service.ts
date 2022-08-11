@@ -49,12 +49,10 @@ export class AreaInternaService {
    *
    */
   guardar(parametros: any): Observable<IAreaInterna> {
-    const queryParams = this.setQueryParams(parametros);
+    // const queryParams = this.setQueryParams(parametros);
     return this._http.post<IAreaInterna>(
       this.url + 'operacion/ActualizacionAreaInterna',
-      {
-        params: queryParams,
-      }
+      parametros
     );
   }
   /**
@@ -68,8 +66,11 @@ export class AreaInternaService {
     usuariosIds.forEach(usuarioId => {
       queryParams = queryParams.append('usuariosIds', usuarioId);
     });
-    return this._http.get<any>(this.url + 'operacion/AsignacionUsuarioInspector', {
-      params: queryParams,
-    });
+    return this._http.get<any>(
+      this.url + 'operacion/AsignacionUsuarioInspector',
+      {
+        params: queryParams,
+      }
+    );
   }
 }
