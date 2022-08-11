@@ -7,7 +7,6 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -15,7 +14,6 @@ import { synveltAnimations } from '@synvelt/animations';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { Observable, startWith, map } from 'rxjs';
 import { IRol } from 'app/models/iRol';
-import { IUsuario } from 'app/models/iUsuario';
 import {
   MediaMatcher,
   BreakpointObserver,
@@ -79,8 +77,8 @@ export class FormRolComponent implements OnInit, OnChanges {
       id: [null, []],
       nombre: [null, [Validators.required]],
       descripcion: [null, []],
-      esAdministradorDatos: ['', []],
-      esAdministradorAplicacion: ['', []],
+      esAdministradorDatos: [false, []],
+      esAdministradorAplicacion: [false, []],
     });
   }
 
@@ -90,6 +88,7 @@ export class FormRolComponent implements OnInit, OnChanges {
         this.setForm();
       }, 1000);
     } else {
+      console.log('¿this.rol', this.rol);
       this.form.patchValue(this.rol);
     }
   }

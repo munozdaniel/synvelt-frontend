@@ -12,17 +12,10 @@
     <h3 class="titulo">Nuevo rol</h3>
     <!-- Opciones del Header -->
   </div>
-  <div class="grid grid-col md:grid-cols-2 mt-4 gap-2">
+  <div class="flex flex-row justify-center items-start mt-4 gap-2">
     <app-form-rol
       [cargando]="cargando"
       (retForm)="setForm($event)"
-      class="w-full"
     ></app-form-rol>
-    <app-seleccionar-usuarios-tabla
-      [cargando]="cargandoUsuario"
-      [usuarios]="usuarios"
-      (retSelectUsuarios)="setSelectUsuarios($event)"
-    >
-    </app-seleccionar-usuarios-tabla>
   </div>
 </div>
