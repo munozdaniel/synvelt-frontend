@@ -27,13 +27,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { synveltAnimations } from '@synvelt/animations';
 import { IAreaInterna } from 'app/models/iAreaInterna';
-const columnasMD = [
-  'nombre',
-  'descripcion',
-  'esAdministradorDatos',
-  'esAdministradorAplicacion',
-  'opciones',
-];
+const columnasMD = ['nombre', 'codigo', 'opciones'];
 const columnasXS = ['nombre', 'opciones'];
 @Component({
   selector: 'app-tabla-areas-internas',

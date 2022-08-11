@@ -9,7 +9,7 @@ import { IAreaInterna } from 'app/models/iAreaInterna';
   selector: 'app-listar-areas-internas',
   templateUrl: './listar-areas-internas.component.html',
 })
-export class ListarAreaInternaesComponent implements OnInit {
+export class ListarAreasInternasComponent implements OnInit {
   areasInternas: IAreaInterna[];
   cargando = false;
   parametros: any;

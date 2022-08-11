@@ -23,7 +23,7 @@ import { AreaInternaRoutingModule } from './area-interna-routing.module';
 import { AgregarAreaInternaComponent } from './containers/agregar-area-interna/agregar-area-interna.component';
 import { AsignarAreaInternaComponent } from './containers/asignar-area-interna/asignar-area-interna.component';
 import { EditarAreaInternaComponent } from './containers/editar-area-interna/editar-area-interna.component';
-import { ListarAreaInternaesComponent } from './containers/listar-areas-internas/listar-areas-internas.component';
+import { ListarAreasInternasComponent } from './containers/listar-areas-internas/listar-areas-internas.component';
 import { FormAreaInternaComponent } from './ui/form-area-interna/form-area-interna.component';
 import { TablaAreasInternasComponent } from './ui/tabla-areas-internas/tabla-areas-internas.component';
 import { FiltroAreasInternasComponent } from './ui/filtro-areas-internas/filtro-areas-internas.component';
@@ -34,7 +34,7 @@ const maskConfig: Partial<IConfig> = {
   declarations: [
     AgregarAreaInternaComponent,
     EditarAreaInternaComponent,
-    ListarAreaInternaesComponent,
+    ListarAreasInternasComponent,
     TablaAreasInternasComponent,
     FiltroAreasInternasComponent,
     FormAreaInternaComponent,

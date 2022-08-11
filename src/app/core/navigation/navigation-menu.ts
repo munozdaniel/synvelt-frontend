@@ -48,6 +48,13 @@ export const horizontalNavigation: SynveltNavigationItem[] = [
         link: '/roles',
         icon: 'heroicons_outline:cog',
       },
+      {
+        id: 'areas-internas',
+        title: 'Áreas internas',
+        type: 'basic',
+        link: '/areainternas',
+        icon: 'heroicons_outline:cog',
+      },
     ],
   },
 ];
