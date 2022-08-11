@@ -40,8 +40,10 @@ export class ListarRolesComponent implements OnInit {
         }
       );
   }
+  redireccionarAsignar() {
+    this._router.navigate(['roles/asignar']);
+  }
   redireccionarAgregar() {
-    console.log('redireccionarAgregar');
     this._router.navigate(['roles/nuevo']);
   }
   setEditar(evento: string) {

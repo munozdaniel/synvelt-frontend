@@ -59,13 +59,19 @@ export class RolService {
       params: queryParams,
     });
   }
-  buscar(parametros?: any): any {
-    console.log('buscar', parametros);
-    const queryParams = this.setQueryParams(parametros);
-    return this._http.get(this.url + 'roles/Lista', {
+  asignar(idRol: string, usuariosIds: string[]): Observable<void> {
+    let queryParams = new HttpParams();
+    if (idRol) {
+      queryParams = queryParams.append('idRol', idRol);
+    }
+    usuariosIds.forEach(usuarioId => {
+      queryParams = queryParams.append('usuariosIds', usuarioId);
+    });
+    return this._http.get<any>(this.url + 'usuarios/AsignacionUsuariosRolG', {
       params: queryParams,
     });
   }
+
   eliminar(id): Observable<void> {
     return this._http.put<void>(this.url + `roles/Baja?id=${id}`, null);
   }

@@ -1,0 +1,19 @@
+<form [formGroup]="form" class="w-fit">
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label class="lbl">Roles</mat-label>
+    <input
+      type="text"
+      matInput
+      class="input is-medium"
+      autocomplete="off"
+      formControlName="rol"
+      [matAutocomplete]="autoRol"
+    />
+    <mat-icon matSuffix>search</mat-icon>
+    <mat-autocomplete #autoRol="matAutocomplete" [displayWith]="displayFnRol">
+      <mat-option *ngFor="let option of filteredRoles | async" [value]="option">
+        {{ option.nombre }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

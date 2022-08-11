@@ -8,9 +8,11 @@ import {
 import {
   ChangeDetectorRef,
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
@@ -29,6 +31,7 @@ export class SeleccionarUsuariosTablaComponent implements OnInit, OnChanges {
   //
   @Input() cargando: boolean;
   @Input() usuarios: IUsuario[];
+  @Output() retUsuariosSeleccionados = new EventEmitter<IUsuario[]>();
   dataSource: MatTableDataSource<any> = new MatTableDataSource([]);
   @ViewChild('sort') set setSort(sort: MatSort) {
     this.dataSource.sort = sort;
@@ -133,5 +136,9 @@ export class SeleccionarUsuariosTablaComponent implements OnInit, OnChanges {
     this.isAllSelected()
       ? this.selection.clear()
       : this.dataSource.data.forEach(row => this.selection.select(row));
+    this.enviarRow();
+  }
+  enviarRow() {
+    this.retUsuariosSeleccionados.emit(this.selection.selected);
   }
 }

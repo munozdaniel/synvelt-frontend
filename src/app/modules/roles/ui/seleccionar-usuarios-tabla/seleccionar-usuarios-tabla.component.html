@@ -1,9 +1,15 @@
 <div class="w-full bg-card mat-elevation-z1 p-2" style="min-height: 332px">
   <header class="mb-4">
-    <h4>Usuarios</h4>
-    <small
-      >Seleccione el/los usuario/s a los que desea asignarles un nuevo
-      rol</small
+    <h3
+      class="text-blue-700 font-bold flex flex-row justify-between items-center"
+    >
+      Usuarios
+      <span *ngIf="selection.selected?.length > 0"
+        >({{ selection.selected?.length }})</span
+      >
+    </h3>
+    <span
+      >Seleccione el/los usuario/s a los que desea asignarles un nuevo rol</span
     >
   </header>
   <mat-progress-bar
@@ -81,7 +87,7 @@
       *matRowDef="let row; columns: columnas"
       class="fila_seleccionada"
       [ngClass]="{ fila_inactiva: row.fechaBaja }"
-      (click)="selection.toggle(row)"
+      (click)="selection.toggle(row); enviarRow()"
     ></tr>
     <!-- -->
     <!-- <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="fila_detalle"></tr> -->

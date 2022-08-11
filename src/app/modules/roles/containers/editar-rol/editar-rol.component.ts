@@ -49,7 +49,7 @@ export class EditarRolComponent implements OnInit, OnDestroy {
   obtenerRolPorId() {
     this.cargando = true;
     this._rolService
-      .buscar({ id: this.rolId })
+      .obtenertodos({ id: this.rolId })
       .pipe(untilDestroyed(this))
       .subscribe(
         datos => {

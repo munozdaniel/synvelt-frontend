@@ -9,15 +9,26 @@
   >
     <h3 class="titulo">Consulta de roles</h3>
     <!-- Opciones del Header -->
-    <button
-      color="primary"
-      class="-ml-3 sm:ml-0 mt-2 sm:mt-0 mb-0 order-last sm:order-last"
-      mat-flat-button
-      (click)="redireccionarAgregar()"
-    >
-      <mat-icon [svgIcon]="'heroicons_outline:plus-circle'"></mat-icon>
-      <span>NUEVO</span>
-    </button>
+    <div class="gap-2 flex flex-row justify-end">
+      <button
+        color="primary"
+        class="-ml-3 sm:ml-0 mt-2 sm:mt-0 mb-0 order-last sm:order-last"
+        mat-flat-button
+        (click)="redireccionarAsignar()"
+      >
+        <mat-icon [svgIcon]="'heroicons_outline:plus-circle'"></mat-icon>
+        <span>ASIGNAR ROL</span>
+      </button>
+      <button
+        color="primary"
+        class="-ml-3 sm:ml-0 mt-2 sm:mt-0 mb-0 order-last sm:order-last"
+        mat-flat-button
+        (click)="redireccionarAgregar()"
+      >
+        <mat-icon [svgIcon]="'heroicons_outline:plus-circle'"></mat-icon>
+        <span>NUEVO</span>
+      </button>
+    </div>
   </div>
   <div
     class="flex flex-col md:flex-row md:justify-between md:items-start mt-4 gap-2"
