@@ -23,7 +23,6 @@ import { EditarRolComponent } from './containers/editar-rol/editar-rol.component
 import { TablaRolesComponent } from './ui/tabla-roles/tabla-roles.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { TablaUsuariosModule } from 'app/shared/tabla-usuarios/tabla-usuarios.module';
-import { SeleccionarUsuariosTablaComponent } from './ui/seleccionar-usuarios-tabla/seleccionar-usuarios-tabla.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AsignarRolComponent } from './containers/asignar-rol/asignar-rol.component';
 import { BuscarRolModule } from 'app/shared/buscar-rol/buscar-rol.module';
@@ -39,7 +38,6 @@ const maskConfig: Partial<IConfig> = {
     TablaRolesComponent,
     FiltroRolesComponent,
     FormRolComponent,
-    SeleccionarUsuariosTablaComponent,
     AsignarRolComponent,
   ],
   imports: [
@@ -67,7 +65,7 @@ const maskConfig: Partial<IConfig> = {
     NgxMaskModule.forRoot(maskConfig),
     TablaUsuariosModule,
     BuscarRolModule,
-    SeleccionarUsuariosTablaModule
+    SeleccionarUsuariosTablaModule,
   ],
 })
 export class RolModule {}

@@ -82,7 +82,7 @@
       <!-- <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="fila_detalle"></tr> -->
     </table>
     <mat-card
-      *ngIf="!roles || roles.length < 1"
+      *ngIf="!areasInternas || areasInternas.length < 1"
       class="bg-card mat-elevation-z0 p-4 flex flex-row justify-center items-center rounded-none"
     >
       <p>No se encontraron resultados</p>

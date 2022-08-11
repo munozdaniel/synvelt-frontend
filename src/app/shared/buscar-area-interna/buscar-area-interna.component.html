@@ -6,12 +6,18 @@
       matInput
       class="input is-medium"
       autocomplete="off"
-      formControlName="rol"
+      formControlName="areaInterna"
       [matAutocomplete]="autoAreaInterna"
     />
     <mat-icon matSuffix>search</mat-icon>
-    <mat-autocomplete #autoAreaInterna="matAutocomplete" [displayWith]="displayFnRol">
-      <mat-option *ngFor="let option of filteredAreaInterna | async" [value]="option">
+    <mat-autocomplete
+      #autoAreaInterna="matAutocomplete"
+      [displayWith]="displayFnAreaInterna"
+    >
+      <mat-option
+        *ngFor="let option of filteredAreasInternas | async"
+        [value]="option"
+      >
         {{ option.nombre }}
       </mat-option>
     </mat-autocomplete>

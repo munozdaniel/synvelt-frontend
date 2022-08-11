@@ -19,7 +19,6 @@ import { TablaUsuariosModule } from 'app/shared/tabla-usuarios/tabla-usuarios.mo
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SeleccionarUsuariosTablaModule } from 'app/shared/seleccionar-usuarios-tabla/seleccionar-usuarios-tabla.module';
 import { BuscarAreaInternaModule } from 'app/shared/buscar-area-interna/buscar-area-interna.module';
-import { SeleccionarUsuariosTablaComponent } from '../roles/ui/seleccionar-usuarios-tabla/seleccionar-usuarios-tabla.component';
 import { AreaInternaRoutingModule } from './area-interna-routing.module';
 import { AgregarAreaInternaComponent } from './containers/agregar-area-interna/agregar-area-interna.component';
 import { AsignarAreaInternaComponent } from './containers/asignar-area-interna/asignar-area-interna.component';
@@ -39,7 +38,6 @@ const maskConfig: Partial<IConfig> = {
     TablaAreasInternasComponent,
     FiltroAreasInternasComponent,
     FormAreaInternaComponent,
-    SeleccionarUsuariosTablaComponent,
     AsignarAreaInternaComponent,
   ],
   imports: [

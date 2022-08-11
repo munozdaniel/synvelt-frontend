@@ -8,8 +8,8 @@ import { IAreaInterna } from 'app/models/iAreaInterna';
 import { map, Observable, startWith } from 'rxjs';
 @UntilDestroy()
 @Component({
-  selector: 'app-area-interna',
-  templateUrl: './area-interna.component.html',
+  selector: 'app-buscar-area-interna',
+  templateUrl: './buscar-area-interna.component.html',
   animations: [synveltAnimations],
 })
 export class BuscarAreaInternaComponent implements OnInit {

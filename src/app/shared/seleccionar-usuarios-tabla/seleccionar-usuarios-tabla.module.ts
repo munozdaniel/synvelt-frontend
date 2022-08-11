@@ -11,10 +11,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from '../shared.module';
+import { SeleccionarUsuariosTablaComponent } from './seleccionar-usuarios-tabla.component';
 
 @NgModule({
-  declarations: [SeleccionarUsuariosTablaModule],
-  exports: [SeleccionarUsuariosTablaModule],
+  declarations: [SeleccionarUsuariosTablaComponent],
+  exports: [SeleccionarUsuariosTablaComponent],
   imports: [
     CommonModule,
     SharedModule,
