@@ -1,0 +1,47 @@
+<div class="flex flex-col flex-auto min-w-0 container mx-auto px-8" style="">
+  <app-breadcrumb
+    [breadcrumbs]="[
+      { nombre: 'Consulta de áreas internas', url: ['areasinterna'] },
+      { nombre: 'Asignar área interna', url: ['areasinterna/asignar'] }
+    ]"
+  ></app-breadcrumb>
+  <!-- Header -->
+  <div
+    class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between bg-transparent"
+  >
+    <h3 class="titulo">Asignar área interna</h3>
+    <!-- Opciones del Header -->
+  </div>
+  <div class="w-full flex flex-row justify-center items-start">
+    <div
+      class="w-full md:w-8/12 flex flex-col items-center justify-start gap-4 py-6 relative"
+    >
+      <div class="bg-card mat-elevation-z1 p-2 w-full md:w-8/12">
+        <mat-progress-bar
+          *ngIf="cargando"
+          mode="indeterminate"
+          class="w-full"
+        ></mat-progress-bar>
+        <header class="mb-4">
+          <h3 class="text-blue-700 font-bold">Área Interna</h3>
+          <span>Seleccione un área interna</span>
+        </header>
+        <!-- Roles -->
+        <app-buscar-area-interna
+          (retFiltros)="setFiltros($event)"
+        ></app-buscar-area-interna>
+      </div>
+      <!-- Tabla -->
+      <app-seleccionar-usuarios-tabla
+        [cargando]="cargandoUsuario"
+        [usuarios]="usuarios"
+        (retUsuariosSeleccionados)="setUsuariosSeleccionados($event)"
+        class="w-full md:w-8/12"
+      >
+      </app-seleccionar-usuarios-tabla>
+      <button mat-raised-button (click)="asignarRol()" color="primary">
+        Guardar
+      </button>
+    </div>
+  </div>
+</div>

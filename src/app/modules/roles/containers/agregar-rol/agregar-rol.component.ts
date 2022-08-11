@@ -17,52 +17,17 @@ export class AgregarRolComponent implements OnInit, OnDestroy {
   cargando = false;
   cargandoUsuario = false;
   usuarios: IUsuario[];
-  usuariosSeleccionados: IUsuario[];
   constructor(
     private _rolService: RolService,
-    private _usuarioService: UsuarioService,
     private _synveltConfirmationService: SynveltConfirmationService,
     private _router: Router
   ) {}
   ngOnDestroy(): void {}
 
-  ngOnInit(): void {
-    this.obtenerUsuarios();
-  }
-  obtenerUsuarios() {
-    this.cargandoUsuario = true;
-    this._usuarioService
-      .buscar()
-      .pipe(untilDestroyed(this))
-      .subscribe(
-        datos => {
-          this.cargandoUsuario = false;
-          this.usuarios = datos;
-        },
-        error => {
-          this.cargandoUsuario = false;
-          console.log('[ERROR]', error);
-        }
-      );
-  }
-  setForm(evento: IRol) {
-    if (this.usuariosSeleccionados?.length < 1) {
-      this._synveltConfirmationService.open({
-        title: 'Formulario Incompleto',
-        message: 'Tiene que seleccionar al menos un usuario',
+  ngOnInit(): void {}
 
-        actions: {
-          confirm: {
-            show: false,
-            // label: 'Aceptar',
-          },
-          cancel: {
-            show: true,
-            label: 'Aceptar',
-          },
-        },
-      });
-    } else {
+  setForm(evento: IRol) {
+
       // Open the confirmation and save the reference
       const dialogRef = this._synveltConfirmationService.open({
         title: 'Confirmar Operación',
@@ -89,7 +54,7 @@ export class AgregarRolComponent implements OnInit, OnDestroy {
           this.guardar(evento);
         }
       });
-    }
+
   }
   guardar(rol: IRol) {
     this.cargando = true;
@@ -118,7 +83,5 @@ export class AgregarRolComponent implements OnInit, OnDestroy {
         }
       );
   }
-  setSelectUsuarios(evento: IUsuario[]) {
-    this.usuariosSeleccionados = [...evento];
-  }
+
 }

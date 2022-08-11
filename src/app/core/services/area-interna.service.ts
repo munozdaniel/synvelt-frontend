@@ -35,7 +35,7 @@ export class AreaInternaService {
    */
   obtenertodos(parametros?: any): Observable<IAreaInterna[]> {
     const queryParams = this.setQueryParams(parametros);
-    return this._http.get<any>(this.url + 'usuarios/ListaAreaInterna', {
+    return this._http.get<any>(this.url + 'operacion/ListaAreaInterna', {
       params: queryParams,
     });
   }
@@ -51,7 +51,7 @@ export class AreaInternaService {
   guardar(parametros: any): Observable<IAreaInterna> {
     const queryParams = this.setQueryParams(parametros);
     return this._http.post<IAreaInterna>(
-      this.url + 'usuarios/ActualizacionAreaInterna',
+      this.url + 'operacion/ActualizacionAreaInterna',
       {
         params: queryParams,
       }
@@ -60,4 +60,16 @@ export class AreaInternaService {
   /**
    * POST operacion/AsignacionUsuarioInspector
    */
+  asignar(idAreaInterna: string, usuariosIds: string[]): Observable<void> {
+    let queryParams = new HttpParams();
+    if (idAreaInterna) {
+      queryParams = queryParams.append('idAreaInterna', idAreaInterna);
+    }
+    usuariosIds.forEach(usuarioId => {
+      queryParams = queryParams.append('usuariosIds', usuarioId);
+    });
+    return this._http.get<any>(this.url + 'operacion/AsignacionUsuarioInspector', {
+      params: queryParams,
+    });
+  }
 }

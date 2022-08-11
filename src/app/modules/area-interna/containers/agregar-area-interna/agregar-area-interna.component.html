@@ -1,0 +1,21 @@
+<div class="flex flex-col flex-auto min-w-0 container mx-auto px-8" style="">
+  <app-breadcrumb
+    [breadcrumbs]="[
+      { nombre: 'Consulta de áreas internas', url: ['areainterna'] },
+      { nombre: 'Nuevo', url: ['areainterna/nuevo'] }
+    ]"
+  ></app-breadcrumb>
+  <!-- Header -->
+  <div
+    class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between bg-transparent"
+  >
+    <h3 class="titulo">Nueva Área Interna</h3>
+    <!-- Opciones del Header -->
+  </div>
+  <div class="flex flex-row justify-center items-start mt-4 gap-2">
+    <app-form-area-interna
+      [cargando]="cargando"
+      (retForm)="setForm($event)"
+    ></app-form-area-interna>
+  </div>
+</div>

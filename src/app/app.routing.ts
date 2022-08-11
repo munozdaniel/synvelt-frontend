@@ -178,4 +178,29 @@ export const appRoutes: Route[] = [
       },
     ],
   },
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    component: LayoutComponent,
+    resolve: {
+      initialData: InitialDataResolver, // para enviar datos al iniciar la ruta (en este caso el menu)
+    },
+    children: [
+      {
+        // canActivate: [NgxPermissionsGuard],
+        // data: {
+        //   permissions: {
+        //     only: ['ADMIN'],
+        //     redirectTo: '/',
+        //   },
+        // },
+        path: 'areainternas',
+        loadChildren: () =>
+          import('app/modules/area-interna/area-interna.module').then(
+            m => m.AreaInternaModule
+          ),
+      },
+    ],
+  },
 ];

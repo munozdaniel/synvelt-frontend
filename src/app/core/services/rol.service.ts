@@ -60,7 +60,6 @@ export class RolService {
     });
   }
   asignar(idRol: string, usuariosIds: string[]): Observable<void> {
-    console.log('idRol', idRol, 'usuariosIds', usuariosIds);
     let queryParams = new HttpParams();
     if (idRol) {
       queryParams = queryParams.append('idRol', idRol);

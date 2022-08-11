@@ -2,26 +2,25 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
-import { RolService } from 'app/core/services/rol.service';
-import { IRol } from 'app/models/iRol';
+import { AreaInternaService } from 'app/core/services/area-interna.service';
+import { IAreaInterna } from 'app/models/iAreaInterna';
 
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 @UntilDestroy()
 @Component({
-  selector: 'app-editar-rol',
-  templateUrl: './editar-rol.component.html',
+  selector: 'app-editar-area-interna',
+  templateUrl: './editar-area-interna.component.html',
 })
-export class EditarRolComponent implements OnInit, OnDestroy {
-  roles$: Observable<IRol[]>; //
+export class EditarAreaInternaComponent implements OnInit, OnDestroy {
   cargando = false;
-  rol: IRol;
-  rolId: string;
+  areaInterna: IAreaInterna;
+  areaInternaId: string;
   usernameValido = false;
   //
   suscripcionUsername: Subscription;
   constructor(
     private _activeRoute: ActivatedRoute,
-    private _rolService: RolService,
+    private _areaInternaService: AreaInternaService,
     private _synveltConfirmationService: SynveltConfirmationService,
     private _router: Router
   ) {}
@@ -32,32 +31,28 @@ export class EditarRolComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // this.obtenerRoles();
-    // Recuperamos el id de la url y buscamos el rol
     this._activeRoute.params.subscribe(params => {
-      this.rolId = params['id'];
-      console.log('this.rolId', this.rolId);
-      if (this.rolId) {
-        this.obtenerRolPorId();
+      this.areaInternaId = params['id'];
+      console.log('this.areaInternaId', this.areaInternaId);
+      if (this.areaInternaId) {
+        this.obtenerAreaInternaPorId();
       } else {
-        // TODO: Controlar que fucnione y mostrar mensaje: 'El rol solicitado no se encuentra disponible'
-        this._router.navigate(['rols']);
+        // TODO: ContareaInternaar que fucnione y mostrar mensaje: 'El areaInterna solicitado no se encuentra disponible'
+        this._router.navigate(['areaInternas']);
       }
     });
   }
-  //   obtenerRoles() {
-  //     this.roles$ = this._rolService.obtenertodos();
-  //   }
-  obtenerRolPorId() {
+
+  obtenerAreaInternaPorId() {
     this.cargando = true;
-    this._rolService
-      .obtenertodos({ id: this.rolId })
+    this._areaInternaService
+      .obtenertodos({ id: this.areaInternaId })
       .pipe(untilDestroyed(this))
       .subscribe(
         datos => {
           this.cargando = false;
           if (datos && datos.length > 0) {
-            this.rol = datos[0];
+            this.areaInterna = datos[0];
           }
         },
         error => {
@@ -66,11 +61,11 @@ export class EditarRolComponent implements OnInit, OnDestroy {
         }
       );
   }
-  setForm(evento: IRol) {
+  setForm(evento: IAreaInterna) {
     // Open the confirmation and save the reference
     const dialogRef = this._synveltConfirmationService.open({
       title: 'Confirmar Operación',
-      message: 'Está por editar un rol, desea continuar?',
+      message: 'Está por editar un área interna, desea continuar?',
       icon: {
         name: 'heroicons_solid:question-mark-circle',
         color: 'info',
@@ -94,17 +89,17 @@ export class EditarRolComponent implements OnInit, OnDestroy {
       }
     });
   }
-  actualizar(rol: IRol) {
+  actualizar(areaInterna: IAreaInterna) {
     this.cargando = true;
-    this._rolService
-      .guardar({ ...rol })
+    this._areaInternaService
+      .guardar({ ...areaInterna })
       .pipe(untilDestroyed(this))
       .subscribe(
         () => {
           this.cargando = false;
           const confirmation = this._synveltConfirmationService.success();
           confirmation.afterClosed().subscribe(() => {
-            this._router.navigate(['rols']);
+            this._router.navigate(['areaInternas']);
           });
         },
         error => {

@@ -7,7 +7,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RolRoutingModule } from './rol-routing.module';
 import { SynveltCardModule } from '@synvelt/components/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -15,36 +14,37 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
-import { ListarRolesComponent } from './containers/listar-rol/listar-roles.component';
-import { FiltroRolesComponent } from './ui/filtro-roles/filtro-roles.component';
-import { FormRolComponent } from './ui/form-rol/form-rol.component';
-import { AgregarRolComponent } from './containers/agregar-rol/agregar-rol.component';
-import { EditarRolComponent } from './containers/editar-rol/editar-rol.component';
-import { TablaRolesComponent } from './ui/tabla-roles/tabla-roles.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { TablaUsuariosModule } from 'app/shared/tabla-usuarios/tabla-usuarios.module';
-import { SeleccionarUsuariosTablaComponent } from './ui/seleccionar-usuarios-tabla/seleccionar-usuarios-tabla.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { AsignarRolComponent } from './containers/asignar-rol/asignar-rol.component';
-import { BuscarRolModule } from 'app/shared/buscar-rol/buscar-rol.module';
 import { SeleccionarUsuariosTablaModule } from 'app/shared/seleccionar-usuarios-tabla/seleccionar-usuarios-tabla.module';
+import { BuscarAreaInternaModule } from 'app/shared/buscar-area-interna/buscar-area-interna.module';
+import { SeleccionarUsuariosTablaComponent } from '../roles/ui/seleccionar-usuarios-tabla/seleccionar-usuarios-tabla.component';
+import { AreaInternaRoutingModule } from './area-interna-routing.module';
+import { AgregarAreaInternaComponent } from './containers/agregar-area-interna/agregar-area-interna.component';
+import { AsignarAreaInternaComponent } from './containers/asignar-area-interna/asignar-area-interna.component';
+import { EditarAreaInternaComponent } from './containers/editar-area-interna/editar-area-interna.component';
+import { ListarAreaInternaesComponent } from './containers/listar-areas-internas/listar-areas-internas.component';
+import { FormAreaInternaComponent } from './ui/form-area-interna/form-area-interna.component';
+import { TablaAreasInternasComponent } from './ui/tabla-areas-internas/tabla-areas-internas.component';
+import { FiltroAreasInternasComponent } from './ui/filtro-areas-internas/filtro-areas-internas.component';
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
 @NgModule({
   declarations: [
-    AgregarRolComponent,
-    EditarRolComponent,
-    ListarRolesComponent,
-    TablaRolesComponent,
-    FiltroRolesComponent,
-    FormRolComponent,
+    AgregarAreaInternaComponent,
+    EditarAreaInternaComponent,
+    ListarAreaInternaesComponent,
+    TablaAreasInternasComponent,
+    FiltroAreasInternasComponent,
+    FormAreaInternaComponent,
     SeleccionarUsuariosTablaComponent,
-    AsignarRolComponent,
+    AsignarAreaInternaComponent,
   ],
   imports: [
     CommonModule,
-    RolRoutingModule,
+    AreaInternaRoutingModule,
     SharedModule,
     MatButtonModule,
     MatIconModule,
@@ -66,8 +66,8 @@ const maskConfig: Partial<IConfig> = {
     // NgxPermissionsModule.forChild(),
     NgxMaskModule.forRoot(maskConfig),
     TablaUsuariosModule,
-    BuscarRolModule,
-    SeleccionarUsuariosTablaModule
+    BuscarAreaInternaModule,
+    SeleccionarUsuariosTablaModule,
   ],
 })
-export class RolModule {}
+export class AreaInternaModule {}

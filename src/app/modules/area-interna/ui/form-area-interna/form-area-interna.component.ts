@@ -13,7 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { synveltAnimations } from '@synvelt/animations';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { Observable, startWith, map } from 'rxjs';
-import { IRol } from 'app/models/iRol';
+import { IAreaInterna } from 'app/models/iAreaInterna';
 import {
   MediaMatcher,
   BreakpointObserver,
@@ -22,19 +22,19 @@ import {
 } from '@angular/cdk/layout';
 
 @Component({
-  selector: 'app-form-rol',
-  templateUrl: './form-rol.component.html',
+  selector: 'app-form-area-interna',
+  templateUrl: './form-area-interna.component.html',
   animations: [synveltAnimations],
 })
-export class FormRolComponent implements OnInit, OnChanges {
+export class FormAreaInternaComponent implements OnInit, OnChanges {
   @Input() cargando: boolean;
-  @Input() rol?: IRol;
-  @Output() retForm = new EventEmitter<IRol>();
+  @Input() areaInterna?: IAreaInterna;
+  @Output() retForm = new EventEmitter<IAreaInterna>();
   @Output() retUsernameExiste = new EventEmitter<any>();
   //
   form: FormGroup;
   esEditar = false;
-  filteredRoles: Observable<IRol[]>;
+  filteredAreaInternaes: Observable<IAreaInterna[]>;
   // Mobile
   isMobile: boolean;
   private _mobileQueryListener: () => void;
@@ -62,7 +62,7 @@ export class FormRolComponent implements OnInit, OnChanges {
       });
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.rol && changes.rol.currentValue) {
+    if (changes.areaInterna && changes.areaInterna.currentValue) {
       this.esEditar = true;
       this.setForm();
     }
@@ -76,9 +76,7 @@ export class FormRolComponent implements OnInit, OnChanges {
     this.form = this._fb.group({
       id: [null, []],
       nombre: [null, [Validators.required]],
-      descripcion: [null, []],
-      esAdministradorDatos: [false, []],
-      esAdministradorAplicacion: [false, []],
+      codigo: [null, []],
     });
   }
 
@@ -88,7 +86,8 @@ export class FormRolComponent implements OnInit, OnChanges {
         this.setForm();
       }, 1000);
     } else {
-      this.form.patchValue(this.rol);
+      console.log('¿this.areaInterna', this.areaInterna);
+      this.form.patchValue(this.areaInterna);
     }
   }
 
@@ -112,6 +111,7 @@ export class FormRolComponent implements OnInit, OnChanges {
         },
       });
     } else {
+      const areaInterna = this.form.value;
       this.retForm.emit(this.form.value);
     }
   }
