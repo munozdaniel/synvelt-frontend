@@ -26,12 +26,14 @@
           <h3 class="text-blue-700 font-bold">Rol</h3>
           <span>Seleccione un rol</span>
         </header>
+        <!-- Roles -->
         <app-buscar-rol (retFiltros)="setFiltros($event)"></app-buscar-rol>
       </div>
+      <!-- Tabla -->
       <app-seleccionar-usuarios-tabla
         [cargando]="cargandoUsuario"
         [usuarios]="usuarios"
-        (retSelectUsuarios)="setSelectUsuarios($event)"
+        (retUsuariosSeleccionados)="setUsuariosSeleccionados($event)"
         class="w-full md:w-8/12"
       >
       </app-seleccionar-usuarios-tabla>

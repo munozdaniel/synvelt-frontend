@@ -48,7 +48,7 @@ export class AsignarRolComponent implements OnInit {
   setFiltros(evento: IRol) {
     this.rol = evento;
   }
-  setSelectUsuarios(usuarios: IUsuario[]) {
+  setUsuariosSeleccionados(usuarios: IUsuario[]) {
     this.usuariosSeleccionados = usuarios;
   }
   asignarRol() {
