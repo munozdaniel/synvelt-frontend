@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { TablaUsuariosComponent } from './tabla-usuarios.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
@@ -33,6 +34,7 @@ const maskConfig: Partial<IConfig> = {
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatMenuModule,
     // NgxPermissionsModule.forChild(),
     NgxMaskModule.forRoot(maskConfig),
   ],

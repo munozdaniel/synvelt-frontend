@@ -66,6 +66,7 @@ export class FormUsuarioComponent implements OnInit, OnChanges {
       telefono: ['', [Validators.maxLength(12)]],
       rol: ['', []],
       areaInterna: ['', []],
+      esInspector: ['', []],
       comentario: ['', [Validators.maxLength(4000)]],
 
       nombreLogin: ['', []], // se saca del cuit
