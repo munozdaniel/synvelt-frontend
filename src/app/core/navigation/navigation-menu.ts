@@ -5,7 +5,7 @@ import { SynveltNavigationItem } from '@synvelt/components/navigation';
 export const horizontalNavigation: SynveltNavigationItem[] = [
   {
     id: 'home',
-    title: 'Home',
+    title: 'Inicio',
     type: 'basic',
     link: '/inicio',
   },

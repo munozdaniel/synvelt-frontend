@@ -37,9 +37,14 @@
         class="w-full md:w-8/12"
       >
       </app-seleccionar-usuarios-tabla>
-      <button mat-raised-button (click)="asignarRol()" color="primary">
-        Guardar
-      </button>
+      <div class="flex flex-row justify-between items-start gap-8">
+        <button mat-raised-button color="warn" (click)="volver()">
+          Cancelar
+        </button>
+        <button mat-raised-button (click)="asignarRol()" color="primary">
+          Guardar
+        </button>
+      </div>
     </div>
   </div>
 </div>

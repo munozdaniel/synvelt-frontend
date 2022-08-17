@@ -15,6 +15,7 @@ import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { Observable, startWith, map } from 'rxjs';
 import { IRol } from 'app/models/iRol';
 import { IAreaInterna } from 'app/models/iAreaInterna';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-form-usuario',
@@ -36,7 +37,8 @@ export class FormUsuarioComponent implements OnInit, OnChanges {
 
   constructor(
     private _fb: FormBuilder,
-    private _synveltConfirmationService: SynveltConfirmationService
+    private _synveltConfirmationService: SynveltConfirmationService,
+    private location: Location
   ) {}
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.usuario && changes.usuario.currentValue) {
@@ -46,10 +48,12 @@ export class FormUsuarioComponent implements OnInit, OnChanges {
     if (changes.roles && changes.roles.currentValue) {
       this.setAutocompleteRoles();
     }
-    if (changes.filteredAreasInternas && changes.filteredAreasInternas.currentValue) {
+    if (
+      changes.filteredAreasInternas &&
+      changes.filteredAreasInternas.currentValue
+    ) {
       this.setAutocompleteRoles();
     }
-
   }
 
   ngOnInit(): void {
@@ -77,33 +81,36 @@ export class FormUsuarioComponent implements OnInit, OnChanges {
       //   idAreaInterna: ['', []],
     });
   }
-    //  Autocomplete
-    setAutocompleteAreaInterna() {
-        if (!this.form) {
-          setTimeout(() => {
-            this.setAutocompleteAreaInterna();
-          }, 1000);
-        } else {
-          this.filteredAreasInternas = this.form.controls.areaInterna.valueChanges.pipe(
-            startWith(''),
-            map(value => (typeof value === 'string' ? value : value.nombre)),
-            map(name => (name ? this._filterAreaInterna(name) : this.areasInternas.slice()))
-          );
-        }
-      }
-      private _filterAreaInterna(name: string): IAreaInterna[] {
-        const filterValue = name.toLowerCase();
+  //  Autocomplete
+  setAutocompleteAreaInterna() {
+    if (!this.form) {
+      setTimeout(() => {
+        this.setAutocompleteAreaInterna();
+      }, 1000);
+    } else {
+      this.filteredAreasInternas =
+        this.form.controls.areaInterna.valueChanges.pipe(
+          startWith(''),
+          map(value => (typeof value === 'string' ? value : value.nombre)),
+          map(name =>
+            name ? this._filterAreaInterna(name) : this.areasInternas.slice()
+          )
+        );
+    }
+  }
+  private _filterAreaInterna(name: string): IAreaInterna[] {
+    const filterValue = name.toLowerCase();
 
-        return this.areasInternas.filter(option => {
-          const nombreCompleto = option.nombre;
-          // return nombreCompleto.toLowerCase().indexOf(filterValue) === 0;
-          return nombreCompleto.toLowerCase().includes(filterValue);
-        });
-      }
-      displayFnAreaInterna(objeto: IAreaInterna): string {
-        return objeto && objeto.nombre ? objeto.nombre : '';
-      }
-      //   Fin: Autocomplete
+    return this.areasInternas.filter(option => {
+      const nombreCompleto = option.nombre;
+      // return nombreCompleto.toLowerCase().indexOf(filterValue) === 0;
+      return nombreCompleto.toLowerCase().includes(filterValue);
+    });
+  }
+  displayFnAreaInterna(objeto: IAreaInterna): string {
+    return objeto && objeto.nombre ? objeto.nombre : '';
+  }
+  //   Fin: Autocomplete
   //  Autocomplete
   setAutocompleteRoles() {
     if (!this.form) {
@@ -166,5 +173,8 @@ export class FormUsuarioComponent implements OnInit, OnChanges {
       usuario.idRolPrincipal = usuario.rol?.id;
       this.retForm.emit(this.form.value);
     }
+  }
+  volver() {
+    this.location.back();
   }
 }

@@ -24,7 +24,7 @@
           [color]="'primary'"
           formControlName="esAdministradorDatos"
         >
-          Administrador de datos
+          ¿Agregar Administrador de datos?
         </mat-slide-toggle>
       </div>
       <div>
@@ -32,23 +32,33 @@
           [color]="'primary'"
           formControlName="esAdministradorAplicacion"
         >
-          Administrador de aplicación
+          ¿Agregar Administrador de aplicación?
         </mat-slide-toggle>
       </div>
     </div>
 
     <div class="flex flex-row justify-center items-center min-w-full mt-4 mb-6">
-      <button
-        *ngIf="!cargando"
-        mat-raised-button
-        color="primary"
-        [disabled]="form.invalid"
-      >
-        {{ usuario && usuario._id ? "Actualizar" : "Guardar" }}
-      </button>
-      <button *ngIf="cargando" mat-raised-button color="warn" [disabled]="true">
-        Cargando...
-      </button>
+      <div class="flex flex-row justify-between items-start gap-8">
+        <button mat-raised-button color="warn" (click)="volver()">
+          Cancelar
+        </button>
+        <button
+          *ngIf="!cargando"
+          mat-raised-button
+          color="primary"
+          [disabled]="form.invalid"
+        >
+          {{ usuario && usuario._id ? "Actualizar" : "Guardar" }}
+        </button>
+        <button
+          *ngIf="cargando"
+          mat-raised-button
+          color="warn"
+          [disabled]="true"
+        >
+          Cargando...
+        </button>
+      </div>
     </div>
   </form>
 </div>

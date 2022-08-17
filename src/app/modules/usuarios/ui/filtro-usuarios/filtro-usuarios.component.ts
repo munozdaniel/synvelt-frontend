@@ -24,8 +24,8 @@ export class FiltroUsuariosComponent implements OnInit, OnChanges {
   form: FormGroup;
   filteredRoles: Observable<IRol[]>;
   filteredAreas: Observable<IAreaInterna[]>;
-  areaIndistinta = { id: null, nombre: 'Indistinto', codigo: 'N/A' };
-  rolIndistinto = { id: null, nombre: 'Indistinto', codigo: 'N/A' };
+  areaIndistinta = { id: null, nombre: '', codigo: 'N/A' };
+  rolIndistinto = { id: null, nombre: '', codigo: 'N/A' };
   constructor(
     private _fb: FormBuilder,
     private _synveltConfirmationService: SynveltConfirmationService

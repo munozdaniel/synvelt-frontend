@@ -6,6 +6,7 @@ import { RolService } from 'app/core/services/rol.service';
 import { UsuarioService } from 'app/core/services/usuario.service';
 import { IRol } from 'app/models/iRol';
 import { IUsuario } from 'app/models/iUsuario';
+import { Location } from '@angular/common';
 @UntilDestroy()
 @Component({
   selector: 'app-asignar-rol',
@@ -22,9 +23,12 @@ export class AsignarRolComponent implements OnInit {
     private _usuarioService: UsuarioService,
     private _synveltConfirmationService: SynveltConfirmationService,
     private _router: Router,
-    private _rolService: RolService
+    private _rolService: RolService,
+    private location: Location
   ) {}
-
+  volver() {
+    this.location.back();
+  }
   ngOnInit(): void {
     this.obtenerUsuarios();
   }

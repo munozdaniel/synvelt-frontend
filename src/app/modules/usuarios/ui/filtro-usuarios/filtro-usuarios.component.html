@@ -36,7 +36,7 @@
         #autoAreas="matAutocomplete"
         [displayWith]="displayFnArea"
       >
-        <mat-option [value]="areaIndistinta">Indistinto</mat-option>
+        <mat-option [value]="areaIndistinta"></mat-option>
         <mat-option
           *ngFor="let option of filteredAreas | async"
           [value]="option"
@@ -59,7 +59,7 @@
       />
       <mat-icon matSuffix>search</mat-icon>
       <mat-autocomplete #autoRol="matAutocomplete" [displayWith]="displayFnRol">
-        <mat-option [value]="rolIndistinto">Indistinto</mat-option>
+        <mat-option [value]="rolIndistinto"></mat-option>
         <mat-option
           *ngFor="let option of filteredRoles | async"
           [value]="option"

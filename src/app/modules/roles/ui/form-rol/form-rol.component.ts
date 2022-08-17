@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { synveltAnimations } from '@synvelt/animations';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
-import { Observable, startWith, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IRol } from 'app/models/iRol';
 import {
   MediaMatcher,
@@ -20,6 +20,7 @@ import {
   Breakpoints,
   BreakpointState,
 } from '@angular/cdk/layout';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-form-rol',
@@ -44,7 +45,8 @@ export class FormRolComponent implements OnInit, OnChanges {
     private _synveltConfirmationService: SynveltConfirmationService,
     private _changeDetectorRef: ChangeDetectorRef,
     private _media: MediaMatcher,
-    public breakpointObserver: BreakpointObserver
+    public breakpointObserver: BreakpointObserver,
+    private location: Location
   ) {
     // "Escuchador" del tamaño de pantalla
     this.mobileQuery = this._media.matchMedia('(max-width: 600px)');
@@ -114,5 +116,8 @@ export class FormRolComponent implements OnInit, OnChanges {
     } else {
       this.retForm.emit(this.form.value);
     }
+  }
+  volver() {
+    this.location.back();
   }
 }

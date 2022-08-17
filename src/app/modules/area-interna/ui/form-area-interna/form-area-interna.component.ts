@@ -20,6 +20,7 @@ import {
   Breakpoints,
   BreakpointState,
 } from '@angular/cdk/layout';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-form-area-interna',
@@ -44,7 +45,8 @@ export class FormAreaInternaComponent implements OnInit, OnChanges {
     private _synveltConfirmationService: SynveltConfirmationService,
     private _changeDetectorRef: ChangeDetectorRef,
     private _media: MediaMatcher,
-    public breakpointObserver: BreakpointObserver
+    public breakpointObserver: BreakpointObserver,
+    private location: Location
   ) {
     // "Escuchador" del tamaño de pantalla
     this.mobileQuery = this._media.matchMedia('(max-width: 600px)');
@@ -72,6 +74,9 @@ export class FormAreaInternaComponent implements OnInit, OnChanges {
     this.initForm();
   }
 
+  volver() {
+    this.location.back();
+  }
   initForm(): void {
     this.form = this._fb.group({
       id: [null, []],
