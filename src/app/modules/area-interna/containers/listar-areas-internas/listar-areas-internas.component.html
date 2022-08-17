@@ -11,24 +11,24 @@
   >
     <h3 class="titulo">Consulta de áreas internas</h3>
     <!-- Opciones del Header -->
-    <div class="gap-2 flex flex-row justify-end">
+    <div class="flex flex-row justify-between md:justify-end flex-wrap gap-2">
       <button
         color="primary"
-        class="-ml-3 sm:ml-0 mt-2 sm:mt-0 mb-0 order-last sm:order-last"
+        class="sm:ml-0 mt-2 sm:mt-0 mb-0 order-last sm:order-last"
         mat-flat-button
         (click)="redireccionarAsignar()"
       >
         <mat-icon [svgIcon]="'heroicons_outline:plus-circle'"></mat-icon>
-        <span>ASIGNAR ÁREA INTERNA</span>
+        <span>Asignar área interna</span>
       </button>
       <button
         color="primary"
-        class="-ml-3 sm:ml-0 mt-2 sm:mt-0 mb-0 order-last sm:order-last"
+        class="sm:ml-0 mt-2 sm:mt-0 mb-0 order-last sm:order-last"
         mat-flat-button
         (click)="redireccionarAgregar()"
       >
         <mat-icon [svgIcon]="'heroicons_outline:plus-circle'"></mat-icon>
-        <span>NUEVO</span>
+        <span>Nuevo</span>
       </button>
     </div>
   </div>

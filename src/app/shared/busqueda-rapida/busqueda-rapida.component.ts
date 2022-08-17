@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { designAnimations } from '@design/animations';
+import { synveltAnimations } from '@synvelt/animations';
 
 @Component({
   selector: 'app-busqueda-rapida',
   templateUrl: './busqueda-rapida.component.html',
   styleUrls: ['./busqueda-rapida.component.scss'],
-  animations: [designAnimations],
+  animations: [synveltAnimations],
 })
 export class BusquedaRapidaComponent implements OnInit {
   @Input() cargando: boolean;

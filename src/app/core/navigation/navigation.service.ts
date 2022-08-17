@@ -4,21 +4,28 @@ import { Observable, of, ReplaySubject, tap } from 'rxjs';
 import { Navigation } from 'app/core/navigation/navigation.types';
 import { SynveltNavigationItem } from '@synvelt/components/navigation';
 import { cloneDeep } from 'lodash-es';
-import { horizontalNavigation } from './navigation-menu';
+import { defaultNavigation, horizontalNavigation } from './navigation-menu';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NavigationService {
-  private _defaultNavigation: SynveltNavigationItem[] = [];
-  private _horizontalNavigation = horizontalNavigation;
+  //   private _defaultNavigation: SynveltNavigationItem[] = [];
+  //   private _horizontalNavigation = horizontalNavigation;
   private _navigation: ReplaySubject<Navigation> =
     new ReplaySubject<Navigation>(1);
-
+  //   private _compactNavigation: SynveltNavigationItem[] = [];
+  private _defaultNavigation: SynveltNavigationItem[] = [];
+  //   private _futuristicNavigation: SynveltNavigationItem[] = [];
+  private _horizontalNavigation: SynveltNavigationItem[] = [];
   /**
    * Constructor
    */
   constructor(private _httpClient: HttpClient) {
+    // this._compactNavigation = compactNavigation;
+    this._defaultNavigation = defaultNavigation;
+    // this._futuristicNavigation = futuristicNavigation;
+    this._horizontalNavigation = horizontalNavigation;
     //     this._userService.user$.pipe(untilDestroyed(this)).subscribe(
     //         datos => {
     //           this.usuario = datos;
@@ -59,6 +66,24 @@ export class NavigationService {
     // );
   }
   fillMenu(): Navigation {
+    // Fill compact navigation children using the default navigation
+    // this._compactNavigation.forEach(compactNavItem => {
+    //   this._defaultNavigation.forEach(defaultNavItem => {
+    //     if (defaultNavItem.id === compactNavItem.id) {
+    //       compactNavItem.children = cloneDeep(defaultNavItem.children);
+    //     }
+    //   });
+    // });
+
+    // Fill futuristic navigation children using the default navigation
+    // this._futuristicNavigation.forEach(futuristicNavItem => {
+    //   this._defaultNavigation.forEach(defaultNavItem => {
+    //     if (defaultNavItem.id === futuristicNavItem.id) {
+    //       futuristicNavItem.children = cloneDeep(defaultNavItem.children);
+    //     }
+    //   });
+    // });
+
     // Fill horizontal navigation children using the default navigation
     this._horizontalNavigation.forEach(horizontalNavItem => {
       this._defaultNavigation.forEach(defaultNavItem => {
@@ -67,7 +92,12 @@ export class NavigationService {
         }
       });
     });
+
+    // Return the response
     const retorno = {
+      //   compact: cloneDeep(this._compactNavigation),
+      default: cloneDeep(this._defaultNavigation),
+      //   futuristic: cloneDeep(this._futuristicNavigation),
       horizontal: cloneDeep(this._horizontalNavigation),
     };
     return retorno;
