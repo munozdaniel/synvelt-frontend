@@ -27,36 +27,35 @@ export class AgregarRolComponent implements OnInit, OnDestroy {
   ngOnInit(): void {}
 
   setForm(evento: IRol) {
-
-      // Open the confirmation and save the reference
-      const dialogRef = this._synveltConfirmationService.open({
-        title: 'Confirmar Operación',
-        message: 'Está por guardar un nuevo rol, desea continuar?',
-        icon: {
-          name: 'heroicons_solid:question-mark-circle',
-          color: 'info',
+    // Open the confirmation and save the reference
+    const dialogRef = this._synveltConfirmationService.open({
+      title: 'Confirmar Operación',
+      message: 'Está por guardar un nuevo rol, desea continuar?',
+      icon: {
+        name: 'heroicons_solid:question-mark-circle',
+        color: 'info',
+      },
+      actions: {
+        confirm: {
+          label: 'Guardar',
+          color: 'primary',
         },
-        actions: {
-          confirm: {
-            label: 'Guardar',
-            color: 'primary',
-          },
-          cancel: {
-            label: 'Cancelar',
-          },
+        cancel: {
+          label: 'Cancelar',
         },
-      });
+      },
+    });
 
-      // Subscribe to afterClosed from the dialog reference
-      dialogRef.afterClosed().subscribe(result => {
-        console.log(result);
-        if (result === 'confirmed') {
-          this.guardar(evento);
-        }
-      });
-
+    // Subscribe to afterClosed from the dialog reference
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if (result === 'confirmed') {
+        this.guardar(evento);
+      }
+    });
   }
   guardar(rol: IRol) {
+    console.log('rol a guardar', rol);
     this.cargando = true;
     this._rolService
       .guardar(rol)
@@ -66,7 +65,7 @@ export class AgregarRolComponent implements OnInit, OnDestroy {
           this.cargando = false;
           const confirmation = this._synveltConfirmationService.success();
           confirmation.afterClosed().subscribe(() => {
-            this._router.navigate(['rols']);
+            this._router.navigate(['roles']);
           });
         },
         error => {
@@ -83,5 +82,4 @@ export class AgregarRolComponent implements OnInit, OnDestroy {
         }
       );
   }
-
 }

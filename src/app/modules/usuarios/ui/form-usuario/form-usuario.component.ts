@@ -48,11 +48,8 @@ export class FormUsuarioComponent implements OnInit, OnChanges {
     if (changes.roles && changes.roles.currentValue) {
       this.setAutocompleteRoles();
     }
-    if (
-      changes.filteredAreasInternas &&
-      changes.filteredAreasInternas.currentValue
-    ) {
-      this.setAutocompleteRoles();
+    if (changes.areasInternas && changes.areasInternas.currentValue) {
+      this.setAutocompleteAreaInterna();
     }
   }
 
@@ -145,6 +142,31 @@ export class FormUsuarioComponent implements OnInit, OnChanges {
       }, 1000);
     } else {
       this.form.patchValue(this.usuario);
+      this.form.controls.claveLogin.setValue(this.usuario.claveLogin);
+      this.setRol();
+      this.setAreaInterna();
+    }
+  }
+  setRol() {
+    if (this.roles?.length > 0) {
+      const rol = this.roles.find(r => r.id === this.usuario.idRolPrincipal);
+      this.form.controls.rol.setValue(rol);
+    } else {
+      setTimeout(() => {
+        this.setRol();
+      }, 1000);
+    }
+  }
+  setAreaInterna() {
+    if (this.areasInternas?.length > 0) {
+      const area = this.areasInternas.find(
+        a => a.id === this.usuario.idAreaInterna
+      );
+      this.form.controls.areaInterna.setValue(area);
+    } else {
+      setTimeout(() => {
+        this.setAreaInterna();
+      }, 1000);
     }
   }
 
@@ -170,8 +192,9 @@ export class FormUsuarioComponent implements OnInit, OnChanges {
     } else {
       const usuario = this.form.value;
       usuario.nombreLogin = usuario.cuil;
+      usuario.idAreaInterna = usuario.areaInterna?.id;
       usuario.idRolPrincipal = usuario.rol?.id;
-      this.retForm.emit(this.form.value);
+      this.retForm.emit(usuario);
     }
   }
   volver() {

@@ -1,12 +1,16 @@
 import { environment } from 'environments/environment';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IAreaInterna } from 'app/models/iAreaInterna';
 @Injectable({
   providedIn: 'root',
 })
 export class AreaInternaService {
+  protected headers = new HttpHeaders().append(
+    'Content-Type',
+    'application/x-www-form-urlencoded'
+  );
   protected url = environment.url;
   /**
    * Constructor
@@ -15,15 +19,24 @@ export class AreaInternaService {
   private setQueryParams(parametros) {
     let queryParams = new HttpParams();
     if (parametros) {
-      if (parametros.nombre) {
-        queryParams = queryParams.append('nombre', parametros.nombre);
-      }
-      if (parametros.id) {
-        queryParams = queryParams.append('id', parametros.id);
-      }
-      if (parametros.codigo) {
-        queryParams = queryParams.append('codigo', parametros.codigo);
-      }
+      Object.entries(parametros).forEach(([key, value], index) => {
+        let valor = '';
+        if (typeof value === 'boolean') {
+          valor = value ? 'true' : 'false';
+        } else {
+          valor = value ? (value as string) : '';
+        }
+        queryParams = queryParams.set(key, valor);
+      });
+      //   if (parametros.nombre) {
+      //     queryParams = queryParams.append('nombre', parametros.nombre);
+      //   }
+      //   if (parametros.id) {
+      //     queryParams = queryParams.append('id', parametros.id);
+      //   }
+      //   if (parametros.codigo) {
+      //     queryParams = queryParams.append('codigo', parametros.codigo);
+      //   }
     }
     return queryParams;
   }
@@ -49,10 +62,14 @@ export class AreaInternaService {
    *
    */
   guardar(parametros: any): Observable<IAreaInterna> {
-    // const queryParams = this.setQueryParams(parametros);
+    const queryParams = this.setQueryParams(parametros);
     return this._http.post<IAreaInterna>(
       this.url + 'operacion/ActualizacionAreaInterna',
-      parametros
+      {},
+      {
+        headers: this.headers,
+        params: queryParams,
+      }
     );
   }
   /**

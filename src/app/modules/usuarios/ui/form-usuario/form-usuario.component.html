@@ -149,14 +149,19 @@
           id="claveLogin"
           matInput
           formControlName="claveLogin"
-          type="number"
+          type="string"
           required
         />
       </mat-form-field>
       <!--  field -->
       <mat-form-field appearance="outline" class="w-full text-area">
         <mat-label>Observación</mat-label>
-        <textarea #observacion matInput placeholder="Observación"></textarea>
+        <textarea
+          #observacion
+          matInput
+          placeholder="Observación"
+          formControlName="comentario"
+        ></textarea>
         <mat-hint align="end">{{ observacion.value.length }} / 4000</mat-hint>
 
         <mat-error *ngIf="form.controls.direccionMail.hasError('maxLength')">
@@ -167,7 +172,9 @@
 
     <div class="flex flex-row justify-center items-center min-w-full mt-4 mb-6">
       <div class="flex flex-row justify-between items-start gap-8">
-        <button mat-raised-button color="warn" (click)="volver()">Cancelar</button>
+        <button mat-raised-button color="warn" (click)="volver()">
+          Cancelar
+        </button>
         <button
           *ngIf="!cargando"
           mat-raised-button
