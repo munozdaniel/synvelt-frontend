@@ -80,11 +80,12 @@ export class AreaInternaService {
     if (idAreaInterna) {
       queryParams = queryParams.append('idAreaInterna', idAreaInterna);
     }
-    usuariosIds.forEach(usuarioId => {
-      queryParams = queryParams.append('usuariosIds', usuarioId);
-    });
-    return this._http.get<any>(
+    // usuariosIds.forEach(usuarioId => {
+    //   queryParams = queryParams.append('usuariosIds', usuarioId);
+    // });
+    return this._http.post<any>(
       this.url + 'operacion/AsignacionUsuarioInspector',
+      usuariosIds,
       {
         params: queryParams,
       }

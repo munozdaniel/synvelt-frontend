@@ -33,6 +33,7 @@
       </div>
       <!-- Tabla -->
       <app-seleccionar-usuarios-tabla
+        [columnas]="columnas"
         [cargando]="cargandoUsuario"
         [usuarios]="usuarios"
         (retUsuariosSeleccionados)="setUsuariosSeleccionados($event)"

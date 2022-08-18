@@ -30,7 +30,7 @@ export class BusquedaRolComponent implements OnInit {
       rol: [null],
     });
     this.form.valueChanges.subscribe(val => {
-      this.retFiltros.emit(val);
+      this.retFiltros.emit(val.rol);
     });
     this.obtenerRoles();
   }

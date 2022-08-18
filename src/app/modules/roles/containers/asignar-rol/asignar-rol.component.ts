@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
@@ -7,6 +7,14 @@ import { UsuarioService } from 'app/core/services/usuario.service';
 import { IRol } from 'app/models/iRol';
 import { IUsuario } from 'app/models/iUsuario';
 import { Location } from '@angular/common';
+import {
+  MediaMatcher,
+  BreakpointObserver,
+  Breakpoints,
+  BreakpointState,
+} from '@angular/cdk/layout';
+const columnasMD = ['select', 'cuit', 'nombreCompleto', 'rol'];
+const columnasXS = ['select', 'nombreCompleto'];
 @UntilDestroy()
 @Component({
   selector: 'app-asignar-rol',
@@ -19,20 +27,60 @@ export class AsignarRolComponent implements OnInit {
   usuarios: IUsuario[];
   usuariosSeleccionados: IUsuario[];
   rol: IRol;
+  // Mobile
+  isMobile: boolean;
+  private _mobileQueryListener: () => void;
+  mobileQuery: MediaQueryList;
+  columnas: string[];
   constructor(
     private _usuarioService: UsuarioService,
     private _synveltConfirmationService: SynveltConfirmationService,
     private _router: Router,
     private _rolService: RolService,
-    private location: Location
-  ) {}
+    private location: Location,
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _media: MediaMatcher,
+    public breakpointObserver: BreakpointObserver
+  ) {
+    // "Escuchador" del tamaño de pantalla
+    this.mobileQuery = this._media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => this._changeDetectorRef.detectChanges();
+    this.breakpointObserver
+      .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          // Si la pantalla es small
+          this.isMobile = true;
+          this.columnas = columnasXS;
+        } else {
+          // Si la pantalla no es small
+          this.isMobile = false;
+          this.columnas = columnasMD;
+        }
+      });
+  }
   volver() {
     this.location.back();
   }
   ngOnInit(): void {
-    this.obtenerUsuarios();
+    this.obtenerAreasInternas();
   }
-  obtenerUsuarios() {
+  obtenerAreasInternas() {
+    this.cargando = true;
+    this._rolService
+      .obtenertodos()
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        datos => {
+          this.obtenerUsuarios(datos);
+        },
+        error => {
+          console.log('[ERROR]', error);
+        }
+      );
+  }
+
+  obtenerUsuarios(roles: IRol[]) {
     this.cargandoUsuario = true;
     this._usuarioService
       .buscar()
@@ -40,7 +88,11 @@ export class AsignarRolComponent implements OnInit {
       .subscribe(
         datos => {
           this.cargandoUsuario = false;
-          this.usuarios = datos;
+          this.usuarios = datos.map(x => {
+            x.rol = roles.find(y => y.id === x.idRolPrincipal);
+            return x;
+          });
+          console.log('us', this.usuarios);
         },
         error => {
           this.cargandoUsuario = false;

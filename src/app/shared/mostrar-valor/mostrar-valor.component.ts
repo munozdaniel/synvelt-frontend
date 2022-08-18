@@ -34,7 +34,7 @@ import {
       <div *ngSwitchCase="'archivo'">
         <app-mostrar-tipo-archivo
           [ocultarEliminar]="true"
-          [habilitacionId]="valor._id"
+          [habilitacionId]="valor.id"
           [filename]="valor.filename"
         ></app-mostrar-tipo-archivo>
       </div>

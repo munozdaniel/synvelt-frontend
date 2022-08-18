@@ -101,10 +101,10 @@ export class ListarUsuariosComponent implements OnInit {
       }
     });
   }
-  confirmarEliminar(_id: string) {
+  confirmarEliminar(id: string) {
     this.cargando = true;
     this._usuarioService
-      .eliminar(_id)
+      .eliminar(id)
       .pipe(untilDestroyed(this))
       .subscribe(
         () => {

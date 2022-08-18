@@ -78,24 +78,7 @@ export class ListarAreasInternasComponent implements OnInit {
       }
     });
   }
-  //   confirmarEliminar(_id: string) {
-  //     this.cargando = true;
-  //     this._areaInternaService
-  //       .eliminar(_id)
-  //       .pipe(untilDestroyed(this))
-  //       .subscribe(
-  //         () => {
-  //           this.cargando = false;
-  //           this._synveltConfirmationService.success();
-  //           this.obtenerTodos();
-  //         },
-  //         error => {
-  //           this._synveltConfirmationService.error();
 
-  //           console.log('[ERROR]', error);
-  //         }
-  //       );
-  //   }
   setFiltros(parametros) {
     console.log('setFiltros', parametros);
     this.parametros = parametros;

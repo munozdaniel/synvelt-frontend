@@ -27,7 +27,7 @@
           color="primary"
           [disabled]="form.invalid"
         >
-          {{ usuario && usuario._id ? "Actualizar" : "Guardar" }}
+          {{ usuario && usuario.id ? "Actualizar" : "Guardar" }}
         </button>
         <button
           *ngIf="cargando"

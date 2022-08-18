@@ -16,6 +16,7 @@ import { Observable, startWith, map } from 'rxjs';
 import { IRol } from 'app/models/iRol';
 import { IAreaInterna } from 'app/models/iAreaInterna';
 import { Location } from '@angular/common';
+import { ValidationService } from 'app/shared/controlmessage/validation.services';
 
 @Component({
   selector: 'app-form-usuario',
@@ -65,8 +66,8 @@ export class FormUsuarioComponent implements OnInit, OnChanges {
       cuil: ['', [Validators.maxLength(11)]],
       direccionMail: ['', [Validators.email, Validators.maxLength(256)]],
       telefono: ['', [Validators.maxLength(12)]],
-      rol: ['', []],
-      areaInterna: ['', []],
+      rol: ['', [ValidationService.esObjeto]],
+      areaInterna: ['', [ValidationService.esObjeto]],
       esInspector: ['', []],
       comentario: ['', [Validators.maxLength(4000)]],
 

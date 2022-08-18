@@ -111,10 +111,13 @@
             {{ option.nombre }}
           </mat-option>
         </mat-autocomplete>
+        <app-control-messages
+          [control]="form.controls?.rol"
+        ></app-control-messages>
       </mat-form-field>
       <!-- areaInterna -->
       <mat-form-field appearance="outline" class="w-full">
-        <mat-label class="lbl">Area Interna</mat-label>
+        <mat-label class="lbl">Área Interna</mat-label>
         <input
           type="text"
           matInput
@@ -135,6 +138,9 @@
             {{ option.nombre }}
           </mat-option>
         </mat-autocomplete>
+        <mat-error *ngIf="form.controls.areaInterna.hasError('noEsObjeto')">
+          Seleccione un item de la lista
+        </mat-error>
       </mat-form-field>
       <!-- field -->
       <div class="contenedor-slide-toggle">
@@ -181,7 +187,7 @@
           color="primary"
           [disabled]="form.invalid"
         >
-          {{ usuario && usuario._id ? "Actualizar" : "Guardar" }}
+          {{ usuario && usuario.id ? "Actualizar" : "Guardar" }}
         </button>
         <button
           *ngIf="cargando"

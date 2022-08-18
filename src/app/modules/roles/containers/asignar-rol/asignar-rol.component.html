@@ -16,7 +16,7 @@
     <div
       class="w-full md:w-8/12 flex flex-col items-center justify-start gap-4 py-6 relative"
     >
-      <div class="bg-card mat-elevation-z1 p-2 w-full md:w-8/12">
+      <div class="bg-card mat-elevation-z1 p-2 w-full">
         <mat-progress-bar
           *ngIf="cargando"
           mode="indeterminate"
@@ -31,10 +31,11 @@
       </div>
       <!-- Tabla -->
       <app-seleccionar-usuarios-tabla
+        [columnas]="columnas"
         [cargando]="cargandoUsuario"
         [usuarios]="usuarios"
         (retUsuariosSeleccionados)="setUsuariosSeleccionados($event)"
-        class="w-full md:w-8/12"
+        class="w-full"
       >
       </app-seleccionar-usuarios-tabla>
       <div class="flex flex-row justify-between items-start gap-8">

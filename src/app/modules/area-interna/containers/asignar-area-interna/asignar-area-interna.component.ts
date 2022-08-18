@@ -1,11 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  MediaMatcher,
+  BreakpointObserver,
+  Breakpoints,
+  BreakpointState,
+} from '@angular/cdk/layout';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { AreaInternaService } from 'app/core/services/area-interna.service';
- import { UsuarioService } from 'app/core/services/usuario.service';
+import { UsuarioService } from 'app/core/services/usuario.service';
 import { IAreaInterna } from 'app/models/iAreaInterna';
 import { IUsuario } from 'app/models/iUsuario';
+const columnasMD = ['select', 'cuit', 'nombreCompleto', 'area'];
+const columnasXS = ['select', 'nombreCompleto'];
 @UntilDestroy()
 @Component({
   selector: 'app-asignar-area-interna',
@@ -18,17 +26,58 @@ export class AsignarAreaInternaComponent implements OnInit {
   usuarios: IUsuario[];
   usuariosSeleccionados: IUsuario[];
   areaInterna: IAreaInterna;
+  // Mobile
+  isMobile: boolean;
+  private _mobileQueryListener: () => void;
+  mobileQuery: MediaQueryList;
+  columnas: string[];
   constructor(
     private _usuarioService: UsuarioService,
     private _synveltConfirmationService: SynveltConfirmationService,
     private _router: Router,
-    private _areaInternaService: AreaInternaService
-  ) {}
+    private _areaInternaService: AreaInternaService,
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _media: MediaMatcher,
+    public breakpointObserver: BreakpointObserver
+  ) {
+    // "Escuchador" del tamaño de pantalla
+    this.mobileQuery = this._media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => this._changeDetectorRef.detectChanges();
+    this.breakpointObserver
+      .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          // Si la pantalla es small
+          this.isMobile = true;
+          this.columnas = columnasXS;
+        } else {
+          // Si la pantalla no es small
+          this.isMobile = false;
+          this.columnas = columnasMD;
+        }
+      });
+  }
 
   ngOnInit(): void {
-    this.obtenerUsuarios();
+    this.obtenerAreasInternas();
   }
-  obtenerUsuarios() {
+  obtenerAreasInternas() {
+    this.cargando = true;
+    this._areaInternaService
+      .obtenertodos()
+      .pipe(untilDestroyed(this))
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        datos => {
+          this.obtenerUsuarios(datos);
+        },
+        error => {
+          console.log('[ERROR]', error);
+        }
+      );
+  }
+
+  obtenerUsuarios(areasInternas: IAreaInterna[]) {
     this.cargandoUsuario = true;
     this._usuarioService
       .buscar()
@@ -36,7 +85,11 @@ export class AsignarAreaInternaComponent implements OnInit {
       .subscribe(
         datos => {
           this.cargandoUsuario = false;
-          this.usuarios = datos;
+          this.usuarios = datos.map(x => {
+            x.areaInterna = areasInternas.find(y => y.id === x.idAreaInterna);
+            return x;
+          });
+          console.log('us', this.usuarios);
         },
         error => {
           this.cargandoUsuario = false;

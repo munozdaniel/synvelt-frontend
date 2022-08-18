@@ -20,8 +20,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { IUsuario } from 'app/models/iUsuario';
-const columnasMD = ['select', 'cuit', 'nombreCompleto', 'area'];
-const columnasXS = ['select', 'nombreCompleto'];
+
 @Component({
   selector: 'app-seleccionar-usuarios-tabla',
   templateUrl: './seleccionar-usuarios-tabla.component.html',
@@ -29,6 +28,7 @@ const columnasXS = ['select', 'nombreCompleto'];
 })
 export class SeleccionarUsuariosTablaComponent implements OnInit, OnChanges {
   //
+  @Input() columnas: string[];
   @Input() cargando: boolean;
   @Input() usuarios: IUsuario[];
   @Output() retUsuariosSeleccionados = new EventEmitter<IUsuario[]>();
@@ -39,7 +39,6 @@ export class SeleccionarUsuariosTablaComponent implements OnInit, OnChanges {
   @ViewChild('paginator') set setPaginator(paginator: MatPaginator) {
     this.dataSource.paginator = paginator;
   }
-  columnas = columnasMD;
   initialSelection = [];
   allowMultiSelect = true;
   selection = new SelectionModel<IUsuario>(
@@ -64,11 +63,9 @@ export class SeleccionarUsuariosTablaComponent implements OnInit, OnChanges {
         if (state.matches) {
           // Si la pantalla es small
           this.isMobile = true;
-          this.columnas = columnasXS;
         } else {
           // Si la pantalla no es small
           this.isMobile = false;
-          this.columnas = columnasMD;
         }
       });
   }

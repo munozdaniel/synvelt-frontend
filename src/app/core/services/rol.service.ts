@@ -80,16 +80,17 @@ export class RolService {
     );
   }
   asignar(idRol: string, usuariosIds: string[]): Observable<void> {
-    let queryParams = new HttpParams();
-    if (idRol) {
-      queryParams = queryParams.append('idRol', idRol);
-    }
-    usuariosIds.forEach(usuarioId => {
-      queryParams = queryParams.append('usuariosIds', usuarioId);
-    });
-    return this._http.get<any>(
-      this.url + 'usuarios/AsignacionUsuariosRolG',
-
+    const queryParams = this.setQueryParams({ idRol });
+    // let queryParams = new HttpParams();
+    // if (idRol) {
+    //   queryParams = queryParams.append('idRol', idRol);
+    // }
+    // usuariosIds.forEach(usuarioId => {
+    //   queryParams = queryParams.append('usuariosIds', usuarioId);
+    // });
+    return this._http.post<any>(
+      this.url + 'usuarios/AsignacionUsuariosRol',
+      usuariosIds,
       {
         headers: this.headers,
         params: queryParams,

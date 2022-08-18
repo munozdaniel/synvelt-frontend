@@ -37,7 +37,7 @@ const columnasMD = [
   'estado',
   'opciones',
 ];
-const columnasXS = ['nombreCompleto'];
+const columnasXS = ['nombreCompleto', 'opciones'];
 @Component({
   selector: 'app-tabla-usuarios',
   templateUrl: './tabla-usuarios.component.html',

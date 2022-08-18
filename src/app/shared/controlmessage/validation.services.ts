@@ -72,7 +72,7 @@ export class ValidationService {
     if (!control.value) {
       return { alMenosUnItemEnElArreglo: true };
     }
-    if (control.value._id) {
+    if (control.value.id) {
       return null;
     } else {
       return { alMenosUnItemEnElArreglo: true };
@@ -87,16 +87,33 @@ export class ValidationService {
    * @param control
    * @returns
    */
-  static esObjeto(control: AbstractControl) {
+  static esObjetoRequerido(control: AbstractControl) {
     if (!control.value) {
       return { noEsObjeto: true };
     }
     if (typeof control.value === 'string') {
       return { noEsObjeto: true };
     }
-    if (control.value && control.value._id) {
+    if (control.value && control.value.id) {
       return null;
     } else {
+      return { noEsObjeto: true };
+    }
+  }
+  static esObjeto(control: AbstractControl) {
+    if (!control.value) {
+      console.log('0no es objeto');
+      return null;
+    }
+    if (typeof control.value === 'string') {
+      console.log('1no es objeto');
+      return { noEsObjeto: true };
+    }
+    if (control.value && control.value.id) {
+      console.log('2no es objeto');
+      return null;
+    } else {
+      console.log('3no es objeto');
       return { noEsObjeto: true };
     }
   }
@@ -116,7 +133,7 @@ export class ValidationService {
     if (typeof control.value === 'string') {
       return { noEsObjeto: true };
     }
-    if (control.value && control.value._id) {
+    if (control.value && control.value.id) {
       return null;
     } else {
       return { noEsObjeto: true };
