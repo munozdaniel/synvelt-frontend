@@ -6,6 +6,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { SharedModule } from '../shared.module';
 import { BusquedaRolComponent } from './buscar-rol.component';
 
@@ -24,6 +25,7 @@ import { BusquedaRolComponent } from './buscar-rol.component';
     MatAutocompleteModule,
     MatInputModule,
     MatCheckboxModule,
+    MatTooltipModule,
   ],
 })
 export class BuscarRolModule {}

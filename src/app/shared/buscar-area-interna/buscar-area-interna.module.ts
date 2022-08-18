@@ -6,6 +6,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { SharedModule } from '../shared.module';
 import { BuscarAreaInternaComponent } from './buscar-area-interna.component';
 
@@ -24,6 +25,7 @@ import { BuscarAreaInternaComponent } from './buscar-area-interna.component';
     MatAutocompleteModule,
     MatInputModule,
     MatCheckboxModule,
+    MatTooltipModule,
   ],
 })
 export class BuscarAreaInternaModule {}

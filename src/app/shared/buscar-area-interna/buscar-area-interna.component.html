@@ -9,7 +9,17 @@
       formControlName="areaInterna"
       [matAutocomplete]="autoAreaInterna"
     />
-    <mat-icon matSuffix>search</mat-icon>
+    <mat-icon *ngIf="!form.controls.areaInterna.value" matSuffix
+      >search</mat-icon
+    >
+    <mat-icon
+      class="cursor-pointer hover:font-bold"
+      matTooltip="Limpiar selección"
+      *ngIf="form.controls.areaInterna.value"
+      (click)="form.controls.areaInterna.setValue('')"
+      matSuffix
+      >close</mat-icon
+    >
     <mat-autocomplete
       #autoAreaInterna="matAutocomplete"
       [displayWith]="displayFnAreaInterna"

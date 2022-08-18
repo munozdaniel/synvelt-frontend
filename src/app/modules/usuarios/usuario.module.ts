@@ -22,6 +22,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { TablaUsuariosModule } from 'app/shared/tabla-usuarios/tabla-usuarios.module';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
@@ -55,7 +56,8 @@ const maskConfig: Partial<IConfig> = {
     // NgxPermissionsModule.forChild(),
     NgxMaskModule.forRoot(maskConfig),
     TablaUsuariosModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTooltipModule,
   ],
 })
 export class UsuarioModule {}

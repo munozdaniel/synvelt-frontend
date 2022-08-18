@@ -31,12 +31,22 @@
         formControlName="areaInterna"
         [matAutocomplete]="autoAreas"
       />
-      <mat-icon matSuffix>search</mat-icon>
+      <mat-icon *ngIf="!form.controls.areaInterna.value" matSuffix
+        >search</mat-icon
+      >
+      <mat-icon
+        class="cursor-pointer hover:font-bold"
+        matTooltip="Limpiar selección"
+        *ngIf="form.controls.areaInterna.value"
+        (click)="form.controls.areaInterna.setValue('')"
+        matSuffix
+      >
+        close</mat-icon
+      >
       <mat-autocomplete
         #autoAreas="matAutocomplete"
         [displayWith]="displayFnArea"
       >
-        <mat-option [value]="areaIndistinta">Cualquiera</mat-option>
         <mat-option
           *ngFor="let option of filteredAreas | async"
           [value]="option"
@@ -57,9 +67,16 @@
         formControlName="rol"
         [matAutocomplete]="autoRol"
       />
-      <mat-icon matSuffix>search</mat-icon>
+      <mat-icon *ngIf="!form.controls.rol.value" matSuffix>search</mat-icon>
+      <mat-icon
+        class="cursor-pointer hover:font-bold"
+        matTooltip="Limpiar selección"
+        *ngIf="form.controls.rol.value"
+        matSuffix
+        (click)="form.controls.rol.setValue('')"
+        >close</mat-icon
+      >
       <mat-autocomplete #autoRol="matAutocomplete" [displayWith]="displayFnRol">
-        <mat-option [value]="rolIndistinto">Cualquiera</mat-option>
         <mat-option
           *ngFor="let option of filteredRoles | async"
           [value]="option"

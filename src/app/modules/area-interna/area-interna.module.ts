@@ -27,6 +27,7 @@ import { ListarAreasInternasComponent } from './containers/listar-areas-internas
 import { FormAreaInternaComponent } from './ui/form-area-interna/form-area-interna.component';
 import { TablaAreasInternasComponent } from './ui/tabla-areas-internas/tabla-areas-internas.component';
 import { FiltroAreasInternasComponent } from './ui/filtro-areas-internas/filtro-areas-internas.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
@@ -66,6 +67,7 @@ const maskConfig: Partial<IConfig> = {
     TablaUsuariosModule,
     BuscarAreaInternaModule,
     SeleccionarUsuariosTablaModule,
+    MatTooltipModule
   ],
 })
 export class AreaInternaModule {}

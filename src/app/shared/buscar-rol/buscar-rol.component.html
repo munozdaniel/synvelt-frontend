@@ -9,7 +9,15 @@
       formControlName="rol"
       [matAutocomplete]="autoRol"
     />
-    <mat-icon matSuffix>search</mat-icon>
+    <mat-icon *ngIf="!form.controls.rol.value" matSuffix>search</mat-icon>
+    <mat-icon
+      class="cursor-pointer hover:font-bold"
+      matTooltip="Limpiar selección"
+      *ngIf="form.controls.rol.value"
+      matSuffix
+      (click)="form.controls.rol.setValue('')"
+      >close</mat-icon
+    >
     <mat-autocomplete #autoRol="matAutocomplete" [displayWith]="displayFnRol">
       <mat-option *ngFor="let option of filteredRoles | async" [value]="option">
         {{ option.nombre }}

@@ -99,7 +99,15 @@
           formControlName="rol"
           [matAutocomplete]="autoRol"
         />
-        <mat-icon matSuffix>search</mat-icon>
+        <mat-icon *ngIf="!form.controls.rol.value" matSuffix>search</mat-icon>
+        <mat-icon
+          class="cursor-pointer hover:font-bold"
+          matTooltip="Limpiar selección"
+          *ngIf="form.controls.rol.value"
+          matSuffix
+          (click)="form.controls.rol.setValue('')"
+          >close</mat-icon
+        >
         <mat-autocomplete
           #autoRol="matAutocomplete"
           [displayWith]="displayFnRol"
@@ -126,7 +134,17 @@
           formControlName="areaInterna"
           [matAutocomplete]="autoAreaInterna"
         />
-        <mat-icon matSuffix>search</mat-icon>
+        <mat-icon *ngIf="!form.controls.areaInterna.value" matSuffix
+          >search</mat-icon
+        >
+        <mat-icon
+          class="cursor-pointer hover:font-bold"
+          matTooltip="Limpiar selección"
+          *ngIf="form.controls.areaInterna.value"
+          (click)="form.controls.areaInterna.setValue('')"
+          matSuffix
+          >close</mat-icon
+        >
         <mat-autocomplete
           #autoAreaInterna="matAutocomplete"
           [displayWith]="displayFnAreaInterna"
