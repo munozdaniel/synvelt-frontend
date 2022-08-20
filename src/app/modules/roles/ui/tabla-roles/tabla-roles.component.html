@@ -35,7 +35,9 @@
       <!--'',
                          -->
       <ng-container matColumnDef="esAdministradorDatos">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Admin. Datos</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <span>Administrador </span><span> de datos</span>
+        </th>
         <td mat-cell *matCellDef="let row">
           <mostrar-valor
             [tipoValor]="'boolean'"
@@ -46,7 +48,9 @@
       <!-- '',
                         -->
       <ng-container matColumnDef="esAdministradorAplicacion">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Admin. App</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <span>Administrador </span><span> de aplicación</span>
+        </th>
         <td mat-cell *matCellDef="let row">
           <mostrar-valor
             [tipoValor]="'boolean'"
