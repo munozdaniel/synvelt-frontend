@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  url: 'http://asdrovia.com/AdmInsp/',
-  // url: 'https://elosegui.org/AdmInsp/',
-  site: 'https://elosegui.org/AIapp',
+   url: 'http://asdrovia.com/AdmInsp/',
+ //   url: 'http://elosegui.org/AdmInsp/',
+  site: 'http://localhost:4200',
 };
 
 /*

@@ -91,4 +91,9 @@ export class AreaInternaService {
       }
     );
   }
+  eliminar(id): Observable<void> {
+    return this._http.delete<void>(
+      this.url + `operacion/EliminacionAreaInterna?id=${id}`
+    );
+  }
 }

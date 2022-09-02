@@ -52,7 +52,7 @@ export class ListarAreasInternasComponent implements OnInit {
   setEliminar(evento: string) {
     const confirmation = this._synveltConfirmationService.open({
       title: 'Confirmar Operación',
-      message: '¿Está seguro de continuar con la eliminación del areaInterna?',
+      message: '¿Está seguro de continuar con la eliminación del área interna?',
       icon: {
         show: true,
         name: 'heroicons_outline:exclamation',
@@ -74,13 +74,29 @@ export class ListarAreasInternasComponent implements OnInit {
     confirmation.afterClosed().subscribe(result => {
       // If the confirm button pressed...
       if (result === 'confirmed') {
-        // this.confirmarEliminar(evento);
+        this.confirmarEliminar(evento);
       }
     });
   }
+  confirmarEliminar(id: string) {
+    this.cargando = true;
+    this._areaInternaService
+      .eliminar(id)
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        () => {
+          this.cargando = false;
+          this._synveltConfirmationService.success();
+          this.obtenerTodos();
+        },
+        error => {
+          this._synveltConfirmationService.error();
 
+          console.log('[ERROR]', error);
+        }
+      );
+  }
   setFiltros(parametros) {
-    console.log('setFiltros', parametros);
     this.parametros = parametros;
     this.obtenerTodos();
   }
