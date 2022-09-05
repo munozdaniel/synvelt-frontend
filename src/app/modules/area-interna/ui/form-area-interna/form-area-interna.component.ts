@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { synveltAnimations } from '@synvelt/animations';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
-import { Observable, startWith, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IAreaInterna } from 'app/models/iAreaInterna';
 import {
   MediaMatcher,

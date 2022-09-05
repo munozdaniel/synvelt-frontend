@@ -1,0 +1,212 @@
+<div class="w-full bg-card mat-elevation-z1">
+  <form
+    [formGroup]="formModeloLista"
+    class="flex flex-col"
+    (ngSubmit)="guardar()"
+  >
+    <div class="p-8 pb-4 grid grid-cols-1 gap-2">
+      <!--  field -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Nombre</mat-label>
+        <input id="nombre" matInput formControlName="nombre" required />
+        <mat-error *ngIf="formModeloLista.controls.nombre.hasError('required')">
+          Este campo es requerido.
+        </mat-error>
+      </mat-form-field>
+      <!--  field -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Comentario</mat-label>
+        <input id="comentario" matInput formControlName="comentario" />
+      </mat-form-field>
+    </div>
+    <!-- Modelo Item Lista Control -->
+    <div formArrayName="modeloItemLista">
+      <div
+        *ngFor="
+          let modeloItemControl of getModeloItemLista().controls;
+          let modeloItemIndex = index
+        "
+      >
+        <div
+          [formGroupName]="modeloItemIndex"
+          style="border: 1px solid gray; padding: 10px"
+        >
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label class="lbl">Tipo de dato</mat-label>
+            <input
+              type="text"
+              matInput
+              class="input is-medium"
+              autocomplete="off"
+              formControlName="modeloTipoDato"
+              [matAutocomplete]="autoTipoDato"
+            />
+            <mat-icon
+              *ngIf="!getModeloItemLista().controls.modeloTipoDato?.value"
+              matSuffix
+              >search</mat-icon
+            >
+            <mat-icon
+              class="cursor-pointer hover:font-bold"
+              matTooltip="Limpiar selección"
+              *ngIf="getModeloItemLista().controls.modeloTipoDato?.value"
+              matSuffix
+              (click)="
+                getModeloItemLista().controls.modeloTipoDato.setValue('')
+              "
+              >close</mat-icon
+            >
+            <mat-autocomplete
+              #autoTipoDato="matAutocomplete"
+              [displayWith]="displayFnTipoDato"
+            >
+              <mat-option
+                *ngFor="let option of filteredTipoDato | async"
+                [value]="option"
+              >
+                {{ option.nombre }}
+              </mat-option>
+            </mat-autocomplete>
+            <!-- <app-control-messages
+              [control]="getModeloItemLista().controls?.modeloTipoDato"
+            ></app-control-messages> -->
+          </mat-form-field>
+          <!--  -->
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Orden</mat-label>
+            <input id="orden" matInput formControlName="orden" type="number" />
+            <!-- <mat-error
+              *ngIf="getModeloItemLista().controls.orden.hasError('min')"
+            >
+              El valor tiene que ser mayor a 0.
+            </mat-error> -->
+          </mat-form-field>
+          <!--  -->
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Nombre</mat-label>
+            <input id="nombre" matInput formControlName="nombre" type="text" />
+            <!-- <mat-error
+              *ngIf="getModeloItemLista().controls.nombre.hasError('required')"
+            >
+              El campo es requerido
+            </mat-error> -->
+          </mat-form-field>
+          <!--  -->
+          <div>
+            <mat-slide-toggle formControlName="multipleSeleccion">
+              Multiple selección</mat-slide-toggle
+            >
+          </div>
+          <!--  -->
+          <div>
+            <mat-slide-toggle formControlName="multiplesValores">
+              Multiple valores</mat-slide-toggle
+            >
+          </div>
+          <!--  -->
+          <div>
+            <mat-slide-toggle formControlName="opcional">
+              Opcional</mat-slide-toggle
+            >
+          </div>
+          <!--  -->
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Formato</mat-label>
+            <input
+              id="formato"
+              matInput
+              formControlName="formato"
+              type="text"
+            />
+          </mat-form-field>
+          <!--  -->
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Orden</mat-label>
+            <input
+              id="longitudMaxima"
+              matInput
+              formControlName="longitudMaxima"
+              type="number"
+            />
+            <!-- <mat-error
+              *ngIf="
+                getModeloItemLista().controls.longitudMaxima.hasError('min')
+              "
+            >
+              El valor tiene que ser mayor a 0.
+            </mat-error> -->
+          </mat-form-field>
+          <!--  -->
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Método de selección</mat-label>
+            <input
+              id="metodoSeleccion"
+              matInput
+              formControlName="metodoSeleccion"
+              type="text"
+            />
+          </mat-form-field>
+          <!--  -->
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Columna de descripción</mat-label>
+            <input
+              id="columnaDescripcion"
+              matInput
+              formControlName="columnaDescripcion"
+              type="text"
+            />
+          </mat-form-field>
+          <!--  -->
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Columna de selección</mat-label>
+            <input
+              id="columnaSeleccion"
+              matInput
+              formControlName="columnaSeleccion"
+              type="text"
+            />
+          </mat-form-field>
+          <!--  -->
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Columna valor</mat-label>
+            <input
+              id="columnaValor"
+              matInput
+              formControlName="columnaValor"
+              type="text"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="flex flex-row justify-center items-center">
+        <button mat-raised-button (click)="addModeloItemLista()">
+          Agregar
+        </button>
+      </div>
+    </div>
+    <!-- /Modelo Item Lista Control -->
+    <div class="flex flex-row justify-center items-center min-w-full mt-4 mb-6">
+      <div class="flex flex-row justify-between items-start gap-8">
+        <button mat-raised-button color="warn" (click)="volver()">
+          Cancelar
+        </button>
+        <button
+          *ngIf="!cargando"
+          mat-raised-button
+          color="primary"
+          [disabled]="formModeloLista.invalid"
+        >
+          {{ usuario && usuario.id ? "Actualizar" : "Guardar" }}
+        </button>
+        <button
+          *ngIf="cargando"
+          mat-raised-button
+          color="warn"
+          [disabled]="true"
+        >
+          Cargando...
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

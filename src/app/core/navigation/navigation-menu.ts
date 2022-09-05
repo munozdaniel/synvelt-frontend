@@ -38,6 +38,13 @@ export const horizontalNavigation: SynveltNavigationItem[] = [
         link: '/areainternas',
         icon: 'heroicons_outline:cog',
       },
+      {
+        id: 'areas-internas',
+        title: 'Controles (xModificarx)',
+        type: 'basic',
+        link: '/controles',
+        icon: 'heroicons_outline:cog',
+      },
     ],
   },
 ];
@@ -76,6 +83,13 @@ export const defaultNavigation: SynveltNavigationItem[] = [
         title: 'Áreas internas',
         type: 'basic',
         link: '/areainternas',
+        icon: 'heroicons_outline:cog',
+      },
+      {
+        id: 'areas-internas',
+        title: 'Controles',
+        type: 'basic',
+        link: '/modelos',
         icon: 'heroicons_outline:cog',
       },
     ],
