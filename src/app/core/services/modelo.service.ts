@@ -2,7 +2,6 @@ import { environment } from 'environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IAreaInterna } from 'app/models/iAreaInterna';
 import { IModeloTipoBase } from 'app/models/iModeloTipoBase';
 import {
   IModeloTipoDato,
@@ -59,8 +58,9 @@ export class ModeloService {
     const queryParams = this.setQueryParams(parametros);
     return this._http.post<any>(
       this.url + 'modelos/ActualizacionModeloListaControl',
-      { ...body },
+      [...body],
       {
+        headers: this.headers,
         params: queryParams,
       }
     );
@@ -80,6 +80,7 @@ export class ModeloService {
       this.url + 'modelos/ActualizacionModeloTipoDato',
       {},
       {
+        headers: this.headers,
         params: queryParams,
       }
     );
@@ -146,4 +147,9 @@ export class ModeloService {
     return this._http.get<any>(this.url + 'modelos/SeleccionTipoBase');
   }
   // =========================================================
+  eliminar(id: string): Observable<boolean> {
+    return this._http.get<any>(
+      this.url + `modelos/EliminacionModeloListaControl?id=${id}`
+    );
+  }
 }

@@ -53,7 +53,7 @@ export class SynveltConfirmationService {
   }
   // Metodos personalizados:
   success(
-    title = 'Operación Exitosa',
+    title = 'Operación éxitosa',
     message = 'El proceso ha finalizado correctamente',
     icon?
   ): MatDialogRef<SynveltConfirmationDialogComponent> {
@@ -79,7 +79,7 @@ export class SynveltConfirmationService {
     });
   }
   error(
-    title = 'Operación Fallida',
+    title = 'Operación fallida',
     message = 'Ops! Ocurrió un error, la operación no se ha completado'
   ): MatDialogRef<SynveltConfirmationDialogComponent> {
     return this.open({

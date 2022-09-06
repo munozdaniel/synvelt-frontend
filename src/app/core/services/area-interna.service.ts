@@ -92,7 +92,7 @@ export class AreaInternaService {
     );
   }
   eliminar(id): Observable<void> {
-    return this._http.delete<void>(
+    return this._http.get<void>(
       this.url + `operacion/EliminacionAreaInterna?id=${id}`
     );
   }

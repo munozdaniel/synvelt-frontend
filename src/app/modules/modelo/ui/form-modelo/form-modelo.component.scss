@@ -1,0 +1,13 @@
+.formulario-dinamico {
+  position: relative;
+  border-radius: 5px;
+  border: 2px solid #cbd5e1;
+  margin-top: 2em;
+}
+.formulario-dinamico > header {
+  background-color: white;
+  position: absolute;
+  top: -12px;
+  padding: 0 10px;
+  left: 4px;
+}

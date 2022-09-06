@@ -69,7 +69,7 @@ export class EditarRolComponent implements OnInit, OnDestroy {
   setForm(evento: IRol) {
     // Open the confirmation and save the reference
     const dialogRef = this._synveltConfirmationService.open({
-      title: 'Confirmar Operación',
+      title: 'Confirmar operación',
       message: 'Está por editar un rol, desea continuar?',
       icon: {
         name: 'heroicons_solid:question-mark-circle',

@@ -51,7 +51,7 @@ export class ListarModelosComponent implements OnInit {
   }
   setEliminar(evento: string) {
     const confirmation = this._synveltConfirmationService.open({
-      title: 'Confirmar Operación',
+      title: 'Confirmar operación',
       message: '¿Está seguro de continuar con la eliminación del modelo?',
       icon: {
         show: true,
@@ -80,22 +80,25 @@ export class ListarModelosComponent implements OnInit {
   }
   confirmarEliminar(id: string) {
     this.cargando = true;
-    alert('pendiente');
-    // this._modeloService
-    //   .eliminar(id)
-    //   .pipe(untilDestroyed(this))
-    //   .subscribe(
-    //     () => {
-    //       this.cargando = false;
-    //       this._synveltConfirmationService.success();
-    //       this.obtenerTodos();
-    //     },
-    //     error => {
-    //       this._synveltConfirmationService.error();
+    this._modeloService
+      .eliminar(id)
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        datos => {
+          this.cargando = false;
+          if (datos) {
+            this._synveltConfirmationService.success();
+            this.obtenerTodos();
+          } else {
+            this._synveltConfirmationService.error();
+          }
+        },
+        error => {
+          this._synveltConfirmationService.error();
 
-    //       console.log('[ERROR]', error);
-    //     }
-    //   );
+          console.log('[ERROR]', error);
+        }
+      );
   }
   setFiltros(parametros) {
     this.parametros = parametros;

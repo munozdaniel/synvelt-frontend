@@ -45,10 +45,13 @@ export class AgregarModeloComponent implements OnInit, OnDestroy {
       );
   }
 
-  setForm(evento: IModeloItemListaControl) {
+  setForm(evento: {
+    modeloLista: IModeloListaControl;
+    modeloItemLista: IModeloItemListaControl[];
+  }) {
     // Open the confirmation and save the reference
     const dialogRef = this._synveltConfirmationService.open({
-      title: 'Confirmar Operación',
+      title: 'Confirmar operación',
       message: 'Está por guardar una nueva área interna, desea continuar?',
       icon: {
         name: 'heroicons_solid:question-mark-circle',
@@ -69,14 +72,17 @@ export class AgregarModeloComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       if (result === 'confirmed') {
-        this.guardar(evento);
+        this.guardar(evento.modeloLista, evento.modeloItemLista);
       }
     });
   }
-  guardar(modelo: IModeloListaControl) {
+  guardar(
+    modeloLista: IModeloListaControl,
+    modeloItemLista: IModeloItemListaControl[]
+  ) {
     this.cargando = true;
     this._modeloService
-      .actualizacionModeloListaControl(modelo)
+      .actualizacionModeloListaControl(modeloLista, modeloItemLista)
       .pipe(untilDestroyed(this))
       .subscribe(
         () => {

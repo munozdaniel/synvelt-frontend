@@ -21,6 +21,7 @@ import { Observable, startWith, map } from 'rxjs';
 import { IModeloTipoDato } from 'app/models/iModeloTipoDato';
 import { Location } from '@angular/common';
 import { ValidationService } from 'app/shared/controlmessage/validation.services';
+import { IModeloListaControl } from 'app/models/iModeloListaControl';
 
 @Component({
   selector: 'app-form-modelo',
@@ -32,7 +33,7 @@ export class FormModeloComponent implements OnInit, OnChanges {
   @Input() cargando: boolean;
   @Input() modelosTipoDato: IModeloTipoDato[];
   // @Input() areaInterna?: IAreaInterna;
-  @Output() retForm = new EventEmitter<IModeloItemListaControl>();
+  @Output() retForm = new EventEmitter<any>();
   //
   formModeloLista: FormGroup;
   formModeloItemLista: FormGroup;
@@ -128,10 +129,11 @@ export class FormModeloComponent implements OnInit, OnChanges {
   newModeloItemLista(): FormGroup {
     this.ordenDefault += 10;
     const formularioDinamico = this._fb.group({
+      id: [null],
       //   idBody: [null, []], Lo maneja el backend
       //   modeloListaControl: [null, []],
-      modeloTipoDato: [null, [ValidationService.esObjeto]], // Autocomplete
-      orden: [this.ordenDefault, [Validators.min(0)]],
+      modeloTipoDato: [null, [ValidationService.esObjeto, Validators.required]], // Autocomplete
+      orden: [this.ordenDefault, [Validators.min(0), Validators.required]],
       nombre: [null, [Validators.required]],
       multipleSeleccion: [false, []],
       multiplesValores: [false, []],
@@ -144,6 +146,8 @@ export class FormModeloComponent implements OnInit, OnChanges {
       opcional: [true, []],
       vigenteBody: [true, []],
       visibleUsuarioGeneral: [true, []],
+      editable: [true, []],
+      agrupacion: [null, []],
     });
     this.setAutocompleteModeloTipoDato(formularioDinamico);
 
@@ -216,8 +220,41 @@ export class FormModeloComponent implements OnInit, OnChanges {
         },
       });
     } else {
-      const areaInterna = this.formModeloLista.value;
-      this.retForm.emit(this.formModeloLista.value);
+      const { id, nombre, comentario, vigente, modeloItemLista } =
+        this.formModeloLista.value;
+      const modeloLista: IModeloListaControl = {
+        id,
+        nombre,
+        comentario,
+        vigente,
+      };
+      const modelosItemListaFormat: IModeloItemListaControl[] =
+        modeloItemLista.map((x: any) => {
+          const retorno: IModeloItemListaControl = {
+            id: x.id,
+            idModeloTipoDato: x.modeloTipoDato.id,
+            orden: x.orden,
+            nombre: x.nombre,
+            multipleSeleccion: x.multipleSeleccion,
+            multiplesValores: x.multiplesValores,
+            formato: x.formato,
+            longitudMaxima: x.longitudMaxima,
+            metodoSeleccion: x.metodoSeleccion,
+            columnaDescripcion: x.columnaDescripcion,
+            columnaSeleccion: x.columnaSeleccion,
+            columnaValor: x.columnaValor,
+            opcional: x.opcional,
+            vigente: x.vigenteBody,
+            visibleUsuarioGeneral: x.visibleUsuarioGeneral,
+            editable: x.editable,
+            agrupacion: x.agrupacion,
+          };
+          return retorno;
+        });
+      this.retForm.emit({
+        modeloLista,
+        modeloItemLista: modelosItemListaFormat,
+      });
     }
   }
 }

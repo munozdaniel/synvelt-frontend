@@ -51,7 +51,7 @@ export class ListarAreasInternasComponent implements OnInit {
   }
   setEliminar(evento: string) {
     const confirmation = this._synveltConfirmationService.open({
-      title: 'Confirmar Operación',
+      title: 'Confirmar operación',
       message: '¿Está seguro de continuar con la eliminación del área interna?',
       icon: {
         show: true,

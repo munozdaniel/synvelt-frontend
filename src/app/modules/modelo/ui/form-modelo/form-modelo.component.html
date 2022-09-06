@@ -4,185 +4,289 @@
     class="flex flex-col"
     (ngSubmit)="guardar()"
   >
-    <div class="p-8 pb-4 grid grid-cols-1 gap-2">
-      <!--  field -->
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Nombre</mat-label>
-        <input id="nombre" matInput formControlName="nombre" required />
-        <mat-error *ngIf="formModeloLista.controls.nombre.hasError('required')">
-          Este campo es requerido.
-        </mat-error>
-      </mat-form-field>
-      <!--  field -->
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Comentario</mat-label>
-        <input id="comentario" matInput formControlName="comentario" />
-      </mat-form-field>
-    </div>
-    <!-- Modelo Item Lista Control -->
-    <div formArrayName="modeloItemLista">
-      <div
-        *ngFor="
-          let modeloItemControl of getModeloItemLista().controls;
-          let modeloItemIndex = index
-        "
-      >
-        <div
-          [formGroupName]="modeloItemIndex"
-          style="border: 1px solid gray; padding: 10px"
-        >
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label class="lbl">Tipo de dato</mat-label>
-            <input
-              type="text"
-              matInput
-              class="input is-medium"
-              autocomplete="off"
-              formControlName="modeloTipoDato"
-              [matAutocomplete]="autoTipoDato"
-            />
-            <mat-icon
-              *ngIf="!getModeloItemLista().controls.modeloTipoDato?.value"
-              matSuffix
-              >search</mat-icon
-            >
-            <mat-icon
-              class="cursor-pointer hover:font-bold"
-              matTooltip="Limpiar selección"
-              *ngIf="getModeloItemLista().controls.modeloTipoDato?.value"
-              matSuffix
-              (click)="
-                getModeloItemLista().controls.modeloTipoDato.setValue('')
-              "
-              >close</mat-icon
-            >
-            <mat-autocomplete
-              #autoTipoDato="matAutocomplete"
-              [displayWith]="displayFnTipoDato"
-            >
-              <mat-option
-                *ngFor="let option of filteredTipoDato | async"
-                [value]="option"
+    <div class="grid grid-cols-1 md:grid-cols-2 items-start p-2">
+      <div class="p-8 pb-4 grid grid-cols-1 gap-2">
+        <!--  field -->
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Nombre</mat-label>
+          <input id="nombre" matInput formControlName="nombre" required />
+          <mat-error
+            *ngIf="formModeloLista.controls.nombre.hasError('required')"
+          >
+            Este campo es requerido.
+          </mat-error>
+        </mat-form-field>
+        <!--  field -->
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Comentario</mat-label>
+          <input id="comentario" matInput formControlName="comentario" />
+        </mat-form-field>
+
+        <div class="flex flex-col">
+          <h4 *ngIf="getModeloItemLista().controls?.length < 1">
+            No hay items agregados
+          </h4>
+          <div *ngIf="getModeloItemLista().controls?.length > 0">
+            <mat-list>
+              <mat-list-item
+                *ngFor="
+                  let modeloItemControl of getModeloItemLista().controls;
+                  let modeloItemIndex = index
+                "
               >
-                {{ option.nombre }}
-              </mat-option>
-            </mat-autocomplete>
-            <!-- <app-control-messages
-              [control]="getModeloItemLista().controls?.modeloTipoDato"
-            ></app-control-messages> -->
-          </mat-form-field>
-          <!--  -->
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Orden</mat-label>
-            <input id="orden" matInput formControlName="orden" type="number" />
-            <!-- <mat-error
+                <div
+                  class="flex flex-col gap-2 mat-elevation-z0 p-2 card-white-2 mb-2"
+                >
+                  <strong class="text-primary-700">
+                    Item N° {{ modeloItemIndex }}
+                  </strong>
+                  <div class="flex flex-row justify-start gap-2">
+                    <strong>Nombre: </strong>
+                    <span
+                      *ngIf="!modeloItemControl.controls.nombre.value"
+                      class="px-2 bg-yellow-300 text-black rounded-full cursor-pointer"
+                      matTooltip="Complete el formulario del item con el nombre"
+                      >Incompleto</span
+                    >
+                    <span *ngIf="modeloItemControl.controls.nombre.value">{{
+                      modeloItemControl.controls.nombre.value
+                    }}</span>
+                  </div>
+                  <div class="flex flex-row justify-start gap-2">
+                    <strong>Tipo de dato: </strong>
+                    <span
+                      *ngIf="
+                        !modeloItemControl.controls.modeloTipoDato.value?.nombre
+                      "
+                      class="px-2 bg-yellow-300 text-black rounded-full cursor-pointer"
+                      matTooltip="Complete el formulario del item con el tipo de dato"
+                      >Incompleto</span
+                    >
+                    <span
+                      *ngIf="
+                        modeloItemControl.controls.modeloTipoDato.value?.nombre
+                      "
+                      >{{
+                        modeloItemControl.controls.modeloTipoDato.value?.nombre
+                      }}</span
+                    >
+                  </div>
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </div>
+          <div class="flex flex-row justify-center items-center mt-2 mb-4">
+            <button
+              mat-raised-button
+              (click)="addModeloItemLista()"
+              color="primary"
+              type="button"
+            >
+              <mat-icon svgIcon="heroicons_outline:plus"></mat-icon>
+              <span> Agregar item</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Modelo Item Lista Control -->
+      <section formArrayName="modeloItemLista">
+        <div
+          *ngFor="
+            let modeloItemControl of getModeloItemLista().controls;
+            let modeloItemIndex = index
+          "
+          class="formulario-dinamico"
+        >
+          <header class="text-primary-700">
+            Item N° {{ modeloItemIndex }}
+          </header>
+          <div
+            [formGroupName]="modeloItemIndex"
+            class="grid grid-cols-1 md:grid-cols-2 gap-2 p-2"
+          >
+            <!--  -->
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Nombre</mat-label>
+              <input
+                id="nombre"
+                matInput
+                formControlName="nombre"
+                type="text"
+              />
+              <app-control-messages
+                [control]="modeloItemControl.controls.nombre"
+              ></app-control-messages>
+            </mat-form-field>
+            <!--  -->
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label class="lbl">Tipo de dato</mat-label>
+              <input
+                type="text"
+                matInput
+                class="input is-medium"
+                autocomplete="off"
+                formControlName="modeloTipoDato"
+                [matAutocomplete]="autoTipoDato"
+              />
+              <mat-icon
+                *ngIf="!getModeloItemLista().controls.modeloTipoDato?.value"
+                matSuffix
+                >search</mat-icon
+              >
+              <mat-icon
+                class="cursor-pointer hover:font-bold"
+                matTooltip="Limpiar selección"
+                *ngIf="getModeloItemLista().controls.modeloTipoDato?.value"
+                matSuffix
+                (click)="
+                  getModeloItemLista().controls.modeloTipoDato.setValue('')
+                "
+                >close</mat-icon
+              >
+              <mat-autocomplete
+                #autoTipoDato="matAutocomplete"
+                [displayWith]="displayFnTipoDato"
+              >
+                <mat-option
+                  *ngFor="let option of filteredTipoDato | async"
+                  [value]="option"
+                >
+                  {{ option.nombre }}
+                </mat-option>
+              </mat-autocomplete>
+              <app-control-messages
+                [control]="modeloItemControl.controls.modeloTipoDato"
+              ></app-control-messages>
+            </mat-form-field>
+            <!--  -->
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Orden</mat-label>
+              <input
+                id="orden"
+                matInput
+                formControlName="orden"
+                type="number"
+              />
+              <!-- <mat-error
               *ngIf="getModeloItemLista().controls.orden.hasError('min')"
             >
               El valor tiene que ser mayor a 0.
             </mat-error> -->
-          </mat-form-field>
-          <!--  -->
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Nombre</mat-label>
-            <input id="nombre" matInput formControlName="nombre" type="text" />
-            <!-- <mat-error
-              *ngIf="getModeloItemLista().controls.nombre.hasError('required')"
-            >
-              El campo es requerido
-            </mat-error> -->
-          </mat-form-field>
-          <!--  -->
-          <div>
-            <mat-slide-toggle formControlName="multipleSeleccion">
-              Multiple selección</mat-slide-toggle
-            >
-          </div>
-          <!--  -->
-          <div>
-            <mat-slide-toggle formControlName="multiplesValores">
-              Multiple valores</mat-slide-toggle
-            >
-          </div>
-          <!--  -->
-          <div>
-            <mat-slide-toggle formControlName="opcional">
-              Opcional</mat-slide-toggle
-            >
-          </div>
-          <!--  -->
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Formato</mat-label>
-            <input
-              id="formato"
-              matInput
-              formControlName="formato"
-              type="text"
-            />
-          </mat-form-field>
-          <!--  -->
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Orden</mat-label>
-            <input
-              id="longitudMaxima"
-              matInput
-              formControlName="longitudMaxima"
-              type="number"
-            />
-            <!-- <mat-error
+            </mat-form-field>
+
+            <!--  -->
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Formato</mat-label>
+              <input
+                id="formato"
+                matInput
+                formControlName="formato"
+                type="text"
+              />
+            </mat-form-field>
+            <!--  -->
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Longitud máxima</mat-label>
+              <input
+                id="longitudMaxima"
+                matInput
+                formControlName="longitudMaxima"
+                type="number"
+              />
+              <!-- <mat-error
               *ngIf="
                 getModeloItemLista().controls.longitudMaxima.hasError('min')
               "
             >
               El valor tiene que ser mayor a 0.
             </mat-error> -->
-          </mat-form-field>
-          <!--  -->
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Método de selección</mat-label>
-            <input
-              id="metodoSeleccion"
-              matInput
-              formControlName="metodoSeleccion"
-              type="text"
-            />
-          </mat-form-field>
-          <!--  -->
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Columna de descripción</mat-label>
-            <input
-              id="columnaDescripcion"
-              matInput
-              formControlName="columnaDescripcion"
-              type="text"
-            />
-          </mat-form-field>
-          <!--  -->
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Columna de selección</mat-label>
-            <input
-              id="columnaSeleccion"
-              matInput
-              formControlName="columnaSeleccion"
-              type="text"
-            />
-          </mat-form-field>
-          <!--  -->
-          <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Columna valor</mat-label>
-            <input
-              id="columnaValor"
-              matInput
-              formControlName="columnaValor"
-              type="text"
-            />
-          </mat-form-field>
+            </mat-form-field>
+            <!--  -->
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Método de selección</mat-label>
+              <input
+                id="metodoSeleccion"
+                matInput
+                formControlName="metodoSeleccion"
+                type="text"
+              />
+            </mat-form-field>
+            <!--  -->
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Columna de descripción</mat-label>
+              <input
+                id="columnaDescripcion"
+                matInput
+                formControlName="columnaDescripcion"
+                type="text"
+              />
+            </mat-form-field>
+            <!--  -->
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Columna de selección</mat-label>
+              <input
+                id="columnaSeleccion"
+                matInput
+                formControlName="columnaSeleccion"
+                type="text"
+              />
+            </mat-form-field>
+            <!--  -->
+            <!--  field -->
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Agrupación</mat-label>
+              <input id="agrupacion" matInput formControlName="agrupacion" />
+            </mat-form-field>
+            <!--  -->
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Columna valor</mat-label>
+              <input
+                id="columnaValor"
+                matInput
+                formControlName="columnaValor"
+                type="text"
+              />
+            </mat-form-field>
+            <!--  -->
+            <div class="contenedor-slide-toggle">
+              <mat-slide-toggle
+                color="primary"
+                formControlName="multipleSeleccion"
+              >
+                Multiple selección</mat-slide-toggle
+              >
+            </div>
+            <!--  -->
+            <div class="contenedor-slide-toggle">
+              <mat-slide-toggle
+                color="primary"
+                formControlName="multiplesValores"
+              >
+                Multiple valores</mat-slide-toggle
+              >
+            </div>
+            <!--  -->
+            <div class="contenedor-slide-toggle">
+              <mat-slide-toggle color="primary" formControlName="opcional">
+                Opcional</mat-slide-toggle
+              >
+            </div>
+            <div
+              class="flex flex-row justify-center items-start w-full"
+              style="grid-column: 1 / -1"
+            >
+              <button
+                color="warn"
+                (click)="removeModeloItemLista(modeloItemIndex)"
+                mat-raised-button
+                class="text-white bg-red-700"
+              >
+                Quitar item
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="flex flex-row justify-center items-center">
-        <button mat-raised-button (click)="addModeloItemLista()">
-          Agregar
-        </button>
-      </div>
+      </section>
     </div>
     <!-- /Modelo Item Lista Control -->
     <div class="flex flex-row justify-center items-center min-w-full mt-4 mb-6">
@@ -210,3 +314,4 @@
     </div>
   </form>
 </div>
+{{ formModeloLista?.value | json }}

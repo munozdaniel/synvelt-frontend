@@ -1,6 +1,6 @@
 export interface IModeloItemListaControl {
   id: number;
-  idModeloListaControl: number;
+  idModeloListaControl?: number;
   idModeloTipoDato: number;
   orden: number;
   nombre: string;
@@ -16,7 +16,7 @@ export interface IModeloItemListaControl {
   vigente: boolean;
   visibleUsuarioGeneral: boolean;
   editable: boolean;
-  agrupacion: string;
+  agrupacion?: string; //
 }
 export interface IModeloItemListaControlParam {
   idModeloListaControl: number;
