@@ -27,7 +27,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { synveltAnimations } from '@synvelt/animations';
 import { IModeloItemListaControl } from 'app/models/iModeloItemListaControl';
-const columnasMD = ['nombre', 'codigo', 'opciones'];
+const columnasMD = ['nombre', 'comentario', 'opciones'];
 const columnasXS = ['nombre', 'opciones'];
 @Component({
   selector: 'app-tabla-modelo',
@@ -86,7 +86,7 @@ export class TablaModeloComponent implements OnInit, OnChanges {
       });
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.odeloItem && changes.odeloItem.currentValue) {
+    if (changes.modelosItem && changes.modelosItem.currentValue) {
       this.dataSource.data = this.modelosItem;
     }
   }

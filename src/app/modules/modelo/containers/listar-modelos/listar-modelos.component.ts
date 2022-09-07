@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { ModeloService } from 'app/core/services/modelo.service';
 import { IModeloItemListaControl } from 'app/models/iModeloItemListaControl';
+import { IModeloListaControl } from 'app/models/iModeloListaControl';
 @UntilDestroy()
 @Component({
   selector: 'app-listar-modelos',
   templateUrl: './listar-modelos.component.html',
 })
 export class ListarModelosComponent implements OnInit {
-  modelosItem: IModeloItemListaControl[];
+  modelosItem: IModeloListaControl[];
   cargando = false;
   parametros: any;
   constructor(
@@ -26,11 +27,10 @@ export class ListarModelosComponent implements OnInit {
   obtenerTodos() {
     this.cargando = true;
     this._modeloService
-      .obtenerModelosItemListaControl(this.parametros)
+      .obtenerModelosListaControl(this.parametros)
       .pipe(untilDestroyed(this))
       .subscribe(
         datos => {
-          console.log('datos', datos);
           this.cargando = false;
           this.modelosItem = datos;
         },
@@ -101,6 +101,7 @@ export class ListarModelosComponent implements OnInit {
       );
   }
   setFiltros(parametros) {
+    console.log('parametros', parametros);
     this.parametros = parametros;
     this.obtenerTodos();
   }

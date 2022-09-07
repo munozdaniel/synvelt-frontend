@@ -205,7 +205,7 @@ export class FormModeloComponent implements OnInit, OnChanges {
   guardar(): void {
     if (this.formModeloLista.invalid) {
       this._synveltConfirmationService.open({
-        title: 'Formulario Incompleto',
+        title: 'Formulario incompleto',
         message: 'Verifique que se hayan ingresado todos los datos requeridos.',
 
         actions: {

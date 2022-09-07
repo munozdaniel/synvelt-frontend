@@ -99,7 +99,7 @@ export class FormRolComponent implements OnInit, OnChanges {
   guardar(): void {
     if (this.form.invalid) {
       this._synveltConfirmationService.open({
-        title: 'Formulario Incompleto',
+        title: 'Formulario incompleto',
         message: 'Verifique que se hayan ingresado todos los datos requeridos.',
 
         actions: {

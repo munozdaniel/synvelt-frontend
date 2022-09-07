@@ -86,6 +86,7 @@ export class ModeloService {
     );
   }
   /**
+   * (Items)
    * GET modelos/SeleccionModeloItemListaControl?idModeloListaControl={idModeloListaControl}
    * Selección de modelos de ítems de un modelo de lista de control
    *
@@ -99,11 +100,13 @@ export class ModeloService {
     return this._http.get<any>(
       this.url + 'modelos/SeleccionModeloItemListaControl',
       {
+        headers: this.headers,
         params: queryParams,
       }
     );
   }
   /**
+   * (Padre)
    * GET modelos/SeleccionModeloListaControl?id={id}&vigente={vigente}
    * Selección de modelos de lista de control
    *
@@ -114,6 +117,7 @@ export class ModeloService {
     parametros?: IModeloListaControlParam
   ): Observable<IModeloListaControl[]> {
     const queryParams = this.setQueryParams(parametros);
+    console.log('queryParams', queryParams);
     return this._http.get<any>(
       this.url + 'modelos/SeleccionModeloListaControl',
       {
@@ -133,6 +137,7 @@ export class ModeloService {
   ): Observable<IModeloTipoDato[]> {
     const queryParams = this.setQueryParams(parametros);
     return this._http.get<any>(this.url + 'modelos/SeleccionModeloTipoDato', {
+      headers: this.headers,
       params: queryParams,
     });
   }

@@ -43,7 +43,7 @@ export class FiltroAreasInternasComponent implements OnInit, OnChanges {
   filtrar() {
     if (this.form.invalid) {
       this._synveltConfirmationService.open({
-        title: 'Formulario Incompleto',
+        title: 'Formulario incompleto',
         message: 'Verifique que se hayan ingresado todos los datos requeridos.',
 
         actions: {

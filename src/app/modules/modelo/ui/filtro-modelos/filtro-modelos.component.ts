@@ -33,7 +33,7 @@ export class FiltroModeloComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.form = this._fb.group({
       nombre: [null],
-      codigo: [null],
+      comentario: [null],
     });
   }
   limpiar() {
@@ -43,7 +43,7 @@ export class FiltroModeloComponent implements OnInit, OnChanges {
   filtrar() {
     if (this.form.invalid) {
       this._synveltConfirmationService.open({
-        title: 'Formulario Incompleto',
+        title: 'Formulario incompleto',
         message: 'Verifique que se hayan ingresado todos los datos requeridos.',
 
         actions: {
