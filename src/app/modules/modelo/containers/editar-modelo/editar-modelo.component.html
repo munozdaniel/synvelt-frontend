@@ -15,7 +15,9 @@
   <div class="flex flex-row justify-center items-start mt-4 gap-2">
     <app-form-modelo
       class="w-full"
+      [esEditar]="true"
       [modelo]="modelo"
+      [modeloItems]="modeloItems"
       [cargando]="cargando"
       [modelosTipoDato]="modelosTipoDato"
       (retForm)="setForm($event)"

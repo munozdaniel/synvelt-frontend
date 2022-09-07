@@ -17,6 +17,7 @@ export class EditarModeloComponent implements OnInit {
   modelo: IModeloListaControl;
   cargando = false;
   modeloId: number;
+  modeloItems: IModeloItemListaControl[];
   constructor(
     private _activeRoute: ActivatedRoute,
     private _modeloService: ModeloService,
@@ -55,16 +56,32 @@ export class EditarModeloComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe(
         datos => {
-          this.cargando = false;
           if (datos && datos.length > 0) {
             this.modelo = datos[0];
+            this.obtenerModelosItemListaControl();
           } else {
+            this.cargando = false;
             this.redireccionar();
           }
         },
         error => {
           console.log('[ERROR]', error);
           this.cargando = false;
+        }
+      );
+  }
+  obtenerModelosItemListaControl() {
+    this._modeloService
+      .obtenerModelosItemListaControl({ idModeloListaControl: this.modelo.id })
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        datos => {
+          this.cargando = false;
+          this.modeloItems = datos;
+        },
+        error => {
+          this.cargando = false;
+          console.log('[ERROR]', error);
         }
       );
   }

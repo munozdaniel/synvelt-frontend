@@ -33,6 +33,7 @@ export class FormModeloComponent implements OnInit, OnChanges {
   @Input() cargando: boolean;
   @Input() modelosTipoDato: IModeloTipoDato[];
   @Input() modelo?: IModeloListaControl;
+  @Input() modeloItems?: IModeloItemListaControl[];
   @Output() retForm = new EventEmitter<any>();
   //
   formModeloLista: FormGroup;
@@ -67,6 +68,9 @@ export class FormModeloComponent implements OnInit, OnChanges {
       });
   }
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes.modeloItems && changes.modeloItems.currentValue) {
+      this.setFormItems();
+    }
     if (changes.modelo && changes.modelo.currentValue) {
       console.log('modelo', this.modelo);
       this.setForm();
@@ -167,7 +171,9 @@ export class FormModeloComponent implements OnInit, OnChanges {
       vigente: [true, []],
       modeloItemLista: this._fb.array([]),
     });
-    this.addModeloItemLista();
+    if (!this.esEditar) {
+      this.addModeloItemLista();
+    }
   }
 
   setForm() {
@@ -177,6 +183,25 @@ export class FormModeloComponent implements OnInit, OnChanges {
       }, 1000);
     } else {
       this.formModeloLista.patchValue(this.modelo);
+    }
+  }
+  setFormItems() {
+    if (!this.formModeloLista) {
+      setTimeout(() => {
+        this.setForm();
+      }, 1000);
+    } else {
+      console.log('setFormItems', this.modeloItems);
+      const datos = this.modeloItems.map(x => {
+        const modeloItem: FormGroup = this.newModeloItemLista();
+        this.getModeloItemLista().push(modeloItem);
+        const modeloTipoDato = this.modelosTipoDato.find(
+          m => m.id === x.idModeloTipoDato
+        );
+        return { ...x, modeloTipoDato };
+      });
+      console.log('¿modeloTipoDato', datos);
+      this.formModeloLista.controls.modeloItemLista.patchValue(datos);
     }
   }
 
