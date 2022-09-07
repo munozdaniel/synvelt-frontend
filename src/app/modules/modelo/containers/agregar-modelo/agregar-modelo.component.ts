@@ -52,7 +52,7 @@ export class AgregarModeloComponent implements OnInit, OnDestroy {
     // Open the confirmation and save the reference
     const dialogRef = this._synveltConfirmationService.open({
       title: 'Confirmar operación',
-      message: 'Está por guardar una nueva área interna, desea continuar?',
+      message: 'Está por guardar un nuevo modelo, desea continuar?',
       icon: {
         name: 'heroicons_solid:question-mark-circle',
         color: 'info',

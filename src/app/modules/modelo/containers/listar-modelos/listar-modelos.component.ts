@@ -3,7 +3,6 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Router } from '@angular/router';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { ModeloService } from 'app/core/services/modelo.service';
-import { IModeloItemListaControl } from 'app/models/iModeloItemListaControl';
 import { IModeloListaControl } from 'app/models/iModeloListaControl';
 @UntilDestroy()
 @Component({
