@@ -32,7 +32,7 @@ export class FormModeloComponent implements OnInit, OnChanges {
   @Input() esEditar = false;
   @Input() cargando: boolean;
   @Input() modelosTipoDato: IModeloTipoDato[];
-  // @Input() areaInterna?: IAreaInterna;
+  @Input() modelo?: IModeloListaControl;
   @Output() retForm = new EventEmitter<any>();
   //
   formModeloLista: FormGroup;
@@ -67,12 +67,11 @@ export class FormModeloComponent implements OnInit, OnChanges {
       });
   }
   ngOnChanges(changes: SimpleChanges): void {
-    // if (
-    //   changes.modelosItemListaControl &&
-    //   changes.modelosItemListaControl.currentValue
-    // ) {
-    //   this.setForm();
-    // }
+    if (changes.modelo && changes.modelo.currentValue) {
+      console.log('modelo', this.modelo);
+      this.setForm();
+      // this.setForm();
+    }
     if (changes.modelosTipoDato && changes.modelosTipoDato.currentValue) {
     }
   }
@@ -169,25 +168,6 @@ export class FormModeloComponent implements OnInit, OnChanges {
       modeloItemLista: this._fb.array([]),
     });
     this.addModeloItemLista();
-    // Collection of ModeloItemListaControl
-    // this.formModeloItemLista = this._fb.group({
-    //   //   idBody: [null, []], Lo maneja el backend
-    //   //   modeloListaControl: [null, []],
-    //   modeloTipoDato: [null, []],
-    //   orden: [null, [Validators.min(0)]],
-    //   nombreBody: [null, []],
-    //   multipleSeleccion: [false, []],
-    //   multiplesValores: [false, []],
-    //   formato: [null, []],
-    //   longitudMaxima: [null, [Validators.min(0)]],
-    //   metodoSeleccion: [null, []],
-    //   columnaDescripcion: [null, []],
-    //   columnaSeleccion: [null, []],
-    //   columnaValor: [null, []],
-    //   opcional: [false, []],
-    //   vigenteBody: [true, []],
-    //   visibleUsuarioGeneral: [false, []],
-    // });
   }
 
   setForm() {
@@ -196,7 +176,7 @@ export class FormModeloComponent implements OnInit, OnChanges {
         this.setForm();
       }, 1000);
     } else {
-      //   this.formModeloLista.patchValue(this.modelosItemListaControl);
+      this.formModeloLista.patchValue(this.modelo);
     }
   }
 
