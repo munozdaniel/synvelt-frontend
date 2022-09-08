@@ -27,6 +27,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { synveltAnimations } from '@synvelt/animations';
 import { IModeloItemListaControl } from 'app/models/iModeloItemListaControl';
+import { IModeloListaControl } from 'app/models/iModeloListaControl';
 const columnasMD = ['nombre', 'comentario', 'opciones'];
 const columnasXS = ['nombre', 'opciones'];
 @Component({
@@ -50,6 +51,7 @@ export class TablaModeloComponent implements OnInit, OnChanges {
   @Input() cargando: boolean;
   @Output() retEliminar = new EventEmitter<number>();
   @Output() retEditar = new EventEmitter<number>();
+  @Output() retObtenerModeloItem = new EventEmitter<IModeloListaControl>();
   columnas = columnasMD;
   dataSource: MatTableDataSource<any> = new MatTableDataSource([]);
   @ViewChild('sort') set setSort(sort: MatSort) {
@@ -58,7 +60,7 @@ export class TablaModeloComponent implements OnInit, OnChanges {
   @ViewChild('paginator') set setPaginator(paginator: MatPaginator) {
     this.dataSource.paginator = paginator;
   }
-  expandedElement: IModeloItemListaControl | null;
+  expandedElement: IModeloListaControl | null;
   // Mobile
   isMobile: boolean;
   private _mobileQueryListener: () => void;
@@ -141,5 +143,20 @@ export class TablaModeloComponent implements OnInit, OnChanges {
   }
   eliminar(row: IModeloItemListaControl) {
     this.retEliminar.emit(row.id);
+  }
+  getModeloItem(row: IModeloListaControl) {
+    const index = this.modelosItem.findIndex(
+      x => x.idModeloListaControl === row.id
+    );
+    console.log('index', index);
+    if (index !== -1) {
+      return this.modelosItem[index];
+    }
+  }
+  obtenerModeloItem(row: IModeloListaControl) {
+    this.expandedElement = this.expandedElement !== row ? row : null;
+    if (!row.items) {
+      this.retObtenerModeloItem.emit(row);
+    }
   }
 }

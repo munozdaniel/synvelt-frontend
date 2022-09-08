@@ -58,7 +58,7 @@ export class ModeloService {
     const queryParams = this.setQueryParams(parametros);
     return this._http.post<any>(
       this.url + 'modelos/ActualizacionModeloListaControl',
-      [...body],
+      body,
       {
         headers: this.headers,
         params: queryParams,

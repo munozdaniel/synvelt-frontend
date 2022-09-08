@@ -1,3 +1,5 @@
+import { IModeloTipoDato } from './iModeloTipoDato';
+
 export interface IModeloItemListaControl {
   id: number;
   idModeloListaControl?: number;
@@ -17,6 +19,8 @@ export interface IModeloItemListaControl {
   visibleUsuarioGeneral: boolean;
   editable: boolean;
   agrupacion?: string; //
+
+  modeloTipoDato?: IModeloTipoDato;
 }
 export interface IModeloItemListaControlParam {
   idModeloListaControl: number;

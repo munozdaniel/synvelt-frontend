@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { ModeloService } from 'app/core/services/modelo.service';
 import { IModeloListaControl } from 'app/models/iModeloListaControl';
+import { IModeloTipoDato } from 'app/models/iModeloTipoDato';
 @UntilDestroy()
 @Component({
   selector: 'app-listar-modelos',
@@ -13,6 +14,7 @@ export class ListarModelosComponent implements OnInit {
   modelosItem: IModeloListaControl[];
   cargando = false;
   parametros: any;
+  modelosTipoDato: IModeloTipoDato[];
   constructor(
     private _modeloService: ModeloService,
     private _router: Router,
@@ -21,8 +23,21 @@ export class ListarModelosComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerTodos();
+    this.obtenerModeloTipoDato();
   }
-
+  obtenerModeloTipoDato() {
+    this._modeloService
+      .obtenerModeloTipoDato()
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        datos => {
+          this.modelosTipoDato = datos;
+        },
+        error => {
+          console.log('[ERROR]', error);
+        }
+      );
+  }
   obtenerTodos() {
     this.cargando = true;
     this._modeloService
@@ -103,5 +118,30 @@ export class ListarModelosComponent implements OnInit {
     console.log('parametros', parametros);
     this.parametros = parametros;
     this.obtenerTodos();
+  }
+  setObtenerModeloItem(modelo: IModeloListaControl) {
+    modelo.cargando = true;
+    this.obtenerModeloItemsLista(modelo);
+  }
+  obtenerModeloItemsLista(modelo: IModeloListaControl) {
+    this._modeloService
+      .obtenerModelosItemListaControl({ idModeloListaControl: modelo.id })
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        datos => {
+          modelo.cargando = false;
+          console.log('datos', datos);
+          modelo.items = datos.map(x => ({
+            ...x,
+            modeloTipoDato: this.modelosTipoDato.find(
+              m => m.id === x.idModeloTipoDato
+            ),
+          }));
+        },
+        error => {
+          modelo.cargando = false;
+          console.log('[ERROR]', error);
+        }
+      );
   }
 }

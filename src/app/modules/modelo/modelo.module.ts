@@ -27,6 +27,7 @@ import { TablaUsuariosModule } from 'app/shared/tabla-usuarios/tabla-usuarios.mo
 import { NgxMaskModule } from 'ngx-mask';
 import { FiltroModeloComponent } from './ui/filtro-modelos/filtro-modelos.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     BuscarAreaInternaModule,
     SeleccionarUsuariosTablaModule,
     MatTooltipModule,
+    MatProgressSpinnerModule
   ],
 })
 export class ModeloModule {}
