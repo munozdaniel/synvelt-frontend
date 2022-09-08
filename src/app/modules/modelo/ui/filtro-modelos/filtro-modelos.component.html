@@ -10,11 +10,15 @@
       <input id="nombre" matInput formControlName="nombre" />
     </mat-form-field>
 
-    <!--  codigo field -->
-    <mat-form-field appearance="outline" class="w-full">
-      <mat-label>Comentario </mat-label>
-      <input id="comentario" matInput formControlName="comentario" />
-    </mat-form-field>
+    <!--   field -->
+    <mat-form-field appearance="outline" class="input-sm">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="vigente">
+          <mat-option [value]="true">ACTIVO</mat-option>
+          <mat-option [value]="false">SUSPENDIDO</mat-option>
+          <mat-option [value]="null">TODOS</mat-option>
+        </mat-select>
+      </mat-form-field>
 
     <!-- Estado -->
     <!-- <mat-form-field appearance="outline" class="input-sm">

@@ -33,7 +33,7 @@ export class FiltroModeloComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.form = this._fb.group({
       nombre: [null],
-      comentario: [null],
+      vigente: [null],
     });
   }
   limpiar() {
@@ -70,9 +70,7 @@ export class FiltroModeloComponent implements OnInit, OnChanges {
       if (parametros.nombre) {
         filtros.nombre = parametros.nombre;
       }
-      if (parametros.codigo) {
-        filtros.codigo = parametros.codigo;
-      }
+      filtros.vigente = parametros.vigente;
 
       this.retFiltros.emit(filtros);
     }
