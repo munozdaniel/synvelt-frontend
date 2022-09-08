@@ -20,7 +20,19 @@ export class ListarModelosComponent implements OnInit {
     private _router: Router,
     private _synveltConfirmationService: SynveltConfirmationService
   ) {}
-
+  test() {
+    this._modeloService
+      .actualizacionModeloListaControl(null, null)
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        datos => {
+          this.obtenerTodos();
+        },
+        error => {
+          console.log('[ERROR]', error);
+        }
+      );
+  }
   ngOnInit(): void {
     this.obtenerTodos();
     this.obtenerModeloTipoDato();

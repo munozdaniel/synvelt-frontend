@@ -28,6 +28,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { FiltroModeloComponent } from './ui/filtro-modelos/filtro-modelos.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { DialogDetalleItemsComponent } from './ui/dialog-detalle-items/dialog-detalle-items.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     FormModeloComponent,
     TablaModeloComponent,
     FiltroModeloComponent,
+    DialogDetalleItemsComponent,
   ],
   imports: [
     CommonModule,

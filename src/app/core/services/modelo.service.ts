@@ -24,6 +24,46 @@ export class ModeloService {
     'application/x-www-form-urlencoded'
   );
   protected url = environment.url;
+  ejemplo = [
+    {
+      id: null,
+      idModeloTipoDato: 'f700a7f2-678f-43ba-820f-49ac99a212f5',
+      orden: 10,
+      nombre: 'nombre',
+      multipleSeleccion: false,
+      multiplesValores: false,
+      formato: null,
+      longitudMaxima: null,
+      metodoSeleccion: null,
+      columnaDescripcion: null,
+      columnaSeleccion: null,
+      columnaValor: null,
+      opcional: true,
+      vigente: true,
+      visibleUsuarioGeneral: true,
+      editable: true,
+      agrupacion: null,
+    },
+    {
+      id: null,
+      idModeloTipoDato: 'f700a7f2-678f-43ba-820f-49ac99a212f5',
+      orden: 10,
+      nombre: 'apellido',
+      multipleSeleccion: false,
+      multiplesValores: false,
+      formato: null,
+      longitudMaxima: null,
+      metodoSeleccion: null,
+      columnaDescripcion: null,
+      columnaSeleccion: null,
+      columnaValor: null,
+      opcional: true,
+      vigente: true,
+      visibleUsuarioGeneral: true,
+      editable: true,
+      agrupacion: null,
+    },
+  ];
   /**
    * Constructor
    */
@@ -55,13 +95,28 @@ export class ModeloService {
     parametros?: IModeloListaControl,
     body?: IModeloItemListaControl[]
   ): Observable<string> {
+    // const headers = {
+    //   'Content-Type': 'application/json',
+    //   'My-Custom-Header': 'foobar',
+    // };
+    const headers = new HttpHeaders().append(
+      'Content-Type',
+      'multipart/form-data'
+    );
     const queryParams = this.setQueryParams(parametros);
+    // const param = {
+    //   id: null,
+    //   nombre: 'random99',
+    //   comentario: 'uncomentario',
+    //   vigente: true,
+    // };
+    // const queryParams = this.setQueryParams(param);
     return this._http.post<any>(
       this.url + 'modelos/ActualizacionModeloListaControl',
       body,
       {
-        headers: this.headers,
         params: queryParams,
+        headers: headers,
       }
     );
   }

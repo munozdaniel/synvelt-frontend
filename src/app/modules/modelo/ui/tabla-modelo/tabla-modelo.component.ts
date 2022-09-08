@@ -22,12 +22,14 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { synveltAnimations } from '@synvelt/animations';
 import { IModeloItemListaControl } from 'app/models/iModeloItemListaControl';
 import { IModeloListaControl } from 'app/models/iModeloListaControl';
+import { DialogDetalleItemsComponent } from '../dialog-detalle-items/dialog-detalle-items.component';
 const columnasMD = ['nombre', 'comentario', 'opciones'];
 const columnasXS = ['nombre', 'opciones'];
 @Component({
@@ -68,7 +70,8 @@ export class TablaModeloComponent implements OnInit, OnChanges {
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
     private _media: MediaMatcher,
-    public breakpointObserver: BreakpointObserver
+    public breakpointObserver: BreakpointObserver,
+    private _dialog: MatDialog
   ) {
     // "Escuchador" del tamaño de pantalla
     this.mobileQuery = this._media.matchMedia('(max-width: 600px)');
@@ -158,5 +161,13 @@ export class TablaModeloComponent implements OnInit, OnChanges {
     if (!row.items) {
       this.retObtenerModeloItem.emit(row);
     }
+  }
+  mostrarDetalles(row: IModeloItemListaControl) {
+    const dialogRef = this._dialog.open(DialogDetalleItemsComponent, {
+      width: '55%',
+      data: { modelo: row },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {});
   }
 }

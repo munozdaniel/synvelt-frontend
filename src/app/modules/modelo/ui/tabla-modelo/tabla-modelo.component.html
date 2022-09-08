@@ -20,6 +20,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
         <td mat-cell *matCellDef="let row">
           <div class="flex flex-col">
+            <!-- <span class="text-primary-700">{{ row.id }}</span> -->
             <mostrar-valor [valor]="row.nombre"></mostrar-valor>
           </div>
         </td>
@@ -106,7 +107,11 @@
                 *ngIf="row.items?.length > 0"
                 class="w-full flex flex-row justify-center items-center mt-2"
               >
-                <button mat-raised-button class="bg-red-700 text-white">
+                <button
+                  mat-raised-button
+                  class="bg-red-700 text-white"
+                  (click)="mostrarDetalles(row)"
+                >
                   Ver detalle
                 </button>
               </div>

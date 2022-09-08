@@ -1,0 +1,123 @@
+<h1 mat-dialog-title class="text-lg font-bold">Detalles</h1>
+<div mat-dialog-content>
+  <div class="flex flex-col">
+    <section>
+      <header class="flex flex-col">
+        <div class="flex flex-row justify-start items-end gap-4">
+          <strong>Modelo de lista: </strong>
+          <mostrar-valor [valor]="modelo.nombre"></mostrar-valor>
+        </div>
+        <div class="flex flex-row justify-start items-end gap-4">
+          <strong>Comentario: </strong>
+          <mostrar-valor [valor]="modelo.comentario"></mostrar-valor>
+        </div>
+      </header>
+      <hr />
+      <article
+        *ngFor="let item of modelo.items"
+        class="grid grid-cols-1 md:grid-cols-2 gap-4 p-2 card-white mb-2"
+      >
+        <div class="flex flex-wrap justify-between items-start">
+          <strong>Item: </strong>
+          <!-- <span>{{ item.nombre }}</span> -->
+          <mostrar-valor [valor]="item.nombre"></mostrar-valor>
+        </div>
+        <div class="flex flex-wrap justify-between items-start">
+          <strong>Tipo de dato: </strong>
+          <!-- <span>{{ item.modeloTipoDato?.nombre }}</span> -->
+          <mostrar-valor [valor]="item.modeloTipoDato?.nombre"></mostrar-valor>
+        </div>
+        <div class="flex flex-wrap justify-between items-start">
+          <strong>Orden: </strong>
+          <!-- <span>{{ item.orden }}</span> -->
+          <mostrar-valor [valor]="item.orden"></mostrar-valor>
+        </div>
+        <div class="flex flex-wrap justify-between items-start">
+          <strong>Permite múltiple selección: </strong>
+          <!-- <span>{{ item.multipleSeleccion ? "SI" : "NO" }}</span> -->
+          <mostrar-valor
+            [valor]="item.multipleSeleccion"
+            [tipoValor]="'boolean'"
+          ></mostrar-valor>
+        </div>
+        <div class="flex flex-wrap justify-between items-start">
+          <strong>Permite múltiple valores: </strong>
+          <!-- <span>{{ item.multiplesValores ? "SI" : "NO" }}</span> -->
+          <mostrar-valor
+            [valor]="item.multiplesValores"
+            [tipoValor]="'boolean'"
+          ></mostrar-valor>
+        </div>
+        <div class="flex flex-wrap justify-between items-start">
+          <strong>Formato: </strong>
+          <!-- <span>{{ item.formato }}</span> -->
+          <mostrar-valor [valor]="item.formato"></mostrar-valor>
+        </div>
+        <div class="flex flex-wrap justify-between items-start">
+          <strong>Longitud máxima: </strong>
+          <!-- <span>{{ item.longitudMaxima }}</span> -->
+          <mostrar-valor [valor]="item.longitudMaxima"></mostrar-valor>
+        </div>
+        <div class="flex flex-wrap justify-between items-start">
+          <strong>Método de selección: </strong>
+          <!-- <span>{{ item.metodoSeleccion }}</span> -->
+          <mostrar-valor [valor]="item.metodoSeleccion"></mostrar-valor>
+        </div>
+        <div class="flex flex-wrap justify-between items-start">
+          <strong>Descripción de columna: </strong>
+          <!-- <span>{{ item.columnaDescripcion }}</span> -->
+          <mostrar-valor [valor]="item.columnaDescripcion"></mostrar-valor>
+        </div>
+        <div class="flex flex-wrap justify-between items-start">
+          <strong>Selección de columna: </strong>
+          <!-- <span>{{ item.columnaSeleccion }}</span> -->
+          <mostrar-valor [valor]="item.columnaSeleccion"></mostrar-valor>
+        </div>
+        <div class="flex flex-wrap justify-between items-start">
+          <strong>Valor de columna: </strong>
+          <!-- <span>{{ item.columnaValor ? item.columnaValor : "S/D" }}</span> -->
+          <mostrar-valor [valor]="item.columnaValor"></mostrar-valor>
+        </div>
+        <div class="flex flex-wrap justify-between items-start">
+          <strong>Es opcional: </strong>
+          <!-- <span>{{ item.opcional ? "SI" : "NO" }}</span> -->
+          <mostrar-valor
+            [valor]="item.opcional"
+            [tipoValor]="'boolean'"
+          ></mostrar-valor>
+        </div>
+        <div class="flex flex-wrap justify-between items-start">
+          <strong>Está vigente: </strong>
+          <!-- <span>{{ item.vigente ? "SI" : "NO" }}</span> -->
+          <mostrar-valor
+            [valor]="item.vigente"
+            [tipoValor]="'boolean'"
+          ></mostrar-valor>
+        </div>
+        <div class="flex flex-wrap justify-between items-start">
+          <strong>Es visible para todos? </strong>
+          <!-- <span>{{ item.vigente ? "SI" : "NO" }}</span> -->
+          <mostrar-valor
+            [valor]="item.visibleUsuarioGeneral"
+            [tipoValor]="'boolean'"
+          ></mostrar-valor>
+        </div>
+        <div class="flex flex-wrap justify-between items-start">
+          <strong>Es editable? </strong>
+          <!-- <span>{{ item.editable ? "SI" : "NO" }}</span> -->
+          <mostrar-valor
+            [valor]="item.editable"
+            [tipoValor]="'boolean'"
+          ></mostrar-valor>
+        </div>
+        <div class="flex flex-wrap justify-between items-start">
+          <strong>Agrupación </strong>
+          <mostrar-valor [valor]="item.agrupacion"></mostrar-valor>
+        </div>
+      </article>
+    </section>
+  </div>
+</div>
+<div mat-dialog-actions class="flex flex-row justify-center items-center">
+  <button mat-button (click)="onNoClick()">Cerrar</button>
+</div>
