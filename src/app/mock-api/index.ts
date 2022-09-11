@@ -1,7 +1,7 @@
 import { AcademyMockApi } from 'app/mock-api/apps/academy/api';
 import { ActivitiesMockApi } from 'app/mock-api/pages/activities/api';
 import { AnalyticsMockApi } from 'app/mock-api/dashboards/analytics/api';
-import { AuthMockApi } from 'app/mock-api/common/auth/api';
+// import { AuthMockApi } from 'app/mock-api/common/auth/api';
 import { ChatMockApi } from 'app/mock-api/apps/chat/api';
 import { ContactsMockApi } from 'app/mock-api/apps/contacts/api';
 import { CryptoMockApi } from 'app/mock-api/dashboards/crypto/api';
@@ -23,27 +23,27 @@ import { TasksMockApi } from 'app/mock-api/apps/tasks/api';
 import { UserMockApi } from 'app/mock-api/common/user/api';
 
 export const mockApiServices = [
-    AcademyMockApi,
-    ActivitiesMockApi,
-    AnalyticsMockApi,
-    AuthMockApi,
-    ChatMockApi,
-    ContactsMockApi,
-    CryptoMockApi,
-    ECommerceInventoryMockApi,
-    FileManagerMockApi,
-    FinanceMockApi,
-    HelpCenterMockApi,
-    IconsMockApi,
-    MailboxMockApi,
-    MessagesMockApi,
-    NavigationMockApi,
-    NotesMockApi,
-    NotificationsMockApi,
-    ProjectMockApi,
-    SearchMockApi,
-    ScrumboardMockApi,
-    ShortcutsMockApi,
-    TasksMockApi,
-    UserMockApi
+  AcademyMockApi,
+  ActivitiesMockApi,
+  AnalyticsMockApi,
+  // AuthMockApi,
+  ChatMockApi,
+  ContactsMockApi,
+  CryptoMockApi,
+  ECommerceInventoryMockApi,
+  FileManagerMockApi,
+  FinanceMockApi,
+  HelpCenterMockApi,
+  IconsMockApi,
+  MailboxMockApi,
+  MessagesMockApi,
+  NavigationMockApi,
+  NotesMockApi,
+  NotificationsMockApi,
+  ProjectMockApi,
+  SearchMockApi,
+  ScrumboardMockApi,
+  ShortcutsMockApi,
+  TasksMockApi,
+  UserMockApi,
 ];

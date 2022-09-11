@@ -8,11 +8,11 @@ import { AuthInterceptor } from './auth.interceptor';
   imports: [HttpClientModule],
   providers: [
     AuthService,
-    // {
-    //     provide : HTTP_INTERCEPTORS,
-    //     useClass: AuthInterceptor,
-    //     multi   : true
-    // }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
     //  {
     //    provide: HTTP_INTERCEPTORS,
     //    useClass: XML2JsonInterceptorService,

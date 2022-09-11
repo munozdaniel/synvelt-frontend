@@ -49,7 +49,7 @@ const routerConfig: ExtraOptions = {
     //   useClass: XML2JsonInterceptorService,
     //   multi: true,
     // },
-    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
 })
 export class AppModule {}

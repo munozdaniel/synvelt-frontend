@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, ReplaySubject, tap } from 'rxjs';
+import { map, Observable, of, ReplaySubject, tap } from 'rxjs';
 import { User } from 'app/core/user/user.types';
+import { IUsuario } from 'app/models/iUsuario';
+import { untilDestroyed } from '@ngneat/until-destroy';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private _user: ReplaySubject<User> = new ReplaySubject<User>(1);
+  private _user: ReplaySubject<IUsuario> = new ReplaySubject<IUsuario>(1);
 
   /**
    * Constructor
@@ -23,12 +25,12 @@ export class UserService {
    *
    * @param value
    */
-  set user(value: User) {
+  set user(value: IUsuario) {
     // Store the value
     this._user.next(value);
   }
 
-  get user$(): Observable<User> {
+  get user$(): Observable<IUsuario> {
     return this._user.asObservable();
   }
 
@@ -36,27 +38,36 @@ export class UserService {
   // @ Public methods
   // -----------------------------------------------------------------------------------------------------
 
-  /**
-   * Get the current logged in user data
-   */
-  get(): Observable<User> {
-    return this._httpClient.get<User>('api/common/user').pipe(
-      tap(user => {
-        this._user.next(user);
-      })
-    );
+  //   /**
+  //    * Get the current logged in user data
+  //    */
+  get(): Observable<IUsuario> {
+    const usuarioString = localStorage.getItem('accessTokenSynvelt') ?? '';
+    console.log('usuarioString', usuarioString);
+    if (usuarioString !== 'undefined' && usuarioString !== '') {
+      //   const usuario: IUsuario = JSON.parse(usuarioString);
+      //   this._user.next(usuario);
+      //   return of(usuario);
+      return this.user$;
+    }
+    return of(null);
+    //  return this._httpClient.get<User>('api/common/user').pipe(
+    //    tap(user => {
+    //      this._user.next(user);
+    //    })
+    //  );
   }
 
-  /**
-   * Update the user
-   *
-   * @param user
-   */
-  update(user: User): Observable<any> {
-    return this._httpClient.patch<User>('api/common/user', { user }).pipe(
-      map(response => {
-        this._user.next(response);
-      })
-    );
-  }
+  //   /**
+  //    * Update the user
+  //    *
+  //    * @param user
+  //    */
+  //   update(user: User): Observable<any> {
+  //     return this._httpClient.patch<User>('api/common/user', { user }).pipe(
+  //       map(response => {
+  //         this._user.next(response);
+  //       })
+  //     );
+  //   }
 }
