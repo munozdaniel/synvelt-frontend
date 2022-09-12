@@ -20,63 +20,16 @@ export class UsuarioService {
     let queryParams = new HttpParams();
     if (parametros) {
       Object.entries(parametros).forEach(([key, value], index) => {
-        queryParams = queryParams.set(key, value ? (value as string) : '');
+        // queryParams = queryParams.set(key, value ? (value as string) : '');
+        let valor = '';
+        if (typeof value === 'boolean') {
+          valor = value ? 'true' : 'false';
+        } else {
+          //   valor = value ? (value as string) : '';
+          valor = value ? encodeURIComponent(value as any) : '';
+        }
+        queryParams = queryParams.set(key, valor);
       });
-      //   if (typeof parametros.activo === 'boolean') {
-      //     queryParams = queryParams.append('activo', parametros.activo);
-      //   }
-      //   if (parametros.apellido) {
-      //     queryParams = queryParams.append('apellido', parametros.apellido);
-      //   }
-      //   if (parametros.comentario) {
-      //     queryParams = queryParams.append('comentario', parametros.nombre);
-      //   }
-      //   if (parametros.nombre) {
-      //     queryParams = queryParams.append('nombre', parametros.nombre);
-      //   }
-      //   if (parametros.nombreCompleto) {
-      //     queryParams = queryParams.append('nombreCompleto', parametros.nombre);
-      //   }
-      //   if (parametros.cuil) {
-      //     queryParams = queryParams.append('cuil', parametros.cuil);
-      //   }
-      //   if (parametros.idAreaInterna) {
-      //     queryParams = queryParams.append(
-      //       'idAreaInterna',
-      //       parametros.idAreaInterna
-      //     );
-      //   }
-      //   if (parametros.idRolPrincipal) {
-      //     queryParams = queryParams.append(
-      //       'idRolPrincipal',
-      //       parametros.idRolPrincipal
-      //     );
-      //   }
-      //   //
-
-      //   if (parametros.claveLogin) {
-      //     queryParams = queryParams.append('claveLogin', parametros.claveLogin);
-      //   }
-
-      //   if (parametros.direccionMail) {
-      //     queryParams = queryParams.append(
-      //       'direccionMail',
-      //       parametros.direccionMail
-      //     );
-      //   }
-      //   if (parametros.esInspector) {
-      //     queryParams = queryParams.append('esInspector', parametros.esInspector);
-      //   }
-      //   if (parametros.id) {
-      //     queryParams = queryParams.append('id', parametros.id);
-      //   }
-
-      //   if (parametros.nombreLogin) {
-      //     queryParams = queryParams.append('nombreLogin', parametros.nombreLogin);
-      //   }
-      //   if (parametros.telefono) {
-      //     queryParams = queryParams.append('telefono', parametros.telefono);
-      //   }
     }
     return queryParams;
   }

@@ -76,7 +76,8 @@ export class ModeloService {
         if (typeof value === 'boolean') {
           valor = value ? 'true' : 'false';
         } else {
-          valor = value ? (value as string) : '';
+        //   valor = value ? (value as string) : '';
+        valor = value ? encodeURIComponent(value as any) : '';
         }
         queryParams = queryParams.set(key, valor);
       });
