@@ -21,14 +21,12 @@ export class XML2JsonInterceptorService implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     req = req.clone({ responseType: 'text' });
-    console.log('req', req);
     return next.handle(req).pipe(
       map(event => {
         if (
           event instanceof HttpResponse &&
           event.headers.get('content-type').indexOf('application/xml') >= 0
         ) {
-          console.log('event', event);
           const parser = new DOMParser();
           const xml = parser.parseFromString(event.body, 'text/xml');
           event = event.clone({ body: this.xml2jsonService.xmlToJson(xml) });

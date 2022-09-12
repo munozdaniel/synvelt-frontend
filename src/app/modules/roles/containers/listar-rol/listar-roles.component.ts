@@ -32,7 +32,6 @@ export class ListarRolesComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe(
         datos => {
-          console.log('datos', datos);
           this.cargando = false;
           this.roles = datos as any;
         },
@@ -97,7 +96,6 @@ export class ListarRolesComponent implements OnInit {
       );
   }
   setFiltros(parametros) {
-    console.log('setFiltros', parametros);
     this.parametros = parametros;
     this.obtenerTodos();
   }

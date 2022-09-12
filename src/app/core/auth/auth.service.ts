@@ -45,7 +45,6 @@ export class AuthService {
    * Setter & getter for access token
    */
   set accessToken(token: string) {
-    console.log('accessTokenSynvelt', token);
     localStorage.setItem('accessTokenSynvelt', token);
   }
 
@@ -87,7 +86,6 @@ export class AuthService {
     }
     const queryParams = this.setQueryParams(credentials);
 
-    console.log('signIn', credentials);
     return this._httpClient
       .get(this.url + 'autorizacion/ValidacionUsuario', {
         params: queryParams,
@@ -123,7 +121,6 @@ export class AuthService {
    * Sign in using the access token
    */
   //   signInUsingToken(): Observable<any> {
-  //     console.log('Esto no está hecho; signInUsingToken');
   //     // Renew token
   //     return this._httpClient
   //       .post('api/auth/refresh-access-token', {

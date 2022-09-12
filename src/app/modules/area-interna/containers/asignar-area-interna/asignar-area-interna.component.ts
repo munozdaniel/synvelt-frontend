@@ -89,7 +89,6 @@ export class AsignarAreaInternaComponent implements OnInit {
             x.areaInterna = areasInternas.find(y => y.id === x.idAreaInterna);
             return x;
           });
-          console.log('us', this.usuarios);
         },
         error => {
           this.cargandoUsuario = false;

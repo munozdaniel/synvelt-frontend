@@ -128,7 +128,6 @@ export class ListarModelosComponent implements OnInit {
       );
   }
   setFiltros(parametros) {
-    console.log('parametros', parametros);
     this.parametros = parametros;
     this.obtenerTodos();
   }
@@ -143,7 +142,6 @@ export class ListarModelosComponent implements OnInit {
       .subscribe(
         datos => {
           modelo.cargando = false;
-          console.log('datos', datos);
           modelo.items = datos.map(x => ({
             ...x,
             modeloTipoDato: this.modelosTipoDato.find(

@@ -60,6 +60,7 @@ export class ErrorService {
   }
   private show(title: string, message: string, icon = ICON, actions = ACTIONS) {
     console.log('[' + title + ']', message);
+    this._synveltConfirmationService.error();
     // this._synveltConfirmationService.open({
     //   title,
     //   message,

@@ -91,7 +91,6 @@ export class FormAreaInternaComponent implements OnInit, OnChanges {
         this.setForm();
       }, 1000);
     } else {
-      console.log('¿this.areaInterna', this.areaInterna);
       this.form.patchValue(this.areaInterna);
     }
   }

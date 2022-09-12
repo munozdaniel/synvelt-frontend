@@ -57,7 +57,6 @@ export class AgregarRolComponent implements OnInit, OnDestroy {
     });
   }
   guardar(rol: IRol) {
-    console.log('rol a guardar', rol);
     this.cargando = true;
     this._rolService
       .guardar(rol)

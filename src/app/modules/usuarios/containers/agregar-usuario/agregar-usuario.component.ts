@@ -70,7 +70,6 @@ export class AgregarUsuarioComponent implements OnInit, OnDestroy {
     });
   }
   guardar(usuario: IUsuario) {
-    console.log('usuario,', usuario);
     this.cargando = true;
     this._usuarioService
       .guardar(usuario)

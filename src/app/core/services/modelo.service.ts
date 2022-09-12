@@ -173,7 +173,6 @@ export class ModeloService {
     parametros?: IModeloListaControlParam
   ): Observable<IModeloListaControl[]> {
     const queryParams = this.setQueryParams(parametros);
-    console.log('queryParams', queryParams);
     return this._http.get<any>(
       this.url + 'modelos/SeleccionModeloListaControl',
       {

@@ -38,7 +38,6 @@ export class EditarRolComponent implements OnInit, OnDestroy {
     // Recuperamos el id de la url y buscamos el rol
     this._activeRoute.params.subscribe(params => {
       this.rolId = params['id'];
-      console.log('this.rolId', this.rolId);
       if (this.rolId) {
         this.obtenerRolPorId();
       } else {

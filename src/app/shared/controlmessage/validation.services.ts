@@ -102,18 +102,14 @@ export class ValidationService {
   }
   static esObjeto(control: AbstractControl) {
     if (!control.value) {
-      console.log('0no es objeto');
       return null;
     }
     if (typeof control.value === 'string') {
-      console.log('1no es objeto');
       return { noEsObjeto: true };
     }
     if (control.value && control.value.id) {
-      console.log('2no es objeto');
       return null;
     } else {
-      console.log('3no es objeto');
       return { noEsObjeto: true };
     }
   }

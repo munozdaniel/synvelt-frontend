@@ -121,7 +121,6 @@ export class ListarUsuariosComponent implements OnInit {
       );
   }
   setFiltros(parametros) {
-    console.log('setFiltros', parametros);
     this.parametros = parametros;
     this.obtenerTodos();
   }

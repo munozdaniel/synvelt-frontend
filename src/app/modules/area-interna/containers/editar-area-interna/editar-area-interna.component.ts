@@ -35,7 +35,6 @@ export class EditarAreaInternaComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._activeRoute.params.subscribe(params => {
       this.areaInternaId = params['id'];
-      console.log('this.areaInternaId', this.areaInternaId);
       if (this.areaInternaId) {
         this.obtenerAreaInternaPorId();
       } else {

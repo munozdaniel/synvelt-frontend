@@ -53,7 +53,6 @@ export class AuthMockApi {
       .onPost('api/auth/sign-in', 1500)
       .reply(({ request }) => {
         // Sign in successful
-        console.log('request', request);
         if (
           request.body.nombre === 'admin' &&
           request.body.password === 'Mun3F++'

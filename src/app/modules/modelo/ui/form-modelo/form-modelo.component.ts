@@ -72,7 +72,6 @@ export class FormModeloComponent implements OnInit, OnChanges {
       this.setFormItems();
     }
     if (changes.modelo && changes.modelo.currentValue) {
-      console.log('modelo', this.modelo);
       this.setForm();
       // this.setForm();
     }
@@ -191,7 +190,6 @@ export class FormModeloComponent implements OnInit, OnChanges {
         this.setForm();
       }, 1000);
     } else {
-      console.log('setFormItems', this.modeloItems);
       const datos = this.modeloItems.map(x => {
         const modeloItem: FormGroup = this.newModeloItemLista();
         this.getModeloItemLista().push(modeloItem);
@@ -200,7 +198,6 @@ export class FormModeloComponent implements OnInit, OnChanges {
         );
         return { ...x, modeloTipoDato };
       });
-      console.log('¿modeloTipoDato', datos);
       this.formModeloLista.controls.modeloItemLista.patchValue(datos);
     }
   }

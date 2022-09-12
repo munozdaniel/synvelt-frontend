@@ -23,7 +23,6 @@ export class XmlInterceptor implements HttpInterceptor {
       filter(event => event instanceof HttpResponse),
       map(
         (event: HttpResponse<any>) => {
-          console.log('eventinter', event);
           if (this.xml.parse(event.body) !== true) {
             // only parse xml response, pass all other responses to other interceptors
             return event;

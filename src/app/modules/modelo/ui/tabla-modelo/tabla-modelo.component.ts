@@ -151,7 +151,6 @@ export class TablaModeloComponent implements OnInit, OnChanges {
     const index = this.modelosItem.findIndex(
       x => x.idModeloListaControl === row.id
     );
-    console.log('index', index);
     if (index !== -1) {
       return this.modelosItem[index];
     }

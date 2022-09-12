@@ -75,7 +75,6 @@ export class RolService {
   //   usuarios/ActualizacionRol?esAdministradorAplicacion={esAdministradorAplicacion}&esAdministradorDatos={esAdministradorDatos}&id={id}&nombre={nombre}&descripcion={descripcion}
   guardar(parametros: any): Observable<IRol> {
     const queryParams = this.setQueryParams(parametros);
-    console.log('queryParams', queryParams);
     return this._http.post<IRol>(
       this.url + 'usuarios/ActualizacionRol',
       {},

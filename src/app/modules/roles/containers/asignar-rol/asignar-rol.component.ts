@@ -92,7 +92,6 @@ export class AsignarRolComponent implements OnInit {
             x.rol = roles.find(y => y.id === x.idRolPrincipal);
             return x;
           });
-          console.log('us', this.usuarios);
         },
         error => {
           this.cargandoUsuario = false;
