@@ -8,6 +8,7 @@ import { IRol } from 'app/models/iRol';
 import { RolService } from 'app/core/services/rol.service';
 import { AreaInternaService } from 'app/core/services/area-interna.service';
 import { IAreaInterna } from 'app/models/iAreaInterna';
+import { ErrorService } from 'app/core/services/error.service';
 @UntilDestroy()
 @Component({
   selector: 'app-listar-usuarios',
@@ -24,7 +25,8 @@ export class ListarUsuariosComponent implements OnInit {
     private _rolService: RolService,
     private _router: Router,
     private _synveltConfirmationService: SynveltConfirmationService,
-    private _areaInternaService: AreaInternaService
+    private _areaInternaService: AreaInternaService,
+    private _errorService: ErrorService
   ) {}
 
   ngOnInit(): void {
@@ -113,8 +115,7 @@ export class ListarUsuariosComponent implements OnInit {
           this.obtenerTodos();
         },
         error => {
-          this._synveltConfirmationService.error();
-
+          this._errorService.showMessage(error);
           console.log('[ERROR]', error);
         }
       );

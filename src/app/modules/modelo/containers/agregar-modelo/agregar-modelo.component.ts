@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
+import { ErrorService } from 'app/core/services/error.service';
 import { ModeloService } from 'app/core/services/modelo.service';
 import { UsuarioService } from 'app/core/services/usuario.service';
 import { IModeloItemListaControl } from 'app/models/iModeloItemListaControl';
@@ -22,7 +23,8 @@ export class AgregarModeloComponent implements OnInit, OnDestroy {
   modelosTipoDato: IModeloTipoDato[];
   constructor(
     private _modeloService: ModeloService,
-    private _usuarioService: UsuarioService,
+    private _errorService: ErrorService,
+
     private _synveltConfirmationService: SynveltConfirmationService,
     private _router: Router
   ) {}
@@ -100,7 +102,7 @@ export class AgregarModeloComponent implements OnInit, OnDestroy {
               error.error.error.message
             );
           } else {
-            this._synveltConfirmationService.error();
+            this._errorService.showMessage(error);
           }
           console.log('[ERROR]', error);
         }

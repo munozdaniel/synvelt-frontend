@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { RolService } from 'app/core/services/rol.service';
 import { IRol } from 'app/models/iRol';
+import { ErrorService } from 'app/core/services/error.service';
 @UntilDestroy()
 @Component({
   selector: 'app-listar-roles',
@@ -16,7 +17,8 @@ export class ListarRolesComponent implements OnInit {
   constructor(
     private _rolService: RolService,
     private _router: Router,
-    private _synveltConfirmationService: SynveltConfirmationService
+    private _synveltConfirmationService: SynveltConfirmationService,
+    private _errorService: ErrorService
   ) {}
 
   ngOnInit(): void {
@@ -90,9 +92,7 @@ export class ListarRolesComponent implements OnInit {
           this.obtenerTodos();
         },
         error => {
-          this._synveltConfirmationService.error();
-
-          console.log('[ERROR]', error);
+          this._errorService.showMessage(error);
         }
       );
   }

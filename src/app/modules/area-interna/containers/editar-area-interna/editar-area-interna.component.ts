@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { AreaInternaService } from 'app/core/services/area-interna.service';
+import { ErrorService } from 'app/core/services/error.service';
 import { IAreaInterna } from 'app/models/iAreaInterna';
 
 import { Subscription } from 'rxjs';
@@ -21,6 +22,7 @@ export class EditarAreaInternaComponent implements OnInit, OnDestroy {
   constructor(
     private _activeRoute: ActivatedRoute,
     private _areaInternaService: AreaInternaService,
+    private _errorService: ErrorService,
     private _synveltConfirmationService: SynveltConfirmationService,
     private _router: Router
   ) {}
@@ -104,7 +106,7 @@ export class EditarAreaInternaComponent implements OnInit, OnDestroy {
         },
         error => {
           this.cargando = false;
-          this._synveltConfirmationService.error();
+          this._errorService.showMessage(error);
           console.log('[ERROR]', error);
         }
       );

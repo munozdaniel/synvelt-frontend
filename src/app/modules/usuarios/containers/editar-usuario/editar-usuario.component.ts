@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { AreaInternaService } from 'app/core/services/area-interna.service';
+import { ErrorService } from 'app/core/services/error.service';
 import { RolService } from 'app/core/services/rol.service';
 import { UsuarioService } from 'app/core/services/usuario.service';
 import { IAreaInterna } from 'app/models/iAreaInterna';
@@ -28,6 +29,7 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
     private _activeRoute: ActivatedRoute,
     private _rolService: RolService,
     private _usuarioService: UsuarioService,
+    private _errorService: ErrorService,
     private _synveltConfirmationService: SynveltConfirmationService,
     private _router: Router
   ) {}
@@ -117,7 +119,7 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
         },
         error => {
           this.cargando = false;
-          this._synveltConfirmationService.error();
+          this._errorService.showMessage(error);
           console.log('[ERROR]', error);
         }
       );

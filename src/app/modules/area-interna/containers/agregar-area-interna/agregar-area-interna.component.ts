@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { AreaInternaService } from 'app/core/services/area-interna.service';
+import { ErrorService } from 'app/core/services/error.service';
 import { UsuarioService } from 'app/core/services/usuario.service';
 import { IAreaInterna } from 'app/models/iAreaInterna';
 import { IUsuario } from 'app/models/iUsuario';
@@ -19,7 +20,7 @@ export class AgregarAreaInternaComponent implements OnInit, OnDestroy {
   usuarios: IUsuario[];
   constructor(
     private _areaInternaService: AreaInternaService,
-    private _usuarioService: UsuarioService,
+    private _errorService: ErrorService,
     private _synveltConfirmationService: SynveltConfirmationService,
     private _router: Router
   ) {}
@@ -31,7 +32,8 @@ export class AgregarAreaInternaComponent implements OnInit, OnDestroy {
     // Open the confirmation and save the reference
     const dialogRef = this._synveltConfirmationService.open({
       title: 'Confirmar operación',
-      message: 'Está por guardar una nueva área interna, confirme esta operación.',
+      message:
+        'Está por guardar una nueva área interna, confirme esta operación.',
       icon: {
         name: 'heroicons_solid:question-mark-circle',
         color: 'info',
@@ -76,7 +78,7 @@ export class AgregarAreaInternaComponent implements OnInit, OnDestroy {
               error.error.error.message
             );
           } else {
-            this._synveltConfirmationService.error();
+            this._errorService.showMessage(error);
           }
           console.log('[ERROR]', error);
         }

@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
+import { ErrorService } from 'app/core/services/error.service';
 import { RolService } from 'app/core/services/rol.service';
 import { IRol } from 'app/models/iRol';
 
@@ -22,6 +23,7 @@ export class EditarRolComponent implements OnInit, OnDestroy {
   constructor(
     private _activeRoute: ActivatedRoute,
     private _rolService: RolService,
+    private _errorService: ErrorService,
     private _synveltConfirmationService: SynveltConfirmationService,
     private _router: Router
   ) {}
@@ -109,7 +111,7 @@ export class EditarRolComponent implements OnInit, OnDestroy {
         },
         error => {
           this.cargando = false;
-          this._synveltConfirmationService.error();
+          this._errorService.showMessage(error);
           console.log('[ERROR]', error);
         }
       );

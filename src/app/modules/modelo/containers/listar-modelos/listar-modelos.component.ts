@@ -5,6 +5,7 @@ import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { ModeloService } from 'app/core/services/modelo.service';
 import { IModeloListaControl } from 'app/models/iModeloListaControl';
 import { IModeloTipoDato } from 'app/models/iModeloTipoDato';
+import { ErrorService } from 'app/core/services/error.service';
 @UntilDestroy()
 @Component({
   selector: 'app-listar-modelos',
@@ -18,6 +19,7 @@ export class ListarModelosComponent implements OnInit {
   constructor(
     private _modeloService: ModeloService,
     private _router: Router,
+    private _errorService: ErrorService,
     private _synveltConfirmationService: SynveltConfirmationService
   ) {}
   test() {
@@ -120,8 +122,7 @@ export class ListarModelosComponent implements OnInit {
           }
         },
         error => {
-          this._synveltConfirmationService.error();
-
+          this._errorService.showMessage(error);
           console.log('[ERROR]', error);
         }
       );
