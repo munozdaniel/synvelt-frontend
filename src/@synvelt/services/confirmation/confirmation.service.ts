@@ -80,7 +80,7 @@ export class SynveltConfirmationService {
   }
   error(
     title = 'Operación fallida',
-    message = 'Ops! Ocurrió un error, la operación no se ha completado'
+    message = 'Ocurrió un error, la operación no se ha completado'
   ): MatDialogRef<SynveltConfirmationDialogComponent> {
     return this.open({
       title,
