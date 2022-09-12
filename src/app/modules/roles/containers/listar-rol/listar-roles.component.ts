@@ -52,7 +52,7 @@ export class ListarRolesComponent implements OnInit {
   setEliminar(evento: string) {
     const confirmation = this._synveltConfirmationService.open({
       title: 'Confirmar operación',
-      message: '¿Está seguro de continuar con la eliminación del rol?',
+      message: 'Está por eliminar un rol, confirme esta operación.',
       icon: {
         show: true,
         name: 'heroicons_outline:exclamation',

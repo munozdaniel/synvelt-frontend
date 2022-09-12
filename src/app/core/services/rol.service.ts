@@ -1,8 +1,13 @@
 import { environment } from 'environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, takeUntil } from 'rxjs';
 import { IRol } from 'app/models/iRol';
+import { IUsuario } from 'app/models/iUsuario';
+import { UserService } from '../user/user.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { AuthService } from '../auth/auth.service';
+@UntilDestroy()
 @Injectable({
   providedIn: 'root',
 })
@@ -15,7 +20,7 @@ export class RolService {
   /**
    * Constructor
    */
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private _authService: AuthService) {}
   private setQueryParams(parametros) {
     let queryParams = new HttpParams();
     if (parametros) {
@@ -97,8 +102,15 @@ export class RolService {
       }
     );
   }
-
+  // Eliminacion de un rol
   eliminar(id): Observable<void> {
-    return this._http.put<void>(this.url + `roles/Baja?id=${id}`, null);
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'multipart/form-data')
+      .append('tokenUsuario', this._authService.accessToken);
+    const queryParams = this.setQueryParams({ id });
+    return this._http.get<void>(this.url + 'usuarios/EliminacionRol', {
+      headers: headers,
+      params: queryParams,
+    });
   }
 }

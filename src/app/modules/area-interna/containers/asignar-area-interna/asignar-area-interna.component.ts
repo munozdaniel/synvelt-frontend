@@ -109,7 +109,7 @@ export class AsignarAreaInternaComponent implements OnInit {
       // Mensaje de error
       this._synveltConfirmationService.open({
         title: 'Formulario incompleto',
-        message: 'Tiene que seleccionar al menos un usuario y un areaInterna',
+        message: 'Tiene que seleccionar al menos un usuario y un area interna',
         actions: {
           confirm: {
             show: false,

@@ -78,7 +78,7 @@ export class ListarModelosComponent implements OnInit {
   setEliminar(evento: string) {
     const confirmation = this._synveltConfirmationService.open({
       title: 'Confirmar operación',
-      message: '¿Está seguro de continuar con la eliminación del modelo?',
+      message: 'Está por eliminar un modelo de lista, confirme esta operación.',
       icon: {
         show: true,
         name: 'heroicons_outline:exclamation',

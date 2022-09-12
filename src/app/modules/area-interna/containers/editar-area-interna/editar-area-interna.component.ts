@@ -65,7 +65,7 @@ export class EditarAreaInternaComponent implements OnInit, OnDestroy {
     // Open the confirmation and save the reference
     const dialogRef = this._synveltConfirmationService.open({
       title: 'Confirmar operación',
-      message: 'Está por editar un área interna, desea continuar?',
+      message: 'Está por editar un área interna, confirme esta operación.',
       icon: {
         name: 'heroicons_solid:question-mark-circle',
         color: 'info',

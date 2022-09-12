@@ -45,7 +45,7 @@ export class AgregarUsuarioComponent implements OnInit, OnDestroy {
     // Open the confirmation and save the reference
     const dialogRef = this._synveltConfirmationService.open({
       title: 'Confirmar operación',
-      message: 'Está por guardar un nuevo usuario, desea continuar?',
+      message: 'Está por guardar un nuevo usuario, confirme esta operación.',
       icon: {
         name: 'heroicons_solid:question-mark-circle',
         color: 'info',

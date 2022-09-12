@@ -75,7 +75,7 @@ export class ListarUsuariosComponent implements OnInit {
   setEliminar(evento: string) {
     const confirmation = this._synveltConfirmationService.open({
       title: 'Confirmar operación',
-      message: '¿Está seguro de continuar con la eliminación del usuario?',
+      message: 'Está por eliminar un usuario, confirme esta operación.',
       icon: {
         show: true,
         name: 'heroicons_outline:exclamation',

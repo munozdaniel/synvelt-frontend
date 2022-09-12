@@ -118,7 +118,7 @@ export class EditarModeloComponent implements OnInit {
     // Open the confirmation and save the reference
     const dialogRef = this._synveltConfirmationService.open({
       title: 'Confirmar operación',
-      message: 'Está por actualizar un modelo, desea continuar?',
+      message: 'Está por actualizar un modelo, confirme esta operación.',
       icon: {
         name: 'heroicons_solid:question-mark-circle',
         color: 'info',
