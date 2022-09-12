@@ -109,7 +109,7 @@ export class RolService {
       .append('tokenUsuario', this._authService.accessToken);
     const queryParams = this.setQueryParams({ id });
     return this._http.get<void>(this.url + 'usuarios/EliminacionRol', {
-      headers: headers,
+      headers: this.headers,
       params: queryParams,
     });
   }

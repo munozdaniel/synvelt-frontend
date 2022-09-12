@@ -83,6 +83,8 @@ export class AreaInternaService {
     // usuariosIds.forEach(usuarioId => {
     //   queryParams = queryParams.append('usuariosIds', usuarioId);
     // });
+    console.log(this.url + 'operacion/AsignacionUsuarioInspector', usuariosIds);
+    console.log(this.url + 'operacion/AsignacionUsuarioInspector', queryParams);
     return this._http.post<any>(
       this.url + 'operacion/AsignacionUsuarioInspector',
       usuariosIds,

@@ -4,9 +4,10 @@
 
 export const environment = {
   production: false,
-   url: 'http://asdrovia.com/AdmInsp/',
- //   url: 'http://elosegui.org/AdmInsp/',
+  url: 'http://asdrovia.com/AdmInsp/',
+  //   url: 'http://elosegui.org/AdmInsp/',
   site: 'http://localhost:4200',
+  version: '1.0.0',
 };
 
 /*

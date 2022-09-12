@@ -12,6 +12,7 @@ import { BooleanInput } from '@angular/cdk/coercion';
 import { Subject, takeUntil } from 'rxjs';
 import { UserService } from 'app/core/user/user.service';
 import { IUsuario } from 'app/models/iUsuario';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'user',
@@ -21,6 +22,7 @@ import { IUsuario } from 'app/models/iUsuario';
   exportAs: 'user',
 })
 export class UserComponent implements OnInit, OnDestroy {
+  version = environment.version;
   /* eslint-disable @typescript-eslint/naming-convention */
   static ngAcceptInputType_showAvatar: BooleanInput;
   /* eslint-enable @typescript-eslint/naming-convention */
