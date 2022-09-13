@@ -53,8 +53,6 @@ const maskConfig: Partial<IConfig> = {
     SynveltCardModule,
     FormsModule,
     MatFormFieldModule,
-    FormsModule,
-    ReactiveFormsModule,
     MatAutocompleteModule,
     MatSelectModule,
     MatInputModule,

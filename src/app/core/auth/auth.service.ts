@@ -119,13 +119,18 @@ export class AuthService {
           // Store the user on the user service
           //   TODO: Pedir que devuelva el usuario
           //   this._userService.user = response.user;
-          this._userService.user = {
+          const usuario = {
             id: response.id,
             nombre: response.nombre,
             apellido: response.apellido,
             direccionMail: response.direccionMail,
             nombreLogin: response.nombreLogin,
           };
+          this._userService.user = { ...usuario };
+          //
+          console.log('guardarlocal', usuario);
+          localStorage.setItem('userSynvelt', JSON.stringify(usuario));
+
           //   TODO: Asignar roles
 
           // Return a new observable with the response
@@ -168,13 +173,13 @@ export class AuthService {
    * Sign out
    */
   signOut(): Observable<any> {
-    console.log('this.accessToken', this.accessToken);
     this._usuarioService
       .logout(this.accessToken)
       .pipe(
         finalize(() => {
           // Remove the access token from the local storage
           localStorage.removeItem('accessTokenSynvelt');
+          localStorage.removeItem('userSynvelt');
           // Set the authenticated flag to false
           this._authenticated = false;
         }),

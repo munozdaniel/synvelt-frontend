@@ -26,11 +26,20 @@ export class UserService {
    * @param value
    */
   set user(value: IUsuario) {
+    console.log('userset', value);
     // Store the value
     this._user.next(value);
   }
 
   get user$(): Observable<IUsuario> {
+    this._user.subscribe(
+      datos => {
+        console.log('get', datos);
+      },
+      error => {
+        console.log('[ERROR]', error);
+      }
+    );
     return this._user.asObservable();
   }
 
@@ -43,12 +52,17 @@ export class UserService {
   //    */
   get(): Observable<IUsuario> {
     // No lo uso, es para obtener el usuario logueado
-    const usuarioString = localStorage.getItem('accessTokenSynvelt') ?? '';
-    if (usuarioString !== 'undefined' && usuarioString !== '') {
-      //   const usuario: IUsuario = JSON.parse(usuarioString);
-      //   this._user.next(usuario);
-      //   return of(usuario);
-      return this.user$;
+    // const usuarioString = localStorage.getItem('accessTokenSynvelt') ?? '';
+    // console.log('usuarioString', usuarioString);
+    // if (usuarioString !== 'undefined' && usuarioString !== '') {
+    //   const usuario: IUsuario = JSON.parse(usuarioString);
+    //   this._user.next(usuario);
+    //   return of(usuario);
+    const userString = localStorage.getItem('userSynvelt') ?? '';
+    if (userString && userString !== 'undefined') {
+      const user = JSON.parse(userString);
+      this._user.next(user);
+      return of(user);
     }
     return of(null);
     //  return this._httpClient.get<User>('api/common/user').pipe(

@@ -108,4 +108,16 @@ export class UsuarioService {
       return of(true);
     }
   }
+  actualizarPassword(parametros: any): Observable<IUsuario> {
+    const queryParams = this.setQueryParams(parametros);
+
+    return this._http.post<IUsuario>(
+      this.url + 'usuarios/ActualizacionClave',
+      {},
+      {
+        headers: this.headers,
+        params: queryParams,
+      }
+    );
+  }
 }

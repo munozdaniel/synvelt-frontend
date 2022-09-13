@@ -1,0 +1,98 @@
+<div class="flex flex-col flex-auto min-w-0 container mx-auto px-8" style="">
+  <div
+    class="flex flex-col md:flex-row md:justify-between md:items-start mt-4 gap-2"
+  >
+    <mat-card class="form-card w-full md:w-100">
+      <mat-card-header>
+        <mat-card-title> Cambiar la contraseña </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="registerForm" class="flex flex-col">
+          <div class="form-row" style="margin-top: 20px">
+            <div class="form-group col">
+              <mat-form-field class="w-full" appearance="outline">
+                <mat-label>Contraseña</mat-label>
+                <input
+                  matInput
+                  [type]="hide2 ? 'password' : 'text'"
+                  formControlName="password"
+                  [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                  autocomplete="off"
+                />
+                <mat-icon
+                  class="cursor-pointer"
+                  matSuffix
+                  (click)="hide2 = !hide2"
+                  >{{ hide2 ? "visibility_off" : "visibility" }}</mat-icon
+                >
+                <mat-error *ngIf="f.password.errors?.required"
+                  >La contraseña es requerida</mat-error
+                >
+                <!-- <mat-error *ngIf="f.password.errors?.minlength">Debe contener al menos 8 caracteres</mat-error>
+                <mat-error *ngIf="f.password.errors?.pattern">No cumple los requisitos del password</mat-error> -->
+              </mat-form-field>
+            </div>
+            <div class="form-group col">
+              <mat-form-field class="w-full" appearance="outline">
+                <mat-label>Repetir Contraseña</mat-label>
+                <input
+                  matInput
+                  [type]="hide3 ? 'password' : 'text'"
+                  formControlName="confirmPassword"
+                  [ngClass]="{
+                    'is-invalid': submitted && f.confirmPassword.errors
+                  }"
+                  autocomplete="off"
+                />
+                <mat-icon
+                  class="cursor-pointer"
+                  matSuffix
+                  (click)="hide3 = !hide3"
+                  >{{ hide3 ? "visibility_off" : "visibility" }}</mat-icon
+                >
+                <mat-error *ngIf="f.confirmPassword.errors?.required"
+                  >La confirmación es requerida</mat-error
+                >
+                <mat-error *ngIf="f.confirmPassword.errors?.mustMatch"
+                  >No coinciden las contraseñas</mat-error
+                >
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+      <mat-card-footer
+        class="flex flex-row justify-between items-center mb-4 p-2"
+      >
+        <button
+          *ngIf="!cargando"
+          mat-raised-button
+          color="accent"
+          (click)="logout()"
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          *ngIf="!cargando"
+          mat-raised-button
+          color="primary"
+          [disabled]="registerForm.invalid"
+          (click)="onSubmit()"
+        >
+          Guardar Cambios
+        </button>
+        <div *ngIf="cargando" style="display: flex; justify-content: center">
+          <mat-spinner
+            mode="indeterminate"
+            diameter="20"
+            color="accent"
+          ></mat-spinner>
+          <button mat-raised-button color="primary" [disabled]="true">
+            En proceso...
+          </button>
+        </div>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

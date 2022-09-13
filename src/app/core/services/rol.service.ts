@@ -1,9 +1,9 @@
 import { environment } from 'environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, takeUntil } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IRol } from 'app/models/iRol';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { AuthService } from '../auth/auth.service';
 @UntilDestroy()
 @Injectable({

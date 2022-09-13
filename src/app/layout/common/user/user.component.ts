@@ -53,6 +53,7 @@ export class UserComponent implements OnInit, OnDestroy {
     this._userService.user$
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((user: IUsuario) => {
+        console.log('¿usercompoennte', user);
         this.user = user;
 
         // Mark for check
@@ -78,25 +79,27 @@ export class UserComponent implements OnInit, OnDestroy {
    *
    * @param status
    */
-  updateUserStatus(status: string): void {
-    // Return if user is not available
-    // if (!this.user) {
-    //   return;
-    // }
-
-    // Update the user
-    // this._userService
-    //   .update({
-    //     ...this.user,
-    //     status,
-    //   })
-    //   .subscribe();
-  }
+  //   updateUserStatus(status: string): void {
+  //     // Return if user is not available
+  //     // if (!this.user) {
+  //     //   return;
+  //     // }
+  //     // Update the user
+  //     // this._userService
+  //     //   .update({
+  //     //     ...this.user,
+  //     //     status,
+  //     //   })
+  //     //   .subscribe();
+  //   }
 
   /**
    * Sign out
    */
   signOut(): void {
     this._router.navigate(['/sign-out']);
+  }
+  redireccionarPerfil(): void {
+    this._router.navigate(['/perfil']);
   }
 }
