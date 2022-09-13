@@ -12,6 +12,7 @@
     <small>
       {{ user?.apellido + " " + user?.nombre }}
     </small>
+    <mat-icon svgIcon="heroicons_outline:chevron-down"></mat-icon>
     <!-- <span
       class="absolute right-0 bottom-0 w-2 h-2 rounded-full"
       [ngClass]="{
@@ -35,8 +36,8 @@
 
   <mat-divider class="my-2"></mat-divider>
   <button mat-menu-item (click)="redireccionarPerfil()">
-    <mat-icon [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
-    <span>Perfil</span>
+    <mat-icon [svgIcon]="'heroicons_outline:key'"></mat-icon>
+    <span>Cambiar contraseña</span>
   </button>
 
   <mat-divider class="my-2"></mat-divider>

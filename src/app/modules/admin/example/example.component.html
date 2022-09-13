@@ -7,9 +7,19 @@
     >
       <div class="grid grid-cols-1">
         <div
-          class="w-full flex flex-row justify-center items-center mb-4"
+          class="w-full flex flex-row justify-between items-center mb-4"
           style="background-color: #1c2736 !important"
         >
+          <div class="flex flex-col text-white p-2">
+            <span class="flex flex-row justify-start items-center gap-2">
+              <mat-icon [svgIcon]="'heroicons_outline:user'"></mat-icon>
+              {{ user?.apellido + " " + user?.nombre }}</span
+            >
+            <span class="flex flex-row justify-start items-center gap-2">
+              <mat-icon [svgIcon]="'heroicons_outline:mail'"></mat-icon>
+              {{ user?.direccionMail }}</span
+            >
+          </div>
           <img
             src="assets/images/logo/logo_transparente.png"
             alt="Logo"
