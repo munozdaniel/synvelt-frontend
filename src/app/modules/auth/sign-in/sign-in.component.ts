@@ -75,7 +75,6 @@ export class AuthSignInComponent implements OnInit {
         const redirectURL =
           this._activatedRoute.snapshot.queryParamMap.get('redirectURL') ||
           '/signed-in-redirect';
-
         // Navigate to the redirect url
         this._router.navigateByUrl(redirectURL);
       },
@@ -84,7 +83,7 @@ export class AuthSignInComponent implements OnInit {
         this.signInForm.enable();
 
         // Reset the form
-        this.signInNgForm.resetForm();
+        // this.signInNgForm.resetForm();
 
         // Set the alert
         this.alert = {

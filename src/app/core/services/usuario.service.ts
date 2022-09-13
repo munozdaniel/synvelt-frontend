@@ -1,6 +1,11 @@
 import { environment } from 'environments/environment';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import {
+  HttpBackend,
+  HttpClient,
+  HttpHeaders,
+  HttpParams,
+} from '@angular/common/http';
 import { IUsuario, LISTAR_USUARIOS } from 'app/models/iUsuario';
 import { Observable, of } from 'rxjs';
 @Injectable({
@@ -12,10 +17,13 @@ export class UsuarioService {
     'application/x-www-form-urlencoded'
   );
   protected url = environment.url;
+  private _httpSinToken: HttpClient;
   /**
    * Constructor
    */
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, handler: HttpBackend) {
+    this._httpSinToken = new HttpClient(handler);
+  }
   private setQueryParams(parametros) {
     let queryParams = new HttpParams();
     if (parametros) {
@@ -87,5 +95,17 @@ export class UsuarioService {
       params: queryParams,
     });
     return of(LISTAR_USUARIOS);
+  }
+  logout(idTokenUsuario): Observable<any> {
+    // autorizacion/Logout?idTokenUsuario={idTokenUsuario}
+    if (idTokenUsuario) {
+      const queryParams = this.setQueryParams({ idTokenUsuario });
+      return this._httpSinToken.get(this.url + 'autorizacion/Logout', {
+        headers: this.headers,
+        params: queryParams,
+      });
+    } else {
+      return of(true);
+    }
   }
 }

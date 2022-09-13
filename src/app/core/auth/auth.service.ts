@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
-import { AuthUtils } from 'app/core/auth/auth.utils';
+import { finalize, Observable, of, switchMap, throwError } from 'rxjs';
 import { UserService } from 'app/core/user/user.service';
 import { environment } from 'environments/environment';
-
+import { UsuarioService } from '../services/usuario.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+@UntilDestroy()
 @Injectable()
 export class AuthService {
   protected headers = new HttpHeaders().append(
@@ -19,7 +20,8 @@ export class AuthService {
    */
   constructor(
     private _httpClient: HttpClient,
-    private _userService: UserService
+    private _userService: UserService,
+    private _usuarioService: UsuarioService
   ) {}
   private setQueryParams(parametros) {
     let queryParams = new HttpParams();
@@ -30,7 +32,8 @@ export class AuthService {
         if (typeof value === 'boolean') {
           valor = value ? 'true' : 'false';
         } else {
-          valor = value ? (value as string) : '';
+          // valor = value ? (value as string) : '';
+          valor = value ? encodeURIComponent(value as any) : '';
         }
         queryParams = queryParams.set(key, valor);
       });
@@ -93,6 +96,19 @@ export class AuthService {
       })
       .pipe(
         switchMap((response: any) => {
+          //   const r = {
+          //     apellido: 'General',
+          //     direccionMail: 'adm@a.net',
+          //     esAdministradorAplicacion: true,
+          //     esAdministradorDatos: true,
+          //     esInspector: true,
+          //     expiracion: '2022-09-13T13:29:55.0204851-07:00',
+          //     id: '4ef89051-ba37-48f2-ba66-f4e7857e3587',
+          //     idRolPrincipal: '5a7d5dba-9768-43a5-a08b-6570ad56ce56',
+          //     nombre: 'Administrador',
+          //     nombreLogin: '20000000000',
+          //     rolesUsuario:[]
+          //   };
           console.log('response', response);
           // Store the access token in the local storage
           this.accessToken = response.id;
@@ -105,9 +121,10 @@ export class AuthService {
           //   this._userService.user = response.user;
           this._userService.user = {
             id: response.id,
-            nombre: 'Admin',
-            direccionMail: 'admin@synvelt.com',
-            apellido: 'Testing',
+            nombre: response.nombre,
+            apellido: response.apellido,
+            direccionMail: response.direccionMail,
+            nombreLogin: response.nombreLogin,
           };
           //   TODO: Asignar roles
 
@@ -151,11 +168,38 @@ export class AuthService {
    * Sign out
    */
   signOut(): Observable<any> {
-    // Remove the access token from the local storage
-    localStorage.removeItem('accessTokenSynvelt');
-
-    // Set the authenticated flag to false
-    this._authenticated = false;
+    console.log('this.accessToken', this.accessToken);
+    this._usuarioService
+      .logout(this.accessToken)
+      .pipe(
+        finalize(() => {
+          // Remove the access token from the local storage
+          localStorage.removeItem('accessTokenSynvelt');
+          // Set the authenticated flag to false
+          this._authenticated = false;
+        }),
+        untilDestroyed(this)
+      )
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        datos => {
+          console.log('[Sesión cerrada]');
+        },
+        error => {
+          console.log('[ERROR]', error);
+        }
+      );
+    //   .subscribe(
+    //     datos => {
+    //       // Remove the access token from the local storage
+    //       localStorage.removeItem('accessTokenSynvelt');
+    //       // Set the authenticated flag to false
+    //       this._authenticated = false;
+    //     },
+    //     error => {
+    //       console.log('[ERROR]', error);
+    //     }
+    //   );
 
     // Return the observable
     return of(true);

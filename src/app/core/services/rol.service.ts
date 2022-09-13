@@ -3,8 +3,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, takeUntil } from 'rxjs';
 import { IRol } from 'app/models/iRol';
-import { IUsuario } from 'app/models/iUsuario';
-import { UserService } from '../user/user.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { AuthService } from '../auth/auth.service';
 @UntilDestroy()

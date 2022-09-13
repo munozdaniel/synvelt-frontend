@@ -52,7 +52,7 @@
           <input
             id="clave"
             matInput
-            type="clave"
+            type="password"
             [formControlName]="'clave'"
             #claveField
           />
@@ -60,15 +60,15 @@
             mat-icon-button
             type="button"
             (click)="
-              claveField.type === 'clave'
+              claveField.type === 'password'
                 ? (claveField.type = 'text')
-                : (claveField.type = 'clave')
+                : (claveField.type = 'password')
             "
             matSuffix
           >
             <mat-icon
               class="icon-size-5"
-              *ngIf="claveField.type === 'clave'"
+              *ngIf="claveField.type === 'password'"
               [svgIcon]="'heroicons_solid:eye'"
             ></mat-icon>
             <mat-icon

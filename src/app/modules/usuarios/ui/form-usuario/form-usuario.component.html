@@ -166,7 +166,7 @@
         </mat-slide-toggle>
       </div>
       <!--  field -->
-      <mat-form-field appearance="outline" class="w-full">
+      <mat-form-field *ngIf="!esEditar" appearance="outline" class="w-full">
         <mat-label>Contraseña</mat-label>
         <input
           id="claveLogin"

@@ -87,7 +87,7 @@ export const defaultNavigation: SynveltNavigationItem[] = [
       },
       {
         id: 'areas-internas',
-        title: 'Controles',
+        title: 'Listas de control',
         type: 'basic',
         link: '/modelos',
         icon: 'heroicons_outline:cog',
