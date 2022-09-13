@@ -57,19 +57,19 @@
             </mat-card-header>
             <mat-divider></mat-divider>
             <mat-selection-list [multiple]="false">
-              <mat-list-option>
+              <mat-list-option (click)="redireccionar('/usuarios')">
                 <div class="flex flex-row justify-start items-center gap-2">
                   <mat-icon svgIcon="heroicons_outline:user-group"></mat-icon>
                   Usuarios
                 </div>
               </mat-list-option>
-              <mat-list-option>
+              <mat-list-option (click)="redireccionar('/roles')">
                 <div class="flex flex-row justify-start items-center gap-2">
                   <mat-icon svgIcon="heroicons_outline:shield-check"></mat-icon>
                   Roles
                 </div>
               </mat-list-option>
-              <mat-list-option>
+              <mat-list-option (click)="redireccionar('/areainternas')">
                 <div class="flex flex-row justify-start items-center gap-2">
                   <mat-icon
                     svgIcon="heroicons_outline:identification"
@@ -77,7 +77,7 @@
                   Áreas internas
                 </div>
               </mat-list-option>
-              <mat-list-option>
+              <mat-list-option (click)="redireccionar('/controles')">
                 <div class="flex flex-row justify-start items-center gap-2">
                   <mat-icon svgIcon="heroicons_outline:pencil-alt"></mat-icon>
                   Lista de control
