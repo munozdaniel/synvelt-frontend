@@ -1,22 +1,82 @@
 <div class="flex flex-col flex-auto min-w-0">
-
-    <!-- Main -->
-    <div class="flex-auto p-6 sm:p-10">
-
-        <!-- CONTENT GOES HERE -->
-        <div class="h-400 min-h-400 max-h-400 border-2 border-dashed border-gray-300 rounded-2xl">
-
-            <div class=" grid grid-cols-1">
-                <div class="w-full flex flex-row justify-center items-center">
-                    <img src="assets/images/logo/logo_transparente.png" alt="Logo" />
-                </div>
-                <div class="flex flex-wrap justify-between items-start">
-                    <mat-card></mat-card>
-                </div>
-            </div>
-
+  <!-- Main -->
+  <div class="flex-auto p-6 sm:p-10">
+    <!-- CONTENT GOES HERE -->
+    <div
+      class="h-400 min-h-400 max-h-400 border-2 border-dashed border-gray-300 rounded-2xl"
+    >
+      <div class="grid grid-cols-1">
+        <div
+          class="w-full flex flex-row justify-center items-center mb-4"
+          style="background-color: #1c2736 !important"
+        >
+          <img
+            src="assets/images/logo/logo_transparente.png"
+            alt="Logo"
+            class="w-80 md:w-100"
+          />
         </div>
-
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-2">
+          <mat-card>
+            <mat-card-header>
+              <strong class="mb-2"> Menú </strong>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+            <mat-selection-list [multiple]="false"> </mat-selection-list>
+          </mat-card>
+          <mat-card>
+            <mat-card-header>
+              <strong class="mb-2"> Menú </strong>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+            <mat-selection-list [multiple]="false"> </mat-selection-list>
+          </mat-card>
+          <mat-card>
+            <mat-card-header>
+              <strong class="mb-2"> Menú </strong>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+            <mat-selection-list [multiple]="false"> </mat-selection-list>
+          </mat-card>
+          <mat-card>
+            <mat-card-header>
+              <strong class="mb-2 flex flex-row justify-center items-center">
+                <mat-icon [svgIcon]="'heroicons_outline:cog'"></mat-icon>
+                Configuración
+              </strong>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+            <mat-selection-list [multiple]="false">
+              <mat-list-option>
+                <div class="flex flex-row justify-start items-center gap-2">
+                  <mat-icon svgIcon="heroicons_outline:user-group"></mat-icon>
+                  Usuarios
+                </div>
+              </mat-list-option>
+              <mat-list-option>
+                <div class="flex flex-row justify-start items-center gap-2">
+                  <mat-icon svgIcon="heroicons_outline:shield-check"></mat-icon>
+                  Roles
+                </div>
+              </mat-list-option>
+              <mat-list-option>
+                <div class="flex flex-row justify-start items-center gap-2">
+                  <mat-icon
+                    svgIcon="heroicons_outline:identification"
+                  ></mat-icon>
+                  Áreas internas
+                </div>
+              </mat-list-option>
+              <mat-list-option>
+                <div class="flex flex-row justify-start items-center gap-2">
+                  <mat-icon svgIcon="heroicons_outline:pencil-alt"></mat-icon>
+                  Lista de control
+                </div>
+              </mat-list-option>
+            </mat-selection-list>
+          </mat-card>
+        </div>
+      </div>
     </div>
-
+  </div>
 </div>
