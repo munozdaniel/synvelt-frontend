@@ -7,7 +7,7 @@ export const environment = {
   url: 'http://asdrovia.com/AdmInsp/',
   //   url: 'http://elosegui.org/AdmInsp/',
   site: 'http://localhost:4200',
-  version: '1.0.2',
+  version: '1.0.3',
 };
 
 /*
