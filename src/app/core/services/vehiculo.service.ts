@@ -5,11 +5,12 @@ import { Observable } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { AuthService } from '../auth/auth.service';
 import { ILocalidad } from 'app/models/iLocalidad';
+import { IVehiculoListarParams } from 'app/models/IVehiculo';
 @UntilDestroy()
 @Injectable({
   providedIn: 'root',
 })
-export class LocalidadService {
+export class VehiculoService {
   protected headers = new HttpHeaders().append(
     'Content-Type',
     'application/x-www-form-urlencoded'
@@ -36,23 +37,24 @@ export class LocalidadService {
     }
     return queryParams;
   }
+
   /**
-   * GET usuarios/ListaRol?esAdministradorAplicacion={esAdministradorAplicacion}&esAdministradorDatos={esAdministradorDatos}&id={id}
    *
    * @param parametros
    * @returns
    */
-  obtenertodos(parametros?: any): Observable<ILocalidad[]> {
+  obtenertodos(parametros?: IVehiculoListarParams): Observable<ILocalidad[]> {
     const queryParams = this.setQueryParams(parametros);
-    return this._http.get<any>(this.url + 'operacion/ListaLocalid', {
+    return this._http.get<any>(this.url + 'operacion/ListaVehiculo', {
       params: queryParams,
     });
   }
-  //   usuarios/ActualizacionRol?esAdministradorAplicacion={esAdministradorAplicacion}&esAdministradorDatos={esAdministradorDatos}&id={id}&nombre={nombre}&descripcion={descripcion}
+  //
   guardar(id: string, parametros: any): Observable<ILocalidad> {
     const queryParams = this.setQueryParams({ id });
+    // const bodyParams = this.setBodyParams(parametros)
     return this._http.post<ILocalidad>(
-      this.url + 'operacion/ActualizacionLocalidad',
+      this.url + 'operacion/ActualizacionVehiculo',
       { ...parametros },
       {
         headers: this.headers,
@@ -60,14 +62,10 @@ export class LocalidadService {
       }
     );
   }
-
-  // Eliminacion de un rol
+  //
   eliminar(id): Observable<void> {
-    const headers = new HttpHeaders()
-      .append('Content-Type', 'multipart/form-data')
-      .append('tokenUsuario', this._authService.accessToken);
     const queryParams = this.setQueryParams({ id });
-    return this._http.get<void>(this.url + 'usuarios/BajaLocalidad', {
+    return this._http.post<void>(this.url + 'operacion/BajaVehiculo', {
       headers: this.headers,
       params: queryParams,
     });

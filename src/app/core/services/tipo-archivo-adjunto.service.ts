@@ -5,11 +5,12 @@ import { Observable } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { AuthService } from '../auth/auth.service';
 import { ILocalidad } from 'app/models/iLocalidad';
+import { ITipoArchivoAdjuntoListaParam } from 'app/models/iTipoArchivoAdjunto';
 @UntilDestroy()
 @Injectable({
   providedIn: 'root',
 })
-export class LocalidadService {
+export class TipoArchivoAdjuntoService {
   protected headers = new HttpHeaders().append(
     'Content-Type',
     'application/x-www-form-urlencoded'
@@ -37,22 +38,23 @@ export class LocalidadService {
     return queryParams;
   }
   /**
-   * GET usuarios/ListaRol?esAdministradorAplicacion={esAdministradorAplicacion}&esAdministradorDatos={esAdministradorDatos}&id={id}
    *
    * @param parametros
    * @returns
    */
-  obtenertodos(parametros?: any): Observable<ILocalidad[]> {
+  obtenertodos(
+    parametros?: ITipoArchivoAdjuntoListaParam
+  ): Observable<ILocalidad[]> {
     const queryParams = this.setQueryParams(parametros);
-    return this._http.get<any>(this.url + 'operacion/ListaLocalid', {
+    return this._http.get<any>(this.url + 'operacion/ListaTipoArchivoAdjunto', {
       params: queryParams,
     });
   }
-  //   usuarios/ActualizacionRol?esAdministradorAplicacion={esAdministradorAplicacion}&esAdministradorDatos={esAdministradorDatos}&id={id}&nombre={nombre}&descripcion={descripcion}
+  //
   guardar(id: string, parametros: any): Observable<ILocalidad> {
     const queryParams = this.setQueryParams({ id });
     return this._http.post<ILocalidad>(
-      this.url + 'operacion/ActualizacionLocalidad',
+      this.url + 'operacion/ActualizacionTipoArchivoAdjunto',
       { ...parametros },
       {
         headers: this.headers,
@@ -61,15 +63,15 @@ export class LocalidadService {
     );
   }
 
-  // Eliminacion de un rol
+  //
   eliminar(id): Observable<void> {
-    const headers = new HttpHeaders()
-      .append('Content-Type', 'multipart/form-data')
-      .append('tokenUsuario', this._authService.accessToken);
     const queryParams = this.setQueryParams({ id });
-    return this._http.get<void>(this.url + 'usuarios/BajaLocalidad', {
-      headers: this.headers,
-      params: queryParams,
-    });
+    return this._http.post<void>(
+      this.url + 'operacion/BajaTipoArchivoAdjunto',
+      {
+        headers: this.headers,
+        params: queryParams,
+      }
+    );
   }
 }
