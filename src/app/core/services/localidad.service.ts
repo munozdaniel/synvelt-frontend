@@ -44,7 +44,7 @@ export class LocalidadService {
    */
   obtenertodos(parametros?: any): Observable<ILocalidad[]> {
     const queryParams = this.setQueryParams(parametros);
-    return this._http.get<any>(this.url + 'operacion/Localidades', {
+    return this._http.get<any>(this.url + 'operacion/ListaLocalid', {
       params: queryParams,
     });
   }
@@ -67,7 +67,7 @@ export class LocalidadService {
       .append('Content-Type', 'multipart/form-data')
       .append('tokenUsuario', this._authService.accessToken);
     const queryParams = this.setQueryParams({ id });
-    return this._http.get<void>(this.url + 'usuarios/EliminacionRol', {
+    return this._http.get<void>(this.url + 'usuarios/BajaLocalidad', {
       headers: this.headers,
       params: queryParams,
     });

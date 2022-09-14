@@ -3,4 +3,5 @@ export interface ILocalidad {
   nombre: string;
   codigoPostal: string;
   traza: any;
+  idEstadoEntidad?: string;
 }

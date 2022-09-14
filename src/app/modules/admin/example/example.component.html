@@ -43,10 +43,53 @@
           </mat-card>
           <mat-card>
             <mat-card-header>
-              <strong class="mb-2"> Menú </strong>
+              <strong class="mb-2"> Datos auxiliares </strong>
             </mat-card-header>
             <mat-divider></mat-divider>
-            <mat-selection-list [multiple]="false"> </mat-selection-list>
+            <mat-selection-list [multiple]="false">
+              <mat-list-option (click)="redireccionar('/vehiculos')">
+                <div class="flex flex-row justify-start items-center gap-2">
+                  <mat-icon svgIcon="heroicons_outline:truck"></mat-icon>
+                  Vehiculos
+                </div>
+              </mat-list-option>
+              <mat-list-option (click)="redireccionar('/tipo-vehiculos')">
+                <div class="flex flex-row justify-start items-center gap-2">
+                  <mat-icon svgIcon="heroicons_outline:tag"></mat-icon>
+                  Tipo de vehiculos
+                </div>
+              </mat-list-option>
+              <mat-list-option (click)="redireccionar('/tipo-archivos')">
+                <div class="flex flex-row justify-start items-center gap-2">
+                  <mat-icon svgIcon="heroicons_outline:paper-clip"></mat-icon>
+                  Tipo de archivo adjunto
+                </div>
+              </mat-list-option>
+              <mat-list-option (click)="redireccionar('/tipo-solicitud')">
+                <div class="flex flex-row justify-start items-center gap-2">
+                  <mat-icon
+                    svgIcon="heroicons_outline:clipboard-list"
+                  ></mat-icon>
+                  Tipo de solicitud
+                </div>
+              </mat-list-option>
+              <mat-list-option (click)="redireccionar('/localidades')">
+                <div class="flex flex-row justify-start items-center gap-2">
+                  <mat-icon
+                    svgIcon="heroicons_outline:location-marker"
+                  ></mat-icon>
+                  Localidades
+                </div>
+              </mat-list-option>
+              <mat-list-option (click)="redireccionar('/preguntas')">
+                <div class="flex flex-row justify-start items-center gap-2">
+                  <mat-icon
+                    svgIcon="heroicons_outline:question-mark-circle"
+                  ></mat-icon>
+                  Preguntas frecuentes
+                </div>
+              </mat-list-option>
+            </mat-selection-list>
           </mat-card>
           <mat-card>
             <mat-card-header>
@@ -81,14 +124,6 @@
                 <div class="flex flex-row justify-start items-center gap-2">
                   <mat-icon svgIcon="heroicons_outline:pencil-alt"></mat-icon>
                   Lista de control
-                </div>
-              </mat-list-option>
-              <mat-list-option (click)="redireccionar('/localidades')">
-                <div class="flex flex-row justify-start items-center gap-2">
-                  <mat-icon
-                    svgIcon="heroicons_outline:location-marker"
-                  ></mat-icon>
-                  Localidades
                 </div>
               </mat-list-option>
             </mat-selection-list>

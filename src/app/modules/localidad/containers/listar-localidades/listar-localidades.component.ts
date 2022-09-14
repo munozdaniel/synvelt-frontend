@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { LocalidadService } from 'app/core/services/localidad.service';
 import { ILocalidad } from 'app/models/iLocalidad';
-
+@UntilDestroy()
 @Component({
   selector: 'app-listar-localidades',
   templateUrl: './listar-localidades.component.html',
