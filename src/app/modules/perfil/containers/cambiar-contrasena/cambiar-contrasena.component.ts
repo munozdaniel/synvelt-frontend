@@ -121,30 +121,37 @@ export class CambiarContrasenaComponent implements OnInit, OnDestroy {
         },
       });
       return;
-    }
-    console.log(this.user);
-    const idUsuario = this.user.id;
-    this._usuarioService
-      .actualizarPassword({
-        idUsuario,
-        claveLogin: this.registerForm.controls.password.value,
-      })
-      .pipe(untilDestroyed(this))
-      .subscribe(
-        datos => {
-          if (datos) {
-            this._synveltConfirmationService.success();
-          } else {
-            this._synveltConfirmationService.error();
-          }
-          this.cargando = false;
+    } else {
+      const confirmation = this._synveltConfirmationService.open({
+        title: 'Confirmar operación',
+        message: 'Está por cambiar la contraseña, confirme esta operación.',
+        icon: {
+          show: true,
+          name: 'heroicons_outline:exclamation',
+          color: 'warn',
         },
-        error => {
-          this.cargando = false;
-          this._synveltConfirmationService.error();
-          console.log('[ERROR]', error);
+        actions: {
+          confirm: {
+            show: true,
+            label: 'Confirmar',
+            color: 'primary',
+          },
+          cancel: {
+            show: true,
+            label: 'Cancelar',
+          },
+        },
+      });
+      // Subscribe to the confirmation dialog closed action
+      confirmation.afterClosed().subscribe(result => {
+        // If the confirm button pressed...
+        if (result === 'confirmed') {
+          console.log(this.user);
+          this.confirmarOperacion();
         }
-      );
+      });
+    }
+
     //   .setPassword(
     //     this.registerForm.controls.oldPassword.value,
     //     usuarioID,
@@ -186,7 +193,30 @@ export class CambiarContrasenaComponent implements OnInit, OnDestroy {
     //     }
     //   );
   }
-
+  confirmarOperacion() {
+    const idUsuario = this.user.id;
+    this._usuarioService
+      .actualizarPassword({
+        idUsuario,
+        claveLogin: this.registerForm.controls.password.value,
+      })
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        datos => {
+          if (datos) {
+            this._synveltConfirmationService.success();
+          } else {
+            this._synveltConfirmationService.error();
+          }
+          this.cargando = false;
+        },
+        error => {
+          this.cargando = false;
+          this._synveltConfirmationService.error();
+          console.log('[ERROR]', error);
+        }
+      );
+  }
   onReset() {
     this.submitted = false;
     this.registerForm.reset();

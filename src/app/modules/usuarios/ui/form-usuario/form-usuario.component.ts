@@ -198,6 +198,8 @@ export class FormUsuarioComponent implements OnInit, OnChanges {
       if (this.esEditar) {
         delete usuario.claveLogin;
       }
+      delete usuario.rol;
+      delete usuario.areaInterna;
       console.log('usuario guardar', usuario);
       this.retForm.emit(usuario);
     }
