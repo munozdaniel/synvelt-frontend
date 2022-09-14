@@ -14,7 +14,7 @@ import { ILocalidad } from 'app/models/iLocalidad';
 export class EditarLocalidadComponent implements OnInit {
   cargando = false;
   localidad: ILocalidad;
-  localidadId: number;
+  localidadId: string;
   constructor(
     private _activeRoute: ActivatedRoute,
     private _router: Router,
@@ -83,7 +83,7 @@ export class EditarLocalidadComponent implements OnInit {
   actualizar(localidad: ILocalidad) {
     this.cargando = true;
     this._localidadService
-      .guardar({ ...localidad })
+      .guardar(this.localidadId, localidad)
       .pipe(untilDestroyed(this))
       .subscribe(
         () => {

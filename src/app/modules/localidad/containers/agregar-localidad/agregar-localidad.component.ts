@@ -54,7 +54,7 @@ export class AgregarLocalidadComponent implements OnInit {
   guardar(areaInterna: ILocalidad) {
     this.cargando = true;
     this._localidadService
-      .guardar(areaInterna)
+      .guardar(null, areaInterna)
       .pipe(untilDestroyed(this))
       .subscribe(
         () => {
