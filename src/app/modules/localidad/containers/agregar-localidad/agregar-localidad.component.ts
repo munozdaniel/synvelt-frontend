@@ -1,34 +1,28 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
-import { AreaInternaService } from 'app/core/services/area-interna.service';
 import { ErrorService } from 'app/core/services/error.service';
-import { UsuarioService } from 'app/core/services/usuario.service';
-import { IAreaInterna } from 'app/models/iAreaInterna';
-import { IUsuario } from 'app/models/iUsuario';
-
+import { LocalidadService } from 'app/core/services/localidad.service';
+import { ILocalidad } from 'app/models/iLocalidad';
 @UntilDestroy()
 @Component({
-  selector: 'app-agregar-area-interna',
-  templateUrl: './agregar-area-interna.component.html',
+  selector: 'app-agregar-localidad',
+  templateUrl: './agregar-localidad.component.html',
+  styleUrls: ['./agregar-localidad.component.scss'],
 })
-export class AgregarAreaInternaComponent implements OnInit, OnDestroy {
-  //
+export class AgregarLocalidadComponent implements OnInit {
   cargando = false;
-  cargandoUsuario = false;
-  usuarios: IUsuario[];
+
   constructor(
-    private _areaInternaService: AreaInternaService,
+    private _router: Router,
     private _errorService: ErrorService,
     private _synveltConfirmationService: SynveltConfirmationService,
-    private _router: Router
+    private _localidadService: LocalidadService
   ) {}
-  ngOnDestroy(): void {}
 
   ngOnInit(): void {}
-
-  setForm(evento: IAreaInterna) {
+  setForm(evento: ILocalidad) {
     // Open the confirmation and save the reference
     const dialogRef = this._synveltConfirmationService.open({
       title: 'Confirmar operación',
@@ -57,9 +51,9 @@ export class AgregarAreaInternaComponent implements OnInit, OnDestroy {
       }
     });
   }
-  guardar(areaInterna: IAreaInterna) {
+  guardar(areaInterna: ILocalidad) {
     this.cargando = true;
-    this._areaInternaService
+    this._localidadService
       .guardar(areaInterna)
       .pipe(untilDestroyed(this))
       .subscribe(
@@ -67,14 +61,14 @@ export class AgregarAreaInternaComponent implements OnInit, OnDestroy {
           this.cargando = false;
           const confirmation = this._synveltConfirmationService.success();
           confirmation.afterClosed().subscribe(() => {
-            this._router.navigate(['areainternas']);
+            this._router.navigate(['localidades']);
           });
         },
         error => {
           this.cargando = false;
           if (error && error.status === 409) {
             this._synveltConfirmationService.error(
-              'Error al guardar el area interna',
+              'Error al guardar la localidad',
               error.error.error.message
             );
           } else {

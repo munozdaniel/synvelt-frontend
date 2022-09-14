@@ -45,6 +45,13 @@ export const horizontalNavigation: SynveltNavigationItem[] = [
         link: '/controles',
         icon: 'heroicons_outline:pencil-alt',
       },
+      {
+        id: 'localidades',
+        title: 'Localidades',
+        type: 'basic',
+        link: '/localidades',
+        icon: 'heroicons_outline:location-marker',
+      },
     ],
   },
 ];
@@ -91,6 +98,13 @@ export const defaultNavigation: SynveltNavigationItem[] = [
         type: 'basic',
         link: '/modelos',
         icon: 'heroicons_outline:pencil-alt',
+      },
+      {
+        id: 'localidades',
+        title: 'Localidades',
+        type: 'basic',
+        link: '/localidades',
+        icon: 'heroicons_outline:location-marker',
       },
     ],
   },

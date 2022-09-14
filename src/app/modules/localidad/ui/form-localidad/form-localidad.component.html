@@ -8,17 +8,28 @@
         <mat-error *ngIf="form.controls.nombre.hasError('required')">
           Este campo es requerido.
         </mat-error>
+        <mat-error *ngIf="form.controls.nombre.hasError('maxLength')">
+          No puede superar los 50 carácteres.
+        </mat-error>
+        <mat-error *ngIf="form.controls.nombre.hasError('minLength')">
+          Tiene que tener más de un carácter.
+        </mat-error>
       </mat-form-field>
       <!--  field -->
       <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Código</mat-label>
+        <mat-label>Código postal</mat-label>
         <input
-          id="codigo"
+          id="codigoPostal"
           matInput
-          formControlName="codigo"
+          formControlName="codigoPostal"
           required
-          type="number"
         />
+        <mat-error *ngIf="form.controls.codigoPostal.hasError('maxLength')">
+          No puede superar los 5 carácteres.
+        </mat-error>
+        <mat-error *ngIf="form.controls.codigoPostal.hasError('minLength')">
+          Tiene que tener más de un carácter.
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -33,7 +44,7 @@
           color="primary"
           [disabled]="form.invalid"
         >
-          {{ areaInterna && areaInterna.id ? "Actualizar" : "Guardar" }}
+          {{ localidad && localidad.id ? "Actualizar" : "Guardar" }}
         </button>
         <button
           *ngIf="cargando"
