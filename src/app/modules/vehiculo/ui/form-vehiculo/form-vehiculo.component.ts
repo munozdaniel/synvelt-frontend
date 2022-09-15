@@ -68,6 +68,12 @@ export class FormVehiculoComponent implements OnInit, OnChanges {
       });
   }
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes.estadosEntidad && changes.estadosEntidad.currentValue) {
+      this.setAutocompleteEstadoEntidad();
+    }
+    if (changes.tipoVehiculos && changes.tipoVehiculos.currentValue) {
+      this.setAutocompleteTipoVehiculo();
+    }
     if (changes.vehiculo && changes.vehiculo.currentValue) {
       this.esEditar = true;
       this.setForm();
