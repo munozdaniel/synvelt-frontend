@@ -129,6 +129,25 @@ export class FormVehiculoComponent implements OnInit, OnChanges {
       });
     } else {
       const vehiculo = this.form.value;
+      const retorno = {};
+      if (vehiculo.id) {
+        retorno['id'] = vehiculo.id;
+      }
+      if (vehiculo.marca) {
+        retorno['marca'] = vehiculo.marca;
+      }
+      if (vehiculo.patente) {
+        retorno['patente'] = vehiculo.patente;
+      }
+      if (vehiculo.año) {
+        retorno['año'] = vehiculo.año;
+      }
+      if (vehiculo.estadoEntidad) {
+        retorno['idEstadoEntidad'] = vehiculo.estadoEntidad.id;
+      }
+      if (vehiculo.tipoVehiculo) {
+        retorno['idTipoVehiculo'] = vehiculo.tipoVehiculo.id;
+      }
       this.retForm.emit(vehiculo);
     }
   }

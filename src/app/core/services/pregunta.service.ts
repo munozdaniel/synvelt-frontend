@@ -60,7 +60,7 @@ export class PreguntaFrecuenteService {
     );
     const queryParams = this.setQueryParams({ id });
     return this._http.post<IPreguntaFrecuente>(
-      this.url + 'operacion/ActualizacionLocalidad',
+      this.url + 'operacion/ActualizacionPreguntaFrecuente',
       { ...parametros },
       {
         headers: headers,

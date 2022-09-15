@@ -87,7 +87,7 @@ export class FormLocalidadComponent implements OnInit, OnChanges {
         ],
       ],
       codigoPostal: [null, [Validators.minLength(1), Validators.maxLength(5)]],
-      traza: [null, []],
+      //   traza: [null, []],
     });
   }
 
