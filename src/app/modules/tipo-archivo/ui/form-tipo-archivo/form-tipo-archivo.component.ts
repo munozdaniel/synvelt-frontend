@@ -26,6 +26,7 @@ import { ITipoArchivo } from 'app/models/iTipoArchivoAdjunto';
   templateUrl: './form-tipo-archivo.component.html',
 })
 export class FormTipoArchivoComponent implements OnInit, OnChanges {
+  lista = ['jpg', 'jpeg', 'png', 'pdf'];
   @Input() estadosEntidad: IEstadoEntidad[];
   @Input() cargando: boolean;
   @Input() tipoArchivo?: ITipoArchivo;
@@ -118,6 +119,7 @@ export class FormTipoArchivoComponent implements OnInit, OnChanges {
           Validators.maxLength(50),
         ],
       ],
+      extensiones: [[], []],
       estadoEntidad: [null, []],
     });
   }

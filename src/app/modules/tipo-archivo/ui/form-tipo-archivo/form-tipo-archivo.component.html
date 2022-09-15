@@ -17,6 +17,15 @@
       </mat-form-field>
       <!--  -->
       <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Extensiones</mat-label>
+        <mat-select formControlName="extensiones" multiple>
+          <mat-option *ngFor="let item of lista" [value]="item">{{
+            item
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!--  -->
+      <mat-form-field appearance="outline" class="w-full">
         <mat-label class="lbl">Estado</mat-label>
         <input
           type="text"

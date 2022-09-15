@@ -47,10 +47,10 @@ export class ListarTiposArchivoComponent implements OnInit {
   }
 
   redireccionarAgregar() {
-    this._router.navigate(['tipos-archivo/nuevo']);
+    this._router.navigate(['tipo-archivo/nuevo']);
   }
   setEditar(evento: string) {
-    this._router.navigate(['tipos-archivo/editar', evento]);
+    this._router.navigate(['tipo-archivo/editar', evento]);
   }
   setEliminar(evento: string) {
     const confirmation = this._synveltConfirmationService.open({

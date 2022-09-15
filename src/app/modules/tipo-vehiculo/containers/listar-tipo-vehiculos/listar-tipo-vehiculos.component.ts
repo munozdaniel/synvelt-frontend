@@ -47,10 +47,10 @@ export class ListarTiposVehiculoComponent implements OnInit {
   }
 
   redireccionarAgregar() {
-    this._router.navigate(['tipos-vehiculo/nuevo']);
+    this._router.navigate(['tipo-vehiculo/nuevo']);
   }
   setEditar(evento: string) {
-    this._router.navigate(['tipos-vehiculo/editar', evento]);
+    this._router.navigate(['tipo-vehiculo/editar', evento]);
   }
   setEliminar(evento: string) {
     const confirmation = this._synveltConfirmationService.open({

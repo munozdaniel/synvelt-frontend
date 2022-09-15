@@ -1,20 +1,6 @@
 <div class="w-full bg-card mat-elevation-z1">
   <form [formGroup]="form" class="flex flex-col" (ngSubmit)="guardar()">
     <div class="p-8 pb-4 grid grid-cols-1 gap-2">
-      <!--  field -->
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Nombre</mat-label>
-        <input id="nombre" matInput formControlName="nombre" required />
-        <mat-error *ngIf="form.controls.nombre.hasError('required')">
-          Este campo es requerido.
-        </mat-error>
-        <mat-error *ngIf="form.controls.nombre.hasError('maxLength')">
-          No puede superar los 50 carácteres.
-        </mat-error>
-        <mat-error *ngIf="form.controls.nombre.hasError('minLength')">
-          Tiene que tener más de un carácter.
-        </mat-error>
-      </mat-form-field>
       <!-- field -->
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>Marca </mat-label>

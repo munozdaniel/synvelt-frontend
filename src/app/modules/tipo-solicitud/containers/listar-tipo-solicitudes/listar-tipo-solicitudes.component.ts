@@ -48,15 +48,15 @@ export class ListarTiposSolicitudComponent implements OnInit {
   }
 
   redireccionarAgregar() {
-    this._router.navigate(['tipos-solicitud/nuevo']);
+    this._router.navigate(['tipo-solicitud/nuevo']);
   }
   setEditar(evento: string) {
-    this._router.navigate(['tipos-solicitud/editar', evento]);
+    this._router.navigate(['tipo-solicitud/editar', evento]);
   }
   setEliminar(evento: string) {
     const confirmation = this._synveltConfirmationService.open({
       title: 'Confirmar operación',
-      message: 'Va a eliminar el tipo de vehiculo, confirme esta operación.',
+      message: 'Va a eliminar el tipo de solicitud, confirme esta operación.',
       icon: {
         show: true,
         name: 'heroicons_outline:exclamation',
