@@ -4,8 +4,10 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { AuthService } from '../auth/auth.service';
-import { ILocalidad } from 'app/models/iLocalidad';
-import { ITipoSolicitudListaParams } from 'app/models/ITipoSolicitud';
+import {
+  ITipoSolicitud,
+  ITipoSolicitudListaParams,
+} from 'app/models/ITipoSolicitud';
 @UntilDestroy()
 @Injectable({
   providedIn: 'root',
@@ -42,18 +44,18 @@ export class TipoSolicitudService {
    * @param parametros
    * @returns
    */
-  obtenertodos(
+  obtenerTodos(
     parametros?: ITipoSolicitudListaParams
-  ): Observable<ILocalidad[]> {
+  ): Observable<ITipoSolicitud[]> {
     const queryParams = this.setQueryParams(parametros);
     return this._http.get<any>(this.url + 'operacion/ListaTipoSolicitud', {
       params: queryParams,
     });
   }
   //
-  guardar(id: string, parametros: any): Observable<ILocalidad> {
+  guardar(id: string, parametros: any): Observable<ITipoSolicitud> {
     const queryParams = this.setQueryParams({ id });
-    return this._http.post<ILocalidad>(
+    return this._http.post<ITipoSolicitud>(
       this.url + 'operacion/ActualizacionTipoSolicitud',
       { ...parametros },
       {

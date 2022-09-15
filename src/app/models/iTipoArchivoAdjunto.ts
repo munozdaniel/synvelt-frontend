@@ -1,6 +1,6 @@
 import { IEstadoEntidad } from './iEstadoEntidad';
 
-export interface ITipoArchivoAdjunto {
+export interface ITipoArchivo {
   id?: string;
   nombre: string;
   extensiones: any[];

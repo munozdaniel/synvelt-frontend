@@ -31,7 +31,7 @@ export class AgregarTipoVehiculoComponent implements OnInit {
     const dialogRef = this._synveltConfirmationService.open({
       title: 'Confirmar operación',
       message:
-        'Está por guardar una nueva área interna, confirme esta operación.',
+        'Está por guardar un nuevo tipo de vehiculo, confirme esta operación.',
       icon: {
         name: 'heroicons_solid:question-mark-circle',
         color: 'info',

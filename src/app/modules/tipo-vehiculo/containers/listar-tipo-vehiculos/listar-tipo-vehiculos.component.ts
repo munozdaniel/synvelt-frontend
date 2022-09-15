@@ -13,9 +13,9 @@ import { Observable } from 'rxjs';
   templateUrl: './listar-tipo-vehiculos.component.html',
 })
 export class ListarTiposVehiculoComponent implements OnInit {
-    estadosEntidad$: Observable<IEstadoEntidad[]> =
+  estadosEntidad$: Observable<IEstadoEntidad[]> =
     this._estadoEntidadService.obtenerTodosCache();
-    cargando = false;
+  cargando = false;
   parametros: any;
   tiposVehiculo: ITipoVehiculo[];
   constructor(
@@ -47,10 +47,10 @@ export class ListarTiposVehiculoComponent implements OnInit {
   }
 
   redireccionarAgregar() {
-    this._router.navigate(['tipos-vehiculos/nuevo']);
+    this._router.navigate(['tipos-vehiculo/nuevo']);
   }
   setEditar(evento: string) {
-    this._router.navigate(['tipos-vehiculos/editar', evento]);
+    this._router.navigate(['tipos-vehiculo/editar', evento]);
   }
   setEliminar(evento: string) {
     const confirmation = this._synveltConfirmationService.open({

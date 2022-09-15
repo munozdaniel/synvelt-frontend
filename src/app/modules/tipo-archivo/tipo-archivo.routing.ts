@@ -1,24 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AgregarLocalidadComponent } from './containers/agregar-localidad/agregar-localidad.component';
-import { EditarLocalidadComponent } from './containers/editar-localidad/editar-localidad.component';
-import { ListarLocalidadesComponent } from './containers/listar-localidades/listar-localidades.component';
+import { AgregarTipoArchivoComponent } from './containers/agregar-tipo-archivo/agregar-tipo-archivo.component';
+import { EditarTipoArchivoComponent } from './containers/editar-tipo-archivo/editar-tipo-archivo.component';
+import { ListarTiposArchivoComponent } from './containers/listar-tipo-archivos/listar-tipo-archivos.component';
 // home
 const routes: Routes = [
   {
     path: '',
-    component: ListarLocalidadesComponent,
+    component: ListarTiposArchivoComponent,
     //  DEBE estar autenticados
   },
   {
     path: 'nuevo',
-    component: AgregarLocalidadComponent,
+    component: AgregarTipoArchivoComponent,
     //  DEBE estar autenticados
   },
 
   {
     path: 'editar/:id',
-    component: EditarLocalidadComponent,
+    component: EditarTipoArchivoComponent,
     //  DEBE estar autenticados
   },
 ];
@@ -27,4 +27,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class LocalidadRoutingModule {}
+export class TipoArchivoRoutingModule {}

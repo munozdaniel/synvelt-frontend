@@ -3,31 +3,35 @@ import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { ErrorService } from 'app/core/services/error.service';
-import { LocalidadService } from 'app/core/services/localidad.service';
-import { ILocalidad } from 'app/models/iLocalidad';
+import { EstadoEntidadService } from 'app/core/services/estado-entidad.service';
+import { TipoSolicitudService } from 'app/core/services/tipo-solicitud.service';
+import { IEstadoEntidad } from 'app/models/iEstadoEntidad';
+import { ITipoSolicitud } from 'app/models/iTipoSolicitud';
+import { Observable } from 'rxjs';
 @UntilDestroy()
 @Component({
-  selector: 'app-agregar-localidad',
-  templateUrl: './agregar-localidad.component.html',
-  styleUrls: ['./agregar-localidad.component.scss'],
+  selector: 'app-agregar-tipo-solicitud',
+  templateUrl: './agregar-tipo-solicitud.component.html',
 })
-export class AgregarLocalidadComponent implements OnInit {
+export class AgregarTipoSolicitudComponent implements OnInit {
   cargando = false;
-
+  estadosEntidad$: Observable<IEstadoEntidad[]> =
+  this._estadoEntidadService.obtenerTodosCache();
   constructor(
     private _router: Router,
     private _errorService: ErrorService,
     private _synveltConfirmationService: SynveltConfirmationService,
-    private _localidadService: LocalidadService
+    private _tipoVehiculoService: TipoSolicitudService,
+    private _estadoEntidadService: EstadoEntidadService
   ) {}
 
   ngOnInit(): void {}
-  setForm(evento: ILocalidad) {
+  setForm(evento: ITipoSolicitud) {
     // Open the confirmation and save the reference
     const dialogRef = this._synveltConfirmationService.open({
       title: 'Confirmar operación',
       message:
-        'Está por guardar una nueva área interna, confirme esta operación.',
+        'Está por guardar un nuevo tipo de solicitud, confirme esta operación.',
       icon: {
         name: 'heroicons_solid:question-mark-circle',
         color: 'info',
@@ -51,9 +55,9 @@ export class AgregarLocalidadComponent implements OnInit {
       }
     });
   }
-  guardar(areaInterna: ILocalidad) {
+  guardar(areaInterna: ITipoSolicitud) {
     this.cargando = true;
-    this._localidadService
+    this._tipoVehiculoService
       .guardar(null, areaInterna)
       .pipe(untilDestroyed(this))
       .subscribe(
@@ -61,14 +65,14 @@ export class AgregarLocalidadComponent implements OnInit {
           this.cargando = false;
           const confirmation = this._synveltConfirmationService.success();
           confirmation.afterClosed().subscribe(() => {
-            this._router.navigate(['localidades']);
+            this._router.navigate(['tipo-solicitudes']);
           });
         },
         error => {
           this.cargando = false;
           if (error && error.status === 409) {
             this._synveltConfirmationService.error(
-              'Error al guardar la localidad',
+              'Error al guardar la tipo-solicitud',
               error.error.error.message
             );
           } else {

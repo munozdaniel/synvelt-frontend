@@ -4,13 +4,15 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { AuthService } from '../auth/auth.service';
-import { ILocalidad } from 'app/models/iLocalidad';
-import { ITipoArchivoAdjuntoListaParam } from 'app/models/iTipoArchivoAdjunto';
+import {
+  ITipoArchivo,
+  ITipoArchivoAdjuntoListaParam,
+} from 'app/models/iTipoArchivoAdjunto';
 @UntilDestroy()
 @Injectable({
   providedIn: 'root',
 })
-export class TipoArchivoAdjuntoService {
+export class TipoArchivoService {
   protected headers = new HttpHeaders().append(
     'Content-Type',
     'application/x-www-form-urlencoded'
@@ -42,18 +44,18 @@ export class TipoArchivoAdjuntoService {
    * @param parametros
    * @returns
    */
-  obtenertodos(
+  obtenerTodos(
     parametros?: ITipoArchivoAdjuntoListaParam
-  ): Observable<ILocalidad[]> {
+  ): Observable<ITipoArchivo[]> {
     const queryParams = this.setQueryParams(parametros);
     return this._http.get<any>(this.url + 'operacion/ListaTipoArchivoAdjunto', {
       params: queryParams,
     });
   }
   //
-  guardar(id: string, parametros: any): Observable<ILocalidad> {
+  guardar(id: string, parametros: any): Observable<ITipoArchivo> {
     const queryParams = this.setQueryParams({ id });
-    return this._http.post<ILocalidad>(
+    return this._http.post<ITipoArchivo>(
       this.url + 'operacion/ActualizacionTipoArchivoAdjunto',
       { ...parametros },
       {

@@ -1,23 +1,24 @@
 <div class="flex flex-col flex-auto min-w-0 container mx-auto px-8" style="">
   <app-breadcrumb
     [breadcrumbs]="[
-      { nombre: 'Consulta de localidades', url: ['localidades'] },
-      { nombre: 'Modificar', url: ['localidades/nuevo'] }
+      { nombre: 'Consulta de tipos de archivo', url: ['tipo-archivo'] },
+      { nombre: 'Modificar', url: ['tipo-archivo/nuevo'] }
     ]"
   ></app-breadcrumb>
   <!-- Header -->
   <div
     class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between bg-transparent"
   >
-    <h3 class="titulo">Modificar localidad</h3>
+    <h3 class="titulo">Modificar tipos de archivo</h3>
     <!-- Opciones del Header -->
   </div>
   <div class="flex flex-row justify-center items-start mt-4 gap-2">
-    <app-form-localidad
+    <app-form-tipo-archivo
       class="w-5/12"
+      [estadosEntidad]="estadosEntidad$ | json"
       [cargando]="cargando"
-      [localidad]="localidad"
+      [tipoArchivo]="tipoArchivo"
       (retForm)="setForm($event)"
-    ></app-form-localidad>
+    ></app-form-tipo-archivo>
   </div>
 </div>

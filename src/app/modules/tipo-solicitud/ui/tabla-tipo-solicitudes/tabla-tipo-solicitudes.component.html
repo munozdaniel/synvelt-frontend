@@ -23,14 +23,6 @@
           </div>
         </td>
       </ng-container>
-      <!--  '',
-                          -->
-      <ng-container matColumnDef="codigoPostal">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Código postal</th>
-        <td mat-cell *matCellDef="let row">
-          <mostrar-valor [valor]="row.codigoPostal"></mostrar-valor>
-        </td>
-      </ng-container>
 
       <ng-container matColumnDef="opciones">
         <th mat-header-cell *matHeaderCellDef>
@@ -82,7 +74,7 @@
       <!-- <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="fila_detalle"></tr> -->
     </table>
     <mat-card
-      *ngIf="!localidades || localidades.length < 1"
+      *ngIf="!tipoSolicitudes || tipoSolicitudes.length < 1"
       class="bg-card mat-elevation-z0 p-4 flex flex-row justify-center items-center rounded-none"
     >
       <p>No se encontraron resultados</p>

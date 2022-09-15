@@ -35,7 +35,7 @@ export class EditarTipoVehiculoComponent implements OnInit {
         this.obtenerTipoVehiculoPorId();
       } else {
         // TODO: ConttipoVehiculoar que fucnione y mostrar mensaje: 'El tipoVehiculo solicitado no se encuentra disponible'
-        this._router.navigate(['tipo-vehiculos']);
+        this._router.navigate(['tipo-vehiculo']);
       }
     });
   }
@@ -61,7 +61,7 @@ export class EditarTipoVehiculoComponent implements OnInit {
     // Open the confirmation and save the reference
     const dialogRef = this._synveltConfirmationService.open({
       title: 'Confirmar operación',
-      message: 'Está por editar una tipoVehiculo, confirme esta operación.',
+      message: 'Está por editar un tipo de vehiculo, confirme esta operación.',
       icon: {
         name: 'heroicons_solid:question-mark-circle',
         color: 'info',

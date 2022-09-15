@@ -16,24 +16,26 @@ import {
 } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
-import { ILocalidad } from 'app/models/iLocalidad';
-import { Observable } from 'rxjs';
+import { map, Observable, startWith } from 'rxjs';
 import { Location } from '@angular/common';
+import { ITipoSolicitud } from 'app/models/ITipoSolicitud';
+import { IEstadoEntidad } from 'app/models/iEstadoEntidad';
 
 @Component({
-  selector: 'app-form-localidad',
-  templateUrl: './form-localidad.component.html',
-  styleUrls: ['./form-localidad.component.scss'],
+  selector: 'app-form-tipo-solicitud',
+  templateUrl: './form-tipo-solicitud.component.html',
 })
-export class FormLocalidadComponent implements OnInit, OnChanges {
+export class FormTipoSolicitudComponent implements OnInit, OnChanges {
+  @Input() estadosEntidad: IEstadoEntidad[];
   @Input() cargando: boolean;
-  @Input() localidad?: ILocalidad;
-  @Output() retForm = new EventEmitter<ILocalidad>();
+  @Input() tipoSolicitud?: ITipoSolicitud;
+  @Output() retForm = new EventEmitter<ITipoSolicitud>();
   @Output() retUsernameExiste = new EventEmitter<any>();
+  filteredEstadoEntidad: Observable<IEstadoEntidad[]>;
   //
   form: FormGroup;
   esEditar = false;
-  filteredLocaliILocalidades: Observable<ILocalidad[]>;
+  filteredLocaliITipoSolicitudes: Observable<ITipoSolicitud[]>;
   // Mobile
   isMobile: boolean;
   private _mobileQueryListener: () => void;
@@ -62,7 +64,10 @@ export class FormLocalidadComponent implements OnInit, OnChanges {
       });
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.localidad && changes.localidad.currentValue) {
+    if (changes.estadosEntidad && changes.estadosEntidad.currentValue) {
+      this.setAutocompleteEstadoEntidad();
+    }
+    if (changes.tipoSolicitud && changes.tipoSolicitud.currentValue) {
       this.esEditar = true;
       this.setForm();
     }
@@ -71,7 +76,35 @@ export class FormLocalidadComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.initForm();
   }
+  //  Autocomplete
+  setAutocompleteEstadoEntidad() {
+    if (!this.form) {
+      setTimeout(() => {
+        this.setAutocompleteEstadoEntidad();
+      }, 1000);
+    } else {
+      this.filteredEstadoEntidad =
+        this.form.controls.estadoEntidad.valueChanges.pipe(
+          startWith(''),
+          map(value => (typeof value === 'string' ? value : value.nombre)),
+          map(name =>
+            name ? this._filterEstadoEntidad(name) : this.estadosEntidad.slice()
+          )
+        );
+    }
+  }
+  private _filterEstadoEntidad(name: string): IEstadoEntidad[] {
+    const filterValue = name.toLowerCase();
 
+    return this.estadosEntidad.filter(option => {
+      const nombreCompleto = option.nombre;
+      // return nombreCompleto.toLowerCase().indexOf(filterValue) === 0;
+      return nombreCompleto.toLowerCase().includes(filterValue);
+    });
+  }
+  displayFnEstadoEntidad(objeto: IEstadoEntidad): string {
+    return objeto && objeto.nombre ? objeto.nombre : '';
+  }
   volver() {
     this.location.back();
   }
@@ -86,8 +119,7 @@ export class FormLocalidadComponent implements OnInit, OnChanges {
           Validators.maxLength(50),
         ],
       ],
-      codigoPostal: [null, [Validators.minLength(1), Validators.maxLength(5)]],
-      traza: [null, []],
+      estadoEntidad: [null, []],
     });
   }
 
@@ -97,7 +129,7 @@ export class FormLocalidadComponent implements OnInit, OnChanges {
         this.setForm();
       }, 1000);
     } else {
-      this.form.patchValue(this.localidad);
+      this.form.patchValue(this.tipoSolicitud);
     }
   }
 
@@ -121,8 +153,8 @@ export class FormLocalidadComponent implements OnInit, OnChanges {
         },
       });
     } else {
-      const localidad = this.form.value;
-      this.retForm.emit(localidad);
+      const tipoSolicitud = this.form.value;
+      this.retForm.emit(tipoSolicitud);
     }
   }
 }

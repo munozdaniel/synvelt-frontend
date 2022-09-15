@@ -9,24 +9,27 @@ import {
 } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
-import { IAreaInterna } from 'app/models/iAreaInterna';
-import { Observable } from 'rxjs';
+import { IEstadoEntidad } from 'app/models/iEstadoEntidad';
+import { map, Observable, startWith } from 'rxjs';
 
 @Component({
-  selector: 'app-filtro-localidades',
-  templateUrl: './filtro-localidades.component.html',
-  styleUrls: ['./filtro-localidades.component.scss'],
+  selector: 'app-filtro-tipo-solicitudes',
+  templateUrl: './filtro-tipo-solicitudes.component.html',
 })
-export class FiltroLocalidadesComponent implements OnInit, OnChanges {
+export class FiltroTiposSolicitudComponent implements OnInit, OnChanges {
   @Input() cargando = false;
+  @Input() estadosEntidad: IEstadoEntidad[];
   @Output() retFiltros = new EventEmitter<any>();
   form: FormGroup;
-  filteredAreasInternas: Observable<IAreaInterna[]>;
+  filteredEstadoEntidad: Observable<IEstadoEntidad[]>;
   constructor(
     private _fb: FormBuilder,
     private _synveltConfirmationService: SynveltConfirmationService
   ) {}
-  ngOnChanges(changes: SimpleChanges): void {}
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.estadosEntidad && changes.estadosEntidad.currentValue) {
+      this.setAutocompleteEstadoEntidad();
+    }}
   /** CAMPOS FILTRO Y ORDEN
    *
    * CUIT - Nombre del Usuario - Área Municipal -
@@ -35,7 +38,7 @@ export class FiltroLocalidadesComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.form = this._fb.group({
       nombre: [null],
-      codigoPostal: [null],
+      estadoEntidad: [[]],
     });
   }
   limpiar() {
@@ -79,4 +82,33 @@ export class FiltroLocalidadesComponent implements OnInit, OnChanges {
       this.retFiltros.emit(filtros);
     }
   }
+    //  Autocomplete
+    setAutocompleteEstadoEntidad() {
+        if (!this.form) {
+          setTimeout(() => {
+            this.setAutocompleteEstadoEntidad();
+          }, 1000);
+        } else {
+          this.filteredEstadoEntidad =
+            this.form.controls.estadoEntidad.valueChanges.pipe(
+              startWith(''),
+              map(value => (typeof value === 'string' ? value : value.nombre)),
+              map(name =>
+                name ? this._filterEstadoEntidad(name) : this.estadosEntidad.slice()
+              )
+            );
+        }
+      }
+      private _filterEstadoEntidad(name: string): IEstadoEntidad[] {
+        const filterValue = name.toLowerCase();
+
+        return this.estadosEntidad.filter(option => {
+          const nombreCompleto = option.nombre;
+          // return nombreCompleto.toLowerCase().indexOf(filterValue) === 0;
+          return nombreCompleto.toLowerCase().includes(filterValue);
+        });
+      }
+      displayFnEstadoEntidad(objeto: IEstadoEntidad): string {
+        return objeto && objeto.nombre ? objeto.nombre : '';
+      }
 }

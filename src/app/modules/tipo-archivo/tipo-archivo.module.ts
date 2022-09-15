@@ -1,18 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AgregarLocalidadComponent } from './containers/agregar-localidad/agregar-localidad.component';
-import { EditarLocalidadComponent } from './containers/editar-localidad/editar-localidad.component';
-import { ListarLocalidadesComponent } from './containers/listar-localidades/listar-localidades.component';
-import { FormLocalidadComponent } from './ui/form-localidad/form-localidad.component';
-import { TablaLocalidadesComponent } from './ui/tabla-localidades/tabla-localidades.component';
-import { LocalidadRoutingModule } from './localidad.routing';
+
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { NgxMaskModule } from 'ngx-mask';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,20 +17,27 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { SynveltCardModule } from '@synvelt/components/card';
 import { SharedModule } from 'app/shared/shared.module';
-import { FiltroLocalidadesComponent } from './ui/filtro-localidades/filtro-localidades.component';
+import { AgregarTipoArchivoComponent } from './containers/agregar-tipo-archivo/agregar-tipo-archivo.component';
+import { EditarTipoArchivoComponent } from './containers/editar-tipo-archivo/editar-tipo-archivo.component';
+import { ListarTiposArchivoComponent } from './containers/listar-tipo-archivos/listar-tipo-archivos.component';
+import { TipoArchivoRoutingModule } from './tipo-archivo.routing';
+import { FiltroTiposArchivoComponent } from './ui/filtro-tipo-archivos/filtro-tipo-archivos.component';
+import { TablaTiposArchivoComponent } from './ui/tabla-tipo-archivos/tabla-tipo-archivos.component';
+import { FormTipoArchivoComponent } from './ui/form-tipo-archivo/form-tipo-archivo.component';
 
 @NgModule({
   declarations: [
-    AgregarLocalidadComponent,
-    EditarLocalidadComponent,
-    ListarLocalidadesComponent,
-    FormLocalidadComponent,
-    TablaLocalidadesComponent,
-    FiltroLocalidadesComponent,
+    EditarTipoArchivoComponent,
+    FormTipoArchivoComponent,
+    TablaTiposArchivoComponent,
+    FiltroTiposArchivoComponent,
+    ListarTiposArchivoComponent,
+    AgregarTipoArchivoComponent,
+    EditarTipoArchivoComponent,
   ],
   imports: [
     CommonModule,
-    LocalidadRoutingModule,
+    TipoArchivoRoutingModule,
     SharedModule,
     MatButtonModule,
     MatIconModule,
@@ -57,4 +58,4 @@ import { FiltroLocalidadesComponent } from './ui/filtro-localidades/filtro-local
     MatTooltipModule,
   ],
 })
-export class LocalidadModule {}
+export class TipoArchivoModule {}
