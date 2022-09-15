@@ -45,17 +45,19 @@ export class AuthInterceptor implements HttpInterceptor {
       //   !AuthUtils.isTokenExpired(this._authService.accessToken)
     ) {
       newReq = req.clone({
-        headers: req.headers.set('tokenUsuario', this._authService.accessToken),
-        // headers: req.headers.set(
-        //   'Authorization',
-        //   'Bearer ' + this._authService.accessToken
-        // ),
+        // headers: req.headers.set('tokenUsuario', this._authService.accessToken),
+        // withCredentials: true,
+        headers: req.headers.set(
+          'Authorization',
+          this._authService.accessToken
+        ),
       });
     }
 
     // Response
     return next.handle(newReq).pipe(
       catchError(error => {
+        console.log('interceptor', error);
         // Catch "401 Unauthorized" responses
         if (error instanceof HttpErrorResponse && error.status === 401) {
           // Sign out

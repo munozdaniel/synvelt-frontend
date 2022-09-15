@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import {
+  HttpBackend,
+  HttpClient,
+  HttpHeaders,
+  HttpParams,
+} from '@angular/common/http';
 import { finalize, Observable, of, switchMap, throwError } from 'rxjs';
 import { UserService } from 'app/core/user/user.service';
 import { environment } from 'environments/environment';
@@ -14,15 +19,18 @@ export class AuthService {
   );
   private _authenticated: boolean = false;
   protected url = environment.url;
-
+  private _httpClientBackend;
   /**
    * Constructor
    */
   constructor(
+    private _handler: HttpBackend,
     private _httpClient: HttpClient,
     private _userService: UserService,
     private _usuarioService: UsuarioService
-  ) {}
+  ) {
+    this._httpClientBackend = new HttpClient(_handler);
+  }
   private setQueryParams(parametros) {
     let queryParams = new HttpParams();
     if (parametros) {
@@ -89,7 +97,7 @@ export class AuthService {
     }
     const queryParams = this.setQueryParams(credentials);
 
-    return this._httpClient
+    return this._httpClientBackend
       .get(this.url + 'autorizacion/ValidacionUsuario', {
         params: queryParams,
         headers: this.headers,
