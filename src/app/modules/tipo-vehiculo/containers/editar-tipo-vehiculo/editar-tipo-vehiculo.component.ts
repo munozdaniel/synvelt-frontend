@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
   templateUrl: './editar-tipo-vehiculo.component.html',
 })
 export class EditarTipoVehiculoComponent implements OnInit {
-    estadosEntidad$: Observable<IEstadoEntidad[]> =
+  estadosEntidad$: Observable<IEstadoEntidad[]> =
     this._estadoEntidadService.obtenerTodosCache();
   cargando = false;
   tipoVehiculo: ITipoVehiculo;
@@ -95,7 +95,7 @@ export class EditarTipoVehiculoComponent implements OnInit {
           this.cargando = false;
           const confirmation = this._synveltConfirmationService.success();
           confirmation.afterClosed().subscribe(() => {
-            this._router.navigate(['tipoVehiculoes']);
+            this._router.navigate(['tipo-vehiculo']);
           });
         },
         error => {

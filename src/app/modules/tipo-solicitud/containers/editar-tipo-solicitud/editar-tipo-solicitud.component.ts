@@ -35,7 +35,7 @@ export class EditarTipoSolicitudComponent implements OnInit {
         this.obtenerTipoSolicitudPorId();
       } else {
         // TODO: ConttipoSolicitudar que fucnione y mostrar mensaje: 'El tipoSolicitud solicitado no se encuentra disponible'
-        this._router.navigate(['tipo-solicituds']);
+        this._router.navigate(['tipo-solicitud']);
       }
     });
   }
@@ -95,7 +95,7 @@ export class EditarTipoSolicitudComponent implements OnInit {
           this.cargando = false;
           const confirmation = this._synveltConfirmationService.success();
           confirmation.afterClosed().subscribe(() => {
-            this._router.navigate(['tipoSolicitudes']);
+            this._router.navigate(['tipo-solicitud']);
           });
         },
         error => {

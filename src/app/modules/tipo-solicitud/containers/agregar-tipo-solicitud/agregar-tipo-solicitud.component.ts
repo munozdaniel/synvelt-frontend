@@ -65,14 +65,14 @@ export class AgregarTipoSolicitudComponent implements OnInit {
           this.cargando = false;
           const confirmation = this._synveltConfirmationService.success();
           confirmation.afterClosed().subscribe(() => {
-            this._router.navigate(['tipo-solicitudes']);
+            this._router.navigate(['tipo-solicitud']);
           });
         },
         error => {
           this.cargando = false;
           if (error && error.status === 409) {
             this._synveltConfirmationService.error(
-              'Error al guardar la tipo-solicitud',
+              'Error al guardar el tipo solicitud',
               error.error.error.message
             );
           } else {

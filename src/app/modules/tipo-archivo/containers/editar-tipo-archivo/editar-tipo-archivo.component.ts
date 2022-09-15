@@ -95,7 +95,7 @@ export class EditarTipoArchivoComponent implements OnInit {
           this.cargando = false;
           const confirmation = this._synveltConfirmationService.success();
           confirmation.afterClosed().subscribe(() => {
-            this._router.navigate(['tipoArchivoes']);
+            this._router.navigate(['tipo-archivo']);
           });
         },
         error => {

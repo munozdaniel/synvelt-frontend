@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 export class AgregarTipoVehiculoComponent implements OnInit {
   cargando = false;
   estadosEntidad$: Observable<IEstadoEntidad[]> =
-  this._estadoEntidadService.obtenerTodosCache();
+    this._estadoEntidadService.obtenerTodosCache();
   constructor(
     private _router: Router,
     private _errorService: ErrorService,
@@ -65,14 +65,14 @@ export class AgregarTipoVehiculoComponent implements OnInit {
           this.cargando = false;
           const confirmation = this._synveltConfirmationService.success();
           confirmation.afterClosed().subscribe(() => {
-            this._router.navigate(['tipo-vehiculoes']);
+            this._router.navigate(['tipo-vehiculo']);
           });
         },
         error => {
           this.cargando = false;
           if (error && error.status === 409) {
             this._synveltConfirmationService.error(
-              'Error al guardar la tipo-vehiculo',
+              'Error al guardar el tipo vehiculo',
               error.error.error.message
             );
           } else {
