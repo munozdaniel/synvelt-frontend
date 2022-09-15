@@ -3,26 +3,30 @@ import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { ErrorService } from 'app/core/services/error.service';
-import { LocalidadService } from 'app/core/services/localidad.service';
-import { ILocalidad } from 'app/models/iLocalidad';
+import { EstadoEntidadService } from 'app/core/services/estado-entidad.service';
+import { TipoVehiculoService } from 'app/core/services/tipo-vehiculo.service';
+import { IEstadoEntidad } from 'app/models/iEstadoEntidad';
+import { ITipoVehiculo } from 'app/models/iTipoVehiculo';
+import { Observable } from 'rxjs';
 @UntilDestroy()
 @Component({
-  selector: 'app-agregar-localidad',
-  templateUrl: './agregar-localidad.component.html',
-  styleUrls: ['./agregar-localidad.component.scss'],
+  selector: 'app-agregar-tipo-vehiculo',
+  templateUrl: './agregar-tipo-vehiculo.component.html',
 })
-export class AgregarLocalidadComponent implements OnInit {
+export class AgregarTipoVehiculoComponent implements OnInit {
   cargando = false;
-
+  estadosEntidad$: Observable<IEstadoEntidad[]> =
+  this._estadoEntidadService.obtenerTodosCache();
   constructor(
     private _router: Router,
     private _errorService: ErrorService,
     private _synveltConfirmationService: SynveltConfirmationService,
-    private _localidadService: LocalidadService
+    private _tipoVehiculoService: TipoVehiculoService,
+    private _estadoEntidadService: EstadoEntidadService
   ) {}
 
   ngOnInit(): void {}
-  setForm(evento: ILocalidad) {
+  setForm(evento: ITipoVehiculo) {
     // Open the confirmation and save the reference
     const dialogRef = this._synveltConfirmationService.open({
       title: 'Confirmar operación',
@@ -51,9 +55,9 @@ export class AgregarLocalidadComponent implements OnInit {
       }
     });
   }
-  guardar(areaInterna: ILocalidad) {
+  guardar(areaInterna: ITipoVehiculo) {
     this.cargando = true;
-    this._localidadService
+    this._tipoVehiculoService
       .guardar(null, areaInterna)
       .pipe(untilDestroyed(this))
       .subscribe(
@@ -61,14 +65,14 @@ export class AgregarLocalidadComponent implements OnInit {
           this.cargando = false;
           const confirmation = this._synveltConfirmationService.success();
           confirmation.afterClosed().subscribe(() => {
-            this._router.navigate(['localidades']);
+            this._router.navigate(['tipo-vehiculoes']);
           });
         },
         error => {
           this.cargando = false;
           if (error && error.status === 409) {
             this._synveltConfirmationService.error(
-              'Error al guardar la localidad',
+              'Error al guardar la tipo-vehiculo',
               error.error.error.message
             );
           } else {

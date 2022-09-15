@@ -1,18 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AgregarLocalidadComponent } from './containers/agregar-localidad/agregar-localidad.component';
-import { EditarLocalidadComponent } from './containers/editar-localidad/editar-localidad.component';
-import { ListarLocalidadesComponent } from './containers/listar-localidades/listar-localidades.component';
-import { FormLocalidadComponent } from './ui/form-localidad/form-localidad.component';
-import { TablaLocalidadesComponent } from './ui/tabla-localidades/tabla-localidades.component';
-import { LocalidadRoutingModule } from './localidad.routing';
+
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { NgxMaskModule } from 'ngx-mask';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,20 +17,27 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { SynveltCardModule } from '@synvelt/components/card';
 import { SharedModule } from 'app/shared/shared.module';
-import { FiltroLocalidadesComponent } from './ui/filtro-localidades/filtro-localidades.component';
+import { AgregarTipoVehiculoComponent } from './containers/agregar-tipo-vehiculo/agregar-tipo-vehiculo.component';
+import { EditarTipoVehiculoComponent } from './containers/editar-tipo-vehiculo/editar-tipo-vehiculo.component';
+import { ListarTiposVehiculoComponent } from './containers/listar-tipo-vehiculos/listar-tipo-vehiculos.component';
+import { TipoVehiculoRoutingModule } from './tipo-vehiculo.routing';
+import { FiltroTiposVehiculoComponent } from './ui/filtro-tipo-vehiculos/filtro-tipo-vehiculos.component';
+import { TablaTiposVehiculoComponent } from './ui/tabla-tipo-vehiculos/tabla-tipo-vehiculos.component';
+import { FormTipoVehiculoComponent } from './ui/form-tipo-vehiculo/form-tipo-vehiculo.component';
 
 @NgModule({
   declarations: [
-    AgregarLocalidadComponent,
-    EditarLocalidadComponent,
-    ListarLocalidadesComponent,
-    FormLocalidadComponent,
-    TablaLocalidadesComponent,
-    FiltroLocalidadesComponent,
+    EditarTipoVehiculoComponent,
+    FormTipoVehiculoComponent,
+    TablaTiposVehiculoComponent,
+    FiltroTiposVehiculoComponent,
+    ListarTiposVehiculoComponent,
+    AgregarTipoVehiculoComponent,
+    EditarTipoVehiculoComponent,
   ],
   imports: [
     CommonModule,
-    LocalidadRoutingModule,
+    TipoVehiculoRoutingModule,
     SharedModule,
     MatButtonModule,
     MatIconModule,
@@ -57,4 +58,4 @@ import { FiltroLocalidadesComponent } from './ui/filtro-localidades/filtro-local
     MatTooltipModule,
   ],
 })
-export class LocalidadModule {}
+export class TipoVehiculoModule {}

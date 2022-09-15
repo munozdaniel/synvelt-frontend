@@ -34,7 +34,14 @@ export class FiltroVehiculosComponent implements OnInit, OnChanges {
     private _fb: FormBuilder,
     private _synveltConfirmationService: SynveltConfirmationService
   ) {}
-  ngOnChanges(changes: SimpleChanges): void {}
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.estadosEntidad && changes.estadosEntidad.currentValue) {
+      this.setAutocompleteEstadoEntidad();
+    }
+    if (changes.tipoVehiculos && changes.tipoVehiculos.currentValue) {
+      this.setAutocompleteTipoVehiculo();
+    }
+  }
   /**
    *
    */

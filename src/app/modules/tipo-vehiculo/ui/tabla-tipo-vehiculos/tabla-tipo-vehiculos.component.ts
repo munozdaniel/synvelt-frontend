@@ -26,14 +26,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { synveltAnimations } from '@synvelt/animations';
-import { ILocalidad } from 'app/models/iLocalidad';
+import { ITipoVehiculo } from 'app/models/ITipoVehiculo';
 
-const columnasMD = ['nombre', 'codigoPostal', 'opciones'];
+const columnasMD = ['nombre', 'opciones'];
 const columnasXS = ['nombre', 'opciones'];
 @Component({
-  selector: 'app-tabla-localidades',
-  templateUrl: './tabla-localidades.component.html',
-  styleUrls: ['./tabla-localidades.component.scss'],
+  selector: 'app-tabla-tipo-vehiculos',
+  templateUrl: './tabla-tipo-vehiculos.component.html',
   animations: [
     synveltAnimations,
     trigger('detailExpand', [
@@ -46,8 +45,8 @@ const columnasXS = ['nombre', 'opciones'];
     ]),
   ],
 })
-export class TablaLocalidadesComponent implements OnInit, OnChanges {
-  @Input() localidades: ILocalidad[];
+export class TablaTiposVehiculoComponent implements OnInit, OnChanges {
+  @Input() tipoVehiculos: ITipoVehiculo[];
   @Input() cargando: boolean;
   @Output() retEliminar = new EventEmitter<string>();
   @Output() retEditar = new EventEmitter<string>();
@@ -59,7 +58,7 @@ export class TablaLocalidadesComponent implements OnInit, OnChanges {
   @ViewChild('paginator') set setPaginator(paginator: MatPaginator) {
     this.dataSource.paginator = paginator;
   }
-  expandedElement: ILocalidad | null;
+  expandedElement: ITipoVehiculo | null;
   // Mobile
   isMobile: boolean;
   private _mobileQueryListener: () => void;
@@ -87,8 +86,8 @@ export class TablaLocalidadesComponent implements OnInit, OnChanges {
       });
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.localidades && changes.localidades.currentValue) {
-      this.dataSource.data = this.localidades;
+    if (changes.tipoVehiculos && changes.tipoVehiculos.currentValue) {
+      this.dataSource.data = this.tipoVehiculos;
     }
   }
 
@@ -96,11 +95,14 @@ export class TablaLocalidadesComponent implements OnInit, OnChanges {
     this.customSearchSortTable();
   }
   customSearchSortTable() {
-    this.dataSource.filterPredicate = (data: ILocalidad, filters: string) => {
+    this.dataSource.filterPredicate = (
+      data: ITipoVehiculo,
+      filters: string
+    ) => {
       const matchFilter = [];
       const filterArray = filters.split(',');
       //   TODO: Verificar si hace falta agregar mas coluymnas
-      const columns = [data.nombre, data.codigoPostal];
+      const columns = [data.nombre];
 
       filterArray.forEach(filter => {
         const customFilter = [];
@@ -114,7 +116,7 @@ export class TablaLocalidadesComponent implements OnInit, OnChanges {
       return matchFilter.every(Boolean); // AND
     };
 
-    this.dataSource.sortingDataAccessor = (item: ILocalidad, property) => {
+    this.dataSource.sortingDataAccessor = (item: ITipoVehiculo, property) => {
       //   property es el nombre de la columna, no del atributo de item.
       switch (property) {
         // case 'empresa':
@@ -131,10 +133,10 @@ export class TablaLocalidadesComponent implements OnInit, OnChanges {
       this.dataSource.paginator.firstPage();
     }
   }
-  editar(row: ILocalidad) {
+  editar(row: ITipoVehiculo) {
     this.retEditar.emit(row.id);
   }
-  eliminar(row: ILocalidad) {
+  eliminar(row: ITipoVehiculo) {
     this.retEliminar.emit(row.id);
   }
 }

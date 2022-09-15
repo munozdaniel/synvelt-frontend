@@ -15,21 +15,39 @@
           Tiene que tener más de un carácter.
         </mat-error>
       </mat-form-field>
-      <!--  field -->
+      <!--  -->
       <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Código postal</mat-label>
+        <mat-label class="lbl">Estado</mat-label>
         <input
-          id="codigoPostal"
+          type="text"
           matInput
-          formControlName="codigoPostal"
-          required
+          class="input is-medium"
+          autocomplete="off"
+          formControlName="estadoEntidad"
+          [matAutocomplete]="autoEstadoEntidad"
         />
-        <mat-error *ngIf="form.controls.codigoPostal.hasError('maxLength')">
-          No puede superar los 5 carácteres.
-        </mat-error>
-        <mat-error *ngIf="form.controls.codigoPostal.hasError('minLength')">
-          Tiene que tener más de un carácter.
-        </mat-error>
+        <mat-icon *ngIf="!form.controls.estadoEntidad.value" matSuffix
+          >search</mat-icon
+        >
+        <mat-icon
+          class="cursor-pointer hover:font-bold"
+          matTooltip="Limpiar selección"
+          *ngIf="form.controls.estadoEntidad.value"
+          (click)="form.controls.estadoEntidad.setValue('')"
+          matSuffix
+          >close</mat-icon
+        >
+        <mat-autocomplete
+          #autoEstadoEntidad="matAutocomplete"
+          [displayWith]="displayFnEstadoEntidad"
+        >
+          <mat-option
+            *ngFor="let option of filteredEstadoEntidad | async"
+            [value]="option"
+          >
+            {{ option.nombre }}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
     </div>
 

@@ -2,22 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
-import { LocalidadService } from 'app/core/services/localidad.service';
-import { ILocalidad } from 'app/models/iLocalidad';
+import { EstadoEntidadService } from 'app/core/services/estado-entidad.service';
+import { TipoVehiculoService } from 'app/core/services/tipo-vehiculo.service';
+import { IEstadoEntidad } from 'app/models/iEstadoEntidad';
+import { ITipoVehiculo } from 'app/models/iTipoVehiculo';
+import { Observable } from 'rxjs';
 @UntilDestroy()
 @Component({
-  selector: 'app-listar-localidades',
-  templateUrl: './listar-localidades.component.html',
-  styleUrls: ['./listar-localidades.component.scss'],
+  selector: 'app-listar-tipos-vehiculo',
+  templateUrl: './listar-tipo-vehiculos.component.html',
 })
-export class ListarLocalidadesComponent implements OnInit {
-  cargando = false;
+export class ListarTiposVehiculoComponent implements OnInit {
+    estadosEntidad$: Observable<IEstadoEntidad[]> =
+    this._estadoEntidadService.obtenerTodosCache();
+    cargando = false;
   parametros: any;
-  localidades: ILocalidad[];
+  tiposVehiculo: ITipoVehiculo[];
   constructor(
-    private _localidadService: LocalidadService,
+    private _tipoVehiculoService: TipoVehiculoService,
     private _router: Router,
-    private _synveltConfirmationService: SynveltConfirmationService
+    private _synveltConfirmationService: SynveltConfirmationService,
+    private _estadoEntidadService: EstadoEntidadService
   ) {}
 
   ngOnInit(): void {
@@ -26,13 +31,13 @@ export class ListarLocalidadesComponent implements OnInit {
 
   obtenerTodos() {
     this.cargando = true;
-    this._localidadService
-      .obtenertodos(this.parametros)
+    this._tipoVehiculoService
+      .obtenerTodos(this.parametros)
       .pipe(untilDestroyed(this))
       .subscribe(
         datos => {
           this.cargando = false;
-          this.localidades = datos as any;
+          this.tiposVehiculo = datos as any;
         },
         error => {
           console.log('[ERROR]', error);
@@ -42,15 +47,15 @@ export class ListarLocalidadesComponent implements OnInit {
   }
 
   redireccionarAgregar() {
-    this._router.navigate(['localidades/nuevo']);
+    this._router.navigate(['tipos-vehiculos/nuevo']);
   }
   setEditar(evento: string) {
-    this._router.navigate(['localidades/editar', evento]);
+    this._router.navigate(['tipos-vehiculos/editar', evento]);
   }
   setEliminar(evento: string) {
     const confirmation = this._synveltConfirmationService.open({
       title: 'Confirmar operación',
-      message: 'Va a eliminar el área interna, confirme esta operación.',
+      message: 'Va a eliminar el tipo de vehiculo, confirme esta operación.',
       icon: {
         show: true,
         name: 'heroicons_outline:exclamation',
@@ -78,7 +83,7 @@ export class ListarLocalidadesComponent implements OnInit {
   }
   confirmarEliminar(id: string) {
     this.cargando = true;
-    this._localidadService
+    this._tipoVehiculoService
       .eliminar(id)
       .pipe(untilDestroyed(this))
       .subscribe(
