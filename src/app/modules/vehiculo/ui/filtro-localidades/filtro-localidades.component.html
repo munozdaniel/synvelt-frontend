@@ -1,0 +1,43 @@
+<form
+  [formGroup]="form"
+  class="bg-card mat-elevation-z1 flex flex-col w-full"
+  (ngSubmit)="filtrar()"
+>
+  <div class="p-8 grid grid-cols-1 gap-2">
+    <!--  nombre field -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Nombre </mat-label>
+      <input id="nombre" matInput formControlName="nombre" />
+    </mat-form-field>
+
+    <!--  codigo field -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Código postal</mat-label>
+      <input id="codigoPostal" matInput formControlName="codigoPostal" />
+    </mat-form-field>
+  </div>
+
+  <div class="flex flex-row justify-between items-center -mt-3 mb-4 px-6">
+    <button
+      mat-stroked-button
+      color="primary"
+      [disabled]="cargando"
+      type="button"
+      (click)="limpiar()"
+    >
+      Limpiar
+    </button>
+    <button
+      *ngIf="!cargando"
+      mat-raised-button
+      color="primary"
+      [disabled]="form.invalid"
+      type="submit"
+    >
+      Filtrar
+    </button>
+    <button *ngIf="cargando" mat-raised-button color="warn" [disabled]="true">
+      Cargando...
+    </button>
+  </div>
+</form>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { ErrorService } from 'app/core/services/error.service';
@@ -7,27 +7,56 @@ import { LocalidadService } from 'app/core/services/localidad.service';
 import { ILocalidad } from 'app/models/iLocalidad';
 @UntilDestroy()
 @Component({
-  selector: 'app-agregar-localidad',
-  templateUrl: './agregar-localidad.component.html',
-  styleUrls: ['./agregar-localidad.component.scss'],
+  selector: 'app-editar-localidad',
+  templateUrl: './editar-localidad.component.html',
+  styleUrls: ['./editar-localidad.component.scss'],
 })
-export class AgregarLocalidadComponent implements OnInit {
+export class EditarLocalidadComponent implements OnInit {
   cargando = false;
-
+  localidad: ILocalidad;
+  localidadId: string;
   constructor(
+    private _activeRoute: ActivatedRoute,
     private _router: Router,
     private _errorService: ErrorService,
     private _synveltConfirmationService: SynveltConfirmationService,
     private _localidadService: LocalidadService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._activeRoute.params.subscribe(params => {
+      this.localidadId = params['id'];
+      if (this.localidadId) {
+        this.obtenerLocalidadPorId();
+      } else {
+        // TODO: Contlocalidadar que fucnione y mostrar mensaje: 'El localidad solicitado no se encuentra disponible'
+        this._router.navigate(['localidads']);
+      }
+    });
+  }
+  obtenerLocalidadPorId() {
+    this.cargando = true;
+    this._localidadService
+      .obtenertodos({ id: this.localidadId })
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        datos => {
+          this.cargando = false;
+          if (datos && datos.length > 0) {
+            this.localidad = datos[0];
+          }
+        },
+        error => {
+          this.cargando = false;
+          console.log('[ERROR]', error);
+        }
+      );
+  }
   setForm(evento: ILocalidad) {
     // Open the confirmation and save the reference
     const dialogRef = this._synveltConfirmationService.open({
       title: 'Confirmar operación',
-      message:
-        'Está por guardar una nueva localidad, confirme esta operación.',
+      message: 'Está por editar una localidad, confirme esta operación.',
       icon: {
         name: 'heroicons_solid:question-mark-circle',
         color: 'info',
@@ -47,14 +76,14 @@ export class AgregarLocalidadComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       if (result === 'confirmed') {
-        this.guardar(evento);
+        this.actualizar(evento);
       }
     });
   }
-  guardar(areaInterna: ILocalidad) {
+  actualizar(localidad: ILocalidad) {
     this.cargando = true;
     this._localidadService
-      .guardar(null, areaInterna)
+      .guardar(this.localidadId, localidad)
       .pipe(untilDestroyed(this))
       .subscribe(
         () => {
@@ -66,14 +95,7 @@ export class AgregarLocalidadComponent implements OnInit {
         },
         error => {
           this.cargando = false;
-          if (error && error.status === 409) {
-            this._synveltConfirmationService.error(
-              'Error al guardar la localidad',
-              error.error.error.message
-            );
-          } else {
-            this._errorService.showMessage(error);
-          }
+          this._errorService.showMessage(error);
           console.log('[ERROR]', error);
         }
       );

@@ -7,19 +7,21 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { IAreaInterna } from 'app/models/iAreaInterna';
-import { Observable, startWith, map } from 'rxjs';
+import { Observable } from 'rxjs';
+
 @Component({
-  selector: 'app-filtro-areas-internas',
-  templateUrl: './filtro-areas-internas.component.html',
+  selector: 'app-filtro-localidades',
+  templateUrl: './filtro-localidades.component.html',
+  styleUrls: ['./filtro-localidades.component.scss'],
 })
-export class FiltroAreasInternasComponent implements OnInit, OnChanges {
+export class FiltroLocalidadesComponent implements OnInit, OnChanges {
   @Input() cargando = false;
   @Output() retFiltros = new EventEmitter<any>();
   form: FormGroup;
-//   filteredAreasInternas: Observable<IAreaInterna[]>;
+  filteredAreasInternas: Observable<IAreaInterna[]>;
   constructor(
     private _fb: FormBuilder,
     private _synveltConfirmationService: SynveltConfirmationService
@@ -33,7 +35,7 @@ export class FiltroAreasInternasComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.form = this._fb.group({
       nombre: [null],
-      codigo: [null],
+      codigoPostal: [null],
     });
   }
   limpiar() {
@@ -70,8 +72,8 @@ export class FiltroAreasInternasComponent implements OnInit, OnChanges {
       if (parametros.nombre) {
         filtros.nombre = parametros.nombre;
       }
-      if (parametros.codigo) {
-        filtros.codigo = parametros.codigo;
+      if (parametros.codigoPostal) {
+        filtros.codigoPostal = parametros.codigoPostal;
       }
 
       this.retFiltros.emit(filtros);
