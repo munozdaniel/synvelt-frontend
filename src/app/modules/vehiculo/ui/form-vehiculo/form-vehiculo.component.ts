@@ -31,7 +31,7 @@ export class FormVehiculoComponent implements OnInit, OnChanges {
   @Input() tipoVehiculos: ITipoVehiculo[];
   @Input() cargando: boolean;
   @Input() vehiculo?: IVehiculo;
-  @Output() retForm = new EventEmitter<IVehiculo>();
+  @Output() retForm = new EventEmitter<any>();
   @Output() retUsernameExiste = new EventEmitter<any>();
   //
   filteredEstadoEntidad: Observable<IEstadoEntidad[]>;
@@ -148,7 +148,7 @@ export class FormVehiculoComponent implements OnInit, OnChanges {
       if (vehiculo.tipoVehiculo) {
         retorno['idTipoVehiculo'] = vehiculo.tipoVehiculo.id;
       }
-      this.retForm.emit(vehiculo);
+      this.retForm.emit(retorno);
     }
   }
   //  Autocomplete
