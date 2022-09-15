@@ -54,12 +54,16 @@ export class TipoSolicitudService {
   }
   //
   guardar(id: string, parametros: any): Observable<ITipoSolicitud> {
+    const headers = new HttpHeaders().append(
+      'Content-Type',
+      'multipart/form-data'
+    );
     const queryParams = this.setQueryParams({ id });
     return this._http.post<ITipoSolicitud>(
       this.url + 'operacion/ActualizacionTipoSolicitud',
       { ...parametros },
       {
-        headers: this.headers,
+        headers: headers,
         params: queryParams,
       }
     );

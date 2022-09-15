@@ -54,12 +54,16 @@ export class PreguntaFrecuenteService {
   }
 
   guardar(id: string, parametros: any): Observable<IPreguntaFrecuente> {
+    const headers = new HttpHeaders().append(
+      'Content-Type',
+      'multipart/form-data'
+    );
     const queryParams = this.setQueryParams({ id });
     return this._http.post<IPreguntaFrecuente>(
       this.url + 'operacion/ActualizacionLocalidad',
       { ...parametros },
       {
-        headers: this.headers,
+        headers: headers,
         params: queryParams,
       }
     );

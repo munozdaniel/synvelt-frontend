@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, shareReplay, Subject, takeUntil } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { AuthService } from '../auth/auth.service';
-import { ILocalidad } from 'app/models/iLocalidad';
 import { IEstadoEntidad } from 'app/models/iEstadoEntidad';
 @UntilDestroy()
 @Injectable({
@@ -53,7 +52,6 @@ export class EstadoEntidadService {
   }
   obtenerTodosCache(parametros?: any): Observable<IEstadoEntidad[]> {
     if (!this.cacheEstadoEntidad$) {
-      console.log('cache empty => refreshing');
       const queryParams = this.setQueryParams(parametros);
       this.cacheEstadoEntidad$ = this._http
         .get<any>(this.url + 'operacion/ListaEstadoEntidad', {

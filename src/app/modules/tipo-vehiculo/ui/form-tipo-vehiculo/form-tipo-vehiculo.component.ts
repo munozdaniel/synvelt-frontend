@@ -25,13 +25,11 @@ import { IEstadoEntidad } from 'app/models/iEstadoEntidad';
   selector: 'app-form-tipo-vehiculo',
   templateUrl: './form-tipo-vehiculo.component.html',
 })
-export class FormTipoVehiculoComponent
-  implements OnInit, OnChanges
-{
+export class FormTipoVehiculoComponent implements OnInit, OnChanges {
   @Input() estadosEntidad: IEstadoEntidad[];
   @Input() cargando: boolean;
   @Input() tipoVehiculo?: ITipoVehiculo;
-  @Output() retForm = new EventEmitter<ITipoVehiculo>();
+  @Output() retForm = new EventEmitter<any>();
   @Output() retUsernameExiste = new EventEmitter<any>();
   filteredEstadoEntidad: Observable<IEstadoEntidad[]>;
   //
@@ -156,7 +154,14 @@ export class FormTipoVehiculoComponent
       });
     } else {
       const tipoVehiculo = this.form.value;
-      this.retForm.emit(tipoVehiculo);
+      const retorno: any = {};
+      if (tipoVehiculo.nombre) {
+        retorno['nombre'] = tipoVehiculo.nombre;
+      }
+      if (tipoVehiculo.estadoEntidad) {
+        retorno['idEstadoEntidad'] = tipoVehiculo.estadoEntidad.id;
+      }
+      this.retForm.emit(retorno);
     }
   }
 }

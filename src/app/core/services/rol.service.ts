@@ -102,9 +102,6 @@ export class RolService {
   }
   // Eliminacion de un rol
   eliminar(id): Observable<void> {
-    const headers = new HttpHeaders()
-      .append('Content-Type', 'multipart/form-data')
-      .append('tokenUsuario', this._authService.accessToken);
     const queryParams = this.setQueryParams({ id });
     return this._http.get<void>(this.url + 'usuarios/EliminacionRol', {
       headers: this.headers,

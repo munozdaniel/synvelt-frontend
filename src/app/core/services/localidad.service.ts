@@ -44,18 +44,22 @@ export class LocalidadService {
    */
   obtenertodos(parametros?: any): Observable<ILocalidad[]> {
     const queryParams = this.setQueryParams(parametros);
-    return this._http.get<any>(this.url + 'operacion/ListaLocalid', {
+    return this._http.get<any>(this.url + 'operacion/ListaLocalidad', {
       params: queryParams,
     });
   }
   //   usuarios/ActualizacionRol?esAdministradorAplicacion={esAdministradorAplicacion}&esAdministradorDatos={esAdministradorDatos}&id={id}&nombre={nombre}&descripcion={descripcion}
   guardar(id: string, parametros: any): Observable<ILocalidad> {
+    const headers = new HttpHeaders().append(
+      'Content-Type',
+      'multipart/form-data'
+    );
     const queryParams = this.setQueryParams({ id });
     return this._http.post<ILocalidad>(
       this.url + 'operacion/ActualizacionLocalidad',
       { ...parametros },
       {
-        headers: this.headers,
+        headers: headers,
         params: queryParams,
       }
     );
@@ -67,7 +71,7 @@ export class LocalidadService {
       .append('Content-Type', 'multipart/form-data')
       .append('tokenUsuario', this._authService.accessToken);
     const queryParams = this.setQueryParams({ id });
-    return this._http.get<void>(this.url + 'usuarios/BajaLocalidad', {
+    return this._http.get<void>(this.url + 'operacion/BajaLocalidad', {
       headers: this.headers,
       params: queryParams,
     });

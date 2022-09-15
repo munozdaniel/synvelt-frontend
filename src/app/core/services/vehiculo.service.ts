@@ -50,13 +50,17 @@ export class VehiculoService {
   }
   //
   guardar(id: string, parametros: any): Observable<IVehiculo> {
+    const headers = new HttpHeaders().append(
+      'Content-Type',
+      'multipart/form-data'
+    );
     const queryParams = this.setQueryParams({ id });
     // const bodyParams = this.setBodyParams(parametros)
     return this._http.post<IVehiculo>(
       this.url + 'operacion/ActualizacionVehiculo',
       { ...parametros },
       {
-        headers: this.headers,
+        headers: headers,
         params: queryParams,
       }
     );

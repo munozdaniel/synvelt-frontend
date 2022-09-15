@@ -54,12 +54,16 @@ export class TipoArchivoService {
   }
   //
   guardar(id: string, parametros: any): Observable<ITipoArchivo> {
+    const headers = new HttpHeaders().append(
+      'Content-Type',
+      'multipart/form-data'
+    );
     const queryParams = this.setQueryParams({ id });
     return this._http.post<ITipoArchivo>(
       this.url + 'operacion/ActualizacionTipoArchivoAdjunto',
       { ...parametros },
       {
-        headers: this.headers,
+        headers: headers,
         params: queryParams,
       }
     );
