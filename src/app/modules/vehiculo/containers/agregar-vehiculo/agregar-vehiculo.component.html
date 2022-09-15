@@ -16,7 +16,7 @@
     <app-form-vehiculo
       class="w-5/12"
       [cargando]="cargando"
-      [estadosEntidad]="estadosEntidad$ | json"
+      [estadosEntidad]="estadosEntidad$ | async"
       [tipoVehiculos]="tipoVehiculo$ | json"
       (retForm)="setForm($event)"
     ></app-form-vehiculo>

@@ -28,7 +28,7 @@
   >
     <app-filtro-tipo-solicitudes
       class="w-full md:w-4/12"
-      [estadosEntidad]="estadosEntidad$ | json"
+      [estadosEntidad]="estadosEntidad$ | async"
       [cargando]="cargando"
       (retFiltros)="setFiltros($event)"
     >

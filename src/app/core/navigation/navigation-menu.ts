@@ -28,14 +28,14 @@ export const horizontalNavigation: SynveltNavigationItem[] = [
         id: 'tipo-vehiculos',
         title: 'Tipo de vehiculos',
         type: 'basic',
-        link: '/tipo-vehiculos',
+        link: '/tipo-vehiculo',
         icon: 'heroicons_outline:tag',
       },
       {
         id: 'tipo-archivo-adjunto',
         title: 'Tipo de archivo adjunto',
         type: 'basic',
-        link: '/tipo-archivos',
+        link: '/tipo-archivo',
         icon: 'heroicons_outline:paper-clip',
       },
       {
@@ -125,14 +125,14 @@ export const defaultNavigation: SynveltNavigationItem[] = [
         id: 'tipo-vehiculos',
         title: 'Tipo de vehiculos',
         type: 'basic',
-        link: '/tipo-vehiculos',
+        link: '/tipo-vehiculo',
         icon: 'heroicons_outline:tag',
       },
       {
         id: 'tipo-archivo-adjunto',
         title: 'Tipo de archivo adjunto',
         type: 'basic',
-        link: '/tipo-archivos',
+        link: '/tipo-archivo',
         icon: 'heroicons_outline:paper-clip',
       },
       {

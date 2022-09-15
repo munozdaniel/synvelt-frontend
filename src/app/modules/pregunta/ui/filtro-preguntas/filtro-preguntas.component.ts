@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
-import { IAreaInterna } from 'app/models/iAreaInterna';
 import { IEstadoEntidad } from 'app/models/iEstadoEntidad';
 import { map, Observable, startWith } from 'rxjs';
 
@@ -40,7 +39,7 @@ export class FiltroPreguntasFrecuentesComponent implements OnInit, OnChanges {
    */
   ngOnInit(): void {
     this.form = this._fb.group({
-      agrupacion: [null],
+      titulo: [null],
       estadoEntidad: [null],
     });
   }

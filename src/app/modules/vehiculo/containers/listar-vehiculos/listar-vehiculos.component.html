@@ -27,7 +27,7 @@
     <app-filtro-vehiculos
       class="w-full md:w-4/12"
       [cargando]="cargando"
-      [estadosEntidad]="estadosEntidad$ | json"
+      [estadosEntidad]="estadosEntidad$ | async"
       [tipoVehiculos]="tipoVehiculos$ | json"
       (retFiltros)="setFiltros($event)"
     >

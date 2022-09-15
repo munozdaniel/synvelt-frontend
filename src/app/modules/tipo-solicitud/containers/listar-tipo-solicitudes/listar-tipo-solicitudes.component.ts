@@ -18,6 +18,7 @@ export class ListarTiposSolicitudComponent implements OnInit {
   cargando = false;
   parametros: any;
   tiposSolicitud: ITipoSolicitud[];
+  estadosEntidad: IEstadoEntidad[];
   constructor(
     private _tipoSolicitudService: TipoSolicitudService,
     private _router: Router,
