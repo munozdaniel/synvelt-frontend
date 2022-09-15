@@ -16,23 +16,26 @@ import {
 } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
-import { IPreguntaFrecuente } from 'app/models/iPreguntaFrecuente';
-import { map, Observable, startWith } from 'rxjs';
+import { IVehiculo } from 'app/models/iVehiculo';
 import { Location } from '@angular/common';
 import { IEstadoEntidad } from 'app/models/iEstadoEntidad';
+import { ITipoVehiculo } from 'app/models/ITipoVehiculo';
+import { startWith, map, Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-form-pregunta',
-  templateUrl: './form-pregunta.component.html',
+  selector: 'app-form-vehiculo',
+  templateUrl: './form-vehiculo.component.html',
 })
-export class FormPreguntaFrecuenteComponent implements OnInit, OnChanges {
+export class FormVehiculoComponent implements OnInit, OnChanges {
   @Input() estadosEntidad: IEstadoEntidad[];
+  @Input() tipoVehiculos: ITipoVehiculo[];
   @Input() cargando: boolean;
-  @Input() pregunta?: IPreguntaFrecuente;
-  @Output() retForm = new EventEmitter<IPreguntaFrecuente>();
+  @Input() vehiculo?: IVehiculo;
+  @Output() retForm = new EventEmitter<IVehiculo>();
   @Output() retUsernameExiste = new EventEmitter<any>();
   //
   filteredEstadoEntidad: Observable<IEstadoEntidad[]>;
+  filteredTipoVehiculo: Observable<IEstadoEntidad[]>;
 
   //
   form: FormGroup;
@@ -65,10 +68,7 @@ export class FormPreguntaFrecuenteComponent implements OnInit, OnChanges {
       });
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.estadosEntidad && changes.estadosEntidad.currentValue) {
-      this.setAutocompleteEstadoEntidad();
-    }
-    if (changes.pregunta && changes.pregunta.currentValue) {
+    if (changes.vehiculo && changes.vehiculo.currentValue) {
       this.esEditar = true;
       this.setForm();
     }
@@ -84,20 +84,11 @@ export class FormPreguntaFrecuenteComponent implements OnInit, OnChanges {
   initForm(): void {
     this.form = this._fb.group({
       id: [null, []],
-      titulo: [
-        null,
-        [
-          Validators.required,
-          Validators.minLength(0),
-          Validators.maxLength(100),
-        ],
-      ],
-      explicacion: [
-        null,
-        [Validators.minLength(0), Validators.maxLength(4000)],
-      ],
-      agrupacion: [null, []],
-      estadoEntidad: [null],
+      marca: [null, [Validators.minLength(1), Validators.maxLength(30)]],
+      patente: [null, [Validators.minLength(1), Validators.maxLength(10)]],
+      año: [null, [Validators.min(0)]],
+      estadoEntidad: [null, []],
+      tipoVehiculo: [null, []],
     });
   }
 
@@ -107,7 +98,7 @@ export class FormPreguntaFrecuenteComponent implements OnInit, OnChanges {
         this.setForm();
       }, 1000);
     } else {
-      this.form.patchValue(this.pregunta);
+      this.form.patchValue(this.vehiculo);
     }
   }
 
@@ -131,8 +122,8 @@ export class FormPreguntaFrecuenteComponent implements OnInit, OnChanges {
         },
       });
     } else {
-      const pregunta = this.form.value;
-      this.retForm.emit(pregunta);
+      const vehiculo = this.form.value;
+      this.retForm.emit(vehiculo);
     }
   }
   //  Autocomplete
@@ -162,6 +153,35 @@ export class FormPreguntaFrecuenteComponent implements OnInit, OnChanges {
     });
   }
   displayFnEstadoEntidad(objeto: IEstadoEntidad): string {
+    return objeto && objeto.nombre ? objeto.nombre : '';
+  }
+  //  Autocomplete
+  setAutocompleteTipoVehiculo() {
+    if (!this.form) {
+      setTimeout(() => {
+        this.setAutocompleteTipoVehiculo();
+      }, 1000);
+    } else {
+      this.filteredTipoVehiculo =
+        this.form.controls.tipoVehiculo.valueChanges.pipe(
+          startWith(''),
+          map(value => (typeof value === 'string' ? value : value.nombre)),
+          map(name =>
+            name ? this._filterTipoVehiculo(name) : this.tipoVehiculos.slice()
+          )
+        );
+    }
+  }
+  private _filterTipoVehiculo(name: string): ITipoVehiculo[] {
+    const filterValue = name.toLowerCase();
+
+    return this.tipoVehiculos.filter(option => {
+      const nombreCompleto = option.nombre;
+      // return nombreCompleto.toLowerCase().indexOf(filterValue) === 0;
+      return nombreCompleto.toLowerCase().includes(filterValue);
+    });
+  }
+  displayFnTipoVehiculo(objeto: IEstadoEntidad): string {
     return objeto && objeto.nombre ? objeto.nombre : '';
   }
 }

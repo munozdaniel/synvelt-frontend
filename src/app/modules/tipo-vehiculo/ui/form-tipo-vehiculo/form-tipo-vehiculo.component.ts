@@ -16,27 +16,24 @@ import {
 } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
-import { IPreguntaFrecuente } from 'app/models/iPreguntaFrecuente';
-import { map, Observable, startWith } from 'rxjs';
+import { ILocalidad } from 'app/models/iLocalidad';
+import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
-import { IEstadoEntidad } from 'app/models/iEstadoEntidad';
 
 @Component({
-  selector: 'app-form-pregunta',
-  templateUrl: './form-pregunta.component.html',
+  selector: 'app-form-localidad',
+  templateUrl: './form-localidad.component.html',
+  styleUrls: ['./form-localidad.component.scss'],
 })
-export class FormPreguntaFrecuenteComponent implements OnInit, OnChanges {
-  @Input() estadosEntidad: IEstadoEntidad[];
+export class FormLocalidadComponent implements OnInit, OnChanges {
   @Input() cargando: boolean;
-  @Input() pregunta?: IPreguntaFrecuente;
-  @Output() retForm = new EventEmitter<IPreguntaFrecuente>();
+  @Input() localidad?: ILocalidad;
+  @Output() retForm = new EventEmitter<ILocalidad>();
   @Output() retUsernameExiste = new EventEmitter<any>();
-  //
-  filteredEstadoEntidad: Observable<IEstadoEntidad[]>;
-
   //
   form: FormGroup;
   esEditar = false;
+  filteredLocaliILocalidades: Observable<ILocalidad[]>;
   // Mobile
   isMobile: boolean;
   private _mobileQueryListener: () => void;
@@ -65,10 +62,7 @@ export class FormPreguntaFrecuenteComponent implements OnInit, OnChanges {
       });
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.estadosEntidad && changes.estadosEntidad.currentValue) {
-      this.setAutocompleteEstadoEntidad();
-    }
-    if (changes.pregunta && changes.pregunta.currentValue) {
+    if (changes.localidad && changes.localidad.currentValue) {
       this.esEditar = true;
       this.setForm();
     }
@@ -84,20 +78,16 @@ export class FormPreguntaFrecuenteComponent implements OnInit, OnChanges {
   initForm(): void {
     this.form = this._fb.group({
       id: [null, []],
-      titulo: [
+      nombre: [
         null,
         [
           Validators.required,
-          Validators.minLength(0),
-          Validators.maxLength(100),
+          Validators.minLength(1),
+          Validators.maxLength(50),
         ],
       ],
-      explicacion: [
-        null,
-        [Validators.minLength(0), Validators.maxLength(4000)],
-      ],
-      agrupacion: [null, []],
-      estadoEntidad: [null],
+      codigoPostal: [null, [Validators.minLength(1), Validators.maxLength(5)]],
+      traza: [null, []],
     });
   }
 
@@ -107,7 +97,7 @@ export class FormPreguntaFrecuenteComponent implements OnInit, OnChanges {
         this.setForm();
       }, 1000);
     } else {
-      this.form.patchValue(this.pregunta);
+      this.form.patchValue(this.localidad);
     }
   }
 
@@ -131,37 +121,8 @@ export class FormPreguntaFrecuenteComponent implements OnInit, OnChanges {
         },
       });
     } else {
-      const pregunta = this.form.value;
-      this.retForm.emit(pregunta);
+      const localidad = this.form.value;
+      this.retForm.emit(localidad);
     }
-  }
-  //  Autocomplete
-  setAutocompleteEstadoEntidad() {
-    if (!this.form) {
-      setTimeout(() => {
-        this.setAutocompleteEstadoEntidad();
-      }, 1000);
-    } else {
-      this.filteredEstadoEntidad =
-        this.form.controls.estadoEntidad.valueChanges.pipe(
-          startWith(''),
-          map(value => (typeof value === 'string' ? value : value.nombre)),
-          map(name =>
-            name ? this._filterEstadoEntidad(name) : this.estadosEntidad.slice()
-          )
-        );
-    }
-  }
-  private _filterEstadoEntidad(name: string): IEstadoEntidad[] {
-    const filterValue = name.toLowerCase();
-
-    return this.estadosEntidad.filter(option => {
-      const nombreCompleto = option.nombre;
-      // return nombreCompleto.toLowerCase().indexOf(filterValue) === 0;
-      return nombreCompleto.toLowerCase().includes(filterValue);
-    });
-  }
-  displayFnEstadoEntidad(objeto: IEstadoEntidad): string {
-    return objeto && objeto.nombre ? objeto.nombre : '';
   }
 }

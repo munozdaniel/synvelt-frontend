@@ -4,8 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { AuthService } from '../auth/auth.service';
-import { ILocalidad } from 'app/models/iLocalidad';
-import { IVehiculoListarParams } from 'app/models/IVehiculo';
+import { IVehiculo, IVehiculoListarParams } from 'app/models/IVehiculo';
 @UntilDestroy()
 @Injectable({
   providedIn: 'root',
@@ -43,17 +42,17 @@ export class VehiculoService {
    * @param parametros
    * @returns
    */
-  obtenertodos(parametros?: IVehiculoListarParams): Observable<ILocalidad[]> {
+  obtenertodos(parametros?: IVehiculoListarParams): Observable<IVehiculo[]> {
     const queryParams = this.setQueryParams(parametros);
     return this._http.get<any>(this.url + 'operacion/ListaVehiculo', {
       params: queryParams,
     });
   }
   //
-  guardar(id: string, parametros: any): Observable<ILocalidad> {
+  guardar(id: string, parametros: any): Observable<IVehiculo> {
     const queryParams = this.setQueryParams({ id });
     // const bodyParams = this.setBodyParams(parametros)
-    return this._http.post<ILocalidad>(
+    return this._http.post<IVehiculo>(
       this.url + 'operacion/ActualizacionVehiculo',
       { ...parametros },
       {

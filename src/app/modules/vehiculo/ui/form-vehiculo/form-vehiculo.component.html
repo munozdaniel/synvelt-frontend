@@ -1,0 +1,153 @@
+<div class="w-full bg-card mat-elevation-z1">
+  <form [formGroup]="form" class="flex flex-col" (ngSubmit)="guardar()">
+    <div class="p-8 pb-4 grid grid-cols-1 gap-2">
+      <!--  field -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Nombre</mat-label>
+        <input id="nombre" matInput formControlName="nombre" required />
+        <mat-error *ngIf="form.controls.nombre.hasError('required')">
+          Este campo es requerido.
+        </mat-error>
+        <mat-error *ngIf="form.controls.nombre.hasError('maxLength')">
+          No puede superar los 50 carácteres.
+        </mat-error>
+        <mat-error *ngIf="form.controls.nombre.hasError('minLength')">
+          Tiene que tener más de un carácter.
+        </mat-error>
+      </mat-form-field>
+      <!-- field -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Marca </mat-label>
+        <input id="marca" matInput formControlName="marca" required="" />
+        <mat-error *ngIf="form.controls.marca.hasError('required')">
+          Este campo es requerido.
+        </mat-error>
+        <mat-error *ngIf="form.controls.marca.hasError('maxLength')">
+          No puede superar los 30 carácteres.
+        </mat-error>
+        <mat-error *ngIf="form.controls.marca.hasError('minLength')">
+          Tiene que tener más de un carácter.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- field -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Patente</mat-label>
+        <input id="patente" matInput formControlName="patente" required="" />
+        <mat-error *ngIf="form.controls.patente.hasError('required')">
+          Este campo es requerido.
+        </mat-error>
+        <mat-error *ngIf="form.controls.patente.hasError('maxLength')">
+          No puede superar los 10 carácteres.
+        </mat-error>
+        <mat-error *ngIf="form.controls.patente.hasError('minLength')">
+          Tiene que tener más de un carácter.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- field -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Año</mat-label>
+        <input id="año" matInput formControlName="año" min="0" />
+        <mat-error *ngIf="form.controls.patente.hasError('required')">
+          Este campo es requerido.
+        </mat-error>
+        <mat-error *ngIf="form.controls.patente.hasError('min')">
+          Debe ser mayor a 0
+        </mat-error>
+      </mat-form-field>
+      <!--  -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label class="lbl">Tipo de vehiculo</mat-label>
+        <input
+          type="text"
+          matInput
+          class="input is-medium"
+          autocomplete="off"
+          formControlName="tipoVehiculo"
+          [matAutocomplete]="autoTipoVehiculo"
+        />
+        <mat-icon *ngIf="!form.controls.tipoVehiculo.value" matSuffix
+          >search</mat-icon
+        >
+        <mat-icon
+          class="cursor-pointer hover:font-bold"
+          matTooltip="Limpiar selección"
+          *ngIf="form.controls.tipoVehiculo.value"
+          (click)="form.controls.tipoVehiculo.setValue('')"
+          matSuffix
+          >close</mat-icon
+        >
+        <mat-autocomplete
+          #autoTipoVehiculo="matAutocomplete"
+          [displayWith]="displayFnTipoVehiculo"
+        >
+          <mat-option
+            *ngFor="let option of filteredTipoVehiculo | async"
+            [value]="option"
+          >
+            {{ option.nombre }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <!--  -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label class="lbl">Estado</mat-label>
+        <input
+          type="text"
+          matInput
+          class="input is-medium"
+          autocomplete="off"
+          formControlName="estadoEntidad"
+          [matAutocomplete]="autoEstadoEntidad"
+        />
+        <mat-icon *ngIf="!form.controls.estadoEntidad.value" matSuffix
+          >search</mat-icon
+        >
+        <mat-icon
+          class="cursor-pointer hover:font-bold"
+          matTooltip="Limpiar selección"
+          *ngIf="form.controls.estadoEntidad.value"
+          (click)="form.controls.estadoEntidad.setValue('')"
+          matSuffix
+          >close</mat-icon
+        >
+        <mat-autocomplete
+          #autoEstadoEntidad="matAutocomplete"
+          [displayWith]="displayFnEstadoEntidad"
+        >
+          <mat-option
+            *ngFor="let option of filteredEstadoEntidad | async"
+            [value]="option"
+          >
+            {{ option.nombre }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+
+    <div class="flex flex-row justify-center items-center min-w-full mt-4 mb-6">
+      <div class="flex flex-row justify-between items-start gap-8">
+        <button mat-raised-button color="warn" (click)="volver()">
+          Cancelar
+        </button>
+        <button
+          *ngIf="!cargando"
+          mat-raised-button
+          color="primary"
+          [disabled]="form.invalid"
+        >
+          {{ localidad && localidad.id ? "Actualizar" : "Guardar" }}
+        </button>
+        <button
+          *ngIf="cargando"
+          mat-raised-button
+          color="warn"
+          [disabled]="true"
+        >
+          Cargando...
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

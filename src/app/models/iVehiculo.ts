@@ -4,9 +4,9 @@ import { ITipoVehiculo } from './ITipoVehiculo';
 export interface IVehiculo {
   id?: string;
   marca: string;
-  idTipoVehiculo: string;
   patente: string;
   año: number;
+  idTipoVehiculo: string;
   idEstadoEntidad: string;
   //
   tipoVehiculo?: ITipoVehiculo;

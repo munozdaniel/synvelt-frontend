@@ -1,0 +1,24 @@
+<div class="flex flex-col flex-auto min-w-0 container mx-auto px-8">
+  <app-breadcrumb
+    [breadcrumbs]="[
+      { nombre: 'Consulta de vehiculos', url: ['vehiculos'] },
+      { nombre: 'Nuevo', url: ['vehiculos/nuevo'] }
+    ]"
+  ></app-breadcrumb>
+  <!-- Header -->
+  <div
+    class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between bg-transparent"
+  >
+    <h3 class="titulo">Nueva vehiculo</h3>
+    <!-- Opciones del Header -->
+  </div>
+  <div class="flex flex-row justify-center items-start mt-4 gap-2">
+    <app-form-vehiculo
+      class="w-5/12"
+      [cargando]="cargando"
+      [estadosEntidad]="estadosEntidad$ | json"
+      [tipoVehiculos]="tipoVehiculo$ | json"
+      (retForm)="setForm($event)"
+    ></app-form-vehiculo>
+  </div>
+</div>
