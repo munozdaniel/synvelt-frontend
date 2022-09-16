@@ -28,7 +28,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { synveltAnimations } from '@synvelt/animations';
 import { IVehiculo } from 'app/models/iVehiculo';
 
-const columnasMD = ['nombre', 'codigoPostal', 'opciones'];
+const columnasMD = ['marca', 'patente','año','tipoVehiculo','estadoEntidad', 'opciones'];
 const columnasXS = ['nombre', 'opciones'];
 @Component({
   selector: 'app-tabla-vehiculos',

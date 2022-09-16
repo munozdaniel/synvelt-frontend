@@ -29,14 +29,14 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-2">
           <mat-card>
             <mat-card-header>
-              <strong class="mb-2"> Menú </strong>
+              <strong class="mb-2"> - </strong>
             </mat-card-header>
             <mat-divider></mat-divider>
             <mat-selection-list [multiple]="false"> </mat-selection-list>
           </mat-card>
           <mat-card>
             <mat-card-header>
-              <strong class="mb-2"> Menú </strong>
+              <strong class="mb-2"> - </strong>
             </mat-card-header>
             <mat-divider></mat-divider>
             <mat-selection-list [multiple]="false"> </mat-selection-list>
@@ -47,32 +47,6 @@
             </mat-card-header>
             <mat-divider></mat-divider>
             <mat-selection-list [multiple]="false">
-              <mat-list-option (click)="redireccionar('/vehiculos')">
-                <div class="flex flex-row justify-start items-center gap-2">
-                  <mat-icon svgIcon="heroicons_outline:truck"></mat-icon>
-                  Vehiculos
-                </div>
-              </mat-list-option>
-              <mat-list-option (click)="redireccionar('/tipo-vehiculo')">
-                <div class="flex flex-row justify-start items-center gap-2">
-                  <mat-icon svgIcon="heroicons_outline:tag"></mat-icon>
-                  Tipo de vehiculos
-                </div>
-              </mat-list-option>
-              <mat-list-option (click)="redireccionar('/tipo-archivo')">
-                <div class="flex flex-row justify-start items-center gap-2">
-                  <mat-icon svgIcon="heroicons_outline:paper-clip"></mat-icon>
-                  Tipo de archivo adjunto
-                </div>
-              </mat-list-option>
-              <mat-list-option (click)="redireccionar('/tipo-solicitud')">
-                <div class="flex flex-row justify-start items-center gap-2">
-                  <mat-icon
-                    svgIcon="heroicons_outline:clipboard-list"
-                  ></mat-icon>
-                  Tipo de solicitud
-                </div>
-              </mat-list-option>
               <mat-list-option (click)="redireccionar('/localidades')">
                 <div class="flex flex-row justify-start items-center gap-2">
                   <mat-icon
@@ -89,6 +63,32 @@
                   Preguntas frecuentes
                 </div>
               </mat-list-option>
+              <mat-list-option (click)="redireccionar('/tipo-archivo')">
+                <div class="flex flex-row justify-start items-center gap-2">
+                  <mat-icon svgIcon="heroicons_outline:paper-clip"></mat-icon>
+                  Tipo de archivo adjunto
+                </div>
+              </mat-list-option>
+              <mat-list-option (click)="redireccionar('/tipo-solicitud')">
+                <div class="flex flex-row justify-start items-center gap-2">
+                  <mat-icon
+                    svgIcon="heroicons_outline:clipboard-list"
+                  ></mat-icon>
+                  Tipo de solicitud
+                </div>
+              </mat-list-option>
+              <mat-list-option (click)="redireccionar('/tipo-vehiculo')">
+                <div class="flex flex-row justify-start items-center gap-2">
+                  <mat-icon svgIcon="heroicons_outline:tag"></mat-icon>
+                  Tipo de vehiculos
+                </div>
+              </mat-list-option>
+              <mat-list-option (click)="redireccionar('/vehiculos')">
+                <div class="flex flex-row justify-start items-center gap-2">
+                  <mat-icon svgIcon="heroicons_outline:truck"></mat-icon>
+                  Vehiculos
+                </div>
+              </mat-list-option>
             </mat-selection-list>
           </mat-card>
           <mat-card>
@@ -100,18 +100,6 @@
             </mat-card-header>
             <mat-divider></mat-divider>
             <mat-selection-list [multiple]="false">
-              <mat-list-option (click)="redireccionar('/usuarios')">
-                <div class="flex flex-row justify-start items-center gap-2">
-                  <mat-icon svgIcon="heroicons_outline:user-group"></mat-icon>
-                  Usuarios
-                </div>
-              </mat-list-option>
-              <mat-list-option (click)="redireccionar('/roles')">
-                <div class="flex flex-row justify-start items-center gap-2">
-                  <mat-icon svgIcon="heroicons_outline:shield-check"></mat-icon>
-                  Roles
-                </div>
-              </mat-list-option>
               <mat-list-option (click)="redireccionar('/areainternas')">
                 <div class="flex flex-row justify-start items-center gap-2">
                   <mat-icon
@@ -120,10 +108,22 @@
                   Áreas internas
                 </div>
               </mat-list-option>
-              <mat-list-option (click)="redireccionar('/controles')">
+              <mat-list-option (click)="redireccionar('/modelos')">
                 <div class="flex flex-row justify-start items-center gap-2">
                   <mat-icon svgIcon="heroicons_outline:pencil-alt"></mat-icon>
                   Lista de control
+                </div>
+              </mat-list-option>
+              <mat-list-option (click)="redireccionar('/roles')">
+                <div class="flex flex-row justify-start items-center gap-2">
+                  <mat-icon svgIcon="heroicons_outline:shield-check"></mat-icon>
+                  Roles
+                </div>
+              </mat-list-option>
+              <mat-list-option (click)="redireccionar('/usuarios')">
+                <div class="flex flex-row justify-start items-center gap-2">
+                  <mat-icon svgIcon="heroicons_outline:user-group"></mat-icon>
+                  Usuarios
                 </div>
               </mat-list-option>
             </mat-selection-list>
