@@ -71,9 +71,13 @@ export class TipoSolicitudService {
 
   //
   eliminar(id): Observable<void> {
+    const headers = new HttpHeaders().append(
+      'Content-Type',
+      'multipart/form-data'
+    );
     const queryParams = this.setQueryParams({ id });
     return this._http.post<void>(this.url + 'operacion/BajaTipoSolicitud', {
-      headers: this.headers,
+      headers: headers,
       params: queryParams,
     });
   }
