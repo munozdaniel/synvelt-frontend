@@ -166,6 +166,12 @@ export class FormVehiculoComponent implements OnInit, OnChanges {
             name ? this._filterEstadoEntidad(name) : this.estadosEntidad.slice()
           )
         );
+      if (this.vehiculo) {
+        const estado = this.estadosEntidad.find(
+          x => x.id === this.vehiculo.idEstadoEntidad
+        );
+        this.form.controls.estadoEntidad.setValue(estado);
+      }
     }
   }
   private _filterEstadoEntidad(name: string): IEstadoEntidad[] {
@@ -195,6 +201,12 @@ export class FormVehiculoComponent implements OnInit, OnChanges {
             name ? this._filterTipoVehiculo(name) : this.tipoVehiculos.slice()
           )
         );
+      if (this.vehiculo) {
+        const tipo = this.tipoVehiculos.find(
+          x => x.id === this.vehiculo.idTipoVehiculo
+        );
+        this.form.controls.tipoVehiculo.setValue(tipo);
+      }
     }
   }
   private _filterTipoVehiculo(name: string): ITipoVehiculo[] {

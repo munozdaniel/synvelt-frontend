@@ -91,6 +91,12 @@ export class FormTipoSolicitudComponent implements OnInit, OnChanges {
             name ? this._filterEstadoEntidad(name) : this.estadosEntidad.slice()
           )
         );
+      if (this.tipoSolicitud) {
+        const estado = this.estadosEntidad.find(
+          x => x.id === this.tipoSolicitud.idEstadoEntidad
+        );
+        this.form.controls.estadoEntidad.setValue(estado);
+      }
     }
   }
   private _filterEstadoEntidad(name: string): IEstadoEntidad[] {
