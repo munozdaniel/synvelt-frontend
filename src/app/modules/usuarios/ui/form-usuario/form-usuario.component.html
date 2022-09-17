@@ -10,7 +10,7 @@
         <mat-error *ngIf="form.controls.nombre.hasError('required')">
           Este campo es requerido.
         </mat-error>
-        <mat-error *ngIf="form.controls.nombre.hasError('maxLength')">
+        <mat-error *ngIf="form.controls.nombre.hasError('maxlength')">
           Máximo 30 carácteres.
         </mat-error>
       </mat-form-field>
@@ -21,7 +21,7 @@
         <mat-error *ngIf="form.controls.apellido.hasError('required')">
           Este campo es requerido.
         </mat-error>
-        <mat-error *ngIf="form.controls.apellido.hasError('maxLength')">
+        <mat-error *ngIf="form.controls.apellido.hasError('maxlength')">
           Máximo 20 carácteres.
         </mat-error>
       </mat-form-field>
@@ -38,7 +38,7 @@
         <mat-error *ngIf="form.controls.cuil.hasError('required')">
           Este campo es requerido.
         </mat-error>
-        <mat-error *ngIf="form.controls.cuil.hasError('maxLength')">
+        <mat-error *ngIf="form.controls.cuil.hasError('maxlength')">
           Máximo 11 carácteres.
         </mat-error>
       </mat-form-field>
@@ -70,7 +70,7 @@
         <mat-error *ngIf="form.controls.direccionMail.hasError('email')">
           No es un formato de email correcto
         </mat-error>
-        <mat-error *ngIf="form.controls.direccionMail.hasError('maxLength')">
+        <mat-error *ngIf="form.controls.direccionMail.hasError('maxlength')">
           Máximo 256 carácteres.
         </mat-error>
       </mat-form-field>
@@ -83,7 +83,7 @@
           formControlName="telefono"
           type="number"
         />
-        <mat-error *ngIf="form.controls.telefono.hasError('maxLength')">
+        <mat-error *ngIf="form.controls.telefono.hasError('maxlength')">
           Máximo 12 caracteres
         </mat-error>
       </mat-form-field>
@@ -187,7 +187,7 @@
         ></textarea>
         <mat-hint align="end">{{ observacion.value.length }} / 4000</mat-hint>
 
-        <mat-error *ngIf="form.controls.direccionMail.hasError('maxLength')">
+        <mat-error *ngIf="form.controls.direccionMail.hasError('maxlength')">
           Máximo 4000 carácteres.
         </mat-error>
       </mat-form-field>

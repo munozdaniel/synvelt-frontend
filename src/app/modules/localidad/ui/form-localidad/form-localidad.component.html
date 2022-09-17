@@ -8,10 +8,10 @@
         <mat-error *ngIf="form.controls.nombre.hasError('required')">
           Este campo es requerido.
         </mat-error>
-        <mat-error *ngIf="form.controls.nombre.hasError('maxLength')">
+        <mat-error *ngIf="form.controls.nombre.hasError('maxlength')">
           No puede superar los 50 carácteres.
         </mat-error>
-        <mat-error *ngIf="form.controls.nombre.hasError('minLength')">
+        <mat-error *ngIf="form.controls.nombre.hasError('minlength')">
           Tiene que tener más de un carácter.
         </mat-error>
       </mat-form-field>
@@ -24,10 +24,10 @@
           formControlName="codigoPostal"
           required
         />
-        <mat-error *ngIf="form.controls.codigoPostal.hasError('maxLength')">
+        <mat-error *ngIf="form.controls.codigoPostal.hasError('maxlength')">
           No puede superar los 5 carácteres.
         </mat-error>
-        <mat-error *ngIf="form.controls.codigoPostal.hasError('minLength')">
+        <mat-error *ngIf="form.controls.codigoPostal.hasError('minlength')">
           Tiene que tener más de un carácter.
         </mat-error>
       </mat-form-field>

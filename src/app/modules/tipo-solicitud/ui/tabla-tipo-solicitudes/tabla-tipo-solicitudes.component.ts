@@ -28,8 +28,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { synveltAnimations } from '@synvelt/animations';
 import { ITipoSolicitud } from 'app/models/ITipoSolicitud';
 
-const columnasMD = ['nombre', 'opciones'];
-const columnasXS = ['nombre', 'opciones'];
+const columnasMD = ['nombre','estado', 'opciones'];
+const columnasXS = ['nombre','estado', 'opciones'];
 @Component({
   selector: 'app-tabla-tipo-solicitudes',
   templateUrl: './tabla-tipo-solicitudes.component.html',

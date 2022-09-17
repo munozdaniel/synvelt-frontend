@@ -15,20 +15,44 @@
       <!--     'cuit', 'nombreCompleto', 'area', 'perfil', 'estado'
                          -->
 
-      <ng-container matColumnDef="nombre">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+      <ng-container matColumnDef="marca">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Marca</th>
         <td mat-cell *matCellDef="let row">
           <div class="flex flex-col">
-            <mostrar-valor [valor]="row.nombre"></mostrar-valor>
+            <mostrar-valor [valor]="row.marca"></mostrar-valor>
           </div>
         </td>
       </ng-container>
       <!--  '',
                           -->
-      <ng-container matColumnDef="codigoPostal">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Código postal</th>
+      <ng-container matColumnDef="patente">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Patente</th>
         <td mat-cell *matCellDef="let row">
-          <mostrar-valor [valor]="row.codigoPostal"></mostrar-valor>
+          <mostrar-valor [valor]="row.patente"></mostrar-valor>
+        </td>
+      </ng-container>
+      <!--  '',
+                          -->
+      <ng-container matColumnDef="año">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Año</th>
+        <td mat-cell *matCellDef="let row">
+          <mostrar-valor [valor]="row.ano"></mostrar-valor>
+        </td>
+      </ng-container>
+      <!--  '',
+                          -->
+      <ng-container matColumnDef="tipoVehiculo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo vehiculo</th>
+        <td mat-cell *matCellDef="let row">
+          <mostrar-valor [valor]="row.tipoVehiculo"></mostrar-valor>
+        </td>
+      </ng-container>
+      <!--  '',
+                          -->
+      <ng-container matColumnDef="estadoEntidad">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+        <td mat-cell *matCellDef="let row">
+          <mostrar-valor [valor]="row.estadoEntidad"></mostrar-valor>
         </td>
       </ng-container>
 

@@ -8,10 +8,10 @@
         <mat-error *ngIf="form.controls.marca.hasError('required')">
           Este campo es requerido.
         </mat-error>
-        <mat-error *ngIf="form.controls.marca.hasError('maxLength')">
+        <mat-error *ngIf="form.controls.marca.hasError('maxlength')">
           No puede superar los 30 carácteres.
         </mat-error>
-        <mat-error *ngIf="form.controls.marca.hasError('minLength')">
+        <mat-error *ngIf="form.controls.marca.hasError('minlength')">
           Tiene que tener más de un carácter.
         </mat-error>
       </mat-form-field>
@@ -23,10 +23,10 @@
         <mat-error *ngIf="form.controls.patente.hasError('required')">
           Este campo es requerido.
         </mat-error>
-        <mat-error *ngIf="form.controls.patente.hasError('maxLength')">
+        <mat-error *ngIf="form.controls.patente.hasError('maxlength')">
           No puede superar los 10 carácteres.
         </mat-error>
-        <mat-error *ngIf="form.controls.patente.hasError('minLength')">
+        <mat-error *ngIf="form.controls.patente.hasError('minlength')">
           Tiene que tener más de un carácter.
         </mat-error>
       </mat-form-field>
