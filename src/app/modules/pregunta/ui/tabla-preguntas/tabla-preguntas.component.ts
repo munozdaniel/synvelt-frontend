@@ -28,7 +28,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { synveltAnimations } from '@synvelt/animations';
 import { IPreguntaFrecuente } from 'app/models/iPreguntaFrecuente';
 
-const columnasMD = ['nombre', 'codigoPostal', 'opciones'];
+const columnasMD = [
+  'titulo',
+  'explicacion',
+  'agrupacion',
+  'estadoEntidad',
+  'opciones',
+];
 const columnasXS = ['nombre', 'opciones'];
 @Component({
   selector: 'app-tabla-preguntas',
