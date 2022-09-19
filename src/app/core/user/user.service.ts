@@ -26,20 +26,11 @@ export class UserService {
    * @param value
    */
   set user(value: IUsuario) {
-    console.log('userset', value);
     // Store the value
     this._user.next(value);
   }
 
   get user$(): Observable<IUsuario> {
-    this._user.subscribe(
-      datos => {
-        console.log('get', datos);
-      },
-      error => {
-        console.log('[ERROR]', error);
-      }
-    );
     return this._user.asObservable();
   }
 

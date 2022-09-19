@@ -40,13 +40,28 @@
         </td>
       </ng-container>
       <!--  '',
-                          -->
-      <ng-container matColumnDef="estadoEntidad">
+      -->
+      <ng-container matColumnDef="estado">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
         <td mat-cell *matCellDef="let row">
-          <mostrar-valor [valor]="row.estadoEntidad.nombre"></mostrar-valor>
+          <div class="flex flex-col">
+            <div *ngIf="!row.estadoEntidad">
+              <span class="estado-tooltip estado-activo">ACTIVO</span>
+            </div>
+            <div *ngIf="row.estadoEntidad">
+              <span
+                class="estado-tooltip"
+                [class.estado-baja]="row.estadoEntidad.nombre === 'BAJA'"
+                [class.estado-suspendido]="
+                  row.estadoEntidad.nombre === 'SUSPENDIDO'
+                "
+                >{{ row.estadoEntidad.nombre }}</span
+              >
+            </div>
+          </div>
         </td>
       </ng-container>
+      <!--  -->
 
       <ng-container matColumnDef="opciones">
         <th mat-header-cell *matHeaderCellDef>

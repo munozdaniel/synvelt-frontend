@@ -29,7 +29,8 @@ export class FiltroTiposVehiculoComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.estadosEntidad && changes.estadosEntidad.currentValue) {
       this.setAutocompleteEstadoEntidad();
-    }}
+    }
+  }
   /** CAMPOS FILTRO Y ORDEN
    *
    * CUIT - Nombre del Usuario - Área Municipal -
@@ -82,33 +83,33 @@ export class FiltroTiposVehiculoComponent implements OnInit, OnChanges {
       this.retFiltros.emit(filtros);
     }
   }
-    //  Autocomplete
-    setAutocompleteEstadoEntidad() {
-        if (!this.form) {
-          setTimeout(() => {
-            this.setAutocompleteEstadoEntidad();
-          }, 1000);
-        } else {
-          this.filteredEstadoEntidad =
-            this.form.controls.estadoEntidad.valueChanges.pipe(
-              startWith(''),
-              map(value => (typeof value === 'string' ? value : value.nombre)),
-              map(name =>
-                name ? this._filterEstadoEntidad(name) : this.estadosEntidad.slice()
-              )
-            );
-        }
-      }
-      private _filterEstadoEntidad(name: string): IEstadoEntidad[] {
-        const filterValue = name.toLowerCase();
+  //  Autocomplete
+  setAutocompleteEstadoEntidad() {
+    if (!this.form) {
+      setTimeout(() => {
+        this.setAutocompleteEstadoEntidad();
+      }, 1000);
+    } else {
+      this.filteredEstadoEntidad =
+        this.form.controls.estadoEntidad.valueChanges.pipe(
+          startWith(''),
+          map(value => (typeof value === 'string' ? value : value?.nombre)),
+          map(name =>
+            name ? this._filterEstadoEntidad(name) : this.estadosEntidad.slice()
+          )
+        );
+    }
+  }
+  private _filterEstadoEntidad(name: string): IEstadoEntidad[] {
+    const filterValue = name.toLowerCase();
 
-        return this.estadosEntidad.filter(option => {
-          const nombreCompleto = option.nombre;
-          // return nombreCompleto.toLowerCase().indexOf(filterValue) === 0;
-          return nombreCompleto.toLowerCase().includes(filterValue);
-        });
-      }
-      displayFnEstadoEntidad(objeto: IEstadoEntidad): string {
-        return objeto && objeto.nombre ? objeto.nombre : '';
-      }
+    return this.estadosEntidad.filter(option => {
+      const nombreCompleto = option.nombre;
+      // return nombreCompleto.toLowerCase().indexOf(filterValue) === 0;
+      return nombreCompleto.toLowerCase().includes(filterValue);
+    });
+  }
+  displayFnEstadoEntidad(objeto: IEstadoEntidad): string {
+    return objeto && objeto.nombre ? objeto.nombre : '';
+  }
 }

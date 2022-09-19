@@ -89,7 +89,7 @@ export class FormUsuarioComponent implements OnInit, OnChanges {
       this.filteredAreasInternas =
         this.form.controls.areaInterna.valueChanges.pipe(
           startWith(''),
-          map(value => (typeof value === 'string' ? value : value.nombre)),
+          map(value => (typeof value === 'string' ? value : value?.nombre)),
           map(name =>
             name ? this._filterAreaInterna(name) : this.areasInternas.slice()
           )
@@ -118,7 +118,7 @@ export class FormUsuarioComponent implements OnInit, OnChanges {
     } else {
       this.filteredRoles = this.form.controls.rol.valueChanges.pipe(
         startWith(''),
-        map(value => (typeof value === 'string' ? value : value.nombre)),
+        map(value => (typeof value === 'string' ? value : value?.nombre)),
         map(name => (name ? this._filterRol(name) : this.roles.slice()))
       );
     }
@@ -200,7 +200,6 @@ export class FormUsuarioComponent implements OnInit, OnChanges {
       }
       delete usuario.rol;
       delete usuario.areaInterna;
-      console.log('usuario guardar', usuario);
       this.retForm.emit(usuario);
     }
   }

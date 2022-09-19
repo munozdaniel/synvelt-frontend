@@ -58,7 +58,7 @@ export class BuscarAreaInternaComponent implements OnInit {
       this.filteredAreasInternas =
         this.form.controls.areaInterna.valueChanges.pipe(
           startWith(''),
-          map(value => (typeof value === 'string' ? value : value.nombre)),
+          map(value => (typeof value === 'string' ? value : value?.nombre)),
           map(name =>
             name ? this._filterAreaInterna(name) : this.areasInternas.slice()
           )

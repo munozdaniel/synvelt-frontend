@@ -26,10 +26,18 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { synveltAnimations } from '@synvelt/animations';
+import { IEstadoEntidad } from 'app/models/iEstadoEntidad';
 import { IVehiculo } from 'app/models/iVehiculo';
 
-const columnasMD = ['marca', 'patente','año','tipoVehiculo','estadoEntidad', 'opciones'];
-const columnasXS = ['nombre', 'opciones'];
+const columnasMD = [
+  'marca',
+  'patente',
+  'año',
+  'tipoVehiculo',
+  'estado',
+  'opciones',
+];
+const columnasXS = ['nombre', 'estado', 'opciones'];
 @Component({
   selector: 'app-tabla-vehiculos',
   templateUrl: './tabla-vehiculos.component.html',
@@ -46,6 +54,7 @@ const columnasXS = ['nombre', 'opciones'];
   ],
 })
 export class TablaVehiculosComponent implements OnInit, OnChanges {
+  @Input() estadosEntidad: IEstadoEntidad[];
   @Input() vehiculos: IVehiculo[];
   @Input() cargando: boolean;
   @Output() retEliminar = new EventEmitter<string>();
@@ -88,9 +97,31 @@ export class TablaVehiculosComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.vehiculos && changes.vehiculos.currentValue) {
       this.dataSource.data = this.vehiculos;
+      this.setEstadoEntidad();
     }
   }
-
+  setEstadoEntidad() {
+    let cantidad = 10;
+    if (this.estadosEntidad && this.estadosEntidad.length > 0) {
+      this.dataSource.data.forEach(x => {
+        const encontrado = this.estadosEntidad.find(
+          e => e.id === x.idEstadoEntidad
+        );
+        if (encontrado) {
+          x.estadoEntidad = encontrado;
+        } else {
+          x.estadoEntidad = null;
+        }
+      });
+    } else {
+      if (cantidad > 0) {
+        setTimeout(() => {
+          this.setEstadoEntidad();
+          cantidad--;
+        }, 1000);
+      }
+    }
+  }
   ngOnInit(): void {
     this.customSearchSortTable();
   }
@@ -122,10 +153,10 @@ export class TablaVehiculosComponent implements OnInit, OnChanges {
     this.dataSource.sortingDataAccessor = (item: IVehiculo, property) => {
       //   property es el nombre de la columna, no del atributo de item.
       switch (property) {
-          case 'tipoVehiculo':
-            return item.tipoVehiculo ? item.tipoVehiculo.nombre.toString() : '';
-          case 'estadoEntidad':
-            return item.estadoEntidad ? item.estadoEntidad.nombre.toString() : '';
+        case 'tipoVehiculo':
+          return item.tipoVehiculo ? item.tipoVehiculo.nombre.toString() : '';
+        case 'estadoEntidad':
+          return item.estadoEntidad ? item.estadoEntidad.nombre.toString() : '';
 
         default:
           return item[property];

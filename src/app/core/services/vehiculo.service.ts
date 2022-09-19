@@ -68,7 +68,7 @@ export class VehiculoService {
   //
   eliminar(id): Observable<void> {
     const queryParams = this.setQueryParams({ id });
-    return this._http.post<void>(this.url + 'operacion/BajaVehiculo', {
+    return this._http.get<void>(this.url + 'operacion/BajaVehiculo', {
       headers: this.headers,
       params: queryParams,
     });

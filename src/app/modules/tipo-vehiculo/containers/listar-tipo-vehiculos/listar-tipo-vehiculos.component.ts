@@ -13,8 +13,7 @@ import { Observable } from 'rxjs';
   templateUrl: './listar-tipo-vehiculos.component.html',
 })
 export class ListarTiposVehiculoComponent implements OnInit {
-  estadosEntidad$: Observable<IEstadoEntidad[]> =
-    this._estadoEntidadService.obtenerTodosCache();
+  estadosEntidad: IEstadoEntidad[];
   cargando = false;
   parametros: any;
   tiposVehiculo: ITipoVehiculo[];
@@ -26,9 +25,22 @@ export class ListarTiposVehiculoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.obtenerEstadosEntidad();
     this.obtenerTodos();
   }
-
+  obtenerEstadosEntidad() {
+    this._estadoEntidadService
+      .obtenerTodosCache()
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        datos => {
+          this.estadosEntidad = datos;
+        },
+        error => {
+          console.log('[ERROR]', error);
+        }
+      );
+  }
   obtenerTodos() {
     this.cargando = true;
     this._tipoVehiculoService

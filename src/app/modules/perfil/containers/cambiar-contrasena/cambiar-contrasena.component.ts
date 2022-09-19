@@ -42,7 +42,6 @@ export class CambiarContrasenaComponent implements OnInit, OnDestroy {
     this._userService.user$
       .pipe(untilDestroyed(this))
       .subscribe((user: IUsuario) => {
-        console.log('User subs', user);
         this.user = user;
       });
     // this._route.params.forEach((params: Params) => {

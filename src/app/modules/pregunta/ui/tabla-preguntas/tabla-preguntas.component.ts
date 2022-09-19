@@ -26,6 +26,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { synveltAnimations } from '@synvelt/animations';
+import { IEstadoEntidad } from 'app/models/iEstadoEntidad';
 import { IPreguntaFrecuente } from 'app/models/iPreguntaFrecuente';
 
 const columnasMD = [
@@ -52,6 +53,7 @@ const columnasXS = ['nombre', 'opciones'];
   ],
 })
 export class TablaPreguntasFrecuentesComponent implements OnInit, OnChanges {
+  @Input() estadosEntidad: IEstadoEntidad[];
   @Input() preguntas: IPreguntaFrecuente[];
   @Input() cargando: boolean;
   @Output() retEliminar = new EventEmitter<string>();
@@ -94,9 +96,31 @@ export class TablaPreguntasFrecuentesComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.preguntas && changes.preguntas.currentValue) {
       this.dataSource.data = this.preguntas;
+      this.setEstadoEntidad();
     }
   }
-
+  setEstadoEntidad() {
+    let cantidad = 10;
+    if (this.estadosEntidad && this.estadosEntidad.length > 0) {
+      this.dataSource.data.forEach(x => {
+        const encontrado = this.estadosEntidad.find(
+          e => e.id === x.idEstadoEntidad
+        );
+        if (encontrado) {
+          x.estadoEntidad = encontrado;
+        } else {
+          x.estadoEntidad = null;
+        }
+      });
+    } else {
+      if (cantidad > 0) {
+        setTimeout(() => {
+          this.setEstadoEntidad();
+          cantidad--;
+        }, 1000);
+      }
+    }
+  }
   ngOnInit(): void {
     this.customSearchSortTable();
   }

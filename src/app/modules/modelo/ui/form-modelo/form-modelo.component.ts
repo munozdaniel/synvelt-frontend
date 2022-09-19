@@ -101,7 +101,7 @@ export class FormModeloComponent implements OnInit, OnChanges {
         formularioDinamico.controls.modeloTipoDato.valueChanges.pipe(
           startWith(''),
           map((value: any) =>
-            typeof value === 'string' ? value : value.nombre
+            typeof value === 'string' ? value : value?.nombre
           ),
           map((name: any) =>
             name

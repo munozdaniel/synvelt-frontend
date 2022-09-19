@@ -234,3 +234,43 @@ tr.fila_inactiva {
   border-radius: 4px;
 }
 
+span.estado-tooltip:not(mat-icon) {
+  padding: 0.3em;
+  border-radius: 5px;
+  font-size: small;
+  font-weight: 600;
+}
+
+.text-teal-600.estado-tooltip:not(mat-icon) {
+  background-color: #2ba1971f;
+  border: 1px solid #2ba197;
+  font-size: smaller;
+  border-radius: 5px;
+}
+.text-sky-600.estado-tooltip:not(mat-icon) {
+  background-color: #0284c71f;
+  border: 1px solid #0284c7;
+  font-size: smaller;
+  border-radius: 5px;
+}
+.estado-suspendido.estado-tooltip:not(mat-icon) {
+  background-color: #efc64640;
+  border: 1px solid #efa046;
+  color: #efa046;
+  font-size: smaller;
+  border-radius: 5px;
+}
+.estado-baja.estado-tooltip:not(mat-icon) {
+  background-color: #991b1b33;
+  color: #991b1b;
+  border: 1px solid #991b1b;
+  font-size: smaller;
+  border-radius: 5px;
+}
+.estado-activo.estado-tooltip:not(mat-icon) {
+  background-color: #8ac32f2e;
+  border: 1px solid rgb(112, 153, 17);
+  color: rgb(67, 95, 3);
+  font-size: smaller;
+  border-radius: 5px;
+}

@@ -57,7 +57,7 @@ export class BusquedaRolComponent implements OnInit {
     } else {
       this.filteredRoles = this.form.controls.rol.valueChanges.pipe(
         startWith(''),
-        map(value => (typeof value === 'string' ? value : value.nombre)),
+        map(value => (typeof value === 'string' ? value : value?.nombre)),
         map(name => (name ? this._filterRol(name) : this.roles.slice()))
       );
     }

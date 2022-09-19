@@ -64,7 +64,7 @@ export class FiltroUsuariosComponent implements OnInit, OnChanges {
     } else {
       this.filteredAreas = this.form.controls.areaInterna.valueChanges.pipe(
         startWith(''),
-        map(value => (typeof value === 'string' ? value : value.nombre)),
+        map(value => (typeof value === 'string' ? value : value?.nombre)),
         map(name =>
           name ? this._filterAreas(name) : this.areasInternas.slice()
         )
@@ -93,7 +93,7 @@ export class FiltroUsuariosComponent implements OnInit, OnChanges {
     } else {
       this.filteredRoles = this.form.controls.rol.valueChanges.pipe(
         startWith(''),
-        map(value => (typeof value === 'string' ? value : value.nombre)),
+        map(value => (typeof value === 'string' ? value : value?.nombre)),
         map(name => (name ? this._filterRol(name) : this.roles.slice()))
       );
     }

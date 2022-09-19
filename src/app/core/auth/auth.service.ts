@@ -136,7 +136,6 @@ export class AuthService {
           };
           this._userService.user = { ...usuario };
           //
-          console.log('guardarlocal', usuario);
           localStorage.setItem('userSynvelt', JSON.stringify(usuario));
 
           //   TODO: Asignar roles

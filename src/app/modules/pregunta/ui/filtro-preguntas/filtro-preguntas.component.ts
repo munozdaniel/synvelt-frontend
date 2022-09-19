@@ -94,7 +94,7 @@ export class FiltroPreguntasFrecuentesComponent implements OnInit, OnChanges {
       this.filteredEstadoEntidad =
         this.form.controls.estadoEntidad.valueChanges.pipe(
           startWith(''),
-          map(value => (typeof value === 'string' ? value : value.nombre)),
+          map(value => (typeof value === 'string' ? value : value?.nombre)),
           map(name =>
             name ? this._filterEstadoEntidad(name) : this.estadosEntidad.slice()
           )

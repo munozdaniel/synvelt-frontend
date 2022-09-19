@@ -26,10 +26,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { synveltAnimations } from '@synvelt/animations';
+import { IEstadoEntidad } from 'app/models/iEstadoEntidad';
 import { ITipoSolicitud } from 'app/models/ITipoSolicitud';
 
-const columnasMD = ['nombre','estado', 'opciones'];
-const columnasXS = ['nombre','estado', 'opciones'];
+const columnasMD = ['nombre', 'estado', 'opciones'];
+const columnasXS = ['nombre', 'estado', 'opciones'];
 @Component({
   selector: 'app-tabla-tipo-solicitudes',
   templateUrl: './tabla-tipo-solicitudes.component.html',
@@ -46,6 +47,7 @@ const columnasXS = ['nombre','estado', 'opciones'];
   ],
 })
 export class TablaTipoSolicitudesComponent implements OnInit, OnChanges {
+  @Input() estadosEntidad: IEstadoEntidad[];
   @Input() tipoSolicitudes: ITipoSolicitud[];
   @Input() cargando: boolean;
   @Output() retEliminar = new EventEmitter<string>();
@@ -88,9 +90,31 @@ export class TablaTipoSolicitudesComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.tipoSolicitudes && changes.tipoSolicitudes.currentValue) {
       this.dataSource.data = this.tipoSolicitudes;
+      this.setEstadoEntidad();
     }
   }
-
+  setEstadoEntidad() {
+    let cantidad = 10;
+    if (this.estadosEntidad && this.estadosEntidad.length > 0) {
+      this.dataSource.data.forEach(x => {
+        const encontrado = this.estadosEntidad.find(
+          e => e.id === x.idEstadoEntidad
+        );
+        if (encontrado) {
+          x.estadoEntidad = encontrado;
+        } else {
+          x.estadoEntidad = null;
+        }
+      });
+    } else {
+      if (cantidad > 0) {
+        setTimeout(() => {
+          this.setEstadoEntidad();
+          cantidad--;
+        }, 1000);
+      }
+    }
+  }
   ngOnInit(): void {
     this.customSearchSortTable();
   }
