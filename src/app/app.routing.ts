@@ -284,6 +284,22 @@ export const appRoutes: Route[] = [
     },
     children: [
       {
+        path: 'choferes',
+        loadChildren: () =>
+          import('app/modules/chofer/chofer.module').then(m => m.ChoferModule),
+      },
+    ],
+  },
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    component: LayoutComponent,
+    resolve: {
+      initialData: InitialDataResolver, // para enviar datos al iniciar la ruta (en este caso el menu)
+    },
+    children: [
+      {
         // canActivate: [NgxPermissionsGuard],
         // data: {
         //   permissions: {

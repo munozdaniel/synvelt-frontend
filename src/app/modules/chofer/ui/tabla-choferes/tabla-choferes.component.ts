@@ -26,22 +26,23 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { synveltAnimations } from '@synvelt/animations';
+import { IAreaInterna } from 'app/models/iAreaInterna';
+import { IChofer } from 'app/models/iChofer';
 import { IEstadoEntidad } from 'app/models/iEstadoEntidad';
-import { ITipoVehiculo } from 'app/models/ITipoVehiculo';
-import { IVehiculo } from 'app/models/iVehiculo';
 
 const columnasMD = [
-  'marca',
-  'patente',
-  'año',
-  'tipoVehiculo',
+  'nombre',
+  'apellido',
+  'contacto',
+  'areaInterna',
   'estado',
   'opciones',
 ];
-const columnasXS = ['nombre', 'estado', 'opciones'];
+const columnasXS = ['nombre', 'opciones'];
 @Component({
-  selector: 'app-tabla-vehiculos',
-  templateUrl: './tabla-vehiculos.component.html',
+  selector: 'app-tabla-choferes',
+  templateUrl: './tabla-choferes.component.html',
+  styleUrls: ['./tabla-choferes.component.scss'],
   animations: [
     synveltAnimations,
     trigger('detailExpand', [
@@ -54,10 +55,10 @@ const columnasXS = ['nombre', 'estado', 'opciones'];
     ]),
   ],
 })
-export class TablaVehiculosComponent implements OnInit, OnChanges {
-  @Input() tiposVehiculo: ITipoVehiculo[];
+export class TablaChoferesComponent implements OnInit, OnChanges {
   @Input() estadosEntidad: IEstadoEntidad[];
-  @Input() vehiculos: IVehiculo[];
+  @Input() areasInternas: IAreaInterna[];
+  @Input() choferes: IChofer[];
   @Input() cargando: boolean;
   @Output() retEliminar = new EventEmitter<string>();
   @Output() retEditar = new EventEmitter<string>();
@@ -69,7 +70,7 @@ export class TablaVehiculosComponent implements OnInit, OnChanges {
   @ViewChild('paginator') set setPaginator(paginator: MatPaginator) {
     this.dataSource.paginator = paginator;
   }
-  expandedElement: IVehiculo | null;
+  expandedElement: IChofer | null;
   // Mobile
   isMobile: boolean;
   private _mobileQueryListener: () => void;
@@ -97,10 +98,10 @@ export class TablaVehiculosComponent implements OnInit, OnChanges {
       });
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.vehiculos && changes.vehiculos.currentValue) {
-      this.dataSource.data = this.vehiculos.map(x => ({ ...x, ano: x.año }));
+    if (changes.choferes && changes.choferes.currentValue) {
+      this.dataSource.data = this.choferes;
       this.setEstadoEntidad();
-      this.setTipoVehiculo();
+      this.setAreaInterna();
     }
   }
   setEstadoEntidad() {
@@ -121,19 +122,21 @@ export class TablaVehiculosComponent implements OnInit, OnChanges {
       }, 1000);
     }
   }
-  setTipoVehiculo() {
-    if (this.tiposVehiculo?.length > 0) {
-      this.dataSource.data.forEach((x: IVehiculo) => {
-        const encontrado = this.tiposVehiculo.find(
-          e => e.id === x.idTipoVehiculo
+  setAreaInterna() {
+    if (this.areasInternas && this.areasInternas.length > 0) {
+      this.dataSource.data.forEach(x => {
+        const encontrado = this.areasInternas.find(
+          e => e.id === x.idAreaInterna
         );
         if (encontrado) {
-          x.tipoVehiculo = encontrado;
+          x.areaInterna = encontrado;
+        } else {
+          x.areaInterna = null;
         }
       });
     } else {
       setTimeout(() => {
-        this.setTipoVehiculo();
+        this.setAreaInterna();
       }, 1000);
     }
   }
@@ -141,16 +144,17 @@ export class TablaVehiculosComponent implements OnInit, OnChanges {
     this.customSearchSortTable();
   }
   customSearchSortTable() {
-    this.dataSource.filterPredicate = (data: IVehiculo, filters: string) => {
+    this.dataSource.filterPredicate = (data: IChofer, filters: string) => {
       const matchFilter = [];
       const filterArray = filters.split(',');
       //   TODO: Verificar si hace falta agregar mas coluymnas
       const columns = [
-        data.marca,
-        data.tipoVehiculo?.nombre,
-        data.patente,
-        data.año,
-        data.estadoEntidad.nombre,
+        data.nombre,
+        data.apellido,
+        data.contacto,
+        data.areaInterna?.nombre,
+        data.estadoEntidad?.nombre,
+        data.comentario,
       ];
 
       filterArray.forEach(filter => {
@@ -165,12 +169,12 @@ export class TablaVehiculosComponent implements OnInit, OnChanges {
       return matchFilter.every(Boolean); // AND
     };
 
-    this.dataSource.sortingDataAccessor = (item: IVehiculo, property) => {
+    this.dataSource.sortingDataAccessor = (item: IChofer, property) => {
       //   property es el nombre de la columna, no del atributo de item.
       switch (property) {
-        case 'tipoVehiculo':
-          return item.tipoVehiculo ? item.tipoVehiculo.nombre.toString() : '';
-        case 'estadoEntidad':
+        case 'areaInterna':
+          return item.areaInterna ? item.areaInterna.nombre.toString() : '';
+        case 'estado':
           return item.estadoEntidad ? item.estadoEntidad.nombre.toString() : '';
 
         default:
@@ -184,10 +188,10 @@ export class TablaVehiculosComponent implements OnInit, OnChanges {
       this.dataSource.paginator.firstPage();
     }
   }
-  editar(row: IVehiculo) {
+  editar(row: IChofer) {
     this.retEditar.emit(row.id);
   }
-  eliminar(row: IVehiculo) {
+  eliminar(row: IChofer) {
     this.retEliminar.emit(row.id);
   }
 }

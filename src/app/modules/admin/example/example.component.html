@@ -47,6 +47,14 @@
             </mat-card-header>
             <mat-divider></mat-divider>
             <mat-selection-list [multiple]="false">
+              <mat-list-option (click)="redireccionar('/choferes')">
+                <div class="flex flex-row justify-start items-center gap-2">
+                  <mat-icon
+                    svgIcon="heroicons_outline:location-marker"
+                  ></mat-icon>
+                  Choferes
+                </div>
+              </mat-list-option>
               <mat-list-option (click)="redireccionar('/localidades')">
                 <div class="flex flex-row justify-start items-center gap-2">
                   <mat-icon
