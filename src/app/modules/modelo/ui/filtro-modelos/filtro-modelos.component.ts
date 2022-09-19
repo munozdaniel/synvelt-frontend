@@ -10,7 +10,7 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SynveltConfirmationService } from '@synvelt/services/confirmation';
 import { IModeloItemListaControl } from 'app/models/iModeloItemListaControl';
-import { Observable, startWith, map } from 'rxjs';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-filtro-modelos',
   templateUrl: './filtro-modelos.component.html',
@@ -33,6 +33,7 @@ export class FiltroModeloComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.form = this._fb.group({
       nombre: [null],
+      agrupacion: [null],
       vigente: [null],
     });
   }
@@ -69,6 +70,9 @@ export class FiltroModeloComponent implements OnInit, OnChanges {
 
       if (parametros.nombre) {
         filtros.nombre = parametros.nombre;
+      }
+      if (parametros.agrupacion) {
+        filtros.agrupacion = parametros.agrupacion;
       }
       filtros.vigente = parametros.vigente;
 
