@@ -125,7 +125,7 @@ export class FormTipoArchivoComponent implements OnInit, OnChanges {
           Validators.maxLength(50),
         ],
       ],
-      extensiones: [[], []],
+      extensiones: [null, []],
       estadoEntidad: [null, []],
     });
   }
@@ -160,7 +160,8 @@ export class FormTipoArchivoComponent implements OnInit, OnChanges {
         },
       });
     } else {
-      const tipoArchivo = this.form.value;
+      const { estadoEntidad, ...tipoArchivo } = this.form.value;
+      tipoArchivo.idEstadoEntidad = estadoEntidad?.id;
       this.retForm.emit(tipoArchivo);
     }
   }

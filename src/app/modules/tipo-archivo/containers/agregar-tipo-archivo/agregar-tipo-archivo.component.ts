@@ -55,10 +55,10 @@ export class AgregarTipoArchivoComponent implements OnInit {
       }
     });
   }
-  guardar(areaInterna: ITipoArchivo) {
+  guardar(tipoArchivo: ITipoArchivo) {
     this.cargando = true;
     this._tipoArchivoService
-      .guardar(null, areaInterna)
+      .guardar(null, tipoArchivo)
       .pipe(untilDestroyed(this))
       .subscribe(
         () => {

@@ -159,7 +159,10 @@ export class FormTipoSolicitudComponent implements OnInit, OnChanges {
         },
       });
     } else {
-      const tipoSolicitud = this.form.value;
+      const { estadoEntidad, ...tipoSolicitud } = this.form.value;
+      if (estadoEntidad) {
+        tipoSolicitud.idEstadoEntidad = estadoEntidad?.id;
+      }
       this.retForm.emit(tipoSolicitud);
     }
   }
