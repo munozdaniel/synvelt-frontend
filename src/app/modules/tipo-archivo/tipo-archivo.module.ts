@@ -24,6 +24,7 @@ import { TipoArchivoRoutingModule } from './tipo-archivo.routing';
 import { FiltroTiposArchivoComponent } from './ui/filtro-tipo-archivos/filtro-tipo-archivos.component';
 import { TablaTiposArchivoComponent } from './ui/tabla-tipo-archivos/tabla-tipo-archivos.component';
 import { FormTipoArchivoComponent } from './ui/form-tipo-archivo/form-tipo-archivo.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { FormTipoArchivoComponent } from './ui/form-tipo-archivo/form-tipo-archi
     MatSlideToggleModule,
     // NgxPermissionsModule.forChild(),
     MatTooltipModule,
+    MatProgressBarModule,
   ],
 })
 export class TipoArchivoModule {}

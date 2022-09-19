@@ -27,6 +27,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { synveltAnimations } from '@synvelt/animations';
 import { IEstadoEntidad } from 'app/models/iEstadoEntidad';
+import { ITipoVehiculo } from 'app/models/ITipoVehiculo';
 import { IVehiculo } from 'app/models/iVehiculo';
 
 const columnasMD = [
@@ -54,6 +55,7 @@ const columnasXS = ['nombre', 'estado', 'opciones'];
   ],
 })
 export class TablaVehiculosComponent implements OnInit, OnChanges {
+  @Input() tiposVehiculo: ITipoVehiculo[];
   @Input() estadosEntidad: IEstadoEntidad[];
   @Input() vehiculos: IVehiculo[];
   @Input() cargando: boolean;
@@ -96,8 +98,9 @@ export class TablaVehiculosComponent implements OnInit, OnChanges {
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.vehiculos && changes.vehiculos.currentValue) {
-      this.dataSource.data = this.vehiculos;
+      this.dataSource.data = this.vehiculos.map(x => ({ ...x, ano: x.año }));
       this.setEstadoEntidad();
+      this.setTipoVehiculo();
     }
   }
   setEstadoEntidad() {
@@ -120,6 +123,22 @@ export class TablaVehiculosComponent implements OnInit, OnChanges {
           cantidad--;
         }, 1000);
       }
+    }
+  }
+  setTipoVehiculo() {
+    if (this.tiposVehiculo?.length > 0) {
+      this.dataSource.data.forEach((x: IVehiculo) => {
+        const encontrado = this.tiposVehiculo.find(
+          e => e.id === x.idTipoVehiculo
+        );
+        if (encontrado) {
+          x.tipoVehiculo = encontrado;
+        }
+      });
+    } else {
+      setTimeout(() => {
+        this.setTipoVehiculo();
+      }, 1000);
     }
   }
   ngOnInit(): void {

@@ -23,6 +23,7 @@ import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { TablaUsuariosModule } from 'app/shared/tabla-usuarios/tabla-usuarios.module';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
@@ -58,6 +59,7 @@ const maskConfig: Partial<IConfig> = {
     TablaUsuariosModule,
     MatSlideToggleModule,
     MatTooltipModule,
+    MatProgressBarModule,
   ],
 })
 export class UsuarioModule {}

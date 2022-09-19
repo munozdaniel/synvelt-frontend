@@ -27,6 +27,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AsignarRolComponent } from './containers/asignar-rol/asignar-rol.component';
 import { BuscarRolModule } from 'app/shared/buscar-rol/buscar-rol.module';
 import { SeleccionarUsuariosTablaModule } from 'app/shared/seleccionar-usuarios-tabla/seleccionar-usuarios-tabla.module';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
@@ -64,6 +65,7 @@ const maskConfig: Partial<IConfig> = {
     TablaUsuariosModule,
     BuscarRolModule,
     SeleccionarUsuariosTablaModule,
+    MatProgressBarModule,
   ],
 })
 export class RolModule {}

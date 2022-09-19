@@ -24,6 +24,7 @@ import { TipoVehiculoRoutingModule } from './tipo-vehiculo.routing';
 import { FiltroTiposVehiculoComponent } from './ui/filtro-tipo-vehiculos/filtro-tipo-vehiculos.component';
 import { TablaTiposVehiculoComponent } from './ui/tabla-tipo-vehiculos/tabla-tipo-vehiculos.component';
 import { FormTipoVehiculoComponent } from './ui/form-tipo-vehiculo/form-tipo-vehiculo.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { FormTipoVehiculoComponent } from './ui/form-tipo-vehiculo/form-tipo-veh
     MatSlideToggleModule,
     // NgxPermissionsModule.forChild(),
     MatTooltipModule,
+    MatProgressBarModule,
   ],
 })
 export class TipoVehiculoModule {}

@@ -29,6 +29,7 @@ import { FiltroModeloComponent } from './ui/filtro-modelos/filtro-modelos.compon
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { DialogDetalleItemsComponent } from './ui/dialog-detalle-items/dialog-detalle-items.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,7 @@ import { DialogDetalleItemsComponent } from './ui/dialog-detalle-items/dialog-de
     BuscarAreaInternaModule,
     SeleccionarUsuariosTablaModule,
     MatTooltipModule,
-    MatProgressSpinnerModule
-  ],
+    MatProgressSpinnerModule,
+    MatProgressBarModule ],
 })
 export class ModeloModule {}

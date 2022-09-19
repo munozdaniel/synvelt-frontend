@@ -28,6 +28,7 @@ import { FormAreaInternaComponent } from './ui/form-area-interna/form-area-inter
 import { TablaAreasInternasComponent } from './ui/tabla-areas-internas/tabla-areas-internas.component';
 import { FiltroAreasInternasComponent } from './ui/filtro-areas-internas/filtro-areas-internas.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
@@ -65,7 +66,8 @@ const maskConfig: Partial<IConfig> = {
     TablaUsuariosModule,
     BuscarAreaInternaModule,
     SeleccionarUsuariosTablaModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressBarModule,
   ],
 })
 export class AreaInternaModule {}

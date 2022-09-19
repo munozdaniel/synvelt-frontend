@@ -24,6 +24,7 @@ import { MatTableModule } from '@angular/material/table';
 import { SynveltCardModule } from '@synvelt/components/card';
 import { SharedModule } from 'app/shared/shared.module';
 import { FiltroLocalidadesComponent } from './ui/filtro-localidades/filtro-localidades.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { FiltroLocalidadesComponent } from './ui/filtro-localidades/filtro-local
     MatSlideToggleModule,
     // NgxPermissionsModule.forChild(),
     MatTooltipModule,
+    MatProgressBarModule,
   ],
 })
 export class LocalidadModule {}

@@ -18,9 +18,8 @@ export class ListarVehiculosComponent implements OnInit {
   cargando = false;
   parametros: any;
   vehiculos: IVehiculo[];
-  tipoVehiculos$: Observable<ITipoVehiculo[]>;
-  estadosEntidad$: Observable<IEstadoEntidad[]> =
-    this._estadoEntidadService.obtenerTodosCache();
+  estadosEntidad: IEstadoEntidad[];
+  tipoVehiculos: ITipoVehiculo[];
   constructor(
     private _vehiculoService: VehiculoService,
     private _router: Router,
@@ -30,10 +29,36 @@ export class ListarVehiculosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.tipoVehiculos$ = this._tipoVehiculoService.obtenerTodos();
     this.obtenerTodos();
+    this.obtenerTiposVehiculo();
+    this.obtenerEstadosEntidad();
   }
-
+  obtenerTiposVehiculo() {
+    this._tipoVehiculoService
+      .obtenerTodos()
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        datos => {
+          this.tipoVehiculos = datos;
+        },
+        error => {
+          console.log('[ERROR]', error);
+        }
+      );
+  }
+  obtenerEstadosEntidad() {
+    this._estadoEntidadService
+      .obtenerTodosCache()
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        datos => {
+          this.estadosEntidad = datos;
+        },
+        error => {
+          console.log('[ERROR]', error);
+        }
+      );
+  }
   obtenerTodos() {
     this.cargando = true;
     this._vehiculoService

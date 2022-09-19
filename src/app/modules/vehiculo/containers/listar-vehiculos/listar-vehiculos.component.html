@@ -27,8 +27,8 @@
     <app-filtro-vehiculos
       class="w-full md:w-4/12"
       [cargando]="cargando"
-      [estadosEntidad]="estadosEntidad$ | async"
-      [tipoVehiculos]="tipoVehiculos$ | async"
+      [estadosEntidad]="estadosEntidad"
+      [tipoVehiculos]="tipoVehiculos"
       (retFiltros)="setFiltros($event)"
     >
     </app-filtro-vehiculos>
@@ -37,6 +37,8 @@
       class="w-full md:w-8/12"
       [vehiculos]="vehiculos"
       [cargando]="cargando"
+      [estadosEntidad]="estadosEntidad"
+      [tiposVehiculo]="tipoVehiculos"
       (retEditar)="setEditar($event)"
       (retEliminar)="setEliminar($event)"
     ></app-tabla-vehiculos>

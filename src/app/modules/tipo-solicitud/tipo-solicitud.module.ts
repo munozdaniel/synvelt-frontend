@@ -24,6 +24,7 @@ import { FiltroTiposSolicitudComponent } from './ui/filtro-tipo-solicitudes/filt
 import { FormTipoSolicitudComponent } from './ui/form-tipo-solicitud/form-tipo-solicitud.component';
 import { TablaTipoSolicitudesComponent } from './ui/tabla-tipo-solicitudes/tabla-tipo-solicitudes.component';
 import { TipoSolicitudRoutingModule } from './tipo-solicitud.routing';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 @NgModule({
   declarations: [
     FormTipoSolicitudComponent,
@@ -54,6 +55,7 @@ import { TipoSolicitudRoutingModule } from './tipo-solicitud.routing';
     MatSlideToggleModule,
     // NgxPermissionsModule.forChild(),
     MatTooltipModule,
+    MatProgressBarModule,
   ],
 })
 export class TipoSolicitudModule {}

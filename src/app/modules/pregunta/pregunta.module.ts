@@ -23,6 +23,7 @@ import { EditarPreguntaFrecuenteComponent } from './containers/editar-pregunta/e
 import { FormPreguntaFrecuenteComponent } from './ui/form-pregunta/form-pregunta.component';
 import { TablaPreguntasFrecuentesComponent } from './ui/tabla-preguntas/tabla-preguntas.component';
 import { FiltroPreguntasFrecuentesComponent } from './ui/filtro-preguntas/filtro-preguntas.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { FiltroPreguntasFrecuentesComponent } from './ui/filtro-preguntas/filtro
     MatSlideToggleModule,
     // NgxPermissionsModule.forChild(),
     MatTooltipModule,
+    MatProgressBarModule,
   ],
 })
 export class PreguntaModule {}

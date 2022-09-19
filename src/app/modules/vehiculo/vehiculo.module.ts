@@ -23,6 +23,7 @@ import { FiltroVehiculosComponent } from './ui/filtro-vehiculos/filtro-vehiculos
 import { FormVehiculoComponent } from './ui/form-vehiculo/form-vehiculo.component';
 import { TablaVehiculosComponent } from './ui/tabla-vehiculos/tabla-vehiculos.component';
 import { VehiculoRoutingModule } from './vehiculo.routing';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { VehiculoRoutingModule } from './vehiculo.routing';
     MatSlideToggleModule,
     // NgxPermissionsModule.forChild(),
     MatTooltipModule,
+    MatProgressBarModule,
   ],
 })
 export class VehiculoModule {}
