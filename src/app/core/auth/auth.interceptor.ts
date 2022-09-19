@@ -9,6 +9,7 @@ import {
 import { catchError, Observable, throwError } from 'rxjs';
 import { AuthService } from 'app/core/auth/auth.service';
 import { AuthUtils } from 'app/core/auth/auth.utils';
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -40,6 +41,7 @@ export class AuthInterceptor implements HttpInterceptor {
     // the user out from the app.
     // console.log('this._authService.accessToken', this._authService.accessToken);
     if (
+      environment.production &&
       this._authService.accessToken
       //   &&
       //   !AuthUtils.isTokenExpired(this._authService.accessToken)
@@ -47,10 +49,10 @@ export class AuthInterceptor implements HttpInterceptor {
       newReq = req.clone({
         // headers: req.headers.set('tokenUsuario', this._authService.accessToken),
         // withCredentials: true,
-        // headers: req.headers.set(
-        //   'Authorization',
-        //   this._authService.accessToken
-        // ),
+        headers: req.headers.set(
+          'Authorization',
+          this._authService.accessToken
+        ),
       });
     }
 
