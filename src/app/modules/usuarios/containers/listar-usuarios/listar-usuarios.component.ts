@@ -116,6 +116,7 @@ export class ListarUsuariosComponent implements OnInit {
         },
         error => {
           this._errorService.showMessage(error);
+          this.cargando = false;
           console.log('[ERROR]', error);
         }
       );

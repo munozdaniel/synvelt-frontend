@@ -122,7 +122,8 @@ export class ListarModelosComponent implements OnInit {
           }
         },
         error => {
-          this._errorService.showMessage(error);
+            this.cargando = false;
+            this._errorService.showMessage(error);
           console.log('[ERROR]', error);
         }
       );

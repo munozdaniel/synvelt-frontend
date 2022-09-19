@@ -67,9 +67,13 @@ export class VehiculoService {
   }
   //
   eliminar(id): Observable<void> {
-    const queryParams = this.setQueryParams({ id });
+    const headers = new HttpHeaders().append(
+      'Content-Type',
+      'multipart/form-data'
+    );
+    const queryParams = this.setQueryParams({ IdVehiculo: id });
     return this._http.get<void>(this.url + 'operacion/BajaVehiculo', {
-      headers: this.headers,
+      headers: headers,
       params: queryParams,
     });
   }

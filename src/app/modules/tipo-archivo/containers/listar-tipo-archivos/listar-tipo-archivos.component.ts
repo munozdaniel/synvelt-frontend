@@ -94,6 +94,7 @@ export class ListarTiposArchivoComponent implements OnInit {
         },
         error => {
           this._synveltConfirmationService.error();
+          this.cargando = false;
 
           console.log('[ERROR]', error);
         }

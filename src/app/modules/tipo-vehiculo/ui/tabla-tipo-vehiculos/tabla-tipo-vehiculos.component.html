@@ -35,11 +35,11 @@
             <div *ngIf="row.estadoEntidad">
               <span
                 class="estado-tooltip"
-                [class.estado-baja]="row.estadoEntidad.nombre === 'BAJA'"
+                [class.estado-baja]="row.estadoEntidad.nombre === 'Baja'"
                 [class.estado-suspendido]="
-                  row.estadoEntidad.nombre === 'SUSPENDIDO'
+                  row.estadoEntidad.nombre === 'Suspendido'
                 "
-                >{{ row.estadoEntidad.nombre }}</span
+                >{{ row.estadoEntidad.nombre | uppercase }}</span
               >
             </div>
           </div>

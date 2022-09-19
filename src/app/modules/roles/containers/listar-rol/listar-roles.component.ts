@@ -91,6 +91,7 @@ export class ListarRolesComponent implements OnInit {
           this.obtenerTodos();
         },
         error => {
+          this.cargando = false;
           this._errorService.showMessage(error);
         }
       );

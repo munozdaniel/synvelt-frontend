@@ -33,10 +33,10 @@ const columnasMD = [
   'titulo',
   'explicacion',
   'agrupacion',
-  'estadoEntidad',
+  'estado',
   'opciones',
 ];
-const columnasXS = ['nombre', 'opciones'];
+const columnasXS = ['nombre', 'estado', 'opciones'];
 @Component({
   selector: 'app-tabla-preguntas',
   templateUrl: './tabla-preguntas.component.html',
