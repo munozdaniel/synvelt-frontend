@@ -76,7 +76,7 @@ export class TipoSolicitudService {
       'multipart/form-data'
     );
     const queryParams = this.setQueryParams({ id });
-    return this._http.post<void>(this.url + 'operacion/BajaTipoSolicitud', {
+    return this._http.get<void>(this.url + 'operacion/BajaTipoSolicitud', {
       headers: headers,
       params: queryParams,
     });
