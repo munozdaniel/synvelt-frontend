@@ -49,7 +49,6 @@ export class AgregarTipoArchivoComponent implements OnInit {
 
     // Subscribe to afterClosed from the dialog reference
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result === 'confirmed') {
         this.guardar(evento);
       }

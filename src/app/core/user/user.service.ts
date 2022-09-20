@@ -44,7 +44,6 @@ export class UserService {
   get(): Observable<IUsuario> {
     // No lo uso, es para obtener el usuario logueado
     // const usuarioString = localStorage.getItem('accessTokenSynvelt') ?? '';
-    // console.log('usuarioString', usuarioString);
     // if (usuarioString !== 'undefined' && usuarioString !== '') {
     //   const usuario: IUsuario = JSON.parse(usuarioString);
     //   this._user.next(usuario);

@@ -145,7 +145,6 @@ export class CambiarContrasenaComponent implements OnInit, OnDestroy {
       confirmation.afterClosed().subscribe(result => {
         // If the confirm button pressed...
         if (result === 'confirmed') {
-          console.log(this.user);
           this.confirmarOperacion();
         }
       });

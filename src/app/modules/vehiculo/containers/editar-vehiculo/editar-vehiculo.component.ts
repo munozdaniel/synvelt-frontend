@@ -21,7 +21,7 @@ export class EditarVehiculoComponent implements OnInit {
   vehiculoId: string;
   tipoVehiculo$: Observable<ITipoVehiculo[]>;
   estadosEntidad$: Observable<IEstadoEntidad[]> =
-  this._estadoEntidadService.obtenerTodosCache();
+    this._estadoEntidadService.obtenerTodosCache();
   constructor(
     private _activeRoute: ActivatedRoute,
     private _router: Router,
@@ -84,7 +84,6 @@ export class EditarVehiculoComponent implements OnInit {
 
     // Subscribe to afterClosed from the dialog reference
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result === 'confirmed') {
         this.actualizar(evento);
       }
