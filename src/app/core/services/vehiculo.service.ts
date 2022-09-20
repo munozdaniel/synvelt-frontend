@@ -71,7 +71,7 @@ export class VehiculoService {
       'Content-Type',
       'multipart/form-data'
     );
-    const queryParams = this.setQueryParams({ IdVehiculo: id });
+    const queryParams = this.setQueryParams({ id });
     return this._http.get<void>(this.url + 'operacion/BajaVehiculo', {
       headers: headers,
       params: queryParams,

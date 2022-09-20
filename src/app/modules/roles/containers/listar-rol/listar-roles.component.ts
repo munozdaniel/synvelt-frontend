@@ -92,7 +92,27 @@ export class ListarRolesComponent implements OnInit {
         },
         error => {
           this.cargando = false;
-          this._errorService.showMessage(error);
+          this._synveltConfirmationService.open({
+            title: 'Ocurrió un error',
+            message:
+              'El rol no pudo ser eliminado. Verifique que no esté siendo utilizado por un usuario e inténtelo nuevamente.',
+            icon: {
+              show: true,
+              name: 'heroicons_outline:exclamation',
+              color: 'warn',
+            },
+            actions: {
+              confirm: {
+                show: true,
+                label: 'Aceptar',
+                color: 'warn',
+              },
+              cancel: {
+                show: false,
+                label: 'Cancelar',
+              },
+            },
+          });
         }
       );
   }

@@ -76,7 +76,7 @@ export class PreguntaFrecuenteService {
       'multipart/form-data'
     );
     const queryParams = this.setQueryParams({ id });
-    return this._http.post<void>(this.url + 'operacion/BajaPreguntaFrecuente', {
+    return this._http.get<void>(this.url + 'operacion/BajaPreguntaFrecuente', {
       headers: headers,
       params: queryParams,
     });

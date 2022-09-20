@@ -76,7 +76,7 @@ export class TipoArchivoService {
       'multipart/form-data'
     );
     const queryParams = this.setQueryParams({ id });
-    return this._http.post<void>(
+    return this._http.get<void>(
       this.url + 'operacion/BajaTipoArchivoAdjunto',
       {
         headers: headers,
