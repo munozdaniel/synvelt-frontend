@@ -77,7 +77,7 @@ export class FiltroTiposSolicitudComponent implements OnInit, OnChanges {
         filtros.nombre = parametros.nombre;
       }
       if (parametros.estadoEntidad) {
-        filtros.idEstadoEntidad = parametros.estadoEntidad.id;
+        filtros.idEstado = parametros.estadoEntidad.id;
       }
 
       this.retFiltros.emit(filtros);

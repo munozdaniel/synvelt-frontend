@@ -85,20 +85,20 @@ export class FiltroVehiculosComponent implements OnInit, OnChanges {
       const parametros = this.form.value;
       const filtros: any = {};
 
-      if (parametros.marca) {
-        filtros.marca = parametros.marca;
-      }
+    //   if (parametros.marca) {
+    //     filtros.marca = parametros.marca;
+    //   }
       if (parametros.patente) {
         filtros.patente = parametros.patente;
       }
-      if (parametros.año) {
-        filtros.año = parametros.año;
-      }
+    //   if (parametros.año) {
+    //     filtros.año = parametros.año;
+    //   }
       if (parametros.tipoVehiculo) {
-        filtros.idTipoVehiculo = parametros.tipoVehiculo.id;
+        filtros.idTipo = parametros.tipoVehiculo.id;
       }
       if (parametros.estadoEntidad) {
-        filtros.idEstadoEntidad = parametros.estadoEntidad.id;
+        filtros.idEstado = parametros.estadoEntidad.id;
       }
 
       this.retFiltros.emit(filtros);

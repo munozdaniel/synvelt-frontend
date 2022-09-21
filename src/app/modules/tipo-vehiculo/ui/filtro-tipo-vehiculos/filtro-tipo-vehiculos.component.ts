@@ -76,8 +76,8 @@ export class FiltroTiposVehiculoComponent implements OnInit, OnChanges {
       if (parametros.nombre) {
         filtros.nombre = parametros.nombre;
       }
-      if (parametros.codigoPostal) {
-        filtros.codigoPostal = parametros.codigoPostal;
+      if (parametros.estadoEntidad) {
+        filtros.idEstado = parametros.estadoEntidad.id;
       }
 
       this.retFiltros.emit(filtros);

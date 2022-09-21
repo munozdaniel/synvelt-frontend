@@ -61,7 +61,7 @@ export const horizontalNavigation: SynveltNavigationItem[] = [
       },
       {
         id: 'vehiculos',
-        title: 'Vehiculos',
+        title: 'Vehículos',
         type: 'basic',
         link: '/vehiculos',
         icon: 'heroicons_outline:truck',
@@ -165,7 +165,7 @@ export const defaultNavigation: SynveltNavigationItem[] = [
       },
       {
         id: 'vehiculos',
-        title: 'Vehiculos',
+        title: 'Vehículos',
         type: 'basic',
         link: '/vehiculos',
         icon: 'heroicons_outline:truck',
