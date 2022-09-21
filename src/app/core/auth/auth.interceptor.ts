@@ -60,7 +60,11 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(newReq).pipe(
       catchError(error => {
         // Catch "401 Unauthorized" responses
-        if (error instanceof HttpErrorResponse && error.status === 401) {
+        if (
+          error instanceof HttpErrorResponse &&
+          (error.status === 401 || error.status === 403)
+        ) {
+          console.log('[ERROR]', error);
           // Sign out
           this._authService.signOut();
 
