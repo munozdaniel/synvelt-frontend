@@ -36,6 +36,7 @@
       class="w-full md:w-8/12"
       [preguntas]="preguntas"
       [cargando]="cargando"
+      [estadosEntidad]="estadosEntidad$ | async"
       (retEditar)="setEditar($event)"
       (retEliminar)="setEliminar($event)"
     ></app-tabla-preguntas>
