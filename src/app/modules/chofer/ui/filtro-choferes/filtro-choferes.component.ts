@@ -83,13 +83,13 @@ export class FiltroChoferesComponent implements OnInit, OnChanges {
       const filtros: any = {};
 
       if (parametros.nombre) {
-        filtros.nombre = parametros.nombre;
+        filtros.apellidoContiene = parametros.nombre;
       }
       if (parametros.areaInterna) {
-        filtros.areaInterna = parametros.areaInterna;
+        filtros.idAreaInterna = parametros.areaInterna.id;
       }
       if (parametros.estadoEntidad) {
-        filtros.estadoEntidad = parametros.estadoEntidad;
+        filtros.idEstado = parametros.estadoEntidad.id;
       }
 
       this.retFiltros.emit(filtros);
