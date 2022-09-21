@@ -32,10 +32,8 @@
       <!--  field -->
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>Contacto</mat-label>
-        <input id="contacto" matInput formControlName="contacto" required />
-        <mat-error *ngIf="form.controls.contacto.hasError('required')">
-          Este campo es requerido.
-        </mat-error>
+        <input id="contacto" matInput formControlName="contacto" />
+
         <mat-error *ngIf="form.controls.contacto.hasError('maxlength')">
           No puede superar los 256 carácteres.
         </mat-error>
@@ -46,10 +44,8 @@
       <!--  field -->
       <mat-form-field appearance="outline" class="w-full">
         <mat-label>Comentario</mat-label>
-        <input id="comentario" matInput formControlName="comentario" required />
-        <mat-error *ngIf="form.controls.comentario.hasError('required')">
-          Este campo es requerido.
-        </mat-error>
+        <input id="comentario" matInput formControlName="comentario" />
+
         <mat-error *ngIf="form.controls.comentario.hasError('maxlength')">
           No puede superar los 1000 carácteres.
         </mat-error>

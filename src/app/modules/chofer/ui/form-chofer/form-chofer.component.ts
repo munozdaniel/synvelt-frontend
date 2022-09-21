@@ -106,8 +106,8 @@ export class FormChoferComponent implements OnInit, OnChanges {
           Validators.maxLength(30),
         ],
       ],
-      contacto: [null, [ Validators.maxLength(256)]],
-      comentario: [null, [ Validators.maxLength(1000)]],
+      contacto: [null, [Validators.maxLength(256)]],
+      comentario: [null, [Validators.maxLength(1000)]],
       areaInterna: [null, []],
       estadoEntidad: [null, []],
       //   traza: [null, []],
@@ -121,9 +121,34 @@ export class FormChoferComponent implements OnInit, OnChanges {
       }, 1000);
     } else {
       this.form.patchValue(this.chofer);
+      this.setAreaInternaForm();
+      this.setEstadoForm();
     }
   }
-
+  setAreaInternaForm() {
+    if (!this.areasInternas) {
+      setTimeout(() => {
+        this.setAreaInternaForm();
+      }, 1000);
+    } else {
+      const area = this.areasInternas.find(
+        x => x.id === this.chofer.idAreaInterna
+      );
+      this.form.controls.areaInterna.setValue(area);
+    }
+  }
+  setEstadoForm() {
+    if (!this.estadosEntidad) {
+      setTimeout(() => {
+        this.setEstadoForm();
+      }, 1000);
+    } else {
+      const estado = this.estadosEntidad.find(
+        x => x.id === this.chofer.idEstadoEntidad
+      );
+      this.form.controls.estadoEntidad.setValue(estado);
+    }
+  }
   //   Fin:Autocomplete
 
   guardar(): void {
@@ -200,6 +225,12 @@ export class FormChoferComponent implements OnInit, OnChanges {
           name ? this._filterAreas(name) : this.areasInternas.slice()
         )
       );
+      //   if (this.chofer) {
+      //     const area = this.areasInternas.find(
+      //       x => x.id === this.chofer.idAreaInterna
+      //     );
+      //     this.form.controls.areaInterna.setValue(area);
+      //   }
     }
   }
   private _filterAreas(name: string): IAreaInterna[] {
