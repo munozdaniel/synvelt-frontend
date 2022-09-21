@@ -37,6 +37,7 @@
     <app-tabla-tipo-solicitudes
       class="w-full md:w-8/12"
       [tipoSolicitudes]="tiposSolicitud"
+      [estadosEntidad]="estadosEntidad$ | async"
       [cargando]="cargando"
       (retEditar)="setEditar($event)"
       (retEliminar)="setEliminar($event)"

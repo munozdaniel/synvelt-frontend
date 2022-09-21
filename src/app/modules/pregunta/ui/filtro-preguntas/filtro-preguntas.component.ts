@@ -39,7 +39,7 @@ export class FiltroPreguntasFrecuentesComponent implements OnInit, OnChanges {
    */
   ngOnInit(): void {
     this.form = this._fb.group({
-      titulo: [null],
+      agrupacion: [null],
       estadoEntidad: [null],
     });
   }

@@ -38,6 +38,7 @@
       class="w-full md:w-8/12"
       [tipoArchivos]="tiposArchivo"
       [cargando]="cargando"
+      [estadosEntidad]="estadosEntidad$ | async"
       (retEditar)="setEditar($event)"
       (retEliminar)="setEliminar($event)"
     ></app-tabla-tipo-archivos>
