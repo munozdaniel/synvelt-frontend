@@ -77,8 +77,8 @@ export class FiltroPreguntasFrecuentesComponent implements OnInit, OnChanges {
       if (parametros.agrupacion) {
         filtros.agrupacion = parametros.agrupacion;
       }
-      if (parametros.idEstado) {
-        filtros.idEstado = parametros.estado.id;
+      if (parametros.estadoEntidad) {
+        filtros.idEstado = parametros.estadoEntidad.id;
       }
 
       this.retFiltros.emit(filtros);
